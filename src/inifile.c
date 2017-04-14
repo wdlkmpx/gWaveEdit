@@ -158,13 +158,14 @@ gboolean inifile_get_gboolean(gchar *setting, gboolean defaultValue)
      c = inifile_get(setting, NULL);
      // printf("inifile_get_gboolean: c == %s\n",c);
      if (c) {
-	  if ( !g_strcasecmp(c,"y") || !strcmp(c,"1") ||
-	       !g_strcasecmp(c,"yes") || !g_strcasecmp(c,"on") || 
-	       !g_strcasecmp(c,"true") || !g_strcasecmp(c,"enabled")) 
+          c = g_utf8_casefold (c, -1);
+	  if ( !strcmp(c,"y") || !strcmp(c,"1") ||
+	       !strcmp(c,"yes") || !strcmp(c,"on") || 
+	       !strcmp(c,"true") || !strcmp(c,"enabled")) 
 	       return TRUE;
-	  if (!g_strcasecmp(c,"n") || !strcmp(c,"0") ||
-	      !g_strcasecmp(c,"no") || !g_strcasecmp(c,"off") ||
-	      !g_strcasecmp(c,"false") || !g_strcasecmp(c,"disabled"))
+	  if (!strcmp(c,"n") || !strcmp(c,"0") ||
+	      !strcmp(c,"no") || !strcmp(c,"off") ||
+	      !strcmp(c,"false") || !strcmp(c,"disabled"))
 	       return FALSE;
 	  inifile_set_gboolean(setting,defaultValue);
      }
