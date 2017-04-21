@@ -22,9 +22,10 @@
 #ifndef FLOATBOX_H_INCLUDED
 #define FLOATBOX_H_INCLUDED
 
-#define FLOATBOX(obj) GTK_CHECK_CAST (obj, floatbox_get_type(), Floatbox)
-#define FLOATBOX_CLASS(class) GTK_CHECK_CLASS_CAST(class,floatbox_get_type(),FloatboxClass)
-#define IS_FLOATBOX(obj) GTK_CHECK_TYPE (obj,floatbox_get_type())
+#define FLOATBOX_TYPE          (floatbox_get_type ())
+#define FLOATBOX(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), FLOATBOX_TYPE, Floatbox))
+#define IS_FLOATBOX(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), FLOATBOX_TYPE))
+#define FLOATBOX_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  FLOATBOX_TYPE, FloatboxClass))
 
 typedef struct _Floatbox Floatbox;
 typedef struct _FloatboxClass FloatboxClass;
@@ -40,7 +41,7 @@ struct _FloatboxClass {
 	void (*numchange)(Floatbox *, float);
 	};
 
-GtkType floatbox_get_type(void);
+GType floatbox_get_type(void);
 GtkWidget *floatbox_new(float value);
 GtkWidget *floatbox_create_scale(Floatbox *box, float minval, float maxval);
 void floatbox_set(Floatbox *box, float value);

@@ -26,9 +26,10 @@
 #include "effectdialog.h"
 #include "float_box.h"
 
-#define COMBINE_CHANNELS_DIALOG(obj) GTK_CHECK_CAST(obj,combine_channels_dialog_get_type(),CombineChannelsDialog)
-#define COMBINE_CHANNELS_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,combine_channels_dialog_get_type(),CombineChannelsDialogClass)
-#define IS_COMBINE_CHANNELS_DIALOG(obj) GTK_CHECK_TYPE(obj,combine_channels_dialog_get_type())
+#define COMBINE_CHANNELS_DIALOG_TYPE          (combine_channels_dialog_get_type ())
+#define COMBINE_CHANNELS_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), COMBINE_CHANNELS_DIALOG_TYPE, CombineChannelsDialog))
+#define IS_COMBINE_CHANNELS_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), COMBINE_CHANNELS_DIALOG_TYPE))
+#define COMBINE_CHANNELS_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  COMBINE_CHANNELS_DIALOG_TYPE, CombineChannelsDialogClass))
 
 typedef struct {
     EffectDialog ed;
@@ -40,6 +41,6 @@ typedef struct {
     EffectDialogClass edc;
 } CombineChannelsDialogClass;
 
-GtkType combine_channels_dialog_get_type();
+GType combine_channels_dialog_get_type();
 
 #endif

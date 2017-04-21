@@ -27,9 +27,10 @@
 #include "int_box.h"
 #include "combo.h"
 
-#define SOX_DIALOG(obj) GTK_CHECK_CAST(obj,sox_dialog_get_type(),SoxDialog)
-#define SOX_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,sox_dialog_get_type(),SoxDialogClass)
-#define IS_SOX_DIALOG(obj) GTK_CHECK_TYPE(obj,sox_dialog_get_type())
+#define SOX_DIALOG_TYPE          (sox_dialog_get_type ())
+#define SOX_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), SOX_DIALOG_TYPE, SoxDialog))
+#define IS_SOX_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SOX_DIALOG_TYPE))
+#define SOX_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  SOX_DIALOG_TYPE, SoxDialogClass))
 
 typedef struct {
      EffectDialog ed;
@@ -46,7 +47,7 @@ typedef struct {
      EffectDialogClass ed_class;
 } SoxDialogClass;
 
-GtkType sox_dialog_get_type(void);
+GType sox_dialog_get_type(void);
 void sox_dialog_register(void);
 gchar *sox_dialog_first_effect(void);
 void sox_dialog_format_string(gchar *buf, guint bufsize, Dataformat *fmt);

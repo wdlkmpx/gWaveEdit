@@ -27,9 +27,10 @@
 #include "effectdialog.h"
 #include "ladspacore.h"
 
-#define LADSPA_DIALOG(obj) GTK_CHECK_CAST(obj,ladspa_dialog_get_type(),LadspaDialog)
-#define LADSPA_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,ladspa_dialog_get_type(),LadspaDialogClass)
-#define IS_LADSPA_DIALOG(obj) GTK_CHECK_TYPE(obj,ladspa_dialog_get_type())
+#define LADSPA_DIALOG_TYPE          (ladspa_dialog_get_type ())
+#define LADSPA_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), LADSPA_DIALOG_TYPE, LadspaDialog))
+#define IS_LADSPA_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), LADSPA_DIALOG_TYPE))
+#define LADSPA_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  LADSPA_DIALOG_TYPE, LadspaDialogClass))
 
 typedef struct {
      EffectDialog ed;
@@ -43,7 +44,7 @@ typedef struct {
      EffectDialogClass edc;
 } LadspaDialogClass;
 
-GtkType ladspa_dialog_get_type(void);
+GType ladspa_dialog_get_type(void);
 
 #endif /* HAVE_LADSPA */
 

@@ -96,9 +96,9 @@ static void chunk_init(Chunk *object)
      chunks = g_list_append( chunks, object );
 }
 
-GtkType chunk_get_type(void)
+GType chunk_get_type(void)
 {
-     static GtkType id=0;
+     static GType id=0;
      if (!id) {
 	  GtkTypeInfo info = {
 	       "Chunk",
@@ -327,8 +327,8 @@ static gboolean has_fake_pcm(Chunk *c)
      return FALSE;
 }
 
-/* Allmän funktion för stegvis bearbetning av en Chunk.
- * Funktionen läser steg för steg av chunken och anropar proc.  
+/* Allm\E4n funktion f\F6r stegvis bearbetning av en Chunk.
+ * Funktionen l\E4ser steg f\F6r steg av chunken och anropar proc.  
  * Efter allt data skickats in kommer eof_proc (om != NULL) att anropas med 
  * samplesize=0.
  */
@@ -519,8 +519,8 @@ Chunk *chunk_filter_tofmt(Chunk *chunk, chunk_filter_tofmt_proc proc,
 	  return ds;
 }
 
-/* Allmän funktion för stegvis avläsning av en Chunk. proc kommer att anropas 
- * en gång för varje sampling i chunken */
+/* Allm\E4n funktion f\F6r stegvis avl\E4sning av en Chunk. proc kommer att anropas 
+ * en g\E5ng f\F6r varje sampling i chunken */
 
 gboolean chunk_parse(Chunk *chunk, chunk_parse_proc proc, 
 		     gboolean allchannels, gboolean convert, int dither_mode, 

@@ -47,10 +47,10 @@
 #include "statusbar.h"
 #include "gtkfiles.h"
 
-#define CHUNK(obj) GTK_CHECK_CAST(obj,chunk_get_type(),Chunk)
-#define CHUNK_CLASS(class) GTK_CHECK_CLASS_CAST(class,chunk_get_type(),ChunkClass)
-#define IS_CHUNK(obj) GTK_CHECK_TYPE(obj,chunk_get_type())
-
+#define CHUNK_TYPE          (chunk_get_type ())
+#define CHUNK(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), CHUNK_TYPE, Chunk))
+#define IS_CHUNK(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CHUNK_TYPE))
+#define CHUNK_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  CHUNK_TYPE, ChunkClass))
 
 typedef struct _Chunk {
      GtkObject object;
@@ -166,7 +166,7 @@ extern gboolean chunk_filter_use_floating_tempfiles;
 /*  ------ Creation functions ------  */
 
 
-GtkType chunk_get_type(void);
+GType chunk_get_type(void);
 Chunk *chunk_new_from_datasource(Datasource *ds);
 
 /** Returns a new chunk with the same data as this chunk but assumed to be in a

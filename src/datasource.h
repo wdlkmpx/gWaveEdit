@@ -30,9 +30,10 @@
 #include "statusbar.h"
 #include "dataformat.h"
 
-#define DATASOURCE(obj) GTK_CHECK_CAST(obj,datasource_get_type(),Datasource)
-#define DATASOURCE_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,datasource_get_type(),DatasourceClass)
-#define IS_DATASOURCE(obj) GTK_CHECK_TYPE(obj,datasource_get_type())
+#define DATASOURCE_TYPE          (datasource_get_type ())
+#define DATASOURCE(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), DATASOURCE_TYPE, Datasource))
+#define IS_DATASOURCE(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), DATASOURCE_TYPE))
+#define DATASOURCE_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  DATASOURCE_TYPE, DatasourceClass))
 
 #ifndef HAVE_LIBSNDFILE
 #define SNDFILE void
@@ -147,7 +148,7 @@ typedef struct {
 } DatasourceClass;
 
 
-GtkType datasource_get_type(void);
+GType datasource_get_type(void);
 
 /* ------------ 
  * CONSTRUCTORS 

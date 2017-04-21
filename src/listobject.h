@@ -26,9 +26,10 @@
 #ifndef LISTOBJECT_H_INCLUDED
 #define LISTOBJECT_H_INCLUDED
 
-#define LIST_OBJECT(obj) GTK_CHECK_CAST(obj,list_object_get_type(),ListObject)
-#define LIST_OBJECT_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,list_object_get_type(),ListObjectClass)
-#define IS_LIST_OBJECT(obj) GTK_CHECK_TYPE(obj,list_object_get_type())
+#define LIST_OBJECT_TYPE          (list_object_get_type ())
+#define LIST_OBJECT(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), LIST_OBJECT_TYPE, ListObject))
+#define IS_LIST_OBJECT(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), LIST_OBJECT_TYPE))
+#define LIST_OBJECT_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  LIST_OBJECT_TYPE, ListObjectClass))
 
 typedef struct {
      GtkObject obj;
@@ -48,7 +49,7 @@ typedef struct {
      void (*item_notify)(ListObject *,gpointer);
 } ListObjectClass;
 
-GtkType list_object_get_type(void);
+GType list_object_get_type(void);
 
 
 /* Creates a new ListObject 

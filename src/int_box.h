@@ -22,9 +22,10 @@
 #ifndef INTBOX_H_INCLUDED
 #define INTBOX_H_INCLUDED
 
-#define INTBOX(obj) GTK_CHECK_CAST (obj, intbox_get_type(), Intbox)
-#define INTBOX_CLASS(class) GTK_CHECK_CLASS_CAST(class,intbox_get_type(),IntboxClass)
-#define IS_INTBOX(obj) GTK_CHECK_TYPE (obj,intbox_get_type())
+#define INTBOX_TYPE          (intbox_get_type ())
+#define INTBOX(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), INTBOX_TYPE, Intbox))
+#define IS_INTBOX(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), INTBOX_TYPE))
+#define INTBOX_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  INTBOX_TYPE, IntboxClass))
 
 typedef struct _Intbox Intbox;
 typedef struct _IntboxClass IntboxClass;
@@ -40,7 +41,7 @@ struct _IntboxClass {
 	void (*numchange)(Intbox *, long int);
 	};
 
-GtkType intbox_get_type(void);
+GType intbox_get_type(void);
 GtkWidget *intbox_new(long value);
 void intbox_set(Intbox *box, long value);
 

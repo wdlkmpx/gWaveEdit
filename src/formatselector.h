@@ -27,9 +27,10 @@
 #include "dataformat.h"
 #include "int_box.h"
 
-#define FORMAT_SELECTOR(obj) GTK_CHECK_CAST(obj,format_selector_get_type(),FormatSelector)
-#define FORMAT_SELECTOR_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,format_selector_get_type(),FormatSelectorClass)
-#define IS_FORMAT_SELECTOR(obj) GTK_CHECK_TYPE(obj,format_selector_get_type())
+#define FORMAT_SELECTOR_TYPE          (format_selector_get_type ())
+#define FORMAT_SELECTOR(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), FORMAT_SELECTOR_TYPE, FormatSelector))
+#define IS_FORMAT_SELECTOR(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), FORMAT_SELECTOR_TYPE))
+#define FORMAT_SELECTOR_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  FORMAT_SELECTOR_TYPE, FormatSelectorClass))
 
 typedef struct {
 
@@ -45,7 +46,7 @@ typedef struct {
      GtkTableClass table_class;
 } FormatSelectorClass;
 
-GtkType format_selector_get_type(void);
+GType format_selector_get_type(void);
 GtkWidget *format_selector_new(gboolean show_full);
 void format_selector_set(FormatSelector *fs, Dataformat *format);
 void format_selector_get(FormatSelector *fs, Dataformat *result);

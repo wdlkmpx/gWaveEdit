@@ -26,9 +26,10 @@
 #include "effectdialog.h"
 #include "documentlist.h"
 
-#define SANDWICH_DIALOG(obj) GTK_CHECK_CAST(obj,sandwich_dialog_get_type(),SandwichDialog)
-#define SANDWICH_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,sandwich_dialog_get_type(),SandwichDialogClass)
-#define IS_SANDWICH_DIALOG(obj) GTK_CHECK_TYPE(obj,sandwich_dialog_get_type())
+#define SANDWICH_DIALOG_TYPE          (sandwich_dialog_get_type ())
+#define SANDWICH_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), SANDWICH_DIALOG_TYPE, SandwichDialog))
+#define IS_SANDWICH_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SANDWICH_DIALOG_TYPE))
+#define SANDWICH_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  SANDWICH_DIALOG_TYPE, SandwichDialogClass))
 
 typedef struct {
      EffectDialog ed;
@@ -41,6 +42,6 @@ typedef struct {
      EffectDialogClass edc;
 } SandwichDialogClass;
 
-GtkType sandwich_dialog_get_type(void);
+GType sandwich_dialog_get_type(void);
 
 #endif

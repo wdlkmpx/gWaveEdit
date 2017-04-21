@@ -27,9 +27,10 @@
 #include "effectdialog.h"
 #include "int_box.h"
 
-#define SAMPLERATE_DIALOG(obj) GTK_CHECK_CAST(obj,samplerate_dialog_get_type(),SamplerateDialog)
-#define SAMPLERATE_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,samplerate_dialog_get_type(),SamplerateDialogClass)
-#define IS_SAMPLERATE_DIALOG(obj) GTK_CHECK_TYPE(obj,samplerate_dialog_get_type())
+#define SAMPLERATE_DIALOG_TYPE          (samplerate_dialog_get_type ())
+#define SAMPLERATE_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), SAMPLERATE_DIALOG_TYPE, SamplerateDialog))
+#define IS_SAMPLERATE_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SAMPLERATE_DIALOG_TYPE))
+#define SAMPLERATE_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  SAMPLERATE_DIALOG_TYPE, SamplerateDialogClass))
 
 typedef struct _SamplerateDialog {
      EffectDialog ed;
@@ -41,6 +42,6 @@ typedef struct _SamplerateDialogClass {
      EffectDialogClass ed_class;
 } SamplerateDialogClass;
 
-GtkType samplerate_dialog_get_type(void);
+GType samplerate_dialog_get_type(void);
 
 #endif

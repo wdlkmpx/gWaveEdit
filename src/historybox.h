@@ -24,9 +24,10 @@
 
 #include <gtk/gtk.h>
 
-#define HISTORY_BOX(obj) GTK_CHECK_CAST(obj,history_box_get_type(),HistoryBox)
-#define HISTORY_BOX_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,history_box_get_type(),HistoryBoxClass)
-#define IS_HISTORY_BOX(obj) GTK_CHECK_TYPE(obj,history_box_get_type())
+#define HISTORY_BOX_TYPE          (history_box_get_type ())
+#define HISTORY_BOX(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), HISTORY_BOX_TYPE, HistoryBox))
+#define IS_HISTORY_BOX(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), HISTORY_BOX_TYPE))
+#define HISTORY_BOX_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  HISTORY_BOX_TYPE, HistoryBoxClass))
 
 typedef struct {
      GtkCombo combo;
@@ -37,7 +38,7 @@ typedef struct {
      GtkComboClass comboclass;
 } HistoryBoxClass;
 
-GtkType history_box_get_type(void);
+GType history_box_get_type(void);
 GtkWidget *history_box_new(gchar *historyname, gchar *value);
 gchar *history_box_get_value(HistoryBox *box);
 void history_box_set_history(HistoryBox *box, gchar *historyname);

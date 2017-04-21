@@ -26,9 +26,10 @@
 #include "combo.h"
 #include "formatselector.h"
 
-#define CONFIG_DIALOG(obj) GTK_CHECK_CAST(obj,config_dialog_get_type(),ConfigDialog)
-#define CONFIG_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,config_dialog_get_type(),ConfigDialogClass)
-#define IS_CONFIG_DIALOG(obj) GTK_CHECK_TYPE(obj,config_dialog_get_type())
+#define CONFIG_DIALOG_TYPE          (config_dialog_get_type ())
+#define CONFIG_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), CONFIG_DIALOG_TYPE, ConfigDialog))
+#define IS_CONFIG_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CONFIG_DIALOG_TYPE))
+#define CONFIG_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  CONFIG_DIALOG_TYPE, ConfigDialogClass))
 
 typedef struct {
      GtkWindow window;
@@ -65,7 +66,7 @@ typedef struct {
      GtkWindowClass wc;
 } ConfigDialogClass;
 
-GtkType config_dialog_get_type(void);
+GType config_dialog_get_type(void);
 GtkWidget *config_dialog_new(void);
 
 #endif

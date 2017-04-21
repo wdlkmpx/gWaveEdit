@@ -26,9 +26,10 @@
 #include "effectdialog.h"
 #include "int_box.h"
 
-#define MAP_CHANNELS_DIALOG(obj) GTK_CHECK_CAST(obj,map_channels_dialog_get_type(),MapChannelsDialog)
-#define MAP_CHANNELS_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,map_channels_dialog_get_type(),MapChannelsDialogClass)
-#define IS_MAP_CHANNELS_DIALOG(obj) GTK_CHECK_TYPE(obj,map_channels_dialog_get_type())
+#define MAP_CHANNELS_DIALOG_TYPE          (map_channels_dialog_get_type ())
+#define MAP_CHANNELS_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), MAP_CHANNELS_DIALOG_TYPE, MapChannelsDialog))
+#define IS_MAP_CHANNELS_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MAP_CHANNELS_DIALOG_TYPE))
+#define MAP_CHANNELS__DIALOGCLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  MAP_CHANNELS_DIALOG_TYPE, MapChannelsDialogClass))
 
 typedef struct {
      EffectDialog ed;
@@ -42,6 +43,6 @@ typedef struct {
     EffectDialogClass edc;
 } MapChannelsDialogClass;
 
-GtkType map_channels_dialog_get_type();
+GType map_channels_dialog_get_type();
 
 #endif

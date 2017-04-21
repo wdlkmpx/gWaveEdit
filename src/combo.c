@@ -153,9 +153,9 @@ void combo_remove_item(Combo *combo, int item_index)
      g_free(c);
 }
 
-GtkType combo_get_type(void)
+GType combo_get_type(void)
 {
-     static GtkType id = 0;
+     static GType id = 0;
      if (!id) {
 	  GtkTypeInfo info = {
 	       "Combo",

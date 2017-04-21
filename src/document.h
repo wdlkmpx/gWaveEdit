@@ -25,9 +25,10 @@
 #include "chunk.h"
 #include "listobject.h"
 
-#define DOCUMENT(obj) GTK_CHECK_CAST(obj,document_get_type(),Document)
-#define DOCUMENT_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,document_get_type(),DocumentClass)
-#define IS_DOCUMENT(obj) GTK_CHECK_TYPE(obj,document_get_type())
+#define DOCUMENT_TYPE          (document_get_type ())
+#define DOCUMENT(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), DOCUMENT_TYPE, Document))
+#define IS_DOCUMENT(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), DOCUMENT_TYPE))
+#define DOCUMENT_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  DOCUMENT_TYPE, DocumentClass))
 
 struct MarkList {
      int length, alloced;
@@ -125,7 +126,7 @@ typedef Chunk *(*document_apply_proc)(Chunk *chunk, StatusBar *bar,
 
 
 
-GtkType document_get_type(void);
+GType document_get_type(void);
 
 Document *document_new_with_file(gchar *filename, StatusBar *bar);
 Document *document_new_with_chunk(Chunk *chunk, gchar *sourcename, 

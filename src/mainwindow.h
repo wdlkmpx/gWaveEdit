@@ -27,9 +27,10 @@
 #include "statusbar.h"
 #include "listobject.h"
 
-#define MAINWINDOW(obj) GTK_CHECK_CAST(obj,mainwindow_get_type(),Mainwindow)
-#define MAINWINDOW_CLASS(class) GTK_CHECK_CLASS_CAST(class,mainwindow_get_type(),MainwindowClass)
-#define IS_MAINWINDOW(obj) GTK_CHECK_TYPE(obj,mainwindow_get_type())
+#define MAINWINDOW_TYPE          (mainwindow_get_type ())
+#define MAINWINDOW(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), MAINWINDOW_TYPE, Mainwindow))
+#define IS_MAINWINDOW(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MAINWINDOW_TYPE))
+#define MAINWINDOW_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  MAINWINDOW_TYPE, MainwindowClass))
 
 #define MAINWINDOW_RECENT_MAX 20
 #define MAINWINDOW_SCROLL_DELTA_RATIO 4
@@ -74,7 +75,7 @@ extern ListObject *mainwindow_objects;
 
 extern gboolean autoplay_mark_flag, varispeed_reset_flag;
 
-GtkType mainwindow_get_type(void);
+GType mainwindow_get_type(void);
 GtkWidget *mainwindow_new();
 GtkWidget *mainwindow_new_with_file(char *filename, gboolean log);
 

@@ -26,11 +26,10 @@
 #include "documentlist.h"
 #include "effectdialog.h"
 
-
-#define EFFECT_BROWSER(obj) GTK_CHECK_CAST(obj,effect_browser_get_type(),EffectBrowser)
-#define EFFECT_BROWSER_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,effect_browser_get_type(),EffectBrowserClass)
-#define IS_EFFECT_BROWSER(obj) GTK_CHECK_TYPE(obj,effect_browser_get_type())
-
+#define EFFECT_BROWSER_TYPE          (effect_browser_get_type ())
+#define EFFECT_BROWSER(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), EFFECT_BROWSER_TYPE, EffectBrowser))
+#define IS_EFFECT_BROWSER(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), EFFECT_BROWSER_TYPE))
+#define EFFECT_BROWSER_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  EFFECT_BROWSER_TYPE, EffectBrowserClass))
 
 #define EFFECT_BROWSER_CACHE_SIZE 8
 
@@ -82,7 +81,7 @@ void effect_register_add_effect(gchar source_tag, const gchar *name,
 void effect_register_rebuild(void);
 
 
-GtkType effect_browser_get_type(void);
+GType effect_browser_get_type(void);
 GtkWidget *effect_browser_new(Document *doc);
 GtkWidget *effect_browser_new_with_effect(Document *doc, gchar *effect_name, 
 					  gchar source_tag, 

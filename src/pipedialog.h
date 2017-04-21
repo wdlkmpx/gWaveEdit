@@ -27,9 +27,10 @@
 #include "historybox.h"
 
 
-#define PIPE_DIALOG(obj) GTK_CHECK_CAST(obj,pipe_dialog_get_type(),PipeDialog)
-#define PIPE_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,pipe_dialog_get_type(),PipeDialogClass)
-#define IS_PIPE_DIALOG(obj) GTK_CHECK_TYPE(obj,pipe_dialog_get_type())
+#define PIPE_DIALOG_TYPE          (pipe_dialog_get_type ())
+#define PIPE_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), PIPE_DIALOG_TYPE, PipeDialog))
+#define IS_PIPE_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PIPE_DIALOG_TYPE))
+#define PIPE_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  PIPE_DIALOG_TYPE, PipeDialogClass))
 
 typedef struct {
      
@@ -44,7 +45,7 @@ typedef struct {
      EffectDialogClass edc;
 } PipeDialogClass;
 
-GtkType pipe_dialog_get_type(void);
+GType pipe_dialog_get_type(void);
 
 gpointer pipe_dialog_open_pipe(gchar *command, int *fds, gboolean open_out);
 gboolean pipe_dialog_error_check(gpointer handle);

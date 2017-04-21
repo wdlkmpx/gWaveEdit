@@ -31,10 +31,10 @@
 #include "document.h"
 #include "viewcache.h"
 
-#define CHUNKVIEW(obj) GTK_CHECK_CAST (obj, chunk_view_get_type(), ChunkView)
-#define CHUNKVIEW_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,chunk_view_get_type(),ChunkViewClass)
-#define IS_CHUNKVIEW(obj) GTK_CHECK_TYPE (obj,chunk_view_get_type())
-
+#define CHUNKVIEW_TYPE          (chunk_view_get_type ())
+#define CHUNKVIEW(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), CHUNKVIEW_TYPE, ChunkView))
+#define IS_CHUNKVIEW(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CHUNKVIEW_TYPE))
+#define CHUNKVIEW_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  CHUNKVIEW_TYPE, ChunkViewClass))
 
 typedef struct _ChunkView {
 
@@ -75,7 +75,7 @@ typedef struct _ChunkViewClass {
 
 } ChunkViewClass;
 
-GtkType chunk_view_get_type(void);
+GType chunk_view_get_type(void);
 
 
 /* Creates a new ChunkView */

@@ -26,9 +26,10 @@
 #include "float_box.h"
 #include "mainwindow.h"
 
-#define GOTO_DIALOG(obj) GTK_CHECK_CAST(obj,goto_dialog_get_type(),GotoDialog)
-#define GOTO_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,goto_dialog_get_type(),GotoDialogClass)
-#define IS_GOTO_DIALOG(obj) GTK_CHECK_TYPE(obj,goto_dialog_get_type())
+#define GOTO_DIALOG_TYPE          (goto_dialog_get_type ())
+#define GOTO_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), GOTO_DIALOG_TYPE, GotoDialog))
+#define IS_GOTO_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GOTO_DIALOG_TYPE))
+#define GOTO_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  GOTO_DIALOG_TYPE, GotoDialogClass))
 
 #define GOTO_DIALOG_POS_AFTER_BEG_FILE 0
 #define GOTO_DIALOG_POS_AFTER_END_FILE 1
@@ -51,7 +52,7 @@ typedef struct _GotoDialogClass {
      GtkWindowClass edc;
 } GotoDialogClass;
 
-GtkType goto_dialog_get_type(void);
+GType goto_dialog_get_type(void);
 GtkWidget *goto_dialog_new(Mainwindow *mw);
 
 #endif

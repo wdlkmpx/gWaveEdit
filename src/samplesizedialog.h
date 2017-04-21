@@ -26,9 +26,10 @@
 #include "effectdialog.h"
 #include "formatselector.h"
 
-#define SAMPLESIZE_DIALOG(obj) GTK_CHECK_CAST(obj,samplesize_dialog_get_type(),SamplesizeDialog)
-#define SAMPLESIZE_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(obj,samplesize_dialog_get_type(),SamplesizeDialogClass)
-#define IS_SAMPLESIZE_DIALOG(obj) GTK_CHECK_TYPE(obj,samplesize_dialog_get_type())
+#define SAMPLESIZE_DIALOG_TYPE          (samplesize_dialog_get_type ())
+#define SAMPLESIZE_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), SAMPLESIZE_DIALOG_TYPE, SamplesizeDialog))
+#define IS_SAMPLESIZE_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SAMPLESIZE_DIALOG_TYPE))
+#define SAMPLESIZE_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  SAMPLESIZE_DIALOG_TYPE, SamplesizeDialogClass))
 
 typedef struct _SamplesizeDialog {
 
@@ -44,6 +45,6 @@ typedef struct _SamplesizeDialogClass {
      EffectDialogClass ed_class;
 } SamplesizeDialogClass;
 
-GtkType samplesize_dialog_get_type(void);
+GType samplesize_dialog_get_type(void);
 
 #endif

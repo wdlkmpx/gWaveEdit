@@ -32,9 +32,10 @@
 #include <gtk/gtk.h>
 #include "main.h"
 
-#define STATUSBAR(obj) GTK_CHECK_CAST(obj,status_bar_get_type(),StatusBar)
-#define STATUSBAR_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,status_bar_get_type(),StatusBarClass)
-#define IS_STATUSBAR(obj) GTK_CHECK_TYPE(obj,status_bar_get_type())
+#define STATUSBAR_TYPE          (status_bar_get_type ())
+#define STATUSBAR(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), STATUSBAR_TYPE, StatusBar))
+#define IS_STATUSBAR(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), STATUSBAR_TYPE))
+#define STATUSBAR_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  STATUSBAR_TYPE, StatusBarClass))
 
 typedef struct {
      GtkFixed fixed;
@@ -71,7 +72,7 @@ typedef struct {
  * should update while playing. */
 extern gboolean status_bar_roll_cursor;
 
-GtkType status_bar_get_type(void);
+GType status_bar_get_type(void);
 GtkWidget *status_bar_new(void);
 
 /* Reset the status bar to the original condition ("no file loaded") */

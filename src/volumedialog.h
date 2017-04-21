@@ -27,9 +27,10 @@
 #include "effectdialog.h"
 #include "float_box.h"
 
-#define VOLUME_DIALOG(obj) GTK_CHECK_CAST(obj,volume_dialog_get_type(),VolumeDialog)
-#define VOLUME_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,volume_dialog_get_type(),VolumeDialogClass)
-#define IS_VOLUME_DIALOG(obj) GTK_CHECK_TYPE(obj,volume_dialog_get_type())
+#define VOLUME_DIALOG_TYPE          (volume_dialog_get_type ())
+#define VOLUME_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), VOLUME_DIALOG_TYPE, VolumeDialog))
+#define IS_VOLUME_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), VOLUME_DIALOG_TYPE))
+#define VOLUME_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  VOLUME_DIALOG_TYPE, VolumeDialogClass))
 
 typedef struct _VolumeDialog {
      EffectDialog ed;
@@ -40,6 +41,6 @@ typedef struct _VolumeDialogClass {
      EffectDialogClass ed_class;
 } VolumeDialogClass;
 
-GtkType volume_dialog_get_type(void);
+GType volume_dialog_get_type(void);
 
 #endif

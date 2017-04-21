@@ -28,9 +28,11 @@
 #include "document.h"
 #include "listobject.h"
 
-#define DOCUMENT_LIST(obj) GTK_CHECK_CAST(obj,document_list_get_type(),DocumentList)
-#define DOCUMENT_LIST_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,document_list_get_type(),DocumentListClass)
-#define IS_DOCUMENT_LIST(obj) GTK_CHECK_TYPE(obj,document_list_get_type())
+#define DOCUMENT_LIST_TYPE          (document_list_get_type ())
+#define DOCUMENT_LIST(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), DOCUMENT_LIST_TYPE, DocumentList))
+#define IS_DOCUMENT_LIST(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), DOCUMENT_LIST_TYPE))
+#define DOCUMENT_LIST_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  DOCUMENT_LIST_TYPE, DocumentListClass))
+
 typedef struct {
      Combo combo;
      Document *selected;
@@ -48,7 +50,7 @@ typedef struct {
      void (*document_changed)(DocumentList *dl);     
 } DocumentListClass;
 
-GtkType document_list_get_type(void);
+GType document_list_get_type(void);
 GtkWidget *document_list_new(Document *chosen);
 void document_list_setup(DocumentList *mwl, Document *chosen);
 

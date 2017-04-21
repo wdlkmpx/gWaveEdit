@@ -32,9 +32,10 @@
 #include "combo.h"
 #include "recordformatcombo.h"
 
-#define RECORD_DIALOG(obj) GTK_CHECK_CAST(obj, record_dialog_get_type(), RecordDialog)
-#define RECORD_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,record_dialog_get_type(),RecordDialogClass)
-#define IS_RECORD_DIALOG(obj) GTK_CHECK_TYPE(obj, record_dialog_get_type())
+#define RECORD_DIALOG_TYPE          (record_dialog_get_type ())
+#define RECORD_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), RECORD_DIALOG_TYPE, RecordDialog))
+#define IS_RECORD_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), RECORD_DIALOG_TYPE))
+#define RECORD_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  RECORD_DIALOG_TYPE, RecordDialogClass))
 
 
 typedef struct {
@@ -76,7 +77,7 @@ typedef struct {
      GtkWindowClass wc;
 } RecordDialogClass;
 
-GtkType record_dialog_get_type(void);
+GType record_dialog_get_type(void);
 Chunk *record_dialog_execute(int *noverruns, off_t overrun_locs[10]);
 
 #endif

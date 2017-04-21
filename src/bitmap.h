@@ -32,9 +32,10 @@
 
 #include <gtk/gtk.h>
 
-#define BITMAP(obj) GTK_CHECK_CAST(obj,bitmap_get_type(),Bitmap)
-#define BITMAP_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,bitmap_get_type(),BitmapClass)
-#define IS_BITMAP(obj) GTK_CHECK_TYPE(obj,bitmap_get_type())
+#define BITMAP_TYPE          (bitmap_get_type ())
+#define BITMAP(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), BITMAP_TYPE, Bitmap))
+#define IS_BITMAP(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BITMAP_TYPE))
+#define BITMAP_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  BITMAP_TYPE, BitmapClass))
 
 typedef struct {
      GtkWidget wid;
@@ -51,7 +52,7 @@ typedef struct {
      GtkWidgetClass klass;
 } BitmapClass;
 
-GtkType bitmap_get_type(void);
+GType bitmap_get_type(void);
 GtkWidget *bitmap_new_from_data(unsigned char *data, int width, int height);
 void bitmap_set_color(Bitmap *bmp, GdkColor *clr);
 void bitmap_set_fg(Bitmap *bmp, gfloat alpha);

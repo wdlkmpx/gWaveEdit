@@ -39,9 +39,10 @@
 #include <gtk/gtk.h>
 #include "mainwindow.h"
 
-#define EFFECT_DIALOG(obj) GTK_CHECK_CAST(obj,effect_dialog_get_type(),EffectDialog)
-#define EFFECT_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,effect_dialog_get_type(),EffectDialogClass)
-#define IS_EFFECT_DIALOG(obj) GTK_CHECK_TYPE(obj,effect_dialog_get_type())
+#define EFFECT_DIALOG_TYPE          (effect_dialog_get_type ())
+#define EFFECT_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), EFFECT_DIALOG_TYPE, EffectDialog))
+#define IS_EFFECT_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), EFFECT_DIALOG_TYPE))
+#define EFFECT_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  EFFECT_DIALOG_TYPE, EffectDialogClass))
 
 typedef struct _EffectDialog {
 
@@ -77,7 +78,7 @@ typedef struct _EffectDialogClass {
 
 } EffectDialogClass;
 
-GtkType effect_dialog_get_type(void);
+GType effect_dialog_get_type(void);
 
 /* This sets the associated Mainwindow for the dialog. This must be called once
  * and only once for a dialog.

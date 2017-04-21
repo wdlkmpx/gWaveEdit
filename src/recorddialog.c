@@ -1031,9 +1031,9 @@ static void record_dialog_class_init(GtkObjectClass *klass)
      klass->destroy = record_dialog_destroy;
 }
 
-GtkType record_dialog_get_type(void)
+GType record_dialog_get_type(void)
 {
-     static GtkType id = 0;
+     static GType id = 0;
      if (!id) {
 	  GtkTypeInfo info = {
 	       "RecordDialog",

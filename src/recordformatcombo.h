@@ -27,9 +27,10 @@
 #include "dataformat.h"
 #include "listobject.h"
 
-#define RECORD_FORMAT_COMBO(obj) GTK_CHECK_CAST(obj,record_format_combo_get_type(),RecordFormatCombo)
-#define RECORD_FORMAT_COMBO_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,record_format_combo_get_type(),RecordFormatComboClass)
-#define IS_RECORD_FORMAT_COMBO(obj) GTK_CHECK_TYPE(obj,record_format_combo_get_type())
+#define RECORD_FORMAT_COMBO_TYPE          (record_format_combo_get_type ())
+#define RECORD_FORMAT_COMBO(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), RECORD_FORMAT_COMBO_TYPE, RecordFormatCombo))
+#define IS_RECORD_FORMAT_COMBO(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), RECORD_FORMAT_COMBO_TYPE))
+#define RECORD_FORMAT_COMBO_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  RECORD_FORMAT_COMBO_TYPE, RecordFormatComboClass))
 
 typedef struct {
      gint num;
@@ -64,7 +65,7 @@ typedef struct {
      void (*format_dialog_request)(RecordFormatCombo *rfc);
 } RecordFormatComboClass;
 
-GtkType record_format_combo_get_type(void);
+GType record_format_combo_get_type(void);
 
 GtkWidget *record_format_combo_new(ListObject *named_presets, 
 				   ListObject *driver_presets,

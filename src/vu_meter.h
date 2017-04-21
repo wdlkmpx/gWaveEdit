@@ -24,9 +24,10 @@
 
 #include <gtk/gtk.h>
 
-#define VU_METER(obj) GTK_CHECK_CAST(obj,vu_meter_get_type(),VuMeter)
-#define VU_METER_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,vu_meter_get_type(),VuMeterClass)
-#define IS_VU_METER(obj) GTK_CHECK_TYPE(obj,vu_meter_get_type())
+#define VU_METER_TYPE          (vu_meter_get_type ())
+#define VU_METER(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), VU_METER_TYPE, VuMeter))
+#define IS_VU_METER(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), VU_METER_TYPE))
+#define VU_METER_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  VU_METER_TYPE, VuMeterClass))
 
 typedef struct {
      GtkDrawingArea da;
@@ -39,7 +40,7 @@ typedef struct {
      GtkDrawingAreaClass dac;
 } VuMeterClass;
 
-GtkType vu_meter_get_type(void);
+GType vu_meter_get_type(void);
 GtkWidget *vu_meter_new(gfloat value);
 void vu_meter_set_value(VuMeter *v, gfloat value);
 void vu_meter_update(VuMeter *v);

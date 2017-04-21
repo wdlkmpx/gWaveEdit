@@ -27,9 +27,10 @@
 #include "float_box.h"
 #include "effectdialog.h"
 
-#define SPEED_DIALOG(obj) GTK_CHECK_CAST(obj,speed_dialog_get_type(),SpeedDialog)
-#define SPEED_DIALOG_CLASS(klass) GTK_CHECK_CLASS_CAST(klass,speed_dialog_get_type(),SpeedDialogClass)
-#define IS_SPEED_DIALOG(obj) GTK_CHECK_TYPE(obj,speed_dialog_get_type())
+#define SPEED_DIALOG_TYPE          (speed_dialog_get_type ())
+#define SPEED_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), SPEED_DIALOG_TYPE, SpeedDialog))
+#define IS_SPEED_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SPEED_DIALOG_TYPE))
+#define SPEED_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  SPEED_DIALOG_TYPE, SpeedDialogClass))
 
 typedef struct _SpeedDialog {
      EffectDialog ed;
@@ -40,6 +41,6 @@ typedef struct _SpeedDialogClass {
      EffectDialogClass ed_class;
 } SpeedDialogClass;
 
-GtkType speed_dialog_get_type(void);
+GType speed_dialog_get_type(void);
 
 #endif
