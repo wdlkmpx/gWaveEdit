@@ -313,7 +313,7 @@ void session_quit(void)
 }
 
 struct session_dialog_data {
-     GtkList *listwid;
+     GtkListStore *list;
      struct session **listmap;
      GtkWidget *resume_button,*delete_button;
      gboolean destroy_flag, resume_click_flag;
@@ -327,14 +327,17 @@ static void session_dialog_destroy(GtkObject *obj, gpointer user_data)
      ddata->destroy_flag = TRUE;
 }
 
-static void session_dialog_select_child(GtkList *list, GtkWidget *widget, 
-					gpointer user_data)
+static void session_dialog_select(GtkTreeSelection *sel,gpointer user_data)
 {
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     gboolean valid;
      struct session_dialog_data *ddata = 
 	  (struct session_dialog_data *)user_data;
-     ddata->resume_index = gtk_list_child_position(list,widget);
-     gtk_widget_set_sensitive(ddata->resume_button,TRUE);
-     gtk_widget_set_sensitive(ddata->delete_button,TRUE);     
+     valid = gtk_tree_selection_get_selected (sel, &model, &iter);
+     if (valid) gtk_tree_model_get (model, &iter, 1, &ddata->resume_index, -1);
+     gtk_widget_set_sensitive(ddata->resume_button,valid);
+     gtk_widget_set_sensitive(ddata->delete_button,valid);
 }
 
 
@@ -355,13 +358,23 @@ static void session_dialog_delete_click(GtkWidget *widget, gpointer user_data)
      struct session_dialog_data *ddata = 
 	  (struct session_dialog_data *)user_data;
      int i;
-     gboolean b;
+     gboolean b, valid;
+     GtkTreeModel *model;
+     GtkTreeIter iter;
      i = user_message("Delete session?",UM_OKCANCEL);
      if (i != MR_OK) return;
      b = session_delete(ddata->listmap[ddata->resume_index]);
      if (b) return;
-     gtk_list_clear_items(ddata->listwid,ddata->resume_index,
-			  ddata->resume_index+1);
+     model = GTK_TREE_MODEL(ddata->list);
+     valid = gtk_tree_model_get_iter_first(model,&iter);
+     while(valid) {
+          gtk_tree_model_get (model, &iter, 1, &i, -1);
+          if (i==ddata->resume_index) {
+               gtk_list_store_remove(ddata->list,&iter);
+               break;
+          }
+          valid = gtk_tree_model_iter_next (model, &iter);
+     }
      for (i=ddata->resume_index; ddata->listmap[i]!=NULL; i++)
 	  ddata->listmap[i] = ddata->listmap[i+1]; 
      gtk_widget_set_sensitive(ddata->resume_button,FALSE);
@@ -372,10 +385,16 @@ gboolean session_dialog(void)
 {
      struct session_dialog_data ddata;
      GtkWidget *a,*b,*c,*d;
-     GList *l = NULL,*m;
+     GList *m;
      int i;
      struct session *s;
      gchar *ch,*p;
+     GtkListStore *l = NULL;
+     GtkTreeIter iter;
+     GtkTreeSelection *sel;
+     GtkTreeViewColumn *col;
+     GtkCellRenderer *renderer;
+
      /* Running and unknown are never shown. Old is also called crash */
      gchar *state_names[] = { NULL, _("Suspended"), _("Crash"),
 			      _("Left files"), _("Crash"), NULL };
@@ -384,6 +403,7 @@ gboolean session_dialog(void)
 
      ddata.listmap = g_malloc((g_list_length(session_list)+1) * 
 			      sizeof(struct session *));
+     l = gtk_list_store_new(2,G_TYPE_STRING,G_TYPE_INT);
      for (m=session_list,i=0; m!=NULL; m=m->next) {
 	  s = (struct session *) m->data;
 	  if (s->state == SESSION_RUNNING || s->state == SESSION_UNKNOWN)
@@ -394,11 +414,13 @@ gboolean session_dialog(void)
 	  /* Replace the newline returned by ctime */
 	  p = strchr(ch,'\n');
 	  if (p) *p=' ';
-	  l = g_list_append(l,gtk_list_item_new_with_label(ch));
+	  gtk_list_store_append(l,&iter);
+	  gtk_list_store_set(l,&iter,0,ch,1,i,-1);
 	  g_free(ch);
 	  ddata.listmap[i++] = s;
      }
      ddata.listmap[i] = NULL;
+     ddata.list = l;
 
      if (l == NULL) {
 	  g_free(ddata.listmap);
@@ -426,11 +448,15 @@ gboolean session_dialog(void)
 				    GTK_POLICY_ALWAYS);
      gtk_box_pack_start(GTK_BOX(b),c,TRUE,TRUE,0);
 
-     d = gtk_list_new();
-     ddata.listwid = GTK_LIST(d);
-     gtk_list_insert_items(GTK_LIST(d),l,0);
-     gtk_signal_connect(GTK_OBJECT(d),"select_child",
-			GTK_SIGNAL_FUNC(session_dialog_select_child),&ddata);
+     d = gtk_tree_view_new_with_model(GTK_TREE_MODEL(l));
+     gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(d),FALSE);
+     renderer = gtk_cell_renderer_text_new();
+     col = gtk_tree_view_column_new_with_attributes(NULL,renderer,"text",0,NULL);
+     gtk_tree_view_append_column(GTK_TREE_VIEW(d),col);
+     sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(d));
+     gtk_tree_selection_set_mode(sel,GTK_SELECTION_SINGLE);
+     g_signal_connect(sel,"changed",
+			G_CALLBACK(session_dialog_select),&ddata);
      gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(c),d);
 
      c = gtk_hbutton_box_new();

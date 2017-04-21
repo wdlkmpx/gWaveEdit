@@ -257,17 +257,18 @@ gboolean user_input_float(gchar *label, gchar *title, gfloat defvalue,
      return FALSE;     
 }
 
-static gpointer user_choice_choice;
-
 static gboolean echo_func(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
      return *((int *)user_data) == MR_OK;
 }
 
-static void user_choice_select_child(GtkList *list, GtkWidget *widget,
-				     gpointer user_data)
+static void user_choice_select(GtkTreeSelection *sel, gpointer user_data)
 {
-     user_choice_choice = gtk_object_get_data(GTK_OBJECT(widget),"choice");
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     gint *result = user_data;
+     if (gtk_tree_selection_get_selected (sel, &model, &iter))
+          gtk_tree_model_get (model, &iter, 1, result, -1);
 }
 
 gint user_choice(gchar **choices, guint def, gchar *windowtitle, 
@@ -275,6 +276,12 @@ gint user_choice(gchar **choices, guint def, gchar *windowtitle,
 {
      GtkWidget *a,*b,*c,*d,*list=NULL,*w;
      guint i;
+     GtkListStore *store;
+     GtkTreeSelection *sel;
+     GtkTreeIter iter;
+     GtkTreeViewColumn *col;
+     GtkCellRenderer *renderer;
+     gint result;
      a = gtk_window_new(GTK_WINDOW_DIALOG);
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_title(GTK_WINDOW(a), windowtitle?windowtitle:_("Choice"));
@@ -302,16 +309,22 @@ gint user_choice(gchar **choices, guint def, gchar *windowtitle,
 				    GTK_POLICY_AUTOMATIC);
      gtk_widget_set_usize(GTK_WIDGET(c),-1,300);
      gtk_box_pack_start(GTK_BOX(b),c,TRUE,TRUE,0);
-     d = list = gtk_list_new();
-     gtk_list_set_selection_mode(GTK_LIST(list),GTK_SELECTION_SINGLE);
+     d = list = gtk_tree_view_new();
+     gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(list),FALSE);
+     store = gtk_list_store_new(2,G_TYPE_STRING,G_TYPE_INT);
+     gtk_tree_view_set_model(GTK_TREE_VIEW(list),GTK_TREE_MODEL(store));
+     renderer = gtk_cell_renderer_text_new();
+     col = gtk_tree_view_column_new_with_attributes(NULL,renderer,"text",0,NULL);
+     gtk_tree_view_append_column(GTK_TREE_VIEW(list),col);
+     sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(list));
+     gtk_tree_selection_set_mode(sel,GTK_SELECTION_SINGLE);
+     g_signal_connect (sel,"changed",G_CALLBACK(user_choice_select),&result);
+
      for (i=0; choices[i]!=NULL; i++) {
-	  w = gtk_list_item_new_with_label(choices[i]);
-	  gtk_object_set_data(GTK_OBJECT(w),"choice",choices+i);
-	  gtk_container_add(GTK_CONTAINER(list),w);
-	  if (i == def) gtk_list_select_child(GTK_LIST(list),w);
+	  gtk_list_store_append(store,&iter);
+	  gtk_list_store_set(store,&iter,0,choices[i],1,i,-1);
+	  if (i == def) gtk_tree_selection_select_iter(sel,&iter);
      }
-     gtk_signal_connect(GTK_OBJECT(list),"select_child",
-			(GtkSignalFunc)user_choice_select_child,NULL);
      gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(c),d);
      c = gtk_hseparator_new();
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
@@ -338,7 +351,6 @@ gint user_choice(gchar **choices, guint def, gchar *windowtitle,
 	  gtk_container_add(GTK_CONTAINER(c),d);
      }
 
-     user_choice_choice = choices+def;
      modal_result = MR_CANCEL;
      gtk_widget_show_all(a);
 
@@ -349,6 +361,6 @@ gint user_choice(gchar **choices, guint def, gchar *windowtitle,
      g_assert(modal_result==MR_OK || allow_cancel);
 
      if (modal_result==MR_CANCEL) return -1;
-     else return (guint) (((gchar **)user_choice_choice)-choices);
+     else return result;
 }
 
