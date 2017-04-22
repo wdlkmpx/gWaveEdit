@@ -1025,10 +1025,11 @@ static void record_dialog_destroy(GtkObject *obj)
      }
 }
 
-static void record_dialog_class_init(GtkObjectClass *klass)
+static void record_dialog_class_init(RecordDialogClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class(gtk_window_get_type());
-     klass->destroy = record_dialog_destroy;
+     oc->destroy = record_dialog_destroy;
 }
 
 GType record_dialog_get_type(void)

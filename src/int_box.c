@@ -80,9 +80,11 @@ static gint intbox_focus_out(GtkWidget *widget, GdkEventFocus *event)
 
 static void intbox_class_init(IntboxClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      parent_class = gtk_type_class(gtk_entry_get_type());
      GTK_ENTRY_CLASS(klass)->activate = intbox_activate;
-     GTK_WIDGET_CLASS(klass)->focus_out_event = intbox_focus_out;
+     wc->focus_out_event = intbox_focus_out;
      klass->numchange=NULL;
      intbox_signals[NUMCHANGED_SIGNAL] = 
 	  gtk_signal_new("numchanged",GTK_RUN_FIRST,
@@ -91,7 +93,7 @@ static void intbox_class_init(IntboxClass *klass)
 			 gtk_marshal_NONE__LONG,GTK_TYPE_NONE,1,
 			 GTK_TYPE_LONG);
 
-     gtk_object_class_add_signals(GTK_OBJECT_CLASS(klass),intbox_signals,
+     gtk_object_class_add_signals(oc,intbox_signals,
 				  LAST_SIGNAL);
 }
 

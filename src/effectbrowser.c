@@ -230,11 +230,13 @@ static gint effect_browser_delete_event(GtkWidget *widget, GdkEventAny *event)
 	  return FALSE;
 }
 
-static void effect_browser_class_init(GtkObjectClass *klass)
+static void effect_browser_class_init(EffectBrowserClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      parent_class = gtk_type_class(gtk_window_get_type());
-     klass->destroy = effect_browser_destroy;
-     GTK_WIDGET_CLASS(klass)->delete_event = effect_browser_delete_event;
+     oc->destroy = effect_browser_destroy;
+     wc->delete_event = effect_browser_delete_event;
 }
 
 static void effect_browser_close(EffectBrowser *eb)

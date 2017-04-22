@@ -180,7 +180,7 @@ static void goto_dialog_init(GotoDialog *gd)
      gtk_window_set_position (GTK_WINDOW (gd), GTK_WIN_POS_CENTER);
 }
 
-static void goto_dialog_class_init(GtkObjectClass *klass)
+static void goto_dialog_class_init(GotoDialogClass *klass)
 {
 }
 

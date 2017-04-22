@@ -668,12 +668,14 @@ static void sox_dialog_destroy(GtkObject *obj)
      parent_class->destroy(obj);
 }
 
-static void sox_dialog_class_init(GtkObjectClass *klass)
+static void sox_dialog_class_init(SoxDialogClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
      parent_class = gtk_type_class(effect_dialog_get_type());
-     EFFECT_DIALOG_CLASS(klass)->apply = sox_dialog_apply;
-     EFFECT_DIALOG_CLASS(klass)->setup = sox_dialog_browser_setup;
-     klass->destroy = sox_dialog_destroy;
+     edc->apply = sox_dialog_apply;
+     edc->setup = sox_dialog_browser_setup;
+     oc->destroy = sox_dialog_destroy;
 }
 
 static void sox_dialog_init(GtkObject *obj)

@@ -172,12 +172,13 @@ static void map_channels_setup(EffectDialog *ed)
     
 }
 
-static void map_channels_dialog_class_init(EffectDialogClass *klass)
+static void map_channels_dialog_class_init(MapChannelsDialogClass *klass)
 {
+    EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
     parent_class = gtk_type_class(effect_dialog_get_type());
-    klass->apply = map_channels_dialog_apply;
-    klass->setup = map_channels_setup;
-    klass->target_changed = map_channels_dialog_target_changed;
+    edc->apply = map_channels_dialog_apply;
+    edc->setup = map_channels_setup;
+    edc->target_changed = map_channels_dialog_target_changed;
 }
 
 static void map_channels_dialog_init(MapChannelsDialog *obj)

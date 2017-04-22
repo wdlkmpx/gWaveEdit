@@ -135,10 +135,11 @@ static void datasource_destroy(GtkObject *obj)
      parent_class->destroy(obj);
 }
 
-static void datasource_class_init(GtkObjectClass *klass)
+static void datasource_class_init(DatasourceClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class(gtk_object_get_type());
-     klass->destroy = datasource_destroy;
+     oc->destroy = datasource_destroy;
 }
 
 GType datasource_get_type(void)

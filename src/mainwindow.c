@@ -716,15 +716,16 @@ static void mainwindow_drag_data_received(GtkWidget *widget,
 	  gtk_drag_finish(dc, FALSE, FALSE, t);
 }
 
-static void mainwindow_class_init(GtkObjectClass *klass)
+static void mainwindow_class_init(MainwindowClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      parent_class = gtk_type_class(gtk_window_get_type());
-     klass->destroy = mainwindow_destroy;
-     GTK_WIDGET_CLASS(klass)->delete_event = mainwindow_delete_event;
-     GTK_WIDGET_CLASS(klass)->realize = mainwindow_realize;
-     GTK_WIDGET_CLASS(klass)->key_press_event = mainwindow_keypress;     
-     GTK_WIDGET_CLASS(klass)->drag_data_received = 
-	  mainwindow_drag_data_received;
+     oc->destroy = mainwindow_destroy;
+     wc->delete_event = mainwindow_delete_event;
+     wc->realize = mainwindow_realize;
+     wc->key_press_event = mainwindow_keypress;
+     wc->drag_data_received = mainwindow_drag_data_received;
 }
 
 static Mainwindow *mainwindow_set_document(Mainwindow *w, Document *d,

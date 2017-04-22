@@ -105,20 +105,20 @@ static void document_list_init(GtkObject *obj)
 				    obj,obj);
 }
 
-static void document_list_class_init(GtkObjectClass *klass)
+static void document_list_class_init(DocumentListClass *klass)
 {
-     DocumentListClass *mwlc = DOCUMENT_LIST_CLASS(klass);
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class(combo_get_type());
-     mwlc->document_changed = NULL;
+     klass->document_changed = NULL;
      COMBO_CLASS(klass)->selection_changed = document_list_changed;
 
      document_list_signals[CHANGED_SIGNAL] = 
 	  gtk_signal_new( "document_changed", GTK_RUN_FIRST, 
-			  GTK_CLASS_TYPE(klass),
+			  GTK_CLASS_TYPE(oc),
 			  GTK_SIGNAL_OFFSET(DocumentListClass,
 					    document_changed),
 			  gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
-     gtk_object_class_add_signals(klass,document_list_signals,LAST_SIGNAL);
+     gtk_object_class_add_signals(oc,document_list_signals,LAST_SIGNAL);
 }
 
 GType document_list_get_type(void)

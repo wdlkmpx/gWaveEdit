@@ -35,31 +35,31 @@ static void list_object_destroy(GtkObject *obj)
      list_object_clear(lo,FALSE);
 }
 
-static void list_object_class_init(GtkObjectClass *klass)
+static void list_object_class_init(ListObjectClass *klass)
 {
-     ListObjectClass *loc = LIST_OBJECT_CLASS(klass);
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class( gtk_object_get_type() );
 
-     klass->destroy = list_object_destroy;
-     loc->item_removed = NULL;
-     loc->item_added = NULL;
+     oc->destroy = list_object_destroy;
+     klass->item_removed = NULL;
+     klass->item_added = NULL;
 
      list_object_signals[ITEM_ADDED_SIGNAL] = 
-	  gtk_signal_new("item-added", GTK_RUN_FIRST, GTK_CLASS_TYPE(klass),
+	  gtk_signal_new("item-added", GTK_RUN_FIRST, GTK_CLASS_TYPE(oc),
 			 GTK_SIGNAL_OFFSET(ListObjectClass,item_added),
 			 gtk_marshal_NONE__POINTER, GTK_TYPE_NONE, 
 			 1, GTK_TYPE_POINTER);
      list_object_signals[ITEM_REMOVED_SIGNAL] = 
-	  gtk_signal_new("item-removed", GTK_RUN_FIRST, GTK_CLASS_TYPE(klass),
+	  gtk_signal_new("item-removed", GTK_RUN_FIRST, GTK_CLASS_TYPE(oc),
 			 GTK_SIGNAL_OFFSET(ListObjectClass,item_removed),
 			 gtk_marshal_NONE__POINTER, GTK_TYPE_NONE, 
 			 1, GTK_TYPE_POINTER);
      list_object_signals[ITEM_NOTIFY_SIGNAL] = 
-	  gtk_signal_new("item-notify", GTK_RUN_FIRST, GTK_CLASS_TYPE(klass),
+	  gtk_signal_new("item-notify", GTK_RUN_FIRST, GTK_CLASS_TYPE(oc),
 			 GTK_SIGNAL_OFFSET(ListObjectClass,item_notify),
 			 gtk_marshal_NONE__POINTER, GTK_TYPE_NONE, 
 			 1, GTK_TYPE_POINTER);
-     gtk_object_class_add_signals(klass,list_object_signals,LAST_SIGNAL);
+     gtk_object_class_add_signals(oc,list_object_signals,LAST_SIGNAL);
 }
 
 static void list_object_init(GtkObject *obj)

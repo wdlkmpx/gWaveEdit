@@ -708,13 +708,13 @@ static gint chunk_view_button_release(GtkWidget *widget, GdkEventButton *event)
      return FALSE;
 }
 
-static void chunk_view_class_init(GtkObjectClass *klass)
+static void chunk_view_class_init(ChunkViewClass *klass)
 {
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     ChunkViewClass *cvc = CHUNKVIEW_CLASS(klass);
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class( gtk_drawing_area_get_type() );
 
-     klass->destroy = chunk_view_destroy;
+     oc->destroy = chunk_view_destroy;
      wc->expose_event = chunk_view_expose;
      wc->size_request = chunk_view_size_request;
      wc->size_allocate = chunk_view_size_allocate;
@@ -722,15 +722,15 @@ static void chunk_view_class_init(GtkObjectClass *klass)
      wc->motion_notify_event = chunk_view_motion_notify;
      wc->button_release_event = chunk_view_button_release;
      wc->scroll_event = chunk_view_scrollwheel;
-     cvc->double_click = NULL;
+     klass->double_click = NULL;
 
      chunk_view_signals[DOUBLE_CLICK_SIGNAL] = 
-         gtk_signal_new("double-click", GTK_RUN_FIRST, GTK_CLASS_TYPE(klass),
+         gtk_signal_new("double-click", GTK_RUN_FIRST, GTK_CLASS_TYPE(oc),
                         GTK_SIGNAL_OFFSET(ChunkViewClass,double_click),
                         gtk_marshal_NONE__POINTER, GTK_TYPE_NONE, 1,
 			GTK_TYPE_POINTER );
 
-     gtk_object_class_add_signals(klass,chunk_view_signals,LAST_SIGNAL);
+     gtk_object_class_add_signals(oc,chunk_view_signals,LAST_SIGNAL);
 }
 
 static void chunk_view_init(GtkObject *obj)

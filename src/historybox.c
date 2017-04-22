@@ -38,7 +38,7 @@ static void history_box_init(HistoryBox *box)
 {
 }
 
-static void history_box_class_init(GtkObjectClass *klass)
+static void history_box_class_init(HistoryBoxClass *klass)
 {
 }
 

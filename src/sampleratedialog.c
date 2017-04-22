@@ -68,10 +68,11 @@ static void samplerate_dialog_setup(EffectDialog *ed)
 		EFFECT_BROWSER(ed->eb)->dl->format.samplerate);
 }
 
-static void samplerate_dialog_class_init(EffectDialogClass *klass)
+static void samplerate_dialog_class_init(SamplerateDialogClass *klass)
 {
-     klass->apply = apply;
-     klass->setup = samplerate_dialog_setup;
+     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
+     edc->apply = apply;
+     edc->setup = samplerate_dialog_setup;
 }
 
 static void samplerate_dialog_init(SamplerateDialog *v)

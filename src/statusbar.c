@@ -101,22 +101,24 @@ static void status_bar_size_request(GtkWidget *widget,
      requisition->width = 10;
 }
 
-static void status_bar_class_init(GtkObjectClass *klass)
+static void status_bar_class_init(StatusBarClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      parent_class = GTK_WIDGET_CLASS(gtk_type_class(gtk_fixed_get_type()));
-     GTK_WIDGET_CLASS(klass)->size_allocate = status_bar_size_allocate;
-     GTK_WIDGET_CLASS(klass)->size_request = status_bar_size_request;
-     STATUSBAR_CLASS(klass)->progress_begin = NULL;
-     STATUSBAR_CLASS(klass)->progress_end = NULL;
+     wc->size_allocate = status_bar_size_allocate;
+     wc->size_request = status_bar_size_request;
+     klass->progress_begin = NULL;
+     klass->progress_end = NULL;
      status_bar_signals[PROGRESS_BEGIN_SIGNAL] = 
-	  gtk_signal_new("progress-begin", GTK_RUN_FIRST,GTK_CLASS_TYPE(klass),
+	  gtk_signal_new("progress-begin", GTK_RUN_FIRST,GTK_CLASS_TYPE(oc),
 			 GTK_SIGNAL_OFFSET(StatusBarClass,progress_begin),
 			 gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
      status_bar_signals[PROGRESS_END_SIGNAL] = 
-	  gtk_signal_new("progress-end", GTK_RUN_FIRST, GTK_CLASS_TYPE(klass),
+	  gtk_signal_new("progress-end", GTK_RUN_FIRST, GTK_CLASS_TYPE(oc),
 			 GTK_SIGNAL_OFFSET(StatusBarClass,progress_end),
 			 gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
-     gtk_object_class_add_signals(klass,status_bar_signals,LAST_SIGNAL);
+     gtk_object_class_add_signals(oc,status_bar_signals,LAST_SIGNAL);
 }
 
 GType status_bar_get_type(void)

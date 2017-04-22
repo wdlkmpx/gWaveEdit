@@ -113,9 +113,10 @@ static void volume_dialog_init(VolumeDialog *v)
      gtk_widget_show_all(a);
 }
 
-static void volume_dialog_class_init(EffectDialogClass *klass)
+static void volume_dialog_class_init(VolumeDialogClass *klass)
 {
-     klass->apply = volume_dialog_apply;
+     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
+     edc->apply = volume_dialog_apply;
 }
 
 GType volume_dialog_get_type(void)

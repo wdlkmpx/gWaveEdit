@@ -71,10 +71,11 @@ static gint vu_meter_expose(GtkWidget *widget, GdkEventExpose *event)
      return TRUE;
 }
 
-static void vu_meter_class_init(GtkWidgetClass *klass)
+static void vu_meter_class_init(VuMeterClass *klass)
 {
-     klass->size_request = vu_meter_size_request;
-     klass->expose_event = vu_meter_expose;
+     GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
+     wc->size_request = vu_meter_size_request;
+     wc->expose_event = vu_meter_expose;
 }
 
 static void vu_meter_init(VuMeter *v)

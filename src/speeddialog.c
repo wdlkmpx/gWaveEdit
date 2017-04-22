@@ -46,9 +46,10 @@ static gboolean apply(EffectDialog *ed)
 			      dl->selected, apply_proc,TRUE,s);
 }
 
-static void speed_dialog_class_init(EffectDialogClass *klass)
+static void speed_dialog_class_init(SpeedDialogClass *klass)
 {
-     klass->apply = apply;
+     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
+     edc->apply = apply;
 }
 
 static void speed_dialog_init(SpeedDialog *v)

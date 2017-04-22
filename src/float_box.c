@@ -78,10 +78,12 @@ static gint floatbox_focus_out(GtkWidget *widget, GdkEventFocus *event)
 
 static void floatbox_class_init(FloatboxClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      parent_class = gtk_type_class(gtk_entry_get_type());
 
      GTK_ENTRY_CLASS(klass)->activate = floatbox_activate;
-     GTK_WIDGET_CLASS(klass)->focus_out_event = floatbox_focus_out;
+     wc->focus_out_event = floatbox_focus_out;
      klass->numchange=NULL;
 
      floatbox_signals[NUMCHANGED_SIGNAL] = 
@@ -91,7 +93,7 @@ static void floatbox_class_init(FloatboxClass *klass)
 			 gtk_marshal_NONE__FLOAT,GTK_TYPE_NONE,1,
 			 GTK_TYPE_FLOAT);
 
-     gtk_object_class_add_signals(GTK_OBJECT_CLASS(klass),floatbox_signals,
+     gtk_object_class_add_signals(oc,floatbox_signals,
 				  LAST_SIGNAL);
 }
 

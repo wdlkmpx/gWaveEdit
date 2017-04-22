@@ -73,10 +73,11 @@ static void chunk_destroy(GtkObject *object)
      chunks = g_list_remove ( chunks, object );
 }
 
-static void chunk_class_init(GtkObjectClass *klass)
+static void chunk_class_init(ChunkClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class(gtk_object_get_type());
-     klass->destroy = chunk_destroy;
+     oc->destroy = chunk_destroy;
 }
 
 static void chunk_init(Chunk *object)

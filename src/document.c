@@ -151,19 +151,19 @@ static void document_state_changed(Document *d)
      list_object_notify(document_objects,d);
 }
 
-static void document_class_init(GtkObjectClass *klass)
+static void document_class_init(DocumentClass *klass)
 {
-     DocumentClass *dc = DOCUMENT_CLASS(klass);
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class(gtk_object_get_type());
      
-     klass->destroy = document_destroy;
-     dc->view_changed = NULL;
-     dc->selection_changed = NULL;
-     dc->cursor_changed = NULL;
-     dc->state_changed = document_state_changed;
+     oc->destroy = document_destroy;
+     klass->view_changed = NULL;
+     klass->selection_changed = NULL;
+     klass->cursor_changed = NULL;
+     klass->state_changed = document_state_changed;
 
      document_signals[VIEW_CHANGED_SIGNAL] = 
-	  gtk_signal_new("view-changed", GTK_RUN_FIRST, GTK_CLASS_TYPE(klass),
+	  gtk_signal_new("view-changed", GTK_RUN_FIRST, GTK_CLASS_TYPE(oc),
 			 GTK_SIGNAL_OFFSET(DocumentClass,view_changed),
 			 gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
      document_signals[SELECTION_CHANGED_SIGNAL] = 
@@ -172,16 +172,16 @@ static void document_class_init(GtkObjectClass *klass)
 			 GTK_SIGNAL_OFFSET(DocumentClass,selection_changed),
 			 gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
      document_signals[CURSOR_CHANGED_SIGNAL] = 
-	  gtk_signal_new("cursor-changed", GTK_RUN_FIRST, GTK_CLASS_TYPE(klass),
+	  gtk_signal_new("cursor-changed", GTK_RUN_FIRST, GTK_CLASS_TYPE(oc),
 			 GTK_SIGNAL_OFFSET(DocumentClass,cursor_changed),
 			 gtk_marshal_NONE__BOOL, GTK_TYPE_NONE, 1, 
 			 GTK_TYPE_BOOL);
      document_signals[STATE_CHANGED_SIGNAL] = 
-	  gtk_signal_new("state-changed", GTK_RUN_FIRST, GTK_CLASS_TYPE(klass),
+	  gtk_signal_new("state-changed", GTK_RUN_FIRST, GTK_CLASS_TYPE(oc),
 			 GTK_SIGNAL_OFFSET(DocumentClass,state_changed),
 			 gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
 
-     gtk_object_class_add_signals(klass,document_signals,LAST_SIGNAL);
+     gtk_object_class_add_signals(oc,document_signals,LAST_SIGNAL);
 
 }
 

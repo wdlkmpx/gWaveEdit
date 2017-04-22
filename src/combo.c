@@ -57,19 +57,21 @@ static void combo_changed(GtkComboBox *combo)
 	  GTK_COMBO_BOX_CLASS(parent_class)->changed(combo);
 }
 
-static void combo_class_init(GtkObjectClass *klass)
+static void combo_class_init(ComboClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      parent_class = gtk_type_class(COMBO_PARENT_TYPE_FUNC());
-     klass->destroy = combo_destroy;
+     oc->destroy = combo_destroy;
      GTK_COMBO_BOX_CLASS(klass)->changed = combo_changed;
-     COMBO_CLASS(klass)->selection_changed = NULL;
-     GTK_WIDGET_CLASS(klass)->size_request = combo_size_request;
+     klass->selection_changed = NULL;
+     wc->size_request = combo_size_request;
      combo_signals[CHANGED_SIGNAL] = 
 	  gtk_signal_new("selection_changed",GTK_RUN_LAST,
-			 GTK_CLASS_TYPE(klass),
+			 GTK_CLASS_TYPE(oc),
 			 GTK_SIGNAL_OFFSET(ComboClass,selection_changed),
 			 gtk_marshal_NONE__NONE,GTK_TYPE_NONE,0);
-     gtk_object_class_add_signals(klass,combo_signals,LAST_SIGNAL);     
+     gtk_object_class_add_signals(oc,combo_signals,LAST_SIGNAL);
 }
 
 

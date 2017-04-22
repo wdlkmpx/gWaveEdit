@@ -106,8 +106,9 @@ static void pipe_dialog_init(PipeDialog *pd)
 
 }
 
-static void pipe_dialog_class_init(EffectDialogClass *edc)
+static void pipe_dialog_class_init(PipeDialogClass *klass)
 {
+     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
      edc->apply = pipe_dialog_apply;
 }
 

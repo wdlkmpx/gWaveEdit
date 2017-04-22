@@ -97,7 +97,7 @@ static void bitmap_destroy(GtkObject *object)
 	  GTK_OBJECT_CLASS(parent_class)->destroy(object);
 }
 
-static void bitmap_class_init(GtkObjectClass *klass)
+static void bitmap_class_init(BitmapClass *klass)
 {
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);

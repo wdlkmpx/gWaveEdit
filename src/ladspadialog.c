@@ -371,13 +371,15 @@ static void ladspa_dialog_destroy(GtkObject *obj)
      parent_class->destroy(obj);
 }
 
-void ladspa_dialog_class_init(GtkObjectClass *klass)
+void ladspa_dialog_class_init(LadspaDialogClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
      parent_class = gtk_type_class(effect_dialog_get_type());
-     EFFECT_DIALOG_CLASS(klass)->apply = ladspa_dialog_apply;
-     EFFECT_DIALOG_CLASS(klass)->setup = ladspa_dialog_setup;
-     EFFECT_DIALOG_CLASS(klass)->target_changed = ladspa_dialog_target_changed;
-     klass->destroy = ladspa_dialog_destroy;
+     edc->apply = ladspa_dialog_apply;
+     edc->setup = ladspa_dialog_setup;
+     edc->target_changed = ladspa_dialog_target_changed;
+     oc->destroy = ladspa_dialog_destroy;
 }
 
 void ladspa_dialog_init(GtkObject *obj)

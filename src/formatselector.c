@@ -29,7 +29,7 @@
 #define DEFAULT_CHANS 2
 #define DEFAULT_RATE 44100
 
-static void format_selector_class_init(GtkObjectClass *klass)
+static void format_selector_class_init(FormatSelectorClass *klass)
 {
 }
 

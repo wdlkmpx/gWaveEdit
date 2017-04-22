@@ -45,10 +45,11 @@ static void config_dialog_destroy(GtkObject *obj)
      parent_class->destroy(obj);
 }
 
-static void config_dialog_class_init(GtkObjectClass *klass)
+static void config_dialog_class_init(ConfigDialogClass *klass)
 {
+     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class(gtk_window_get_type());
-     klass->destroy = config_dialog_destroy;
+     oc->destroy = config_dialog_destroy;
 }
 
 static void config_dialog_ok(GtkButton *button, gpointer user_data)

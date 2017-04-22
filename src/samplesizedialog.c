@@ -60,10 +60,11 @@ static void samplesize_setup(EffectDialog *ed)
      format_selector_set(SAMPLESIZE_DIALOG(ed)->fs, f);
 }
 
-static void samplesize_dialog_class_init(EffectDialogClass *klass)
+static void samplesize_dialog_class_init(SamplesizeDialogClass *klass)
 {
-     klass->apply = samplesize_apply;
-     klass->setup = samplesize_setup;
+     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
+     edc->apply = samplesize_apply;
+     edc->setup = samplesize_setup;
 }
 
 static void gurumode_toggle(GtkToggleButton *togglebutton, gpointer user_data)
