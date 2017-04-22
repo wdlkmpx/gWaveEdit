@@ -114,7 +114,7 @@ GType chunk_get_type(void)
 
 static Chunk *chunk_new(void)
 {
-     return gtk_type_new(chunk_get_type());
+     return g_object_new(CHUNK_TYPE, NULL);
 }
 
 Chunk *chunk_new_silent(Dataformat *format, gfloat seconds)

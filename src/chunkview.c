@@ -772,7 +772,7 @@ GType chunk_view_get_type(void)
 
 GtkWidget *chunk_view_new(void)
 {
-     return GTK_WIDGET(gtk_type_new(chunk_view_get_type()));
+     return GTK_WIDGET(g_object_new(CHUNKVIEW_TYPE, NULL));
 }
 
 void chunk_view_set_document(ChunkView *cv, Document *doc)

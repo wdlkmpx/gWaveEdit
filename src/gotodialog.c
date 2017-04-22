@@ -203,7 +203,7 @@ GType goto_dialog_get_type(void)
 GtkWidget *goto_dialog_new(Mainwindow *mw)
 {     
      GtkWidget *w;
-     w = gtk_type_new(goto_dialog_get_type());
+     w = g_object_new(GOTO_DIALOG_TYPE, NULL);
      GOTO_DIALOG(w)->mw = mw;
      return w;
 }

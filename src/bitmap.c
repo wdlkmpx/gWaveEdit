@@ -141,7 +141,7 @@ GtkWidget *bitmap_new_from_data(unsigned char *data, int width, int height)
      Bitmap *b;
      GtkWidget *w;
      gpointer p;
-     p = gtk_type_new(bitmap_get_type());
+     p = g_object_new (BITMAP_TYPE, NULL);
      w = p;
      b = p;
      b->bmp = gdk_bitmap_create_from_data(NULL,(const gchar *)data,width,height);    

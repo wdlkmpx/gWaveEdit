@@ -171,7 +171,7 @@ GType combo_get_type(void)
 
 GtkWidget *combo_new(void)
 {
-     return (GtkWidget *)gtk_type_new(combo_get_type());
+     return (GtkWidget *)g_object_new(COMBO_TYPE, NULL);
 }
 
 void combo_set_max_request_width(Combo *c, int width)

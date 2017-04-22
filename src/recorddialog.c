@@ -1053,7 +1053,7 @@ Chunk *record_dialog_execute(int *noverruns, off_t overrun_locs[10])
      Chunk *ds;
      int i;
 
-     rd = RECORD_DIALOG(gtk_type_new(record_dialog_get_type()));
+     rd = g_object_new(RECORD_DIALOG_TYPE, NULL);
      record_dialog_stopflag = FALSE;
      current_dialog = rd;
      gtk_widget_show(GTK_WIDGET(rd));

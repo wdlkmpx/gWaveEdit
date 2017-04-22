@@ -175,7 +175,7 @@ static Datasource *datasource_copy(Datasource *orig)
 {
      Datasource *ds;
 
-     ds = gtk_type_new(datasource_get_type());
+     ds = g_object_new(DATASOURCE_TYPE, NULL);
      ds->type = orig->type;
      memcpy(&(ds->format),&(orig->format),sizeof(Dataformat));
      ds->length = orig->length;
@@ -229,7 +229,7 @@ Datasource *datasource_clone_df(Datasource *source, Dataformat *format)
 	  return df;
      }
  
-     df = gtk_type_new(datasource_get_type());
+     df = g_object_new(DATASOURCE_TYPE, NULL);
      df->type = DATASOURCE_CLONE;
      memcpy(&(df->format),format,sizeof(Dataformat));
      df->bytes = source->bytes;
@@ -243,7 +243,7 @@ Datasource *datasource_byteswap(Datasource *source)
 {
      Datasource *ds;
      if (source == NULL) return NULL;
-     ds = gtk_type_new(datasource_get_type());
+     ds = g_object_new(DATASOURCE_TYPE, NULL);
      ds->type = DATASOURCE_BYTESWAP;
      memcpy(&(ds->format),&(source->format),sizeof(Dataformat));
      ds->format.bigendian = !source->format.bigendian;
@@ -262,7 +262,7 @@ Datasource *datasource_channel_map(Datasource *source, int n_channels,
 
      if (source == NULL) return NULL;
 
-     ds = gtk_type_new(datasource_get_type());
+     ds = g_object_new(DATASOURCE_TYPE, NULL);
      ds->type = DATASOURCE_CHANMAP;
      memcpy(&(ds->format),&(source->format),sizeof(Dataformat));
      ds->format.channels = n_channels;
@@ -281,7 +281,7 @@ Datasource *datasource_channel_map(Datasource *source, int n_channels,
 Datasource *datasource_new_silent(Dataformat *format, off_t samples)
 {
      Datasource *ds;
-     ds = gtk_type_new(datasource_get_type());
+     ds = g_object_new(DATASOURCE_TYPE, NULL);
      memcpy(&(ds->format), format, sizeof(Dataformat));
      ds->type = DATASOURCE_SILENCE;
      ds->length = samples;
@@ -293,7 +293,7 @@ Datasource *datasource_new_from_data(void *data, Dataformat *format,
 				     guint32 size)
 {
      Datasource *ds;
-     ds = (Datasource *)gtk_type_new(datasource_get_type());
+     ds = g_object_new(DATASOURCE_TYPE, NULL);
      ds->type = DATASOURCE_REAL;
      memcpy(&(ds->format),format,sizeof(Dataformat));
      ds->length = size / format->samplebytes;
@@ -849,7 +849,7 @@ Datasource *datasource_convert(Datasource *source, Dataformat *new_format)
 	  return datasource_byteswap(source);
      }
 
-     ds = gtk_type_new(datasource_get_type());
+     ds = g_object_new(DATASOURCE_TYPE, NULL);
      ds->type = DATASOURCE_CONVERT;
      memcpy(&(ds->format),new_format,sizeof(Dataformat));
      ds->format.samplebytes = ds->format.samplesize * ds->format.channels;

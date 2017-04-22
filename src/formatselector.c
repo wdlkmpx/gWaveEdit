@@ -148,7 +148,7 @@ static void format_selector_show_full(FormatSelector *fs)
 
 GtkWidget *format_selector_new(gboolean show_full)
 {
-     GtkWidget *fs = gtk_type_new(format_selector_get_type());
+     GtkWidget *fs = g_object_new(FORMAT_SELECTOR_TYPE, NULL);
      if (show_full) format_selector_show_full(FORMAT_SELECTOR(fs));
      return fs;
 }

@@ -102,7 +102,7 @@ GType vu_meter_get_type(void)
 GtkWidget *vu_meter_new(gfloat value)
 {
      VuMeter *v;
-     v = gtk_type_new(vu_meter_get_type());
+     v = g_object_new(VU_METER_TYPE, NULL);
      v->value = value;
      v->goal = value;
      g_get_current_time(&(v->valuetime));

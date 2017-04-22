@@ -140,7 +140,7 @@ GType document_list_get_type(void)
 GtkWidget *document_list_new(Document *chosen)
 {
      GtkWidget *widget;
-     widget = GTK_WIDGET(gtk_type_new(document_list_get_type()));
+     widget = GTK_WIDGET(g_object_new(DOCUMENT_LIST_TYPE, NULL));
      document_list_setup(DOCUMENT_LIST(widget),chosen);
      return widget;     
 }

@@ -257,7 +257,7 @@ void document_forget_filename(Document *d)
 Document *document_new_with_chunk(Chunk *chunk, gchar *sourcename,
 				  StatusBar *bar)
 {
-     Document *d = (Document *)gtk_type_new(document_get_type());
+     Document *d = g_object_new(DOCUMENT_TYPE, NULL);
      /* Don't send the notify signal from document_objects here, since we 
       * haven't added the document yet. */
      document_set_filename(d,sourcename,FALSE);

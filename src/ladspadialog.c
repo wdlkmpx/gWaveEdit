@@ -418,7 +418,7 @@ static EffectDialog *ladspa_dialog_get(gchar *name, gchar source_tag,
 				       gpointer user_data)
 {
      if (ladspa_find_effect(name) == NULL) return NULL;
-     return EFFECT_DIALOG(gtk_type_new(ladspa_dialog_get_type()));
+     return EFFECT_DIALOG(g_object_new(LADSPA_DIALOG_TYPE, NULL));
 }
 
 void ladspa_dialog_register(void)

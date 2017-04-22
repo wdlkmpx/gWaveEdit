@@ -137,7 +137,7 @@ GType status_bar_get_type(void)
 
 GtkWidget *status_bar_new(void)
 {
-     return GTK_WIDGET(gtk_type_new(status_bar_get_type()));
+     return GTK_WIDGET(g_object_new(STATUSBAR_TYPE, NULL));
 }
 
 static void status_bar_set_mode(StatusBar *sb, gint mode)

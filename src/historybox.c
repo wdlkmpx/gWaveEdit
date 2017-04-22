@@ -86,7 +86,7 @@ GType history_box_get_type(void)
 
 GtkWidget *history_box_new(gchar *historyname, gchar *value)
 {
-     HistoryBox *hb = gtk_type_new(history_box_get_type());
+     HistoryBox *hb = g_object_new(HISTORY_BOX_TYPE, NULL);
      history_box_set_history(hb, historyname);
      history_box_set_value(hb, value);
      return GTK_WIDGET(hb);

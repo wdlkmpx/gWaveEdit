@@ -2765,7 +2765,7 @@ return id;
 
 GtkWidget *mainwindow_new(void)
 {
-     return GTK_WIDGET( gtk_type_new(mainwindow_get_type()) );
+     return GTK_WIDGET(g_object_new(MAINWINDOW_TYPE, NULL));
 }
 
 GtkWidget *mainwindow_new_with_file(char *filename, gboolean log)

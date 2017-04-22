@@ -1244,5 +1244,5 @@ GType config_dialog_get_type(void)
 
 GtkWidget *config_dialog_new(void)
 {
-     return gtk_type_new(config_dialog_get_type());
+     return g_object_new(CONFIG_DIALOG_TYPE, NULL);
 }

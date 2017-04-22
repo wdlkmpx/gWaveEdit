@@ -520,7 +520,7 @@ static Chunk *wav_load(char *filename, int dither_mode, StatusBar *bar)
      fmt.bigendian = rifx;
      fmt.packing = 0;
 
-     ds = gtk_type_new(datasource_get_type());
+     ds = g_object_new(DATASOURCE_TYPE, NULL);
 
      memcpy(&(ds->format),&fmt,sizeof(fmt));
      ds->type = DATASOURCE_VIRTUAL;
@@ -674,7 +674,7 @@ static Chunk *raw_load(gchar *filename, int dither_mode, StatusBar *bar)
      if (i==-1) return NULL;
      fmt = rawdialog_execute(filename,i,&offs);
      if (!fmt) return NULL;
-     ds = (Datasource *)gtk_type_new(datasource_get_type());
+     ds = g_object_new(DATASOURCE_TYPE, NULL);
      memcpy(&(ds->format),fmt,sizeof(Dataformat));
      ds->bytes = i-offs;
      ds->length = (i-offs)/fmt->samplebytes;
@@ -757,7 +757,7 @@ static Chunk *sndfile_load(gchar *filename, int dither_mode, StatusBar *bar)
      f.samplerate = info.samplerate;
      f.channels = info.channels;
      f.samplebytes = f.channels * f.samplesize;
-     ds = gtk_type_new(datasource_get_type());
+     ds = g_object_new(DATASOURCE_TYPE, NULL);
      ds->type = DATASOURCE_SNDFILE;
      memcpy(&(ds->format),&f,sizeof(f));
      ds->length = (off_t) info.frames;

@@ -225,8 +225,7 @@ GtkWidget *record_format_combo_new(ListObject *named_presets,
 				   ListObject *nameless_presets, 
 				   gboolean show_other)
 {
-     RecordFormatCombo *rfc = 
-	  (RecordFormatCombo *)gtk_type_new(record_format_combo_get_type());
+     RecordFormatCombo *rfc = g_object_new(RECORD_FORMAT_COMBO_TYPE, NULL);
      rfc->named_presets = named_presets;
      gtk_object_ref(GTK_OBJECT(named_presets));
      gtk_object_sink(GTK_OBJECT(named_presets));

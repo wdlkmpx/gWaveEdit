@@ -134,7 +134,7 @@ void floatbox_set(Floatbox *box, float val)
 GtkWidget *floatbox_new(float val)
 {
      Floatbox *box;
-     box=gtk_type_new(floatbox_get_type());
+     box=g_object_new(FLOATBOX_TYPE, NULL);
      box->val = val-1.0; /* To force update */
      floatbox_set(box,val);
      return GTK_WIDGET(box);

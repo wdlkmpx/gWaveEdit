@@ -448,7 +448,7 @@ Chunk *tempfile_finished(TempFile handle)
      guint i;
      
      if (t->start_buf != NULL) {
-	  ds = gtk_type_new(datasource_get_type());
+	  ds = g_object_new(DATASOURCE_TYPE, NULL);
 	  ds->type = DATASOURCE_REAL;
 	  memcpy(&(ds->format),&(t->format),sizeof(Dataformat));
 	  u = ringbuf_available(t->start_buf);
@@ -487,7 +487,7 @@ Chunk *tempfile_finished(TempFile handle)
 	       continue;
 	  }
 
-	  ds = gtk_type_new(datasource_get_type());
+	  ds = g_object_new(DATASOURCE_TYPE, NULL);
 	  ds->type = DATASOURCE_TEMPFILE;
 
 	  memcpy(&(ds->format),&(t->format),sizeof(Dataformat));

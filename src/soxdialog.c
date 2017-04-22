@@ -839,7 +839,7 @@ EffectDialog *sox_dialog_get_func(gchar *name, gchar source_tag,
      gboolean *b;
      for (c=supported_effects,b=sox_support_map; *c!=NULL; c++,b++) {
 	  if (*b && !strcmp(*c,name)) 
-	       return gtk_type_new(sox_dialog_get_type());
+	       return g_object_new(SOX_DIALOG_TYPE, NULL);
      }
      return NULL;
 }

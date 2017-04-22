@@ -87,14 +87,14 @@ GType list_object_get_type(void)
 
 ListObject *list_object_new(gboolean do_ref)
 {
-     ListObject *lo = gtk_type_new(list_object_get_type());
+     ListObject *lo = g_object_new(LIST_OBJECT_TYPE, NULL);
      lo->do_ref = do_ref;
      return lo;
 }
 
 ListObject *list_object_new_from_list(GList *list, gboolean do_ref)
 {
-     ListObject *lo = gtk_type_new(list_object_get_type());
+     ListObject *lo = g_object_new(LIST_OBJECT_TYPE, NULL);
      lo->do_ref = do_ref;
      lo->list = list;
      if (do_ref) {

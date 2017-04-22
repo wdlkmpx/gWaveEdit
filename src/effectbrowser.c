@@ -131,7 +131,7 @@ static EffectDialog *builtin_get_func(gchar *name, gchar source_tag,
      else if (!strcmp(name,"pipe")) type = pipe_dialog_get_type();
      else if (!strcmp(name,"sandwich")) type = sandwich_dialog_get_type();
      if (type >= 0) 
-	  return EFFECT_DIALOG(gtk_type_new(type));
+	  return EFFECT_DIALOG(g_object_new(type, NULL));
      else
 	  return NULL;
 }
@@ -271,7 +271,7 @@ static EffectDialog *get_effect_missing_dialog(gchar *name, gchar source_tag)
 {
      EffectDialog *ed;
      GtkWidget *w;
-     ed = gtk_type_new(effect_dialog_get_type());
+     ed = g_object_new(EFFECT_DIALOG_TYPE, NULL);
      w = gtk_label_new(_("This effect could not be loaded."));
      gtk_container_add(ed->input_area,w);
      gtk_widget_show(w);
@@ -880,8 +880,7 @@ GtkWidget *effect_browser_new_with_effect(Document *doc, gchar *effect,
 					  gboolean close_after)
 {
      GtkWidget *w;
-     EffectBrowser *eb = 
-	  EFFECT_BROWSER(gtk_type_new(effect_browser_get_type()));
+     EffectBrowser *eb = g_object_new(EFFECT_BROWSER_TYPE, NULL);
      gtk_signal_connect(GTK_OBJECT(eb->list_widget),"select_child",
 			(GtkSignalFunc)effect_browser_select_child,eb);
 

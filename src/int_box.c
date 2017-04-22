@@ -135,7 +135,7 @@ gtk_signal_emit(GTK_OBJECT(box),intbox_signals[NUMCHANGED_SIGNAL],box->val);
 GtkWidget *intbox_new(long val)
 {
 Intbox *box;
-box=gtk_type_new(intbox_get_type());
+box=g_object_new(INTBOX_TYPE, NULL);
 box->val=val-1;
 intbox_set(box,val);
 return GTK_WIDGET(box);
