@@ -24,6 +24,8 @@
 #include "main.h"
 #include "listobject.h"
 
+G_DEFINE_TYPE(ListObject,list_object,GTK_TYPE_OBJECT)
+
 enum { ITEM_ADDED_SIGNAL, ITEM_REMOVED_SIGNAL, ITEM_NOTIFY_SIGNAL, 
        LAST_SIGNAL };
 static guint list_object_signals[LAST_SIGNAL] = { 0 };
@@ -66,22 +68,6 @@ static void list_object_init(ListObject *lo)
 {
      lo->list = NULL;
      lo->do_ref = FALSE;
-}
-
-GType list_object_get_type(void)
-{
-     static GType id=0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "ListObject",
-	       sizeof(ListObject),
-	       sizeof(ListObjectClass),
-	       (GtkClassInitFunc) list_object_class_init,
-	       (GtkObjectInitFunc) list_object_init
-	  };
-	  id = gtk_type_unique( gtk_object_get_type(), &info );
-     }
-     return id;
 }
 
 ListObject *list_object_new(gboolean do_ref)

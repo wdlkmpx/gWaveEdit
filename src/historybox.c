@@ -27,6 +27,8 @@
 
 #define HISTORY_BOX_MAXENTRIES 20
 
+G_DEFINE_TYPE(HistoryBox,history_box,GTK_TYPE_COMBO)
+
 typedef struct {
      gchar *name;
      GList *entries;
@@ -66,22 +68,6 @@ static void save_history(HistoryBoxHistory *hist)
      g_snprintf(c,sizeof(c),"history_%s_%d",hist->name,i);
      inifile_set(c,NULL);
      g_assert(i<=HISTORY_BOX_MAXENTRIES+1);
-}
-
-GType history_box_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "HistoryBox",
-	       sizeof(HistoryBox),
-	       sizeof(HistoryBoxClass),
-	       (GtkClassInitFunc) history_box_class_init,
-	       (GtkObjectInitFunc) history_box_init
-	  };
-	  id = gtk_type_unique(gtk_combo_get_type(),&info);
-     }
-     return id;
 }
 
 GtkWidget *history_box_new(gchar *historyname, gchar *value)

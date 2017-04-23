@@ -34,6 +34,8 @@
 #include "tempfile.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(Datasource,datasource,GTK_TYPE_OBJECT)
+
 static GtkObjectClass *parent_class;
 static GList *datasource_list = NULL;
 
@@ -140,22 +142,6 @@ static void datasource_class_init(DatasourceClass *klass)
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class(gtk_object_get_type());
      oc->destroy = datasource_destroy;
-}
-
-GType datasource_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-		GtkTypeInfo info = {
-		     "Datasource",
-		     sizeof(Datasource),
-		     sizeof(DatasourceClass),
-		     (GtkClassInitFunc) datasource_class_init,
-		     (GtkObjectInitFunc) datasource_init 
-		};
-		id=gtk_type_unique(gtk_object_get_type(),&info);	  
-     }
-     return id;
 }
 
 static char *datasource_get_temparea(struct temparea *ta, int size)

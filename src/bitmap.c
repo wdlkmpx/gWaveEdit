@@ -26,6 +26,8 @@
 
 #include <string.h>
 
+G_DEFINE_TYPE(Bitmap,bitmap,GTK_TYPE_WIDGET)
+
 static GtkWidgetClass *parent_class;
 
 static void bitmap_style_set(GtkWidget *widget, GtkStyle *previous_style)
@@ -116,22 +118,6 @@ static void bitmap_init(Bitmap *b)
      b->color_mode = 0;
      memset(&(b->clr), 0, sizeof(b->clr));
      b->alpha = 1.0;
-}
-
-GType bitmap_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "Bitmap",
-	       sizeof(Bitmap),
-	       sizeof(BitmapClass),
-	       (GtkClassInitFunc)bitmap_class_init,
-	       (GtkObjectInitFunc)bitmap_init
-	  };
-	  id = gtk_type_unique(gtk_widget_get_type(),&info);
-     }
-     return id;
 }
 
 GtkWidget *bitmap_new_from_data(unsigned char *data, int width, int height)

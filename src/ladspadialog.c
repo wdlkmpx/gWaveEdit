@@ -40,6 +40,8 @@ gchar *ladspa_dialog_first_effect(void)
 
 #if defined(HAVE_LADSPA)
 
+G_DEFINE_TYPE(LadspaDialog,ladspa_dialog,EFFECT_DIALOG_TYPE)
+
 GtkObjectClass *parent_class;
 
 gboolean ladspa_dialog_apply(EffectDialog *ed)
@@ -385,22 +387,6 @@ void ladspa_dialog_class_init(LadspaDialogClass *klass)
 void ladspa_dialog_init(LadspaDialog *obj)
 {
      /* Wait with initialisation until the setup signal */
-}
-
-GType ladspa_dialog_get_type(void)
-{
-     static GType id=0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "LadspaDialog",
-	       sizeof(LadspaDialog),
-	       sizeof(LadspaDialogClass),
-	       (GtkClassInitFunc)ladspa_dialog_class_init,
-	       (GtkObjectInitFunc)ladspa_dialog_init
-	  };
-	  id = gtk_type_unique(effect_dialog_get_type(),&info);
-     }
-     return id;
 }
 
 static void register_func(LadspaEffect *eff)

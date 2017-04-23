@@ -35,6 +35,8 @@
 #include "rateconv.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(SamplerateDialog,samplerate_dialog,EFFECT_DIALOG_TYPE)
+
 static void set_method(Combo *cbo, gpointer user_data)
 {
      SamplerateDialog *s = SAMPLERATE_DIALOG(user_data);
@@ -118,20 +120,4 @@ static void samplerate_dialog_init(SamplerateDialog *v)
 			GTK_SIGNAL_FUNC(set_method),v);
 
      gtk_widget_show_all(a);
-}
-
-GType samplerate_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "SamplerateDialog",
-	       sizeof(SamplerateDialog),
-	       sizeof(SamplerateDialogClass),
-	       (GtkClassInitFunc) samplerate_dialog_class_init,
-	       (GtkObjectInitFunc) samplerate_dialog_init
-	  };
-	  id = gtk_type_unique(effect_dialog_get_type(),&info);
-     }
-     return id;
 }

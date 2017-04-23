@@ -28,6 +28,8 @@
 #include "effectbrowser.h"
 #include "main.h"
 
+G_DEFINE_TYPE(MapChannelsDialog,map_channels_dialog,EFFECT_DIALOG_TYPE)
+
 static GtkObjectClass *parent_class;
 static gboolean *map_matrix = NULL;
 
@@ -183,20 +185,4 @@ static void map_channels_dialog_class_init(MapChannelsDialogClass *klass)
 
 static void map_channels_dialog_init(MapChannelsDialog *obj)
 {
-}
-
-GType map_channels_dialog_get_type(void)
-{
-    static GType id = 0;
-    if (!id) {
-        GtkTypeInfo info = {
-            "MapChannelsDialog",
-            sizeof(MapChannelsDialog),
-            sizeof(MapChannelsDialogClass),
-            (GtkClassInitFunc)map_channels_dialog_class_init,
-            (GtkObjectInitFunc)map_channels_dialog_init
-        };
-        id = gtk_type_unique(effect_dialog_get_type(),&info);
-    }
-    return id;
 }

@@ -40,6 +40,7 @@
 #include "rateconv.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(Chunk,chunk,GTK_TYPE_OBJECT)
 
 gboolean chunk_filter_use_floating_tempfiles;
 
@@ -95,22 +96,6 @@ static void chunk_init(Chunk *object)
      object->size=0;
      object->parts = 0;
      chunks = g_list_append( chunks, object );
-}
-
-GType chunk_get_type(void)
-{
-     static GType id=0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "Chunk",
-	       sizeof(Chunk),
-	       sizeof(ChunkClass),
-	       (GtkClassInitFunc) chunk_class_init,
-	       (GtkObjectInitFunc) chunk_init 
-	  };
-	  id=gtk_type_unique(gtk_object_get_type(),&info);
-     }
-     return id;
 }
 
 static Chunk *chunk_new(void)

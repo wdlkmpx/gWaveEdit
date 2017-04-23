@@ -28,6 +28,8 @@
 #include "main.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(Floatbox,floatbox,GTK_TYPE_ENTRY)
+
 static GtkEntryClass *parent_class;
 
 enum {
@@ -101,21 +103,6 @@ static void floatbox_init(Floatbox *fbox)
 {
      gtk_entry_set_width_chars(GTK_ENTRY(fbox),10);
      fbox->adj = NULL;
-}
-
-GType floatbox_get_type(void)
-{
-     static GType id=0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "Floatbox",
-	       sizeof(Floatbox),
-	       sizeof(FloatboxClass),
-	       (GtkClassInitFunc) floatbox_class_init,
-	       (GtkObjectInitFunc) floatbox_init };
-	  id=gtk_type_unique(gtk_entry_get_type(),&info);
-     }
-     return id;
 }
 
 void floatbox_set(Floatbox *box, float val)

@@ -23,6 +23,8 @@
 
 #include "documentlist.h"
 
+G_DEFINE_TYPE(DocumentList,document_list,COMBO_TYPE)
+
 static GtkObjectClass *parent_class;
 enum { CHANGED_SIGNAL, LAST_SIGNAL };
 static guint document_list_signals[LAST_SIGNAL] = { 0 };
@@ -119,22 +121,6 @@ static void document_list_class_init(DocumentListClass *klass)
 					    document_changed),
 			  gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
      gtk_object_class_add_signals(oc,document_list_signals,LAST_SIGNAL);
-}
-
-GType document_list_get_type(void)
-{
-     static GType id=0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "DocumentList",
-	       sizeof(DocumentList),
-	       sizeof(DocumentListClass),
-	       (GtkClassInitFunc)document_list_class_init,
-	       (GtkObjectInitFunc)document_list_init
-	  };
-	  id = gtk_type_unique( combo_get_type(), &info );	       
-     }	
-     return id;
 }
 
 GtkWidget *document_list_new(Document *chosen)

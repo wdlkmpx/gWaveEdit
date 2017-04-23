@@ -26,6 +26,8 @@
 #include "effectbrowser.h"
 #include "main.h"
 
+G_DEFINE_TYPE(CombineChannelsDialog,combine_channels_dialog,EFFECT_DIALOG_TYPE)
+
 static GtkObjectClass *parent_class;
 static sample_t *combination_matrix;
 static sample_t *samples = NULL;
@@ -130,20 +132,4 @@ static void combine_channels_dialog_class_init(CombineChannelsDialogClass *klass
 
 static void combine_channels_dialog_init(CombineChannelsDialog *obj)
 {
-}
-
-GType combine_channels_dialog_get_type(void)
-{
-    static GType id = 0;
-    if (!id) {
-        GtkTypeInfo info = {
-            "CombineChannelsDialog",
-            sizeof(CombineChannelsDialog),
-            sizeof(CombineChannelsDialogClass),
-            (GtkClassInitFunc)combine_channels_dialog_class_init,
-            (GtkObjectInitFunc)combine_channels_dialog_init
-        };
-        id = gtk_type_unique(effect_dialog_get_type(),&info);
-    }
-    return id;
 }

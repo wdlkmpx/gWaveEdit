@@ -27,6 +27,8 @@
 #include "player.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(Document,document,GTK_TYPE_OBJECT)
+
 ListObject *document_objects = NULL;
 
 Document *playing_document = NULL;
@@ -182,22 +184,6 @@ static void document_class_init(DocumentClass *klass)
 
      gtk_object_class_add_signals(oc,document_signals,LAST_SIGNAL);
 
-}
-
-GType document_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "Document",
-	       sizeof(Document),
-	       sizeof(DocumentClass),
-	       (GtkClassInitFunc) document_class_init,
-	       (GtkObjectInitFunc) document_init
-	  };
-	  id = gtk_type_unique(gtk_object_get_type(),&info);
-     }
-     return id;
 }
 
 Document *document_new_with_file(gchar *filename, StatusBar *bar)

@@ -24,6 +24,8 @@
 #include "recordformatcombo.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(RecordFormatCombo,record_format_combo,COMBO_TYPE)
+
 static GtkObjectClass *parent_class;
 
 enum { FORMAT_CHANGED_SIGNAL, FORMAT_DIALOG_REQUEST_SIGNAL, LAST_SIGNAL };
@@ -198,22 +200,6 @@ static void record_format_combo_class_init(RecordFormatComboClass *klass)
 
 static void record_format_combo_init(RecordFormatCombo *obj)
 {
-}
-
-GType record_format_combo_get_type(void)
-{
-     static GType id=0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "RecordFormatCombo",
-	       sizeof(RecordFormatCombo),
-	       sizeof(RecordFormatComboClass),
-	       (GtkClassInitFunc) record_format_combo_class_init,
-	       (GtkObjectInitFunc) record_format_combo_init
-	  };
-	  id = gtk_type_unique( combo_get_type(), &info );
-     }
-     return id;
 }
 
 static void presets_changed(ListObject *lo, gpointer item, gpointer user_data)

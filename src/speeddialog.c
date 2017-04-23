@@ -30,6 +30,8 @@
 #include "float_box.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(SpeedDialog,speed_dialog,EFFECT_DIALOG_TYPE)
+
 static Chunk *apply_proc(Chunk *chunk, StatusBar *bar, gpointer user_data)
 {
      SpeedDialog *s = SPEED_DIALOG(user_data);
@@ -66,20 +68,4 @@ static void speed_dialog_init(SpeedDialog *v)
      c = gtk_label_new("%");
      gtk_box_pack_start( GTK_BOX(ed->input_area), c, FALSE, FALSE, 0 );
      gtk_widget_show(c);
-}
-
-GType speed_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "SpeedDialog",
-	       sizeof(SpeedDialog),
-	       sizeof(SpeedDialogClass),
-	       (GtkClassInitFunc) speed_dialog_class_init,
-	       (GtkObjectInitFunc) speed_dialog_init
-	  };
-	  id = gtk_type_unique(effect_dialog_get_type(),&info);
-     }
-     return id;
 }

@@ -41,6 +41,8 @@
 #include "effectbrowser.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(PipeDialog,pipe_dialog,EFFECT_DIALOG_TYPE)
+
 struct pipe_data {
      int fds[3];
      gchar *command;
@@ -110,22 +112,6 @@ static void pipe_dialog_class_init(PipeDialogClass *klass)
 {
      EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
      edc->apply = pipe_dialog_apply;
-}
-
-GType pipe_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "PipeDialog",
-	       sizeof(PipeDialog),
-	       sizeof(PipeDialogClass),
-	       (GtkClassInitFunc) pipe_dialog_class_init,
-	       (GtkObjectInitFunc) pipe_dialog_init
-	  };
-	  id = gtk_type_unique(effect_dialog_get_type(),&info);
-     }
-     return id;
 }
 
 static void add_error_text(GtkWidget *t,gchar *text)

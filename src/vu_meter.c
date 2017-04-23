@@ -26,6 +26,8 @@
 #include "main.h"
 #include "vu_meter.h"
 
+G_DEFINE_TYPE(VuMeter,vu_meter,GTK_TYPE_DRAWING_AREA)
+
 static void vu_meter_size_request(GtkWidget *widget, GtkRequisition *req)
 {
      req->width = 80;
@@ -82,22 +84,6 @@ static void vu_meter_init(VuMeter *v)
 {
      v->value = 0.0;
      v->goal = 0.0;
-}
-
-GType vu_meter_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "VuMeter",
-	       sizeof(VuMeter),
-	       sizeof(VuMeterClass),
-	       (GtkClassInitFunc) vu_meter_class_init,
-	       (GtkObjectInitFunc) vu_meter_init
-	  };
-	  id = gtk_type_unique(gtk_drawing_area_get_type(),&info);
-     }
-     return id;
 }
 
 GtkWidget *vu_meter_new(gfloat value)

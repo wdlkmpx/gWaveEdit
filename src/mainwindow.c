@@ -85,6 +85,8 @@
 #define BUILD_TIME __TIME__
 #endif
 
+G_DEFINE_TYPE(Mainwindow,mainwindow,GTK_TYPE_WINDOW)
+
 ListObject *mainwindow_objects = NULL;
 
 static gboolean window_geometry_stack_inited = FALSE;
@@ -2746,22 +2748,6 @@ static void mainwindow_init(Mainwindow *obj)
      gte.flags = gte.info = 0;
      gtk_drag_dest_set(GTK_WIDGET(obj), GTK_DEST_DEFAULT_ALL, &gte, 1, 
 		       GDK_ACTION_COPY | GDK_ACTION_MOVE);
-}
-
-GType mainwindow_get_type(void)
-{
-static GType id=0;
-if (!id) {
-	GtkTypeInfo info = {
-	     "Mainwindow",
-	     sizeof(Mainwindow),
-	     sizeof(MainwindowClass),
-	     (GtkClassInitFunc) mainwindow_class_init,
-	     (GtkObjectInitFunc) mainwindow_init 
-	};
-	id=gtk_type_unique(gtk_window_get_type(),&info);
-	}
-return id;
 }
 
 GtkWidget *mainwindow_new(void)

@@ -36,6 +36,8 @@
 #include "gettext.h"
 #include "filetypes.h"
 
+G_DEFINE_TYPE(ConfigDialog,config_dialog,GTK_TYPE_WINDOW)
+
 static GtkObjectClass *parent_class;
 
 static void config_dialog_destroy(GtkObject *obj)
@@ -1225,22 +1227,6 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_window_add_accel_group(GTK_WINDOW (cd), ag);
 
 
-}
-
-GType config_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "ConfigDialog",
-	       sizeof(ConfigDialog),
-	       sizeof(ConfigDialogClass),
-	       (GtkClassInitFunc) config_dialog_class_init,
-	       (GtkObjectInitFunc) config_dialog_init
-	  };
-	  id = gtk_type_unique(gtk_window_get_type(),&info);
-     }
-     return id;
 }
 
 GtkWidget *config_dialog_new(void)

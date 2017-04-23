@@ -26,6 +26,8 @@
 #include "effectbrowser.h"
 #include "um.h"
 
+G_DEFINE_TYPE(SandwichDialog,sandwich_dialog,EFFECT_DIALOG_TYPE)
+
 static gboolean sandwich_dialog_apply(EffectDialog *ed)
 {
      SandwichDialog *sd = SANDWICH_DIALOG(ed);
@@ -142,20 +144,4 @@ static void sandwich_dialog_init(SandwichDialog *obj)
      gtk_box_pack_start(GTK_BOX(EFFECT_DIALOG(obj)->input_area),
 			a,FALSE,FALSE,0);
      gtk_widget_show_all(a);
-}
-
-GType sandwich_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "SandwichDialog",
-	       sizeof(SandwichDialog),
-	       sizeof(SandwichDialogClass),
-	       (GtkClassInitFunc) sandwich_dialog_class_init,
-	       (GtkObjectInitFunc) sandwich_dialog_init
-	  };
-	  id = gtk_type_unique(effect_dialog_get_type(),&info);
-     }
-     return id;
 }

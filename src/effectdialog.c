@@ -29,6 +29,8 @@
 #include "main.h"
 #include "um.h"
 
+G_DEFINE_TYPE(EffectDialog,effect_dialog,GTK_TYPE_VBOX)
+
 enum { APPLY_SIGNAL, SETUP_SIGNAL, TARGET_CHANGED_SIGNAL, LAST_SIGNAL };
 static guint effect_dialog_signals[LAST_SIGNAL] = { 0 };
 
@@ -74,22 +76,6 @@ static void effect_dialog_init(EffectDialog *v)
      gtk_widget_show ( b );
 
      gtk_container_set_border_width(GTK_CONTAINER(v),5);
-}
-
-GType effect_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "EffectDialog",
-	       sizeof(EffectDialog),
-	       sizeof(EffectDialogClass),
-	       (GtkClassInitFunc) effect_dialog_class_init,
-	       (GtkObjectInitFunc) effect_dialog_init
-	  };
-	  id = gtk_type_unique(gtk_vbox_get_type(),&info);
-     }
-     return id;
 }
 
 static void effect_dialog_eb_target_changed(DocumentList *dl, 

@@ -36,6 +36,8 @@
 #include "um.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(SoxDialog,sox_dialog,EFFECT_DIALOG_TYPE)
+
 static GtkObjectClass *parent_class;
 
 static gchar *supported_effects[] = { 
@@ -687,22 +689,6 @@ static void sox_dialog_init(SoxDialog *sd)
      sd->ca = NULL;
      /* We wait with proper initialization until we know
       * which effect we represent (in sox_dialog_mainwindow_set). */
-}
-
-GType sox_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "SoxDialog",
-	       sizeof(SoxDialog),
-	       sizeof(SoxDialogClass),
-	       (GtkClassInitFunc)sox_dialog_class_init,
-	       (GtkObjectInitFunc)sox_dialog_init
-	  };
-	  id = gtk_type_unique(effect_dialog_get_type(),&info);	  
-     }
-     return id;
 }
 
 gboolean sox_dialog_register_main(gchar source_tag)

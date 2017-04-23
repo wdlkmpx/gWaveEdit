@@ -29,6 +29,8 @@
 #define DEFAULT_CHANS 2
 #define DEFAULT_RATE 44100
 
+G_DEFINE_TYPE(FormatSelector,format_selector,GTK_TYPE_TABLE)
+
 static void format_selector_class_init(FormatSelectorClass *klass)
 {
 }
@@ -102,22 +104,6 @@ static void format_selector_init(FormatSelector *fs)
 
      gtk_widget_show_all(GTK_WIDGET(fs));
      gtk_widget_hide(GTK_WIDGET(fs));
-}
-
-GType format_selector_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "FormatSelector",
-	       sizeof(FormatSelector),
-	       sizeof(FormatSelectorClass),
-	       (GtkClassInitFunc) format_selector_class_init,
-	       (GtkObjectInitFunc) format_selector_init
-	  };
-	  id = gtk_type_unique(gtk_table_get_type(),&info);
-     }
-     return id;
 }
 
 /* Show channel and sample rate items */

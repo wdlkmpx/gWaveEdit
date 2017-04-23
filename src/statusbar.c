@@ -29,6 +29,8 @@
 
 #define LEFT_MARGIN 4
 
+G_DEFINE_TYPE(StatusBar,status_bar,GTK_TYPE_FIXED)
+
 gboolean status_bar_roll_cursor;
 
 static GtkWidgetClass *parent_class;
@@ -119,22 +121,6 @@ static void status_bar_class_init(StatusBarClass *klass)
 			 GTK_SIGNAL_OFFSET(StatusBarClass,progress_end),
 			 gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
      gtk_object_class_add_signals(oc,status_bar_signals,LAST_SIGNAL);
-}
-
-GType status_bar_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "StatusBar",
-	       sizeof(StatusBar),
-	       sizeof(StatusBarClass),
-	       (GtkClassInitFunc)status_bar_class_init,
-	       (GtkObjectInitFunc)status_bar_init
-	  };
-	  id = gtk_type_unique(gtk_fixed_get_type(),&info);
-     }
-     return id;
 }
 
 GtkWidget *status_bar_new(void)

@@ -30,6 +30,7 @@
 #include "float_box.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(VolumeDialog,volume_dialog,EFFECT_DIALOG_TYPE)
 
 static Chunk *volume_dialog_apply_proc(Chunk *chunk, StatusBar *bar, 
 				       gpointer user_data)
@@ -117,20 +118,4 @@ static void volume_dialog_class_init(VolumeDialogClass *klass)
 {
      EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
      edc->apply = volume_dialog_apply;
-}
-
-GType volume_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "VolumeDialog",
-	       sizeof(VolumeDialog),
-	       sizeof(VolumeDialogClass),
-	       (GtkClassInitFunc) volume_dialog_class_init,
-	       (GtkObjectInitFunc) volume_dialog_init
-	  };
-	  id = gtk_type_unique(effect_dialog_get_type(),&info);
-     }
-     return id;
 }

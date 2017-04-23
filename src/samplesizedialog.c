@@ -27,6 +27,8 @@
 #include "gettext.h"
 #include "um.h"
 
+G_DEFINE_TYPE(SamplesizeDialog,samplesize_dialog,EFFECT_DIALOG_TYPE)
+
 static Chunk *samplesize_apply_proc(Chunk *chunk, StatusBar *bar,
 				    gpointer user_data)
 {
@@ -103,20 +105,4 @@ static void samplesize_dialog_init(SamplesizeDialog *ssd)
 			ssd);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      gtk_widget_show(c);
-}
-
-GType samplesize_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "SamplesizeDialog",
-	       sizeof(SamplesizeDialog),
-	       sizeof(SamplesizeDialogClass),
-	       (GtkClassInitFunc) samplesize_dialog_class_init,
-	       (GtkObjectInitFunc) samplesize_dialog_init
-	  };
-	  id = gtk_type_unique(effect_dialog_get_type(),&info);
-     }
-     return id;
 }

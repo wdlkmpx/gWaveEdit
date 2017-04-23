@@ -34,6 +34,8 @@
 #include "gettext.h"
 #include "mainloop.h"
 
+G_DEFINE_TYPE(RecordDialog,record_dialog,GTK_TYPE_WINDOW)
+
 static struct {
      GtkWindow *wnd;
      FormatSelector *fs;
@@ -1030,22 +1032,6 @@ static void record_dialog_class_init(RecordDialogClass *klass)
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      parent_class = gtk_type_class(gtk_window_get_type());
      oc->destroy = record_dialog_destroy;
-}
-
-GType record_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "RecordDialog",
-	       sizeof(RecordDialog),
-	       sizeof(RecordDialogClass),
-	       (GtkClassInitFunc) record_dialog_class_init,
-	       (GtkObjectInitFunc) record_dialog_init
-	  };
-	  id = gtk_type_unique(gtk_window_get_type(),&info);
-     }
-     return id;
 }
 
 Chunk *record_dialog_execute(int *noverruns, off_t overrun_locs[10])

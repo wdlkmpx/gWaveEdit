@@ -28,6 +28,8 @@
 #include "main.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(Intbox,intbox,GTK_TYPE_ENTRY)
+
 static GtkEntryClass *parent_class;
 
 enum {
@@ -101,23 +103,6 @@ static void intbox_init(Intbox *fbox)
 {
      gtk_entry_set_width_chars(GTK_ENTRY(fbox),10);
      fbox->adj = NULL;
-}
-
-GType intbox_get_type(void)
-{
-static GType id=0;
-if (!id) {
-	GtkTypeInfo info = {
-		"Intbox",
-		sizeof(Intbox),
-		sizeof(IntboxClass),
-		(GtkClassInitFunc) intbox_class_init,
-		(GtkObjectInitFunc) intbox_init,
-		NULL,
-		NULL};
-	id=gtk_type_unique(gtk_entry_get_type(),&info);
-	}
-return id;
 }
 
 void intbox_set(Intbox *box, long val)

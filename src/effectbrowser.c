@@ -37,6 +37,8 @@
 #include "mapchannelsdialog.h"
 #include "sandwichdialog.h"
 
+G_DEFINE_TYPE(EffectBrowser,effect_browser,GTK_TYPE_WINDOW)
+
 struct source {
      gchar tag;
      gchar *name;
@@ -854,22 +856,6 @@ static void effect_browser_init(EffectBrowser *eb)
      GTK_WIDGET_SET_FLAGS(GTK_WIDGET(b251),GTK_CAN_DEFAULT);
      gtk_widget_grab_default(GTK_WIDGET(b251));
      gtk_widget_show_all(b);
-}
-
-GType effect_browser_get_type(void)
-{
-     static GType id=0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "EffectBrowser",
-	       sizeof(EffectBrowser),
-	       sizeof(EffectBrowserClass),
-	       (GtkClassInitFunc)effect_browser_class_init,
-	       (GtkObjectInitFunc)effect_browser_init
-	  };
-	  id = gtk_type_unique(gtk_window_get_type(),&info);
-     }
-     return id;
 }
 
 GtkWidget *effect_browser_new(Document *doc)

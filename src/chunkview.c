@@ -30,6 +30,8 @@
 #include "player.h"
 #include "mainloop.h"
 
+G_DEFINE_TYPE(ChunkView,chunk_view,GTK_TYPE_DRAWING_AREA)
+
 static GtkObjectClass *parent_class;
 static guint font_height=0,font_width=0;
 
@@ -750,22 +752,6 @@ static void chunk_view_init(ChunkView *cv)
 				      (gint *)&font_height);
 	  g_object_unref(pl);
      }
-}
-
-GType chunk_view_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "ChunkView",
-	       sizeof(ChunkView),
-	       sizeof(ChunkViewClass),
-	       (GtkClassInitFunc) chunk_view_class_init,
-	       (GtkObjectInitFunc) chunk_view_init 
-	  };
-	  id = gtk_type_unique( gtk_drawing_area_get_type(), &info );
-     }
-     return id;
 }
 
 GtkWidget *chunk_view_new(void)

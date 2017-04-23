@@ -23,6 +23,8 @@
 
 #include "combo.h"
 
+G_DEFINE_TYPE(Combo,combo,GTK_TYPE_COMBO_BOX)
+
 enum { CHANGED_SIGNAL, LAST_SIGNAL };
 static guint combo_signals[LAST_SIGNAL] = { 0 };
 
@@ -153,22 +155,6 @@ void combo_remove_item(Combo *combo, int item_index)
      /* printf("Removing:  selected_index %d, string %s\n",i,c); */
      combo->strings = g_list_remove(combo->strings,c);
      g_free(c);
-}
-
-GType combo_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "Combo",
-	       sizeof(Combo),
-	       sizeof(ComboClass),
-	       (GtkClassInitFunc)combo_class_init,
-	       (GtkObjectInitFunc)combo_init
-	  };
-	  id = gtk_type_unique(COMBO_PARENT_TYPE_FUNC(),&info);
-     }
-     return id;
 }
 
 GtkWidget *combo_new(void)

@@ -27,6 +27,8 @@
 #include "main.h"
 #include "gettext.h"
 
+G_DEFINE_TYPE(GotoDialog,goto_dialog,GTK_TYPE_WINDOW)
+
 static gboolean goto_dialog_apply(GotoDialog *gd)
 {
      off_t p=0,q;
@@ -182,22 +184,6 @@ static void goto_dialog_init(GotoDialog *gd)
 
 static void goto_dialog_class_init(GotoDialogClass *klass)
 {
-}
-
-GType goto_dialog_get_type(void)
-{
-     static GType id = 0;
-     if (!id) {
-	  GtkTypeInfo info = {
-	       "GotoDialog",
-	       sizeof(GotoDialog),
-	       sizeof(GotoDialogClass),
-	       (GtkClassInitFunc) goto_dialog_class_init,
-	       (GtkObjectInitFunc) goto_dialog_init
-	  };
-	  id = gtk_type_unique(gtk_window_get_type(),&info);
-     }
-     return id;
 }
 
 GtkWidget *goto_dialog_new(Mainwindow *mw)
