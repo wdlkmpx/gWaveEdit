@@ -75,7 +75,7 @@ static void combo_class_init(ComboClass *klass)
 }
 
 
-static void combo_init(GtkObject *obj)
+static void combo_init(Combo *obj)
 {
      /* Most of this was taken from the code for gtk_combo_box_new_text in 
       * GTK+ 2.4.13 */
@@ -93,8 +93,8 @@ static void combo_init(GtkObject *obj)
                                   "text", 0,
                                   NULL);
 
-  COMBO(obj)->strings = NULL;     
-  COMBO(obj)->max_request_width = -1;
+  obj->strings = NULL;
+  obj->max_request_width = -1;
 }
 
 void combo_set_items(Combo *combo, GList *item_strings, int default_index)

@@ -85,24 +85,24 @@ static void document_list_remove(ListObject *lo, gpointer item,
 
 }
 
-static void document_list_init(GtkObject *obj)
+static void document_list_init(DocumentList *mwl)
 {
-     DocumentList *mwl = DOCUMENT_LIST(obj);
+     GtkObject *gtkobj = GTK_OBJECT(mwl);
      /* Most initialization is done in document_list_setup */
-     combo_set_max_request_width(COMBO(obj),350);
+     combo_set_max_request_width(COMBO(mwl),350);
      mwl->selected = NULL;
      gtk_signal_connect_while_alive(GTK_OBJECT(document_objects), 
 				    "item_added",
 				    GTK_SIGNAL_FUNC(document_list_addnotify),
-				    obj,obj);
+				    gtkobj,gtkobj);
      gtk_signal_connect_while_alive(GTK_OBJECT(document_objects), 
 				    "item_removed",
 				    GTK_SIGNAL_FUNC(document_list_remove),
-				    obj,obj);
+				    gtkobj,gtkobj);
      gtk_signal_connect_while_alive(GTK_OBJECT(document_objects), 
 				    "item_notify",
 				    GTK_SIGNAL_FUNC(document_list_addnotify),
-				    obj,obj);
+				    gtkobj,gtkobj);
 }
 
 static void document_list_class_init(DocumentListClass *klass)

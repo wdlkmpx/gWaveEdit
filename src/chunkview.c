@@ -733,21 +733,19 @@ static void chunk_view_class_init(ChunkViewClass *klass)
      gtk_object_class_add_signals(oc,chunk_view_signals,LAST_SIGNAL);
 }
 
-static void chunk_view_init(GtkObject *obj)
+static void chunk_view_init(ChunkView *cv)
 {
-     ChunkView *cv;
-     cv = CHUNKVIEW(obj);
      cv->doc = NULL;
      cv->image = NULL;
      cv->timescale = TRUE;
      cv->scale_factor = 1.0;
      cv->cache = view_cache_new();
-     gtk_widget_add_events( GTK_WIDGET(obj), GDK_BUTTON_MOTION_MASK | 
+     gtk_widget_add_events( GTK_WIDGET(cv), GDK_BUTTON_MOTION_MASK |
 			    GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK |
 			    GDK_POINTER_MOTION_MASK );
      if (!font_height) {
 	  PangoLayout *pl;
-	  pl = gtk_widget_create_pango_layout( GTK_WIDGET(obj), "0123456789" );
+	  pl = gtk_widget_create_pango_layout( GTK_WIDGET(cv), "0123456789" );
 	  pango_layout_get_pixel_size(pl, (gint *)&font_width, 
 				      (gint *)&font_height);
 	  g_object_unref(pl);

@@ -62,9 +62,8 @@ static void list_object_class_init(ListObjectClass *klass)
      gtk_object_class_add_signals(oc,list_object_signals,LAST_SIGNAL);
 }
 
-static void list_object_init(GtkObject *obj)
+static void list_object_init(ListObject *lo)
 {
-     ListObject *lo = LIST_OBJECT(obj);
      lo->list = NULL;
      lo->do_ref = FALSE;
 }

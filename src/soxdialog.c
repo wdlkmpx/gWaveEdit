@@ -678,9 +678,8 @@ static void sox_dialog_class_init(SoxDialogClass *klass)
      oc->destroy = sox_dialog_destroy;
 }
 
-static void sox_dialog_init(GtkObject *obj)
+static void sox_dialog_init(SoxDialog *sd)
 {
-     SoxDialog *sd = SOX_DIALOG(obj);
      sd->fb1 = sd->fb2 = sd->fb3 = sd->fb4 = sd->fb5 = NULL;
      sd->tb1 = NULL;
      sd->ib1 = sd->ib2 = sd->ib3 = NULL;    

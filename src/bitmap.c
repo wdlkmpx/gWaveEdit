@@ -107,11 +107,9 @@ static void bitmap_class_init(BitmapClass *klass)
      oc->destroy = bitmap_destroy;
 }
 
-static void bitmap_init(GtkObject *obj)
+static void bitmap_init(Bitmap *b)
 {
-     Bitmap *b = BITMAP(obj);
-
-     gtk_widget_set_has_window(GTK_WIDGET(obj),FALSE);
+     gtk_widget_set_has_window(GTK_WIDGET(b),FALSE);
 
      b->gc = NULL;
      b->bmp = NULL;

@@ -49,15 +49,14 @@ static void samplesize_changed(Combo *obj, gpointer user_data)
 			      dataformat_sample_t.bigendian?1:0);
 }
 
-static void format_selector_init(GtkWidget *widget)
+static void format_selector_init(FormatSelector *fs)
 {
-     GtkWidget *a=widget,*b;
-     FormatSelector *fs = FORMAT_SELECTOR(widget);
+     GtkWidget *a=GTK_WIDGET(fs),*b;
      GList *l;
 
-     gtk_table_set_row_spacings(GTK_TABLE(widget),3);
-     gtk_table_set_col_spacings(GTK_TABLE(widget),4);
-     attach_label(_("Sample type: "),widget,1,0);
+     gtk_table_set_row_spacings(GTK_TABLE(fs),3);
+     gtk_table_set_col_spacings(GTK_TABLE(fs),4);
+     attach_label(_("Sample type: "),GTK_WIDGET(fs),1,0);
      b = combo_new();
      l = g_list_append(NULL,_("8 bit PCM"));
      l = g_list_append(l, _("16 bit PCM"));
@@ -101,8 +100,8 @@ static void format_selector_init(GtkWidget *widget)
      fs->channel_combo = NULL;
      fs->rate_box = NULL;
 
-     gtk_widget_show_all(widget);
-     gtk_widget_hide(widget);
+     gtk_widget_show_all(GTK_WIDGET(fs));
+     gtk_widget_hide(GTK_WIDGET(fs));
 }
 
 GType format_selector_get_type(void)

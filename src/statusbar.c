@@ -54,17 +54,17 @@ static void status_bar_expose(GtkWidget *widget, GdkEventExpose *event,
      }
 }
 
-static void status_bar_init(GtkObject *obj)
+static void status_bar_init(StatusBar *sb)
 {
-     StatusBar *sb = STATUSBAR(obj);
-     GtkContainer *cont = GTK_CONTAINER(obj);
-     GtkFixed *fix = GTK_FIXED(obj);
+     GtkObject *gtkobj = GTK_OBJECT(sb);
+     GtkContainer *cont = GTK_CONTAINER(sb);
+     GtkFixed *fix = GTK_FIXED(sb);
      GtkWidget *da;
 
      da = gtk_label_new("");
      sb->da = da;
      gtk_signal_connect(GTK_OBJECT(da),"expose_event",
-			GTK_SIGNAL_FUNC(status_bar_expose),obj);
+			GTK_SIGNAL_FUNC(status_bar_expose),gtkobj);
      gtk_fixed_put(fix,da,0,0);
 
      sb->mode = 2;

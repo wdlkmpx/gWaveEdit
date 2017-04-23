@@ -90,9 +90,8 @@ static gboolean marklist_equal(struct MarkList *l1, struct MarkList *l2)
      return TRUE;
 }
 
-static void document_init(GtkObject *obj)
+static void document_init(Document *d)
 {
-     Document *d = DOCUMENT(obj);
      d->filename = NULL;
      d->lossy = FALSE;
      d->titlename = NULL;

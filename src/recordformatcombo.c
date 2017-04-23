@@ -196,7 +196,7 @@ static void record_format_combo_class_init(RecordFormatComboClass *klass)
 				  record_format_combo_signals,LAST_SIGNAL);
 }
 
-static void record_format_combo_init(GtkObject *obj)
+static void record_format_combo_init(RecordFormatCombo *obj)
 {
 }
 

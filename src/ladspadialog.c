@@ -382,7 +382,7 @@ void ladspa_dialog_class_init(LadspaDialogClass *klass)
      oc->destroy = ladspa_dialog_destroy;
 }
 
-void ladspa_dialog_init(GtkObject *obj)
+void ladspa_dialog_init(LadspaDialog *obj)
 {
      /* Wait with initialisation until the setup signal */
 }
