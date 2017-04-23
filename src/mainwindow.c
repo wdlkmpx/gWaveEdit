@@ -92,7 +92,6 @@ ListObject *mainwindow_objects = NULL;
 static gboolean window_geometry_stack_inited = FALSE;
 static GSList *window_geometry_stack = NULL;
 static GList *recent_filenames = NULL;
-static GtkObjectClass *parent_class;
 static Chunk *clipboard = NULL;
 gboolean autoplay_mark_flag = FALSE;
 gboolean varispeed_reset_flag = FALSE;
@@ -424,13 +423,13 @@ static void mainwindow_destroy(GtkObject *obj)
 					 window_geometry_stack);
      }
 
-     parent_class->destroy(obj);
+     GTK_OBJECT_CLASS(mainwindow_parent_class)->destroy(obj);
 }
 
 static gint mainwindow_delete_event(GtkWidget *widget, GdkEventAny *event)
 {
      Mainwindow *w = MAINWINDOW ( widget );
-     GtkWidgetClass *pcw = GTK_WIDGET_CLASS(parent_class);
+     GtkWidgetClass *pcw = GTK_WIDGET_CLASS(mainwindow_parent_class);
      if (change_check(w)) return TRUE;
      if (playing_document == w->doc) player_stop();
      geometry_stack_push(GTK_WINDOW(w),NULL,&window_geometry_stack);
@@ -440,8 +439,8 @@ static gint mainwindow_delete_event(GtkWidget *widget, GdkEventAny *event)
 
 static void mainwindow_realize(GtkWidget *widget)
 {
-     if (GTK_WIDGET_CLASS(parent_class)->realize) 
-	  GTK_WIDGET_CLASS(parent_class)->realize(widget);
+     if (GTK_WIDGET_CLASS(mainwindow_parent_class)->realize) 
+	  GTK_WIDGET_CLASS(mainwindow_parent_class)->realize(widget);
      if (!icon) icon = gdk_pixmap_create_from_xpm_d(widget->window,NULL,NULL,
 						    icon_xpm);
      gdk_window_set_icon(widget->window,NULL,icon,NULL);     
@@ -507,7 +506,7 @@ static gint mainwindow_keypress(GtkWidget *widget, GdkEventKey *event)
 	  return TRUE;
      }
      if (w->doc == NULL) 
-          return GTK_WIDGET_CLASS(parent_class)->key_press_event(widget,event);
+          return GTK_WIDGET_CLASS(mainwindow_parent_class)->key_press_event(widget,event);
      if ((event->state & GDK_CONTROL_MASK))
 	  switch (event->keyval) {
 	  case GDK_0: mainwindow_toggle_mark(w,"0"); return TRUE;
@@ -642,7 +641,7 @@ static gint mainwindow_keypress(GtkWidget *widget, GdkEventKey *event)
 			       (w->doc->viewend+w->doc->viewstart)/2);
 	       return TRUE;
 	  }
-     return GTK_WIDGET_CLASS(parent_class)->key_press_event(widget,event);
+     return GTK_WIDGET_CLASS(mainwindow_parent_class)->key_press_event(widget,event);
 }
 
 static void urldecode(char *str)
@@ -722,7 +721,6 @@ static void mainwindow_class_init(MainwindowClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     parent_class = gtk_type_class(gtk_window_get_type());
      oc->destroy = mainwindow_destroy;
      wc->delete_event = mainwindow_delete_event;
      wc->realize = mainwindow_realize;

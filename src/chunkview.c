@@ -32,7 +32,6 @@
 
 G_DEFINE_TYPE(ChunkView,chunk_view,GTK_TYPE_DRAWING_AREA)
 
-static GtkObjectClass *parent_class;
 static guint font_height=0,font_width=0;
 
 enum { VIEW_CHANGED_SIGNAL, SELECTION_CHANGED_SIGNAL, CURSOR_CHANGED_SIGNAL, 
@@ -137,7 +136,7 @@ static void chunk_view_destroy (GtkObject *object)
 	  gtk_object_unref(GTK_OBJECT(cv->doc));
      }
      cv->doc = NULL;
-     parent_class->destroy(object);
+     GTK_OBJECT_CLASS(chunk_view_parent_class)->destroy(object);
      if (cv->cache) view_cache_free(cv->cache);
      cv->cache = NULL;
 }
@@ -445,7 +444,7 @@ static void chunk_view_size_allocate(GtkWidget *widget, GtkAllocation *all)
 {
      ChunkView *cv = CHUNKVIEW(widget);
      Document *d = cv->doc;
-     GTK_WIDGET_CLASS(parent_class)->size_allocate(widget,all);
+     GTK_WIDGET_CLASS(chunk_view_parent_class)->size_allocate(widget,all);
      if (cv->image == NULL) { 	  /* Hack */
 	  cv->image_width = all->width;
 	  cv->image_height = all->height;
@@ -714,7 +713,6 @@ static void chunk_view_class_init(ChunkViewClass *klass)
 {
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     parent_class = gtk_type_class( gtk_drawing_area_get_type() );
 
      oc->destroy = chunk_view_destroy;
      wc->expose_event = chunk_view_expose;

@@ -25,7 +25,6 @@
 
 G_DEFINE_TYPE(DocumentList,document_list,COMBO_TYPE)
 
-static GtkObjectClass *parent_class;
 enum { CHANGED_SIGNAL, LAST_SIGNAL };
 static guint document_list_signals[LAST_SIGNAL] = { 0 };
 static gboolean updating = FALSE;
@@ -45,8 +44,8 @@ static void document_list_changed(Combo *combo)
 			  document_list_signals[CHANGED_SIGNAL]);
      }
 
-     if (COMBO_CLASS(parent_class)->selection_changed)
-	  COMBO_CLASS(parent_class)->selection_changed(combo);
+     if (COMBO_CLASS(document_list_parent_class)->selection_changed)
+	  COMBO_CLASS(document_list_parent_class)->selection_changed(combo);
 }
 
 static void document_list_addnotify(ListObject *lo, gpointer item, 
@@ -110,7 +109,6 @@ static void document_list_init(DocumentList *mwl)
 static void document_list_class_init(DocumentListClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     parent_class = gtk_type_class(combo_get_type());
      klass->document_changed = NULL;
      COMBO_CLASS(klass)->selection_changed = document_list_changed;
 

@@ -28,7 +28,6 @@
 
 G_DEFINE_TYPE(CombineChannelsDialog,combine_channels_dialog,EFFECT_DIALOG_TYPE)
 
-static GtkObjectClass *parent_class;
 static sample_t *combination_matrix;
 static sample_t *samples = NULL;
 
@@ -116,14 +115,13 @@ static void combine_channels_destroy(GtkObject *obj)
     CombineChannelsDialog *ccd = COMBINE_CHANNELS_DIALOG(obj);
     g_free(ccd->combination_matrix);
     ccd->combination_matrix = NULL;
-    parent_class->destroy(obj);
+    GTK_OBJECT_CLASS(combine_channels_dialog_parent_class)->destroy(obj);
 }
 
 static void combine_channels_dialog_class_init(CombineChannelsDialogClass *klass)
 {
     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
-    parent_class = gtk_type_class(effect_dialog_get_type());
     edc->apply = combine_channels_dialog_apply;
     edc->setup = combine_channels_setup;
     edc->target_changed = combine_channels_dialog_target_changed;

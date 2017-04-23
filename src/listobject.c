@@ -29,7 +29,6 @@ G_DEFINE_TYPE(ListObject,list_object,GTK_TYPE_OBJECT)
 enum { ITEM_ADDED_SIGNAL, ITEM_REMOVED_SIGNAL, ITEM_NOTIFY_SIGNAL, 
        LAST_SIGNAL };
 static guint list_object_signals[LAST_SIGNAL] = { 0 };
-static GtkObjectClass *parent_class;
 
 static void list_object_destroy(GtkObject *obj)
 {
@@ -40,7 +39,6 @@ static void list_object_destroy(GtkObject *obj)
 static void list_object_class_init(ListObjectClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     parent_class = gtk_type_class( gtk_object_get_type() );
 
      oc->destroy = list_object_destroy;
      klass->item_removed = NULL;

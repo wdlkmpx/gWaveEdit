@@ -26,8 +26,6 @@
 
 G_DEFINE_TYPE(RecordFormatCombo,record_format_combo,COMBO_TYPE)
 
-static GtkObjectClass *parent_class;
-
 enum { FORMAT_CHANGED_SIGNAL, FORMAT_DIALOG_REQUEST_SIGNAL, LAST_SIGNAL };
 static guint record_format_combo_signals[LAST_SIGNAL] = { 0 };
 
@@ -47,7 +45,7 @@ static void record_format_combo_destroy(GtkObject *obj)
 	  gtk_object_unref(GTK_OBJECT(rfc->nameless_presets));
 	  rfc->nameless_presets = NULL;
      }
-     parent_class->destroy(obj);
+     GTK_OBJECT_CLASS(record_format_combo_parent_class)->destroy(obj);
 }
 
 static gchar *rf_string(Dataformat *fmt, gchar *name)
@@ -176,7 +174,6 @@ static void record_format_combo_selection_changed(Combo *obj)
 static void record_format_combo_class_init(RecordFormatComboClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     parent_class = gtk_type_class(combo_get_type());
      oc->destroy = record_format_combo_destroy;
      COMBO_CLASS(klass)->selection_changed = 
 	  record_format_combo_selection_changed;

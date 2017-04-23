@@ -30,12 +30,10 @@ static guint combo_signals[LAST_SIGNAL] = { 0 };
 
 static gboolean updating_flag = FALSE;
 
-static GtkObjectClass *parent_class;
-
 static void combo_size_request(GtkWidget *widget, GtkRequisition *req)
 {
      Combo *obj = COMBO(widget);
-     GTK_WIDGET_CLASS(parent_class)->size_request(widget,req);
+     GTK_WIDGET_CLASS(combo_parent_class)->size_request(widget,req);
      if (obj->max_request_width >= 0 && req->width > obj->max_request_width)
 	  req->width = obj->max_request_width;
 }
@@ -48,22 +46,21 @@ static void combo_destroy(GtkObject *obj)
 	  g_list_free(combo->strings);
 	  combo->strings = NULL;
      }
-     parent_class->destroy(obj);
+     GTK_OBJECT_CLASS(combo_parent_class)->destroy(obj);
 }
 
 static void combo_changed(GtkComboBox *combo)
 {
      if (!updating_flag)
 	  gtk_signal_emit(GTK_OBJECT(combo),combo_signals[CHANGED_SIGNAL]);
-     if (GTK_COMBO_BOX_CLASS(parent_class)->changed)
-	  GTK_COMBO_BOX_CLASS(parent_class)->changed(combo);
+     if (GTK_COMBO_BOX_CLASS(combo_parent_class)->changed)
+	  GTK_COMBO_BOX_CLASS(combo_parent_class)->changed(combo);
 }
 
 static void combo_class_init(ComboClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     parent_class = gtk_type_class(COMBO_PARENT_TYPE_FUNC());
      oc->destroy = combo_destroy;
      GTK_COMBO_BOX_CLASS(klass)->changed = combo_changed;
      klass->selection_changed = NULL;

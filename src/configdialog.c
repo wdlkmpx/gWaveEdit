@@ -38,19 +38,16 @@
 
 G_DEFINE_TYPE(ConfigDialog,config_dialog,GTK_TYPE_WINDOW)
 
-static GtkObjectClass *parent_class;
-
 static void config_dialog_destroy(GtkObject *obj)
 {
      ConfigDialog *cd = CONFIG_DIALOG(obj);
      cd->selected_tempdir = NULL;
-     parent_class->destroy(obj);
+     GTK_OBJECT_CLASS(config_dialog_parent_class)->destroy(obj);
 }
 
 static void config_dialog_class_init(ConfigDialogClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     parent_class = gtk_type_class(gtk_window_get_type());
      oc->destroy = config_dialog_destroy;
 }
 

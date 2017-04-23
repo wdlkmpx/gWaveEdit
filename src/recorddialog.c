@@ -48,7 +48,6 @@ static struct {
 
 static gboolean record_dialog_set_format(RecordDialog *rd);
 
-static GtkObjectClass *parent_class;
 static gboolean record_dialog_stopflag = FALSE;
 static RecordDialog *current_dialog;
 
@@ -1018,7 +1017,7 @@ static void record_dialog_destroy(GtkObject *obj)
      rd->analysis_buf = NULL;
      g_free(rd->analysis_sbuf);
      rd->analysis_sbuf = NULL;
-     parent_class->destroy(obj);
+     GTK_OBJECT_CLASS(record_dialog_parent_class)->destroy(obj);
      if (rd->driver_presets != NULL) {
 	  list_object_foreach(rd->driver_presets, (GFunc)g_free, NULL);
 	  list_object_clear(rd->driver_presets, FALSE);
@@ -1030,7 +1029,6 @@ static void record_dialog_destroy(GtkObject *obj)
 static void record_dialog_class_init(RecordDialogClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     parent_class = gtk_type_class(gtk_window_get_type());
      oc->destroy = record_dialog_destroy;
 }
 

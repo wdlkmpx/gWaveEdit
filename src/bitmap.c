@@ -28,13 +28,11 @@
 
 G_DEFINE_TYPE(Bitmap,bitmap,GTK_TYPE_WIDGET)
 
-static GtkWidgetClass *parent_class;
-
 static void bitmap_style_set(GtkWidget *widget, GtkStyle *previous_style)
 {
      BITMAP(widget)->update_gc = TRUE;
-     if (parent_class->style_set != NULL)
-	  parent_class->style_set(widget,previous_style);
+     if (GTK_WIDGET_CLASS(bitmap_parent_class)->style_set != NULL)
+	  GTK_WIDGET_CLASS(bitmap_parent_class)->style_set(widget,previous_style);
 }
 
 static gboolean bitmap_expose(GtkWidget *widget, GdkEventExpose *event)
@@ -79,8 +77,8 @@ static gboolean bitmap_expose(GtkWidget *widget, GdkEventExpose *event)
      
      gdk_draw_rectangle(widget->window, b->gc, TRUE, ox, oy, b->bmpw, b->bmph);
 
-     if (parent_class->expose_event != NULL)
-	  return parent_class->expose_event(widget,event);
+     if (GTK_WIDGET_CLASS(bitmap_parent_class)->expose_event != NULL)
+	  return GTK_WIDGET_CLASS(bitmap_parent_class)->expose_event(widget,event);
      return FALSE;
 }
 
@@ -95,15 +93,14 @@ static void bitmap_destroy(GtkObject *object)
 	  gdk_bitmap_unref(b->bmp);
 	  b->bmp = NULL;
      }
-     if (GTK_OBJECT_CLASS(parent_class)->destroy != NULL)
-	  GTK_OBJECT_CLASS(parent_class)->destroy(object);
+     if (GTK_OBJECT_CLASS(bitmap_parent_class)->destroy != NULL)
+	  GTK_OBJECT_CLASS(bitmap_parent_class)->destroy(object);
 }
 
 static void bitmap_class_init(BitmapClass *klass)
 {
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     parent_class = gtk_type_class(gtk_widget_get_type());
      wc->style_set = bitmap_style_set;
      wc->expose_event = bitmap_expose;
      oc->destroy = bitmap_destroy;

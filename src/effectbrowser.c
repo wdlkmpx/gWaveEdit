@@ -59,8 +59,6 @@ static GSList *sources = NULL;
 static GSList *geometry_stack = NULL;
 static gboolean geometry_stack_inited = FALSE;
 
-static GtkObjectClass *parent_class;
-
 static void list_widget_rebuild(gpointer dummy, gpointer dummy2, 
 				EffectBrowser *eb);
 
@@ -209,7 +207,8 @@ static void effect_browser_destroy(GtkObject *obj)
 	       eb->dialogs[i] = NULL;
 	  }
      }
-     if (parent_class->destroy) parent_class->destroy(obj);
+     if (GTK_OBJECT_CLASS(effect_browser_parent_class)->destroy)
+          GTK_OBJECT_CLASS(effect_browser_parent_class)->destroy(obj);
 }
 
 static void geom_push(EffectBrowser *eb)
@@ -226,8 +225,8 @@ static void geom_push(EffectBrowser *eb)
 static gint effect_browser_delete_event(GtkWidget *widget, GdkEventAny *event)
 {
      geom_push(EFFECT_BROWSER(widget));
-     if (GTK_WIDGET_CLASS(parent_class)->delete_event)
-	  return GTK_WIDGET_CLASS(parent_class)->delete_event(widget,event);
+     if (GTK_WIDGET_CLASS(effect_browser_parent_class)->delete_event)
+	  return GTK_WIDGET_CLASS(effect_browser_parent_class)->delete_event(widget,event);
      else
 	  return FALSE;
 }
@@ -236,7 +235,6 @@ static void effect_browser_class_init(EffectBrowserClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     parent_class = gtk_type_class(gtk_window_get_type());
      oc->destroy = effect_browser_destroy;
      wc->delete_event = effect_browser_delete_event;
 }

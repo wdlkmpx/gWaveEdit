@@ -42,8 +42,6 @@ gchar *ladspa_dialog_first_effect(void)
 
 G_DEFINE_TYPE(LadspaDialog,ladspa_dialog,EFFECT_DIALOG_TYPE)
 
-GtkObjectClass *parent_class;
-
 gboolean ladspa_dialog_apply(EffectDialog *ed)
 {
      LadspaDialog *ld = LADSPA_DIALOG(ed);
@@ -370,14 +368,13 @@ static void ladspa_dialog_destroy(GtkObject *obj)
 	  g_free(ld->settings[i]);
 	  ld->settings[i] = NULL;
      }
-     parent_class->destroy(obj);
+     GTK_OBJECT_CLASS(ladspa_dialog_parent_class)->destroy(obj);
 }
 
 void ladspa_dialog_class_init(LadspaDialogClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
-     parent_class = gtk_type_class(effect_dialog_get_type());
      edc->apply = ladspa_dialog_apply;
      edc->setup = ladspa_dialog_setup;
      edc->target_changed = ladspa_dialog_target_changed;

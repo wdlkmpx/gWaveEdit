@@ -33,7 +33,6 @@ G_DEFINE_TYPE(StatusBar,status_bar,GTK_TYPE_FIXED)
 
 gboolean status_bar_roll_cursor;
 
-static GtkWidgetClass *parent_class;
 static int progress_count = 0;
 
 enum { PROGRESS_BEGIN_SIGNAL, PROGRESS_END_SIGNAL, LAST_SIGNAL };
@@ -93,13 +92,13 @@ static void status_bar_size_allocate(GtkWidget *widget,
 	 daw->allocation.width != allocation->width) {
 	  gtk_widget_set_usize(daw,allocation->width,allocation->height);
      }
-     parent_class->size_allocate(widget,allocation);
+     GTK_WIDGET_CLASS(status_bar_parent_class)->size_allocate(widget,allocation);
 }
 
 static void status_bar_size_request(GtkWidget *widget, 
 				    GtkRequisition *requisition)
 {
-     parent_class->size_request(widget,requisition);
+     GTK_WIDGET_CLASS(status_bar_parent_class)->size_request(widget,requisition);
      requisition->width = 10;
 }
 
@@ -107,7 +106,6 @@ static void status_bar_class_init(StatusBarClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     parent_class = GTK_WIDGET_CLASS(gtk_type_class(gtk_fixed_get_type()));
      wc->size_allocate = status_bar_size_allocate;
      wc->size_request = status_bar_size_request;
      klass->progress_begin = NULL;

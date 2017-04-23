@@ -30,7 +30,6 @@
 
 G_DEFINE_TYPE(MapChannelsDialog,map_channels_dialog,EFFECT_DIALOG_TYPE)
 
-static GtkObjectClass *parent_class;
 static gboolean *map_matrix = NULL;
 
 static Chunk *map_channels_dialog_apply_proc(Chunk *chunk, StatusBar *bar,
@@ -177,7 +176,6 @@ static void map_channels_setup(EffectDialog *ed)
 static void map_channels_dialog_class_init(MapChannelsDialogClass *klass)
 {
     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
-    parent_class = gtk_type_class(effect_dialog_get_type());
     edc->apply = map_channels_dialog_apply;
     edc->setup = map_channels_setup;
     edc->target_changed = map_channels_dialog_target_changed;

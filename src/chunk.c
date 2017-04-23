@@ -44,8 +44,6 @@ G_DEFINE_TYPE(Chunk,chunk,GTK_TYPE_OBJECT)
 
 gboolean chunk_filter_use_floating_tempfiles;
 
-static GtkObjectClass *parent_class;
-
 static GList *chunks = NULL;
 
 guint chunk_alive_count(void)
@@ -70,14 +68,13 @@ static void chunk_destroy(GtkObject *object)
 	  g_list_free(c->parts);
      }
      c->parts = NULL;
-     parent_class->destroy(object);
+     GTK_OBJECT_CLASS(chunk_parent_class)->destroy(object);
      chunks = g_list_remove ( chunks, object );
 }
 
 static void chunk_class_init(ChunkClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     parent_class = gtk_type_class(gtk_object_get_type());
      oc->destroy = chunk_destroy;
 }
 

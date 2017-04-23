@@ -30,8 +30,6 @@
 
 G_DEFINE_TYPE(Intbox,intbox,GTK_TYPE_ENTRY)
 
-static GtkEntryClass *parent_class;
-
 enum {
      NUMCHANGED_SIGNAL,
      LAST_SIGNAL
@@ -64,7 +62,8 @@ static void intbox_activate(GtkEntry *editable)
 	  intbox_set(INTBOX(editable),l);
      else
 	  intbox_update_text(INTBOX(editable));
-     if (parent_class->activate) parent_class->activate(editable);
+     if (GTK_ENTRY_CLASS(intbox_parent_class)->activate)
+          GTK_ENTRY_CLASS(intbox_parent_class)->activate(editable);
 }
 
 static gint intbox_focus_out(GtkWidget *widget, GdkEventFocus *event)
@@ -77,14 +76,13 @@ static gint intbox_focus_out(GtkWidget *widget, GdkEventFocus *event)
      if (*d==0 && b->adj!=NULL && l>=(long)gtk_adjustment_get_lower(b->adj) &&
 	 l<=(long)gtk_adjustment_get_upper(b->adj))
 	  gtk_adjustment_set_value(b->adj,l);
-     return GTK_WIDGET_CLASS(parent_class)->focus_out_event(widget,event);
+     return GTK_WIDGET_CLASS(intbox_parent_class)->focus_out_event(widget,event);
 }
 
 static void intbox_class_init(IntboxClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     parent_class = gtk_type_class(gtk_entry_get_type());
      GTK_ENTRY_CLASS(klass)->activate = intbox_activate;
      wc->focus_out_event = intbox_focus_out;
      klass->numchange=NULL;

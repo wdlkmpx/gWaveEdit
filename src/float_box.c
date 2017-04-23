@@ -30,8 +30,6 @@
 
 G_DEFINE_TYPE(Floatbox,floatbox,GTK_TYPE_ENTRY)
 
-static GtkEntryClass *parent_class;
-
 enum {
      NUMCHANGED_SIGNAL,
      LAST_SIGNAL
@@ -61,7 +59,8 @@ static void floatbox_activate(GtkEntry *editable)
 	  floatbox_set(FLOATBOX(editable),f);
      else
 	  floatbox_update_text(FLOATBOX(editable));
-     if (parent_class->activate) parent_class->activate(editable);
+     if (GTK_ENTRY_CLASS(floatbox_parent_class)->activate)
+          GTK_ENTRY_CLASS(floatbox_parent_class)->activate(editable);
 }
 
 static gint floatbox_focus_out(GtkWidget *widget, GdkEventFocus *event)
@@ -75,14 +74,13 @@ static gint floatbox_focus_out(GtkWidget *widget, GdkEventFocus *event)
 	 f<=gtk_adjustment_get_upper(b->adj)) {
 	  gtk_adjustment_set_value(b->adj,f);
      }
-     return GTK_WIDGET_CLASS(parent_class)->focus_out_event(widget,event);
+     return GTK_WIDGET_CLASS(floatbox_parent_class)->focus_out_event(widget,event);
 }
 
 static void floatbox_class_init(FloatboxClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     parent_class = gtk_type_class(gtk_entry_get_type());
 
      GTK_ENTRY_CLASS(klass)->activate = floatbox_activate;
      wc->focus_out_event = floatbox_focus_out;

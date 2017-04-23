@@ -40,8 +40,6 @@ enum { VIEW_CHANGED_SIGNAL, SELECTION_CHANGED_SIGNAL, CURSOR_CHANGED_SIGNAL,
        STATE_CHANGED_SIGNAL, LAST_SIGNAL };
 static guint document_signals[LAST_SIGNAL] = { 0 };
 
-static GtkObjectClass *parent_class;
-
 static void document_set_cursor_main(Document *d, off_t cursorpos, 
 				     gboolean playslave, gboolean running,
 				     off_t bufpos);
@@ -144,7 +142,7 @@ static void document_destroy(GtkObject *object)
      clear_history(d->history_pos);
      d->history_pos = NULL;
      list_object_remove(document_objects,object);
-     parent_class->destroy(object);
+     GTK_OBJECT_CLASS(document_parent_class)->destroy(object);
 }
 
 static void document_state_changed(Document *d)
@@ -155,7 +153,6 @@ static void document_state_changed(Document *d)
 static void document_class_init(DocumentClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     parent_class = gtk_type_class(gtk_object_get_type());
      
      oc->destroy = document_destroy;
      klass->view_changed = NULL;
