@@ -40,7 +40,7 @@ static void rawdialog_ok(GtkButton *button, gpointer user_data)
 {
      if (format_selector_check(fs) || 
 	 intbox_check_limit(offset_box,0,maxhdrsize,_("header size"))) {
-          gtk_signal_emit_stop_by_name(GTK_OBJECT(button),"clicked");
+          g_signal_stop_emission_by_name(G_OBJECT(button),"clicked");
           return;
      }
      format_selector_get(fs,&fmt);

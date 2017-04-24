@@ -135,8 +135,8 @@ static void record_format_set_main(RecordFormatCombo *rfc, int type,
 	  rebuild_strings(rfc);
 	  nosignal_flag = FALSE;
      }
-     gtk_signal_emit(GTK_OBJECT(rfc),
-		     record_format_combo_signals[FORMAT_CHANGED_SIGNAL]);
+     g_signal_emit(G_OBJECT(rfc),
+		     record_format_combo_signals[FORMAT_CHANGED_SIGNAL],0);
 }
 
 static void record_format_combo_selection_changed(Combo *obj)
@@ -150,9 +150,9 @@ static void record_format_combo_selection_changed(Combo *obj)
 
      i = combo_selected_index(obj);
      if (i >= rfc->other_start) {
-	  gtk_signal_emit(GTK_OBJECT(obj),
+	  g_signal_emit(G_OBJECT(obj),
 			  record_format_combo_signals
-			  [FORMAT_DIALOG_REQUEST_SIGNAL]);
+			  [FORMAT_DIALOG_REQUEST_SIGNAL],0);
 	  rebuild_strings(rfc);
      } else if (i >= rfc->custom_start) { 
 	  g_assert(i == rfc->custom_start && rfc->current_selection_type == 3);

@@ -40,8 +40,8 @@ static void document_list_changed(Combo *combo)
      if (d != dl->selected) {
 	  dl->selected = d;
 	  memcpy(&(dl->format),&(d->chunk->format),sizeof(Dataformat));
-	  gtk_signal_emit(GTK_OBJECT(dl),
-			  document_list_signals[CHANGED_SIGNAL]);
+	  g_signal_emit(G_OBJECT(dl),
+			  document_list_signals[CHANGED_SIGNAL],0);
      }
 
      if (COMBO_CLASS(document_list_parent_class)->selection_changed)
@@ -59,8 +59,8 @@ static void document_list_addnotify(ListObject *lo, gpointer item,
      }
      document_list_setup(dl,dl->selected);     
      if (d == dl->selected) {	  
-	  gtk_signal_emit(GTK_OBJECT(dl),
-			  document_list_signals[CHANGED_SIGNAL]);
+	  g_signal_emit(G_OBJECT(dl),
+			  document_list_signals[CHANGED_SIGNAL],0);
      }
 }
 
@@ -79,8 +79,8 @@ static void document_list_remove(ListObject *lo, gpointer item,
 	  }
 	  mwl->selected = DOCUMENT(list_object_get(document_objects,0));
 	  document_list_setup(mwl,mwl->selected);
-	  gtk_signal_emit(GTK_OBJECT(mwl),
-			  document_list_signals[CHANGED_SIGNAL]);
+	  g_signal_emit(G_OBJECT(mwl),
+			  document_list_signals[CHANGED_SIGNAL],0);
      } else
 	  document_list_setup(mwl,mwl->selected);
 

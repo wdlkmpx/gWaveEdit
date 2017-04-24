@@ -52,7 +52,7 @@ static void combo_destroy(GtkObject *obj)
 static void combo_changed(GtkComboBox *combo)
 {
      if (!updating_flag)
-	  gtk_signal_emit(GTK_OBJECT(combo),combo_signals[CHANGED_SIGNAL]);
+	  g_signal_emit(G_OBJECT(combo),combo_signals[CHANGED_SIGNAL],0);
      if (GTK_COMBO_BOX_CLASS(combo_parent_class)->changed)
 	  GTK_COMBO_BOX_CLASS(combo_parent_class)->changed(combo);
 }
@@ -117,7 +117,7 @@ void combo_set_items(Combo *combo, GList *item_strings, int default_index)
      if (default_index >= len || default_index < 0) default_index = 0;
      gtk_combo_box_set_active(GTK_COMBO_BOX(combo),default_index);
      updating_flag = FALSE;
-     gtk_signal_emit(GTK_OBJECT(combo),combo_signals[CHANGED_SIGNAL]);
+     g_signal_emit(G_OBJECT(combo),combo_signals[CHANGED_SIGNAL],0);
 }
 
 void combo_set_selection(Combo *combo, int item_index)

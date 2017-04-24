@@ -520,8 +520,8 @@ static gint chunk_view_button_press(GtkWidget *widget, GdkEventButton *event)
      if (d == NULL) return FALSE;
      if (event->type == GDK_2BUTTON_PRESS && event->button == 1) {
 	  o = calc_sample(cv,event->x,(gfloat)widget->allocation.width);
-	  gtk_signal_emit(GTK_OBJECT(cv),
-			  chunk_view_signals[DOUBLE_CLICK_SIGNAL],&o);
+	  g_signal_emit(G_OBJECT(cv),
+			  chunk_view_signals[DOUBLE_CLICK_SIGNAL], 0, &o);
 	  return FALSE;
      }
      dragstart = dragend = 

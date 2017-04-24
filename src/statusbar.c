@@ -167,11 +167,11 @@ static void status_bar_set_mode(StatusBar *sb, gint mode)
      }
      sb->mode = mode;
      if (old_mode == 1) 
-	  gtk_signal_emit(GTK_OBJECT(sb),
-			  status_bar_signals[PROGRESS_END_SIGNAL]);
+	  g_signal_emit(G_OBJECT(sb),
+			  status_bar_signals[PROGRESS_END_SIGNAL],0);
      if (mode == 1) 
-	  gtk_signal_emit(GTK_OBJECT(sb),
-			  status_bar_signals[PROGRESS_BEGIN_SIGNAL]);
+	  g_signal_emit(G_OBJECT(sb),
+			  status_bar_signals[PROGRESS_BEGIN_SIGNAL],0);
      gtk_widget_queue_draw(GTK_WIDGET(sb));
 }
 

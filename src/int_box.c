@@ -115,7 +115,7 @@ if (box->val == val) return;
  } 
 box->val=val;
  intbox_update_text(box); 
-gtk_signal_emit(GTK_OBJECT(box),intbox_signals[NUMCHANGED_SIGNAL],box->val);
+     g_signal_emit(G_OBJECT(box),intbox_signals[NUMCHANGED_SIGNAL],0,box->val);
 }
 
 GtkWidget *intbox_new(long val)
@@ -168,7 +168,7 @@ static void intbox_adj_changed(GtkAdjustment *adjustment, gpointer user_data)
      Intbox *box = INTBOX(user_data);
      box->val = box->adj->value;
      intbox_update_text(box);
-     gtk_signal_emit(GTK_OBJECT(box),intbox_signals[NUMCHANGED_SIGNAL],
+     g_signal_emit(G_OBJECT(box),intbox_signals[NUMCHANGED_SIGNAL],0,
 		     box->val);
 }
 

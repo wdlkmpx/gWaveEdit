@@ -116,7 +116,7 @@ void floatbox_set(Floatbox *box, float val)
      }
      box->val=val;
      floatbox_update_text(box);
-     gtk_signal_emit(GTK_OBJECT(box),floatbox_signals[NUMCHANGED_SIGNAL],box->val);
+     g_signal_emit(G_OBJECT(box),floatbox_signals[NUMCHANGED_SIGNAL],0,box->val);
 }
 
 GtkWidget *floatbox_new(float val)
@@ -170,7 +170,7 @@ static void floatbox_adj_changed(GtkAdjustment *adjustment, gpointer user_data)
      Floatbox *box = FLOATBOX(user_data);
      box->val = box->adj->value;
      floatbox_update_text(box);
-     gtk_signal_emit(GTK_OBJECT(box),floatbox_signals[NUMCHANGED_SIGNAL],
+     g_signal_emit(G_OBJECT(box),floatbox_signals[NUMCHANGED_SIGNAL],0,
 		     box->val);     
 }
 

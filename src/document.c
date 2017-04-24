@@ -237,7 +237,7 @@ static void document_set_filename(Document *d, gchar *filename,
 void document_forget_filename(Document *d)
 {
      document_set_filename(d,NULL,FALSE);
-     gtk_signal_emit(GTK_OBJECT(d),document_signals[STATE_CHANGED_SIGNAL]);
+     g_signal_emit(G_OBJECT(d),document_signals[STATE_CHANGED_SIGNAL],0);
 }
 
 Document *document_new_with_chunk(Chunk *chunk, gchar *sourcename,
@@ -276,8 +276,8 @@ gboolean document_save(Document *d, gchar *filename, gint type_id,
 	  clear_history(d->history_pos);
 	  d->history_pos = NULL;
 	  document_set_filename(d,filename,TRUE);
-	  gtk_signal_emit(GTK_OBJECT(d),
-			  document_signals[STATE_CHANGED_SIGNAL]);
+	  g_signal_emit(G_OBJECT(d),
+			  document_signals[STATE_CHANGED_SIGNAL],0);
      }
      return b;
 }
@@ -484,7 +484,7 @@ void document_update(Document *d, Chunk *new_chunk,
      fix_history(d);
 
      /* Emit signal */
-     gtk_signal_emit(GTK_OBJECT(d),document_signals[STATE_CHANGED_SIGNAL]);
+     g_signal_emit(G_OBJECT(d),document_signals[STATE_CHANGED_SIGNAL],0);
 }
 
 gboolean document_apply(Document *d, chunk_filter_proc proc, 
@@ -648,8 +648,8 @@ static void document_set_cursor_main(Document *d, off_t cursorpos,
      d->old_playbufpos = d->playbufpos;
      d->playbufpos = running ? bufpos : -1;
 
-     gtk_signal_emit(GTK_OBJECT(d),
-		     document_signals[CURSOR_CHANGED_SIGNAL],
+     g_signal_emit(G_OBJECT(d),
+		     document_signals[CURSOR_CHANGED_SIGNAL],0,
 		     running);	  
 }
 
@@ -697,7 +697,7 @@ void document_set_view(Document *d, off_t viewstart, off_t viewend)
      if (d->viewstart != viewstart || d->viewend != viewend) {
 	  d->viewstart = viewstart;
 	  d->viewend = viewend;
-	  gtk_signal_emit(GTK_OBJECT(d),document_signals[VIEW_CHANGED_SIGNAL]);
+	  g_signal_emit(G_OBJECT(d),document_signals[VIEW_CHANGED_SIGNAL],0);
      }
 }
 
@@ -732,8 +732,8 @@ void document_set_selection(Document *d, off_t selstart, off_t selend)
 	  d->old_selend = d->selend;
 	  d->selstart = selstart;
 	  d->selend = selend;
-	  gtk_signal_emit(GTK_OBJECT(d),
-			  document_signals[SELECTION_CHANGED_SIGNAL]);
+	  g_signal_emit(G_OBJECT(d),
+			  document_signals[SELECTION_CHANGED_SIGNAL],0);
      }
 }
 
@@ -781,8 +781,8 @@ void document_set_mark(Document *d, gchar *label, off_t position)
 	       } else {
 		    d->marks.places[i] = position;
 	       }
-	       gtk_signal_emit(GTK_OBJECT(d),
-			       document_signals[STATE_CHANGED_SIGNAL]);
+	       g_signal_emit(G_OBJECT(d),
+			       document_signals[STATE_CHANGED_SIGNAL],0);
 	       return;
 	  }
      if (d->marks.length == d->marks.alloced) {
@@ -795,8 +795,8 @@ void document_set_mark(Document *d, gchar *label, off_t position)
      d->marks.names[d->marks.length] = g_strdup(label);
      d->marks.places[d->marks.length] = position;
      d->marks.length ++;
-     gtk_signal_emit(GTK_OBJECT(d),
-		     document_signals[STATE_CHANGED_SIGNAL]);
+     g_signal_emit(G_OBJECT(d),
+		     document_signals[STATE_CHANGED_SIGNAL],0);
 }
 
 off_t document_get_mark(Document *d, const gchar *label)
@@ -813,8 +813,8 @@ void document_clear_marks(Document *d)
 {
      if (d->marks.length > 0) {
 	  clear_marklist(&(d->marks));
-	  gtk_signal_emit(GTK_OBJECT(d),
-			  document_signals[STATE_CHANGED_SIGNAL]);
+	  g_signal_emit(G_OBJECT(d),
+			  document_signals[STATE_CHANGED_SIGNAL],0);
      }
 }
 
@@ -848,7 +848,7 @@ static void get_state_from_history(Document *d)
      d->chunk = d->history_pos->chunk;
      gtk_object_ref(GTK_OBJECT(d->chunk));
      copy_marklist(&(d->marks),&(d->history_pos->marks));
-     gtk_signal_emit(GTK_OBJECT(d),document_signals[STATE_CHANGED_SIGNAL]);
+     g_signal_emit(G_OBJECT(d),document_signals[STATE_CHANGED_SIGNAL],0);
 }
 
 void document_undo(Document *d)

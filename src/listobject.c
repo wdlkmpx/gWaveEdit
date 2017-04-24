@@ -97,7 +97,7 @@ void list_object_add(ListObject *lo, gpointer ptr)
 	  gtk_object_ref(GTK_OBJECT(ptr));
 	  gtk_object_sink(GTK_OBJECT(ptr));
      }
-     gtk_signal_emit(GTK_OBJECT(lo),list_object_signals[ITEM_ADDED_SIGNAL],
+     g_signal_emit(G_OBJECT(lo),list_object_signals[ITEM_ADDED_SIGNAL],0,
 		     ptr);
 }
 
@@ -107,7 +107,7 @@ gboolean list_object_remove(ListObject *lo, gpointer ptr)
      l = g_list_find(lo->list,ptr);
      if (l == NULL) return FALSE;
      lo->list = g_list_remove_link( lo->list, l );
-     gtk_signal_emit(GTK_OBJECT(lo),list_object_signals[ITEM_REMOVED_SIGNAL],
+     g_signal_emit(G_OBJECT(lo),list_object_signals[ITEM_REMOVED_SIGNAL],0,
 		     ptr);
      if (lo->do_ref) gtk_object_unref(GTK_OBJECT(ptr));
      g_list_free_1(l);
@@ -116,7 +116,7 @@ gboolean list_object_remove(ListObject *lo, gpointer ptr)
 
 void list_object_notify(ListObject *lo, gpointer ptr)
 {
-     gtk_signal_emit(GTK_OBJECT(lo),list_object_signals[ITEM_NOTIFY_SIGNAL],
+     g_signal_emit(G_OBJECT(lo),list_object_signals[ITEM_NOTIFY_SIGNAL],0,
 		     ptr);
 }
 
