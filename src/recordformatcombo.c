@@ -179,17 +179,19 @@ static void record_format_combo_class_init(RecordFormatComboClass *klass)
 	  record_format_combo_selection_changed;
      klass->format_changed = NULL;
      record_format_combo_signals[FORMAT_CHANGED_SIGNAL] = 
-	  gtk_signal_new("format_changed",GTK_RUN_LAST,
-			 GTK_CLASS_TYPE(oc),
-			 GTK_SIGNAL_OFFSET(RecordFormatComboClass,
+	  g_signal_new("format_changed", G_TYPE_FROM_CLASS(klass),
+		       G_SIGNAL_RUN_LAST,
+		       G_STRUCT_OFFSET(RecordFormatComboClass,
 					   format_changed),
-			 gtk_marshal_NONE__NONE,GTK_TYPE_NONE,0);
+		       NULL, NULL,
+		       gtk_marshal_NONE__NONE,G_TYPE_NONE,0);
      record_format_combo_signals[FORMAT_DIALOG_REQUEST_SIGNAL] = 
-	  gtk_signal_new("format_dialog_request",GTK_RUN_LAST,
-			 GTK_CLASS_TYPE(oc),
-			 GTK_SIGNAL_OFFSET(RecordFormatComboClass,
+	  g_signal_new("format_dialog_request", G_TYPE_FROM_CLASS(klass),
+		       G_SIGNAL_RUN_LAST,
+		       G_STRUCT_OFFSET(RecordFormatComboClass,
 					   format_dialog_request),
-			 gtk_marshal_NONE__NONE,GTK_TYPE_NONE,0);
+		       NULL, NULL,
+		       gtk_marshal_NONE__NONE,G_TYPE_NONE,0);
      
      gtk_object_class_add_signals(oc,
 				  record_format_combo_signals,LAST_SIGNAL);

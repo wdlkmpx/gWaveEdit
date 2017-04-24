@@ -42,17 +42,20 @@ static void effect_dialog_class_init(EffectDialogClass *klass)
      klass->target_changed = NULL;
 
      effect_dialog_signals[APPLY_SIGNAL] =
-	  gtk_signal_new("apply",GTK_RUN_LAST,GTK_CLASS_TYPE(oc),
-			 GTK_SIGNAL_OFFSET(EffectDialogClass,apply),
-			 gtk_marshal_BOOL__NONE,GTK_TYPE_BOOL,0);
+          g_signal_new("apply",G_TYPE_FROM_CLASS(klass),G_SIGNAL_RUN_LAST,
+		       G_STRUCT_OFFSET(EffectDialogClass,apply),
+		       NULL, NULL,
+		       gtk_marshal_BOOL__NONE,G_TYPE_BOOLEAN,0);
      effect_dialog_signals[SETUP_SIGNAL] =
-         gtk_signal_new("setup",GTK_RUN_FIRST,GTK_CLASS_TYPE(oc),
-                        GTK_SIGNAL_OFFSET(EffectDialogClass,setup),
-                        gtk_marshal_NONE__NONE,GTK_TYPE_NONE,0);
+          g_signal_new("setup",G_TYPE_FROM_CLASS(klass),G_SIGNAL_RUN_FIRST,
+                       G_STRUCT_OFFSET(EffectDialogClass,setup),
+                       NULL, NULL,
+                       gtk_marshal_NONE__NONE,G_TYPE_NONE,0);
      effect_dialog_signals[TARGET_CHANGED_SIGNAL] = 
-	  gtk_signal_new("target-changed",GTK_RUN_FIRST,GTK_CLASS_TYPE(oc),
-			 GTK_SIGNAL_OFFSET(EffectDialogClass,target_changed),
-			 gtk_marshal_NONE__NONE,GTK_TYPE_NONE,0);
+	  g_signal_new("target-changed",G_TYPE_FROM_CLASS(klass),G_SIGNAL_RUN_FIRST,
+		       G_STRUCT_OFFSET(EffectDialogClass,target_changed),
+		       NULL, NULL,
+		       gtk_marshal_NONE__NONE,G_TYPE_NONE,0);
 
      gtk_object_class_add_signals(oc,effect_dialog_signals,LAST_SIGNAL);
 }

@@ -66,10 +66,11 @@ static void combo_class_init(ComboClass *klass)
      klass->selection_changed = NULL;
      wc->size_request = combo_size_request;
      combo_signals[CHANGED_SIGNAL] = 
-	  gtk_signal_new("selection_changed",GTK_RUN_LAST,
-			 GTK_CLASS_TYPE(oc),
-			 GTK_SIGNAL_OFFSET(ComboClass,selection_changed),
-			 gtk_marshal_NONE__NONE,GTK_TYPE_NONE,0);
+	  g_signal_new("selection_changed", G_TYPE_FROM_CLASS(klass),
+	               G_SIGNAL_RUN_LAST,
+		       G_STRUCT_OFFSET(ComboClass,selection_changed),
+		       NULL, NULL,
+		       gtk_marshal_NONE__NONE,G_TYPE_NONE,0);
      gtk_object_class_add_signals(oc,combo_signals,LAST_SIGNAL);
 }
 

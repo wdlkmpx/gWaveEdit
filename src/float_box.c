@@ -87,11 +87,12 @@ static void floatbox_class_init(FloatboxClass *klass)
      klass->numchange=NULL;
 
      floatbox_signals[NUMCHANGED_SIGNAL] = 
-	  gtk_signal_new("numchanged",GTK_RUN_FIRST,
-			 GTK_CLASS_TYPE(klass),
-			 GTK_SIGNAL_OFFSET(FloatboxClass,numchange),
-			 gtk_marshal_NONE__FLOAT,GTK_TYPE_NONE,1,
-			 GTK_TYPE_FLOAT);
+	  g_signal_new("numchanged", G_TYPE_FROM_CLASS(klass),
+		       G_SIGNAL_RUN_FIRST,
+		       G_STRUCT_OFFSET(FloatboxClass,numchange),
+		       NULL, NULL,
+		       gtk_marshal_NONE__FLOAT,G_TYPE_NONE,1,
+		       G_TYPE_FLOAT);
 
      gtk_object_class_add_signals(oc,floatbox_signals,
 				  LAST_SIGNAL);

@@ -725,10 +725,11 @@ static void chunk_view_class_init(ChunkViewClass *klass)
      klass->double_click = NULL;
 
      chunk_view_signals[DOUBLE_CLICK_SIGNAL] = 
-         gtk_signal_new("double-click", GTK_RUN_FIRST, GTK_CLASS_TYPE(oc),
-                        GTK_SIGNAL_OFFSET(ChunkViewClass,double_click),
-                        gtk_marshal_NONE__POINTER, GTK_TYPE_NONE, 1,
-			GTK_TYPE_POINTER );
+         g_signal_new("double-click", G_TYPE_FROM_CLASS(klass),
+                      G_SIGNAL_RUN_FIRST,
+                      G_STRUCT_OFFSET(ChunkViewClass,double_click),
+                      NULL, NULL, gtk_marshal_NONE__POINTER,
+                      G_TYPE_NONE, 1, G_TYPE_POINTER);
 
      gtk_object_class_add_signals(oc,chunk_view_signals,LAST_SIGNAL);
 }

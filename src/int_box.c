@@ -87,11 +87,12 @@ static void intbox_class_init(IntboxClass *klass)
      wc->focus_out_event = intbox_focus_out;
      klass->numchange=NULL;
      intbox_signals[NUMCHANGED_SIGNAL] = 
-	  gtk_signal_new("numchanged",GTK_RUN_FIRST,
-			 GTK_CLASS_TYPE(klass),
-			 GTK_SIGNAL_OFFSET(IntboxClass,numchange),
-			 gtk_marshal_NONE__LONG,GTK_TYPE_NONE,1,
-			 GTK_TYPE_LONG);
+	  g_signal_new("numchanged", G_TYPE_FROM_CLASS(klass),
+		       G_SIGNAL_RUN_FIRST,
+		       G_STRUCT_OFFSET(IntboxClass,numchange),
+		       NULL, NULL,
+		       gtk_marshal_NONE__LONG,G_TYPE_NONE,1,
+		       G_TYPE_LONG);
 
      gtk_object_class_add_signals(oc,intbox_signals,
 				  LAST_SIGNAL);

@@ -113,11 +113,11 @@ static void document_list_class_init(DocumentListClass *klass)
      COMBO_CLASS(klass)->selection_changed = document_list_changed;
 
      document_list_signals[CHANGED_SIGNAL] = 
-	  gtk_signal_new( "document_changed", GTK_RUN_FIRST, 
-			  GTK_CLASS_TYPE(oc),
-			  GTK_SIGNAL_OFFSET(DocumentListClass,
-					    document_changed),
-			  gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
+	  g_signal_new("document_changed", G_TYPE_FROM_CLASS(klass),
+	               G_SIGNAL_RUN_FIRST,
+		       G_STRUCT_OFFSET(DocumentListClass,document_changed),
+		       NULL, NULL,
+		       gtk_marshal_NONE__NONE, G_TYPE_NONE, 0);
      gtk_object_class_add_signals(oc,document_list_signals,LAST_SIGNAL);
 }
 
