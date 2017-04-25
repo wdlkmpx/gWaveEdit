@@ -101,7 +101,7 @@ static void samplesize_dialog_init(SamplesizeDialog *ssd)
 
      c=gtk_check_button_new_with_label(_("Don't actually change the data "
 				       "(for repairing bad files etc)"));
-     gtk_signal_connect(GTK_OBJECT(c),"toggled",GTK_SIGNAL_FUNC(gurumode_toggle),
+     g_signal_connect(G_OBJECT(c),"toggled",G_CALLBACK(gurumode_toggle),
 			ssd);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      gtk_widget_show(c);

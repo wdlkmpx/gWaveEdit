@@ -167,8 +167,8 @@ static void map_channels_setup(EffectDialog *ed)
 
     gtk_widget_show_all(z);
 
-    gtk_signal_connect(GTK_OBJECT(mcd->outchannels),"numchanged",
-		       GTK_SIGNAL_FUNC(numchannels_changed),mcd);
+    g_signal_connect(G_OBJECT(mcd->outchannels),"numchanged",
+		       G_CALLBACK(numchannels_changed),mcd);
     intbox_set(mcd->outchannels,mcd->channels_out);
     
 }

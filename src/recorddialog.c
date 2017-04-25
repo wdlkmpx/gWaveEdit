@@ -522,17 +522,17 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
      item = other_dialog_build_preset_list(rd);
      gtk_signal_connect_while_alive
 	  (GTK_OBJECT(preset_list),"item_added",
-	   GTK_SIGNAL_FUNC(other_dialog_preset_item_added),other_dialog.wnd,
+	   G_CALLBACK(other_dialog_preset_item_added),other_dialog.wnd,
 	   GTK_OBJECT(other_dialog.wnd));
      gtk_signal_connect_while_alive
 	  (GTK_OBJECT(preset_list),"item_removed",
-	   GTK_SIGNAL_FUNC(other_dialog_preset_item_removed),other_dialog.wnd,
+	   G_CALLBACK(other_dialog_preset_item_removed),other_dialog.wnd,
 	   GTK_OBJECT(other_dialog.wnd));
 
      a = GTK_WIDGET(other_dialog.wnd);
      gtk_container_set_border_width(GTK_CONTAINER(a),10);
-     gtk_signal_connect(GTK_OBJECT(a),"delete_event",
-			GTK_SIGNAL_FUNC(other_dialog_delete),NULL);
+     g_signal_connect(G_OBJECT(a),"delete_event",
+			G_CALLBACK(other_dialog_delete),NULL);
      b = gtk_vbox_new(FALSE,6);
      gtk_container_add(GTK_CONTAINER(a),b);
      c = gtk_hbox_new(FALSE,6);
@@ -590,15 +590,15 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
      gtk_widget_add_accelerator (d, "clicked", ag, GDK_Return, 0, 
 				 (GtkAccelFlags) 0);
      gtk_container_add(GTK_CONTAINER(c),d);
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",
-			GTK_SIGNAL_FUNC(other_dialog_ok),rd);
+     g_signal_connect(G_OBJECT(d),"clicked",
+			G_CALLBACK(other_dialog_ok),rd);
      d = gtk_button_new_with_label(_("Add/Update preset"));
      gtk_widget_set_sensitive(d,FALSE);
      gtk_widget_size_request(d,&req);
      gtk_widget_set_size_request(d,req.width,req.height);
      gtk_container_add(GTK_CONTAINER(c),d);
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",
-			GTK_SIGNAL_FUNC(other_dialog_addpreset),rd);
+     g_signal_connect(G_OBJECT(d),"clicked",
+			G_CALLBACK(other_dialog_addpreset),rd);
      other_dialog.set_button_button = GTK_BUTTON(d);
      other_dialog.set_button_label = GTK_LABEL(gtk_bin_get_child(GTK_BIN(d)));
      d = gtk_button_new_with_label(_("Close"));
@@ -606,22 +606,22 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
 				 (GtkAccelFlags) 0);
      gtk_container_add(GTK_CONTAINER(c),d );
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       GTK_OBJECT(a));
      gtk_widget_show_all(a);
      gtk_window_add_accel_group(GTK_WINDOW (a), ag);
 
-     gtk_signal_connect(GTK_OBJECT(other_dialog.wnd),"delete_event",
-			GTK_SIGNAL_FUNC(other_dialog_delete),NULL);
-     gtk_signal_connect(GTK_OBJECT(other_dialog.preset_list),"select_child",
-			GTK_SIGNAL_FUNC(other_dialog_select_child),rd);
-     gtk_signal_connect(GTK_OBJECT(other_dialog.name_entry),"changed",
-			GTK_SIGNAL_FUNC(other_dialog_name_changed),rd);
+     g_signal_connect(G_OBJECT(other_dialog.wnd),"delete_event",
+			G_CALLBACK(other_dialog_delete),NULL);
+     g_signal_connect(G_OBJECT(other_dialog.preset_list),"select_child",
+			G_CALLBACK(other_dialog_select_child),rd);
+     g_signal_connect(G_OBJECT(other_dialog.name_entry),"changed",
+			G_CALLBACK(other_dialog_name_changed),rd);
 
      if (item != NULL) gtk_list_select_child(other_dialog.preset_list,item);
 
      gtk_signal_connect_object_while_alive(GTK_OBJECT(rd),"destroy",
-					   GTK_SIGNAL_FUNC(gtk_widget_destroy),
+					   G_CALLBACK(gtk_widget_destroy),
 					   GTK_OBJECT(other_dialog.wnd));
 }
 
@@ -871,8 +871,8 @@ void record_dialog_init(RecordDialog *obj)
      gtk_window_set_position(GTK_WINDOW(obj),GTK_WIN_POS_CENTER);
      gtk_container_set_border_width(GTK_CONTAINER(obj),10);
 
-     gtk_signal_connect(GTK_OBJECT(obj),"delete_event",
-			GTK_SIGNAL_FUNC(record_dialog_delete_event),NULL);
+     g_signal_connect(G_OBJECT(obj),"delete_event",
+			G_CALLBACK(record_dialog_delete_event),NULL);
 
 
 
@@ -899,10 +899,10 @@ void record_dialog_init(RecordDialog *obj)
 				 obj->driver_presets, !complete);
      gtk_box_pack_start(GTK_BOX(d),e,TRUE,TRUE,0);
      obj->format_combo = RECORD_FORMAT_COMBO(e);
-     gtk_signal_connect(GTK_OBJECT(e),"format_changed",
-			GTK_SIGNAL_FUNC(record_dialog_format_changed),obj);
-     gtk_signal_connect(GTK_OBJECT(e),"format_dialog_request",
-			GTK_SIGNAL_FUNC(other_format_dialog),obj);
+     g_signal_connect(G_OBJECT(e),"format_changed",
+			G_CALLBACK(record_dialog_format_changed),obj);
+     g_signal_connect(G_OBJECT(e),"format_dialog_request",
+			G_CALLBACK(other_format_dialog),obj);
 
      d = gtk_hbox_new(FALSE,3);
      gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,6);
@@ -918,12 +918,12 @@ void record_dialog_init(RecordDialog *obj)
      e = gtk_button_new_with_label(_("Disable"));
      obj->disable_limit_button = GTK_BUTTON(e);
      gtk_widget_set_sensitive(GTK_WIDGET(e),obj->limit_record);
-     gtk_signal_connect(GTK_OBJECT(e),"clicked",
-			GTK_SIGNAL_FUNC(disable_time_limit),obj);
+     g_signal_connect(G_OBJECT(e),"clicked",
+			G_CALLBACK(disable_time_limit),obj);
      gtk_box_pack_end(GTK_BOX(d),e,FALSE,FALSE,0);
      e = gtk_button_new_with_label(_("Set"));
-     gtk_signal_connect(GTK_OBJECT(e),"clicked",
-			GTK_SIGNAL_FUNC(set_time_limit),obj);
+     g_signal_connect(G_OBJECT(e),"clicked",
+			G_CALLBACK(set_time_limit),obj);
      gtk_box_pack_end(GTK_BOX(d),e,FALSE,FALSE,0);
      e = gtk_entry_new();
      obj->limit_entry = GTK_ENTRY(e);
@@ -963,26 +963,26 @@ void record_dialog_init(RecordDialog *obj)
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, 
 				 (GtkAccelFlags) 0);
      gtk_widget_set_sensitive(c,FALSE);
-     gtk_signal_connect(GTK_OBJECT(c),"clicked",
-			GTK_SIGNAL_FUNC(record_dialog_start),obj);
+     g_signal_connect(G_OBJECT(c),"clicked",
+			G_CALLBACK(record_dialog_start),obj);
      obj->record_button = GTK_WIDGET(c);
      gtk_container_add(GTK_CONTAINER(b),c);
 
      c = gtk_button_new_with_label(_("Reset max peaks"));
      gtk_widget_set_sensitive(c,FALSE);
-     gtk_signal_connect(GTK_OBJECT(c),"clicked", GTK_SIGNAL_FUNC(reset_peaks),obj);
+     g_signal_connect(G_OBJECT(c),"clicked", G_CALLBACK(reset_peaks),obj);
      obj->reset_button = GTK_WIDGET(c);
      gtk_container_add(GTK_CONTAINER(b),c);     
 
      c = gtk_button_new_with_label(_("Launch mixer"));
-     gtk_signal_connect(GTK_OBJECT(c),"clicked",GTK_SIGNAL_FUNC(launch_mixer),
+     g_signal_connect(G_OBJECT(c),"clicked",G_CALLBACK(launch_mixer),
 			NULL);
      gtk_container_add(GTK_CONTAINER(b),c);
      c = gtk_button_new_with_label(_("Close"));
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 
 				 (GtkAccelFlags) 0);
-     gtk_signal_connect(GTK_OBJECT(c),"clicked",
-			GTK_SIGNAL_FUNC(record_dialog_close),obj);
+     g_signal_connect(G_OBJECT(c),"clicked",
+			G_CALLBACK(record_dialog_close),obj);
      gtk_container_add(GTK_CONTAINER(b),c);
      obj->close_button = c;
 

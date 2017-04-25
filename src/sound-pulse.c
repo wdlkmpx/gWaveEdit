@@ -1091,7 +1091,7 @@ static void pulse_preferences(void)
      gtk_window_set_position(GTK_WINDOW(a),GTK_WIN_POS_MOUSE);
      gtk_container_set_border_width(GTK_CONTAINER(a),5);
      gtk_signal_connect_object(GTK_OBJECT(a),"destroy",
-			       GTK_SIGNAL_FUNC(g_free),(GtkObject *)up);
+			       G_CALLBACK(g_free),(GtkObject *)up);
      b = gtk_vbox_new(FALSE,5);
      gtk_container_add(GTK_CONTAINER(a),b);
      c = gtk_hbox_new(FALSE,3);
@@ -1112,12 +1112,12 @@ static void pulse_preferences(void)
      c = gtk_hbutton_box_new();
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_button_new_with_label(_("OK"));
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",GTK_SIGNAL_FUNC(pulse_prefs_ok),
+     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(pulse_prefs_ok),
 			up);
      gtk_container_add(GTK_CONTAINER(c),d);
      d = gtk_button_new_with_label(_("Cancel"));
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       GTK_OBJECT(a));
      gtk_container_add(GTK_CONTAINER(c),d);
      gtk_widget_show_all(a);

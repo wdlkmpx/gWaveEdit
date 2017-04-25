@@ -74,8 +74,8 @@ static void alsa_show_preferences(void)
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_position(GTK_WINDOW(a),GTK_WIN_POS_MOUSE);
      gtk_container_set_border_width(GTK_CONTAINER(a),5);
-     gtk_signal_connect(GTK_OBJECT(a),"delete_event",
-			GTK_SIGNAL_FUNC(gtk_false),NULL);
+     g_signal_connect(G_OBJECT(a),"delete_event",
+			G_CALLBACK(gtk_false),NULL);
      b = gtk_table_new(4,2,FALSE);
      gtk_container_add(GTK_CONTAINER(a),b);
      attach_label(_("Playback device: "),b,0,0);
@@ -96,12 +96,12 @@ static void alsa_show_preferences(void)
      gtk_table_attach(GTK_TABLE(b),c,0,2,3,4,GTK_EXPAND|GTK_FILL,
 		      GTK_EXPAND|GTK_FILL,0,5);
      d = gtk_button_new_with_label(_("OK"));
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",GTK_SIGNAL_FUNC(alsa_prefs_ok),
+     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(alsa_prefs_ok),
 			a);
      gtk_container_add(GTK_CONTAINER(c),d);
      d = gtk_button_new_with_label(_("Cancel"));
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       GTK_OBJECT(a));
      gtk_container_add(GTK_CONTAINER(c),d);     
      gtk_widget_show_all(a);

@@ -302,8 +302,8 @@ static gchar *get_save_filename(gchar *old_filename, gchar *title_text,
 	  l = g_list_append(l,e);
      }
      combo_set_items(COMBO(typesel),l,0);
-     gtk_signal_connect(GTK_OBJECT(typesel),"selection-changed",
-			GTK_SIGNAL_FUNC(typesel_changed),usedef);
+     g_signal_connect(G_OBJECT(typesel),"selection-changed",
+			G_CALLBACK(typesel_changed),usedef);
      g_list_foreach(l,(GFunc)g_free,NULL);
      g_list_free(l);
 
@@ -739,14 +739,14 @@ static Mainwindow *mainwindow_set_document(Mainwindow *w, Document *d,
      document_set_followmode(d,w->followmode);
      gtk_object_ref(GTK_OBJECT(w->doc));
      gtk_object_sink(GTK_OBJECT(w->doc));
-     gtk_signal_connect(GTK_OBJECT(d),"view_changed",
-			GTK_SIGNAL_FUNC(mainwindow_view_changed),w);
-     gtk_signal_connect(GTK_OBJECT(d),"selection_changed",
-			GTK_SIGNAL_FUNC(mainwindow_selection_changed),w);
-     gtk_signal_connect(GTK_OBJECT(d),"cursor_changed",
-			GTK_SIGNAL_FUNC(mainwindow_cursor_changed),w);
-     gtk_signal_connect(GTK_OBJECT(d),"state_changed",
-			GTK_SIGNAL_FUNC(mainwindow_state_changed),w);
+     g_signal_connect(G_OBJECT(d),"view_changed",
+			G_CALLBACK(mainwindow_view_changed),w);
+     g_signal_connect(G_OBJECT(d),"selection_changed",
+			G_CALLBACK(mainwindow_selection_changed),w);
+     g_signal_connect(G_OBJECT(d),"cursor_changed",
+			G_CALLBACK(mainwindow_cursor_changed),w);
+     g_signal_connect(G_OBJECT(d),"state_changed",
+			G_CALLBACK(mainwindow_state_changed),w);
      chunk_view_set_document ( w->view, d );
      document_set_status_bar(d, w->statusbar);
      fix_title(w);
@@ -1428,7 +1428,7 @@ static void help_readme(GtkMenuItem *menuitem, gpointer user_data)
 				 (GtkAccelFlags) 0);
      GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
      gtk_signal_connect_object(GTK_OBJECT(button),"clicked",
-			       (GtkSignalFunc)gtk_widget_destroy,
+			       G_CALLBACK(gtk_widget_destroy),
 			       GTK_OBJECT(window));
      gtk_box_pack_start (GTK_BOX (box2), button, TRUE, TRUE, 0);
      gtk_widget_show (button);
@@ -1495,7 +1495,7 @@ gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, (GtkAccelFlags) 0);
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, (GtkAccelFlags) 0);
      gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-			       (GtkSignalFunc)gtk_widget_destroy,GTK_OBJECT(a));
+			       G_CALLBACK(gtk_widget_destroy),GTK_OBJECT(a));
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      gtk_widget_show(c);
      
@@ -2192,14 +2192,14 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Load a file from disk"),"X",b,GTK_SIGNAL_FUNC(file_open),w);
+	  _("Load a file from disk"),"X",b,G_CALLBACK(file_open),w);
      p = gdk_pixmap_colormap_create_from_xpm_d(
 	  NULL, gtk_widget_get_colormap(GTK_WIDGET(w)), &bmp, NULL,
 	  button_save_xpm);
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Save the current file to disk"),"X",b,GTK_SIGNAL_FUNC(file_save),w);
+	  _("Save the current file to disk"),"X",b,G_CALLBACK(file_save),w);
      w->need_chunk_items = g_list_append(w->need_chunk_items,r);
      gtk_toolbar_append_space(GTK_TOOLBAR(t));
      p = gdk_pixmap_colormap_create_from_xpm_d(
@@ -2208,7 +2208,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Undo the last change"),"X",b,GTK_SIGNAL_FUNC(edit_undo),w);
+	  _("Undo the last change"),"X",b,G_CALLBACK(edit_undo),w);
      w->need_undo_items = g_list_append(w->need_undo_items, r);
      p = gdk_pixmap_colormap_create_from_xpm_d(
 	  NULL, gtk_widget_get_colormap(GTK_WIDGET(w)), &bmp, NULL,
@@ -2216,7 +2216,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Redo the last undo operation"),"X",b,GTK_SIGNAL_FUNC(edit_redo),
+	  _("Redo the last undo operation"),"X",b,G_CALLBACK(edit_redo),
 	  w);
      w->need_redo_items = g_list_append(w->need_redo_items, r);
      gtk_toolbar_append_space(GTK_TOOLBAR(t));
@@ -2226,7 +2226,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Cut out the current selection"),"X",b,GTK_SIGNAL_FUNC(edit_cut),w);
+	  _("Cut out the current selection"),"X",b,G_CALLBACK(edit_cut),w);
      w->need_selection_items = g_list_append(w->need_selection_items, r);
      p = gdk_pixmap_colormap_create_from_xpm_d(
 	  NULL, gtk_widget_get_colormap(GTK_WIDGET(w)), &bmp, NULL,
@@ -2234,7 +2234,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Copy the current selection"),"X",b,GTK_SIGNAL_FUNC(edit_copy),w);
+	  _("Copy the current selection"),"X",b,G_CALLBACK(edit_copy),w);
      w->need_selection_items = g_list_append(w->need_selection_items, r);
      p = gdk_pixmap_colormap_create_from_xpm_d(
 	  NULL, gtk_widget_get_colormap(GTK_WIDGET(w)), &bmp, NULL,
@@ -2242,7 +2242,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Paste at cursor position"),"X",b,GTK_SIGNAL_FUNC(edit_paste),w);
+	  _("Paste at cursor position"),"X",b,G_CALLBACK(edit_paste),w);
      w->need_clipboard_items = g_list_append(w->need_clipboard_items, r);
      p = gdk_pixmap_colormap_create_from_xpm_d(
 	  NULL, gtk_widget_get_colormap(GTK_WIDGET(w)), &bmp, NULL,
@@ -2251,7 +2251,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
 	  _("Paste, overwriting the data after the cursor position"),"X",b,
-	  GTK_SIGNAL_FUNC(edit_pasteover),w);
+	  G_CALLBACK(edit_pasteover),w);
      w->need_clipboard_items = g_list_append(w->need_clipboard_items, r);
      gtk_widget_set_sensitive(r,FALSE);
      p = gdk_pixmap_colormap_create_from_xpm_d(
@@ -2260,7 +2260,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Delete the selection"),"X",b,GTK_SIGNAL_FUNC(edit_delete),w);
+	  _("Delete the selection"),"X",b,G_CALLBACK(edit_delete),w);
      w->need_selection_items = g_list_append(w->need_selection_items, r);
      gtk_toolbar_append_space(GTK_TOOLBAR(t));
      p = gdk_pixmap_colormap_create_from_xpm_d(
@@ -2270,7 +2270,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
 	  _("Set selection start to cursor position"),"X",b,
-	  GTK_SIGNAL_FUNC(edit_selstartcursor),w);
+	  G_CALLBACK(edit_selstartcursor),w);
      w->need_chunk_items = g_list_append(w->need_chunk_items, r);
      p = gdk_pixmap_colormap_create_from_xpm_d(
 	  NULL, gtk_widget_get_colormap(GTK_WIDGET(w)), &bmp, NULL,
@@ -2279,7 +2279,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
 	  _("Set selection end to cursor position"),"X",b,
-	  GTK_SIGNAL_FUNC(edit_selendcursor),w);
+	  G_CALLBACK(edit_selendcursor),w);
      w->need_chunk_items = g_list_append(w->need_chunk_items, r);
      gtk_toolbar_append_space(GTK_TOOLBAR(t));
      p = gdk_pixmap_colormap_create_from_xpm_d(
@@ -2289,7 +2289,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
 	  _("Play from cursor position"),"X",b,
-	  GTK_SIGNAL_FUNC(edit_play),w);
+	  G_CALLBACK(edit_play),w);
      w->need_chunk_items = g_list_append(w->need_chunk_items, r);
      p = gdk_pixmap_colormap_create_from_xpm_d
        (NULL, gtk_widget_get_colormap(GTK_WIDGET(w)), &bmp, NULL,
@@ -2298,7 +2298,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
 	  _("Play selected area"),"X",b,
-	  GTK_SIGNAL_FUNC(edit_playselection),w);
+	  G_CALLBACK(edit_playselection),w);
      w->need_chunk_items = g_list_append(w->need_chunk_items,r);
      p = gdk_pixmap_colormap_create_from_xpm_d(
 	  NULL, gtk_widget_get_colormap(GTK_WIDGET(w)), &bmp, NULL,
@@ -2307,7 +2307,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
 	  _("Stop playing"),"X",b,
-	  GTK_SIGNAL_FUNC(edit_stop),w);
+	  G_CALLBACK(edit_stop),w);
      w->need_chunk_items = g_list_append(w->need_chunk_items, r);
      gtk_toolbar_append_space(GTK_TOOLBAR(t));
      p = gdk_pixmap_colormap_create_from_xpm_d(
@@ -2317,7 +2317,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_TOGGLEBUTTON,NULL,NULL,
 	  _("Loop mode (play over and over)"),"X",b,
-	  GTK_SIGNAL_FUNC(loopmode_toggle),&(w->loopmode));
+	  G_CALLBACK(loopmode_toggle),&(w->loopmode));
      if ( inifile_get_gboolean("loopMode",FALSE) ) 
 	  gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON(r), TRUE);
      p = gdk_pixmap_colormap_create_from_xpm_d(
@@ -2327,7 +2327,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_TOGGLEBUTTON,NULL,NULL,
 	  _("Keep view and playback together"),"X",b,
-	  GTK_SIGNAL_FUNC(followmode_toggle),w);
+	  G_CALLBACK(followmode_toggle),w);
      if ( inifile_get_gboolean("followMode",FALSE) ) {
 	  gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON(r), TRUE);
 	  w->followmode = TRUE;
@@ -2340,7 +2340,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_TOGGLEBUTTON,NULL,NULL,
 	  _("Auto return to playback start"),"X",b,
-	  GTK_SIGNAL_FUNC(bouncemode_toggle),w);
+	  G_CALLBACK(bouncemode_toggle),w);
      if ( inifile_get_gboolean("bounceMode",FALSE) ) {
 	  gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON(r), TRUE);
 	  w->bouncemode = TRUE;
@@ -2353,7 +2353,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Record"),"X",b,GTK_SIGNAL_FUNC(edit_record),w);
+	  _("Record"),"X",b,G_CALLBACK(edit_record),w);
      gtk_widget_set_sensitive(r,input_supported());
      gtk_toolbar_append_space(GTK_TOOLBAR(t));
      p = gdk_pixmap_colormap_create_from_xpm_d(
@@ -2362,7 +2362,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      b = gtk_pixmap_new(p, bmp);
      r = gtk_toolbar_append_element(
 	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Launch mixer"),"X",b,GTK_SIGNAL_FUNC(launch_mixer),w);     
+	  _("Launch mixer"),"X",b,G_CALLBACK(launch_mixer),w);
      return t;
 }
 
@@ -2569,19 +2569,19 @@ static void mainwindow_init(Mainwindow *obj)
 					  INI_SETTING_TIMESCALE_DEFAULT));
      obj->view->show_bufpos = inifile_get_gboolean
 	  (INI_SETTING_BUFPOS,INI_SETTING_BUFPOS_DEFAULT);
-     gtk_signal_connect( GTK_OBJECT(obj->view), "double-click",
-			 GTK_SIGNAL_FUNC(mainwindow_view_double_click), obj);
+     g_signal_connect(G_OBJECT(obj->view), "double-click",
+			 G_CALLBACK(mainwindow_view_double_click), obj);
      obj->view_adj = GTK_ADJUSTMENT( gtk_adjustment_new ( 0,0,0,0,0,0 ));
-     gtk_signal_connect( GTK_OBJECT(obj->view_adj), "value-changed", 
-			 GTK_SIGNAL_FUNC(mainwindow_value_changed), obj);
+     g_signal_connect(G_OBJECT(obj->view_adj), "value-changed",
+			 G_CALLBACK(mainwindow_value_changed), obj);
      obj->zoom_adj = GTK_ADJUSTMENT( gtk_adjustment_new ( 0, 0, 1.2,0.01, 0.1, 
 							  0.2 ));
-     gtk_signal_connect( GTK_OBJECT(obj->zoom_adj), "value-changed",
-			 GTK_SIGNAL_FUNC(mainwindow_zoom_changed), obj);
+     g_signal_connect(G_OBJECT(obj->zoom_adj), "value-changed",
+			 G_CALLBACK(mainwindow_zoom_changed), obj);
      obj->vertical_zoom_adj = 
        GTK_ADJUSTMENT(gtk_adjustment_new ( 0, 0, 0.2 + log (inifile_get_guint32 ("vzoomMax", 100)) / log (100.0), 0.01, 0.1, 0.2 ));
-     gtk_signal_connect( GTK_OBJECT(obj->vertical_zoom_adj), "value-changed",
-			 GTK_SIGNAL_FUNC(mainwindow_vertical_zoom_changed),
+     g_signal_connect(G_OBJECT(obj->vertical_zoom_adj), "value-changed",
+			 G_CALLBACK(mainwindow_vertical_zoom_changed),
 			 obj);
 #ifdef INV_SPEED
      obj->speed_adj =
@@ -2590,15 +2590,15 @@ static void mainwindow_init(Mainwindow *obj)
      obj->speed_adj =
 	  GTK_ADJUSTMENT(gtk_adjustment_new(1.0,0.0,2.2,0.01,0.1,0.2));
 #endif
-     gtk_signal_connect(GTK_OBJECT(obj->speed_adj),"value-changed",
-			GTK_SIGNAL_FUNC(mainwindow_speed_changed),
+     g_signal_connect(G_OBJECT(obj->speed_adj),"value-changed",
+			G_CALLBACK(mainwindow_speed_changed),
 			obj);
 
      obj->statusbar = STATUSBAR(status_bar_new());
-     gtk_signal_connect(GTK_OBJECT(obj->statusbar),"progress_begin",
-			GTK_SIGNAL_FUNC(procstart),obj);
-     gtk_signal_connect(GTK_OBJECT(obj->statusbar),"progress_end",
-			GTK_SIGNAL_FUNC(procend),obj);
+     g_signal_connect(G_OBJECT(obj->statusbar),"progress_begin",
+			G_CALLBACK(procstart),obj);
+     g_signal_connect(G_OBJECT(obj->statusbar),"progress_end",
+			G_CALLBACK(procend),obj);
      obj->loopmode = inifile_get_gboolean("loopMode",FALSE);
      obj->bouncemode = FALSE; /* Set to true by create_toolbar */
      obj->sensitive = TRUE;
@@ -2663,7 +2663,7 @@ static void mainwindow_init(Mainwindow *obj)
      c = gtk_vscale_new ( obj->zoom_adj );
      /* GTK1 doesn't work well with using the right mouse button press event. 
       * As a work around, we use the release event instead */
-     gtk_signal_connect(GTK_OBJECT(c),"button_press_event",GTK_SIGNAL_FUNC(hzoom_scale_press),obj);
+     g_signal_connect(G_OBJECT(c),"button_press_event",G_CALLBACK(hzoom_scale_press),obj);
      gtk_scale_set_digits(GTK_SCALE(c),3);
      gtk_scale_set_draw_value (GTK_SCALE(c), FALSE);
      gtk_table_attach(GTK_TABLE(b),c,2,3,1,2,0,GTK_EXPAND|GTK_FILL,0,0);
@@ -2671,7 +2671,7 @@ static void mainwindow_init(Mainwindow *obj)
      obj->hzoom_slider = c;
 
      c = gtk_vscale_new ( obj->vertical_zoom_adj );
-     gtk_signal_connect(GTK_OBJECT(c),"button_press_event",GTK_SIGNAL_FUNC(vzoom_scale_press),obj);
+     g_signal_connect(G_OBJECT(c),"button_press_event",G_CALLBACK(vzoom_scale_press),obj);
      gtk_scale_set_digits(GTK_SCALE(c),3);
      gtk_scale_set_draw_value (GTK_SCALE(c), FALSE);
      gtk_table_attach(GTK_TABLE(b),c,1,2,1,2,0,GTK_EXPAND|GTK_FILL,0,0);
@@ -2679,7 +2679,7 @@ static void mainwindow_init(Mainwindow *obj)
      obj->vzoom_slider = c;
 
      c = gtk_vscale_new ( obj->speed_adj );
-     gtk_signal_connect(GTK_OBJECT(c),"button_press_event",GTK_SIGNAL_FUNC(speed_scale_press),obj);
+     g_signal_connect(G_OBJECT(c),"button_press_event",G_CALLBACK(speed_scale_press),obj);
      gtk_scale_set_digits(GTK_SCALE(c),2);
      gtk_scale_set_draw_value (GTK_SCALE(c), FALSE);
      /* gtk_range_set_update_policy(GTK_RANGE(c),GTK_UPDATE_DELAYED); */

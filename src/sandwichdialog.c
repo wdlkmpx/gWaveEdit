@@ -119,8 +119,8 @@ static void sandwich_dialog_init(SandwichDialog *obj)
      obj->marker_entry = GTK_ENTRY(a);
      gtk_entry_set_width_chars(obj->marker_entry, 7);
      gtk_entry_set_text(obj->marker_entry, "0");
-     gtk_signal_connect(GTK_OBJECT(obj->marker_entry),"changed",
-			GTK_SIGNAL_FUNC(marker_entry_changed),obj);
+     g_signal_connect(G_OBJECT(obj->marker_entry),"changed",
+			G_CALLBACK(marker_entry_changed),obj);
      
      a = gtk_vbox_new(FALSE,3);
      b = gtk_hbox_new(FALSE,0);

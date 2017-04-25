@@ -197,7 +197,7 @@ static void mhjack_preferences(void)
      gtk_window_set_title(GTK_WINDOW(a),_("Jack Preferences"));
      gtk_window_set_position(GTK_WINDOW(a),GTK_WIN_POS_CENTER);
      gtk_container_set_border_width(GTK_CONTAINER(a),8);
-     gtk_signal_connect_object(GTK_OBJECT(a),"destroy",GTK_SIGNAL_FUNC(g_free),
+     gtk_signal_connect_object(GTK_OBJECT(a),"destroy",G_CALLBACK(g_free),
 			       (GtkObject *)dlg);
      b = gtk_vbox_new(FALSE,5);
      gtk_container_add(GTK_CONTAINER(a),b);
@@ -258,12 +258,12 @@ static void mhjack_preferences(void)
      c = gtk_hbutton_box_new();
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_button_new_with_label(_("OK"));
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",
-			GTK_SIGNAL_FUNC(mhjack_preferences_ok),dlg);
+     g_signal_connect(G_OBJECT(d),"clicked",
+			G_CALLBACK(mhjack_preferences_ok),dlg);
      gtk_container_add(GTK_CONTAINER(c),d);
      d = gtk_button_new_with_label(_("Close"));
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       GTK_OBJECT(a));
      gtk_container_add(GTK_CONTAINER(c),d);     
      gtk_widget_show_all(a);

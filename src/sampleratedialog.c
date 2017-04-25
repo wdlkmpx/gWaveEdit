@@ -116,8 +116,8 @@ static void samplerate_dialog_init(SamplerateDialog *v)
      combo_set_items(COMBO(c),l,v->method);
      g_list_free(l);
      
-     gtk_signal_connect(GTK_OBJECT(c),"selection_changed",
-			GTK_SIGNAL_FUNC(set_method),v);
+     g_signal_connect(G_OBJECT(c),"selection_changed",
+			G_CALLBACK(set_method),v);
 
      gtk_widget_show_all(a);
 }

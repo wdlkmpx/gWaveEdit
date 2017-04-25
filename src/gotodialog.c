@@ -146,8 +146,8 @@ static void goto_dialog_init(GotoDialog *gd)
      b = gtk_hbutton_box_new();
      gtk_box_pack_end(GTK_BOX(a),b,FALSE,FALSE,0);
      c = gtk_button_new_with_label(_("OK"));
-     gtk_signal_connect(GTK_OBJECT(c),"clicked",
-			GTK_SIGNAL_FUNC(goto_dialog_ok),gd);
+     g_signal_connect(G_OBJECT(c),"clicked",
+			G_CALLBACK(goto_dialog_ok),gd);
      gtk_container_add(GTK_CONTAINER(b),c);
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_KP_Enter, 0, 
 				 (GtkAccelFlags) 0);
@@ -155,12 +155,12 @@ static void goto_dialog_init(GotoDialog *gd)
 				 (GtkAccelFlags) 0);
      c = gtk_button_new_with_label(_("Apply"));
      gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-			       GTK_SIGNAL_FUNC(goto_dialog_apply),
+			       G_CALLBACK(goto_dialog_apply),
 			       GTK_OBJECT(gd));
      gtk_container_add(GTK_CONTAINER(b),c);
      c = gtk_button_new_with_label(_("Close"));
      gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       GTK_OBJECT(gd));
      gtk_container_add(GTK_CONTAINER(b),c);
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 

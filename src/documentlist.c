@@ -94,15 +94,15 @@ static void document_list_init(DocumentList *mwl)
      mwl->selected = NULL;
      gtk_signal_connect_while_alive(GTK_OBJECT(document_objects), 
 				    "item_added",
-				    GTK_SIGNAL_FUNC(document_list_addnotify),
+				    G_CALLBACK(document_list_addnotify),
 				    gtkobj,gtkobj);
      gtk_signal_connect_while_alive(GTK_OBJECT(document_objects), 
 				    "item_removed",
-				    GTK_SIGNAL_FUNC(document_list_remove),
+				    G_CALLBACK(document_list_remove),
 				    gtkobj,gtkobj);
      gtk_signal_connect_while_alive(GTK_OBJECT(document_objects), 
 				    "item_notify",
-				    GTK_SIGNAL_FUNC(document_list_addnotify),
+				    G_CALLBACK(document_list_addnotify),
 				    gtkobj,gtkobj);
 }
 

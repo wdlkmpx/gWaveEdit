@@ -385,7 +385,7 @@ static gchar *get_filename_main(gchar *current_name, gchar *title_text,
 	       g_free(c);
 	  }
      }
-     gtk_signal_connect(GTK_OBJECT(fc),"response",GTK_SIGNAL_FUNC(response),
+     g_signal_connect(G_OBJECT(fc),"response",G_CALLBACK(response),
 			&sr);
      gtk_widget_show(w);
      while (!sr.responded) mainloop(); 

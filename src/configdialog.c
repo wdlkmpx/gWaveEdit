@@ -277,8 +277,8 @@ static void colors_click(GtkButton *button, gpointer user_data)
 						  FALSE);
      gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION(cs), TRUE);
 
-     gtk_signal_connect(GTK_OBJECT(cs),"color_changed",
-			GTK_SIGNAL_FUNC(color_set),NULL);
+     g_signal_connect(G_OBJECT(cs),"color_changed",
+			G_CALLBACK(color_set),NULL);
 
      a = gtk_window_new(GTK_WINDOW_DIALOG);
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
@@ -286,15 +286,15 @@ static void colors_click(GtkButton *button, gpointer user_data)
      gtk_window_set_title(GTK_WINDOW(a),_("Colors"));
      gtk_window_set_policy(GTK_WINDOW(a),FALSE,FALSE,TRUE);
      gtk_signal_connect_object(GTK_OBJECT(a),"delete_event",
-			       GTK_SIGNAL_FUNC(g_free),(GtkObject *)ctable);
+			       G_CALLBACK(g_free),(GtkObject *)ctable);
      b = gtk_vbox_new(FALSE,5);
      gtk_container_set_border_width(GTK_CONTAINER(b),5);
      gtk_container_add(GTK_CONTAINER(a),b);
      c = gtk_hbox_new(FALSE,10);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_list_new();
-     gtk_signal_connect(GTK_OBJECT(d),"select_child",
-			GTK_SIGNAL_FUNC(color_select),cs);
+     g_signal_connect(G_OBJECT(d),"select_child",
+			G_CALLBACK(color_select),cs);
      gtk_list_set_selection_mode(GTK_LIST(d),GTK_SELECTION_BROWSE);
      gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
      for (i=FIRST_CUSTOM_COLOR; i<LAST_COLOR; i++) {
@@ -307,8 +307,8 @@ static void colors_click(GtkButton *button, gpointer user_data)
 	  gtk_container_add(GTK_CONTAINER(e),f);
 	  g = gtk_drawing_area_new();
 	  gtk_drawing_area_size(GTK_DRAWING_AREA(g),20,20);
-	  gtk_signal_connect(GTK_OBJECT(g),"expose_event",
-			     GTK_SIGNAL_FUNC(color_expose),
+	  g_signal_connect(G_OBJECT(g),"expose_event",
+			     G_CALLBACK(color_expose),
 			     (gpointer)(&ctable[i-FIRST_CUSTOM_COLOR]));
 	  gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
 	  g = gtk_label_new(_(color_names[i]));
@@ -323,22 +323,22 @@ static void colors_click(GtkButton *button, gpointer user_data)
      key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(d)->child),_("_Preview"));
      gtk_widget_add_accelerator (d, "clicked", ag, key, GDK_MOD1_MASK,
 				 (GtkAccelFlags) 0);
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",GTK_SIGNAL_FUNC(color_apply),
+     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),
 			ctable);     
      gtk_container_add(GTK_CONTAINER(c),d);
      d = gtk_button_new_with_label("");
      key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(d)->child),_("_OK"));
      gtk_widget_add_accelerator (d, "clicked", ag, key, GDK_MOD1_MASK,
 				 (GtkAccelFlags) 0);
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",GTK_SIGNAL_FUNC(color_apply),
+     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),
 			ctable);
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",GTK_SIGNAL_FUNC(save_colors),
+     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(save_colors),
 			NULL);
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       (GtkObject *)a);
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(g_free),(GtkObject *)ctable);
+			       G_CALLBACK(g_free),(GtkObject *)ctable);
      gtk_container_add(GTK_CONTAINER(c),d);
      GTK_WIDGET_SET_FLAGS(d,GTK_CAN_DEFAULT);
      gtk_widget_grab_default(d);
@@ -350,12 +350,12 @@ static void colors_click(GtkButton *button, gpointer user_data)
      gtk_widget_add_accelerator (d, "clicked", ag, GDK_Escape, 0,
 				 (GtkAccelFlags) 0);
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(set_custom_colors),
+			       G_CALLBACK(set_custom_colors),
 			       (GtkObject *)NULL);
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(g_free),(GtkObject *)ctable);
+			       G_CALLBACK(g_free),(GtkObject *)ctable);
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       (GtkObject *)a);
      gtk_container_add(GTK_CONTAINER(c),d);
 
@@ -491,8 +491,8 @@ static void config_dialog_init(ConfigDialog *cd)
     cd->sound_driver = COMBO(w);
     l = sound_driver_valid_names();
     combo_set_items(cd->sound_driver,l,sound_driver_index());
-    gtk_signal_connect(GTK_OBJECT(cd->sound_driver),"selection_changed",
-		       GTK_SIGNAL_FUNC(sound_driver_changed),cd);    
+    g_signal_connect(G_OBJECT(cd->sound_driver),"selection_changed",
+		       G_CALLBACK(sound_driver_changed),cd);
 
     i = rateconv_driver_count(TRUE);
     for (l=NULL,j=0; j<i; j++)
@@ -592,8 +592,8 @@ static void config_dialog_init(ConfigDialog *cd)
     key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Settings"));
     gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
 			       (GtkAccelFlags) 0);
-    gtk_signal_connect(GTK_OBJECT(w),"clicked",
-		       GTK_SIGNAL_FUNC(sound_settings_click),cd);
+    g_signal_connect(G_OBJECT(w),"clicked",
+		       G_CALLBACK(sound_settings_click),cd);
     gtk_widget_set_sensitive(w,sound_driver_has_preferences(NULL));
     cd->sound_driver_prefs = GTK_BUTTON(w);
 
@@ -721,10 +721,10 @@ static void config_dialog_init(ConfigDialog *cd)
 	 a = gtk_list_item_new_with_label(ch);
 	 gtk_container_add(GTK_CONTAINER(w),a);
     }
-    gtk_signal_connect(GTK_OBJECT(w),"select_child",
-		       GTK_SIGNAL_FUNC(tempdir_select),cd);
-    gtk_signal_connect(GTK_OBJECT(w),"unselect_child",
-		       GTK_SIGNAL_FUNC(tempdir_unselect),cd);
+    g_signal_connect(G_OBJECT(w),"select_child",
+		       G_CALLBACK(tempdir_select),cd);
+    g_signal_connect(G_OBJECT(w),"unselect_child",
+		       G_CALLBACK(tempdir_unselect),cd);
     cd->selected_tempdir = NULL;
     
 
@@ -736,38 +736,38 @@ static void config_dialog_init(ConfigDialog *cd)
     key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Remove"));
     gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
 			       (GtkAccelFlags) 0);
-    gtk_signal_connect(GTK_OBJECT(w),"clicked",
-		       GTK_SIGNAL_FUNC(tempdir_remove_click),cd);
+    g_signal_connect(G_OBJECT(w),"clicked",
+		       G_CALLBACK(tempdir_remove_click),cd);
     gtk_widget_set_sensitive(w,FALSE);
     cd->tempdir_remove = GTK_BUTTON(w);
     w = gtk_button_new_with_label("");
     key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Add"));
     gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
 			       (GtkAccelFlags) 0);
-    gtk_signal_connect(GTK_OBJECT(w),"clicked",
-		       GTK_SIGNAL_FUNC(tempdir_add_click),cd);
+    g_signal_connect(G_OBJECT(w),"clicked",
+		       G_CALLBACK(tempdir_add_click),cd);
     cd->tempdir_add = GTK_BUTTON(w);
     w = gtk_button_new_with_label("");
     key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Browse..."));
     gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
 			       (GtkAccelFlags) 0);
-    gtk_signal_connect(GTK_OBJECT(w),"clicked",
-		       GTK_SIGNAL_FUNC(tempdir_browse_click),cd);
+    g_signal_connect(G_OBJECT(w),"clicked",
+		       G_CALLBACK(tempdir_browse_click),cd);
     cd->tempdir_browse = GTK_BUTTON(w);
     w = gtk_button_new_with_label("");
     key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Up"));
     gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
 			       (GtkAccelFlags) 0);
-    gtk_signal_connect(GTK_OBJECT(w),"clicked",
-		       GTK_SIGNAL_FUNC(tempdir_up_click),cd);
+    g_signal_connect(G_OBJECT(w),"clicked",
+		       G_CALLBACK(tempdir_up_click),cd);
     gtk_widget_set_sensitive(w,FALSE);
     cd->tempdir_up = GTK_BUTTON(w);
     w = gtk_button_new_with_label("");
     key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Down"));
     gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
 			       (GtkAccelFlags) 0);
-    gtk_signal_connect(GTK_OBJECT(w),"clicked",
-		       GTK_SIGNAL_FUNC(tempdir_down_click),cd);
+    g_signal_connect(G_OBJECT(w),"clicked",
+		       G_CALLBACK(tempdir_down_click),cd);
     gtk_widget_set_sensitive(w,FALSE);
     cd->tempdir_down = GTK_BUTTON(w);
 
@@ -828,8 +828,8 @@ static void config_dialog_init(ConfigDialog *cd)
 	 gtk_widget_set_sensitive(GTK_WIDGET(cd->sound_driver),FALSE);
 	 gtk_toggle_button_set_active(cd->driver_autodetect,TRUE);
     }
-    gtk_signal_connect(GTK_OBJECT(w),"toggled",
-		       GTK_SIGNAL_FUNC(driver_autodetect_toggled),cd);
+    g_signal_connect(G_OBJECT(w),"toggled",
+		       G_CALLBACK(driver_autodetect_toggled),cd);
 
     w = combo_new();
     l = NULL;
@@ -895,7 +895,7 @@ static void config_dialog_init(ConfigDialog *cd)
 				_("Customize co_lors..."));
     gtk_widget_add_accelerator (g,"clicked",ag,key,GDK_MOD1_MASK,
 				(GtkAccelFlags) 0);
-    gtk_signal_connect(GTK_OBJECT(g),"clicked",GTK_SIGNAL_FUNC(colors_click),
+    g_signal_connect(G_OBJECT(g),"clicked",G_CALLBACK(colors_click),
 		       cd);
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
 
@@ -1202,8 +1202,8 @@ static void config_dialog_init(ConfigDialog *cd)
 				(GtkAccelFlags) 0);
     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, 
 				(GtkAccelFlags) 0);
-    gtk_signal_connect(GTK_OBJECT(c),"clicked",
-		       GTK_SIGNAL_FUNC(config_dialog_ok),cd);
+    g_signal_connect(G_OBJECT(c),"clicked",
+		       G_CALLBACK(config_dialog_ok),cd);
 
     gtk_container_add (GTK_CONTAINER (b), c);
     GTK_WIDGET_SET_FLAGS (c, GTK_CAN_DEFAULT);
@@ -1215,7 +1215,7 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 
 				(GtkAccelFlags) 0);
     gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-                              GTK_SIGNAL_FUNC(gtk_widget_destroy),
+                              G_CALLBACK(gtk_widget_destroy),
                               GTK_OBJECT(cd));
     gtk_container_add (GTK_CONTAINER (b), c);
     GTK_WIDGET_SET_FLAGS (c, GTK_CAN_DEFAULT);

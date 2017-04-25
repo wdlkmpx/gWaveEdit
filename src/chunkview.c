@@ -769,14 +769,14 @@ void chunk_view_set_document(ChunkView *cv, Document *doc)
      if (doc != NULL) { 
 	  gtk_object_ref(GTK_OBJECT(doc)); 
 	  gtk_object_sink(GTK_OBJECT(doc)); 
-	  gtk_signal_connect(GTK_OBJECT(doc),"view_changed",
-			     GTK_SIGNAL_FUNC(chunk_view_changed),cv);
-	  gtk_signal_connect(GTK_OBJECT(doc),"state_changed",
-			     GTK_SIGNAL_FUNC(chunk_view_changed),cv);
-	  gtk_signal_connect(GTK_OBJECT(doc),"selection_changed",
-			     GTK_SIGNAL_FUNC(chunk_view_selection_changed),cv);
-	  gtk_signal_connect(GTK_OBJECT(doc),"cursor_changed",
-			     GTK_SIGNAL_FUNC(chunk_view_cursor_changed),cv);
+	  g_signal_connect(G_OBJECT(doc),"view_changed",
+			     G_CALLBACK(chunk_view_changed),cv);
+	  g_signal_connect(G_OBJECT(doc),"state_changed",
+			     G_CALLBACK(chunk_view_changed),cv);
+	  g_signal_connect(G_OBJECT(doc),"selection_changed",
+			     G_CALLBACK(chunk_view_selection_changed),cv);
+	  g_signal_connect(G_OBJECT(doc),"cursor_changed",
+			     G_CALLBACK(chunk_view_cursor_changed),cv);
      }
      chunk_view_changed(cv->doc,cv);
 }

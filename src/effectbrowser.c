@@ -628,8 +628,8 @@ static void add_list_item_main(struct effect *e, GtkList *l, EffectBrowser *eb)
      w = gtk_list_item_new_with_label(d);
      g_free(c);
      gtk_object_set_data(GTK_OBJECT(w),"effectptr",e);
-     gtk_signal_connect(GTK_OBJECT(w),"button_press_event",
-			GTK_SIGNAL_FUNC(list_item_button_press),eb);
+     g_signal_connect(G_OBJECT(w),"button_press_event",
+			G_CALLBACK(list_item_button_press),eb);
      gtk_container_add(GTK_CONTAINER(l),w);
      gtk_widget_show(w);
 }
@@ -730,8 +730,8 @@ static void effect_browser_init(EffectBrowser *eb)
      effect_register_update_list();
      add_list_widget_items(eb->list_widget,eb);
 
-     gtk_signal_connect(GTK_OBJECT(effect_list),"item-notify",
-			GTK_SIGNAL_FUNC(list_widget_rebuild),eb);
+     g_signal_connect(G_OBJECT(effect_list),"item-notify",
+			G_CALLBACK(list_widget_rebuild),eb);
 
      b11 = gtk_scrolled_window_new(NULL,NULL);
      gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(b11),
@@ -745,29 +745,29 @@ static void effect_browser_init(EffectBrowser *eb)
 #else
      b121 = gtk_button_new_with_label(_("Top"));
 #endif
-     gtk_signal_connect(GTK_OBJECT(b121),"clicked",
-			GTK_SIGNAL_FUNC(top_click),eb);
+     g_signal_connect(G_OBJECT(b121),"clicked",
+			G_CALLBACK(top_click),eb);
 #ifdef GTK_STOCK_GO_UP
      b122 = gtk_button_new_from_stock(GTK_STOCK_GO_UP);
 #else
      b122 = gtk_button_new_with_label(_("Up"));
 #endif
-     gtk_signal_connect(GTK_OBJECT(b122),"clicked",
-			GTK_SIGNAL_FUNC(up_click),eb);
+     g_signal_connect(G_OBJECT(b122),"clicked",
+			G_CALLBACK(up_click),eb);
 #ifdef GTK_STOCK_GO_DOWN
      b123 = gtk_button_new_from_stock(GTK_STOCK_GO_DOWN);
 #else
      b123 = gtk_button_new_with_label(_("Down"));
 #endif
-     gtk_signal_connect(GTK_OBJECT(b123),"clicked",
-			GTK_SIGNAL_FUNC(down_click),eb);
+     g_signal_connect(G_OBJECT(b123),"clicked",
+			G_CALLBACK(down_click),eb);
 #ifdef GTK_STOCK_GOTO_BOTTOM
      b124 = gtk_button_new_from_stock(GTK_STOCK_GOTO_BOTTOM);
 #else
      b124 = gtk_button_new_with_label(_("Bottom"));
 #endif
-     gtk_signal_connect(GTK_OBJECT(b124),"clicked",
-			GTK_SIGNAL_FUNC(bottom_click),eb);
+     g_signal_connect(G_OBJECT(b124),"clicked",
+			G_CALLBACK(bottom_click),eb);
 
      b12 = gtk_hbox_new(FALSE,5);
      gtk_box_pack_start(GTK_BOX(b12),b121,FALSE,FALSE,0);
@@ -801,7 +801,7 @@ static void effect_browser_init(EffectBrowser *eb)
 #else
      b251 = gtk_button_new_with_label(_("Apply"));
 #endif
-     gtk_signal_connect(GTK_OBJECT(b251),"clicked",(GtkSignalFunc)apply_click,
+     g_signal_connect(G_OBJECT(b251),"clicked",G_CALLBACK(apply_click),
 			eb);
 
 #ifdef GTK_STOCK_CLOSE
@@ -811,7 +811,7 @@ static void effect_browser_init(EffectBrowser *eb)
 #endif
      gtk_widget_add_accelerator (b252, "clicked", ag, GDK_Escape, 0, (GtkAccelFlags) 0);
      gtk_signal_connect_object(GTK_OBJECT(b252),"clicked",
-			       (GtkSignalFunc)effect_browser_close,
+			       G_CALLBACK(effect_browser_close),
 			       GTK_OBJECT(eb));
 
      b25 = gtk_hbutton_box_new(); 
@@ -867,8 +867,8 @@ GtkWidget *effect_browser_new_with_effect(Document *doc, gchar *effect,
 {
      GtkWidget *w;
      EffectBrowser *eb = g_object_new(EFFECT_BROWSER_TYPE, NULL);
-     gtk_signal_connect(GTK_OBJECT(eb->list_widget),"select_child",
-			(GtkSignalFunc)effect_browser_select_child,eb);
+     g_signal_connect(G_OBJECT(eb->list_widget),"select_child",
+			G_CALLBACK(effect_browser_select_child),eb);
 
      w = document_list_new(doc);
      gtk_box_pack_end(GTK_BOX(eb->mw_list_box),w,TRUE,TRUE,0);

@@ -69,8 +69,8 @@ static void format_selector_init(FormatSelector *fs)
      combo_set_items(COMBO(b),l,0);
      g_list_free(l);
      fs->samplesize_combo = COMBO(b);
-     gtk_signal_connect(GTK_OBJECT(b),"selection_changed",
-			GTK_SIGNAL_FUNC(samplesize_changed),fs);
+     g_signal_connect(G_OBJECT(b),"selection_changed",
+			G_CALLBACK(samplesize_changed),fs);
      gtk_table_attach(GTK_TABLE(a),b,1,2,1,2,GTK_FILL,0,0,0);
      attach_label(_("Signedness: "),a,2,0);
      b = combo_new();     

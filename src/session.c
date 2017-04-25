@@ -432,8 +432,8 @@ gboolean session_dialog(void)
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_default_size(GTK_WINDOW(a),400,200);
      gtk_container_set_border_width(GTK_CONTAINER(a),5);
-     gtk_signal_connect(GTK_OBJECT(a),"destroy",
-			GTK_SIGNAL_FUNC(session_dialog_destroy),&ddata);
+     g_signal_connect(G_OBJECT(a),"destroy",
+			G_CALLBACK(session_dialog_destroy),&ddata);
      
      b = gtk_vbox_new(FALSE,5);
      gtk_container_add(GTK_CONTAINER(a),b);
@@ -465,31 +465,31 @@ gboolean session_dialog(void)
      d = gtk_button_new_with_label(_("Resume selected"));
      ddata.resume_button = d;
      gtk_widget_set_sensitive(d,FALSE);
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",
-			GTK_SIGNAL_FUNC(session_dialog_resume_click),&ddata);
+     g_signal_connect(G_OBJECT(d),"clicked",
+			G_CALLBACK(session_dialog_resume_click),&ddata);
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       (GtkObject *)a);
      gtk_container_add(GTK_CONTAINER(c),d);
 
      d = gtk_button_new_with_label(_("Delete selected"));
      ddata.delete_button = d;
      gtk_widget_set_sensitive(d,FALSE);
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",
-			GTK_SIGNAL_FUNC(session_dialog_delete_click),&ddata);
+     g_signal_connect(G_OBJECT(d),"clicked",
+			G_CALLBACK(session_dialog_delete_click),&ddata);
      gtk_container_add(GTK_CONTAINER(c),d);
 
      d = gtk_button_new_with_label(_("Start new session"));
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       (GtkObject *)a);
      gtk_container_add(GTK_CONTAINER(c),d);
 
      d = gtk_button_new_with_label(_("Exit"));
-     gtk_signal_connect(GTK_OBJECT(d),"clicked",
-			GTK_SIGNAL_FUNC(session_dialog_exit),&ddata);
+     g_signal_connect(G_OBJECT(d),"clicked",
+			G_CALLBACK(session_dialog_exit),&ddata);
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       (GtkObject *)a);
      gtk_container_add(GTK_CONTAINER(c),d);
 

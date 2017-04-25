@@ -184,8 +184,8 @@ GtkWidget *intbox_create_scale(Intbox *box, long minval, long maxval)
 						       1.0,
 						       10.0,
 						       1.0));
-	  gtk_signal_connect(GTK_OBJECT(box->adj),"value_changed",
-			     GTK_SIGNAL_FUNC(intbox_adj_changed),box);
+	  g_signal_connect(G_OBJECT(box->adj),"value_changed",
+			     G_CALLBACK(intbox_adj_changed),box);
 	  gtk_adjustment_set_value(box->adj,box->val);
      }
      w = gtk_hscale_new(box->adj);

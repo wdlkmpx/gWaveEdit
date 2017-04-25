@@ -514,8 +514,8 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
 	  sd->fb1 = FLOATBOX(b);
 	  gtk_table_attach(GTK_TABLE(a),b,1,2,5,6,GTK_FILL,0,0,0);
 
-	  gtk_signal_connect(GTK_OBJECT(w1),"selection_changed",
-			     GTK_SIGNAL_FUNC(sox_filter_type_changed),sd);
+	  g_signal_connect(G_OBJECT(w1),"selection_changed",
+			     G_CALLBACK(sox_filter_type_changed),sd);
 	  combo_set_selection(COMBO(w1),sd->i1);
 	  gtk_widget_show_all(a);
      } else if (!strcmp(ed->effect_name,"compand")) {
@@ -579,8 +579,8 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
 	  b = floatbox_new(inifile_get_gfloat("sox_dcshift_gain",0.05));
 	  gtk_table_attach(GTK_TABLE(a),b,1,2,2,3,0,0,0,0);
 	  sd->fb2 = FLOATBOX(b);
-	  gtk_signal_connect(GTK_OBJECT(w1),"toggled",
-			     GTK_SIGNAL_FUNC(toggle_sensitive),sd->fb2);
+	  g_signal_connect(G_OBJECT(w1),"toggled",
+			     G_CALLBACK(toggle_sensitive),sd->fb2);
 	  gtk_toggle_button_set_active
 	       (GTK_TOGGLE_BUTTON(w1),
 		inifile_get_gboolean("sox_dcshift_limiter",FALSE));

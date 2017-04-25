@@ -64,8 +64,8 @@ static void status_bar_init(StatusBar *sb)
 
      da = gtk_label_new("");
      sb->da = da;
-     gtk_signal_connect(GTK_OBJECT(da),"expose_event",
-			GTK_SIGNAL_FUNC(status_bar_expose),gtkobj);
+     g_signal_connect(G_OBJECT(da),"expose_event",
+			G_CALLBACK(status_bar_expose),gtkobj);
      gtk_fixed_put(fix,da,0,0);
 
      sb->mode = 2;

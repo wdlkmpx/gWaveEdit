@@ -1205,7 +1205,7 @@ static gpointer mp3_get_settings(void)
      gtk_window_set_title(GTK_WINDOW(a),_("MP3 Preferences"));
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_signal_connect_object(GTK_OBJECT(a),"destroy",
-			       GTK_SIGNAL_FUNC(set_flag),
+			       G_CALLBACK(set_flag),
 			       (GtkObject *)
 			       &(mp3_get_settings_data.destroyed_flag));
      b = gtk_vbox_new(FALSE,6);
@@ -1220,8 +1220,8 @@ static gpointer mp3_get_settings(void)
      d = combo_new();
      mp3_get_settings_data.type_combo = COMBO(d);
      combo_set_items(mp3_get_settings_data.type_combo, l, 0);
-     gtk_signal_connect(GTK_OBJECT(d),"selection_changed",
-			GTK_SIGNAL_FUNC(mp3_get_settings_type_changed),NULL);
+     g_signal_connect(G_OBJECT(d),"selection_changed",
+			G_CALLBACK(mp3_get_settings_type_changed),NULL);
      gtk_box_pack_start(GTK_BOX(c),d,TRUE,TRUE,0);     
      g_list_free(l);
      c = gtk_hbox_new(FALSE,4);
@@ -1248,15 +1248,15 @@ static gpointer mp3_get_settings(void)
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_button_new_with_label(_("OK"));
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(set_flag),
+			       G_CALLBACK(set_flag),
 			       (GtkObject *)&(mp3_get_settings_data.ok_flag));
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       GTK_OBJECT(a));
      gtk_container_add(GTK_CONTAINER(c),d);
      d = gtk_button_new_with_label(_("Cancel"));
      gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       GTK_OBJECT(a));
      gtk_container_add(GTK_CONTAINER(c),d);
      c = gtk_hseparator_new();

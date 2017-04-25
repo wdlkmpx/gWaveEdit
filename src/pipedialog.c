@@ -149,7 +149,7 @@ static GtkWidget *create_error_window(gchar *command)
 				 (GtkAccelFlags) 0);
 
      gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-			       GTK_SIGNAL_FUNC(gtk_widget_destroy),
+			       G_CALLBACK(gtk_widget_destroy),
 			       GTK_OBJECT(a));
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
 

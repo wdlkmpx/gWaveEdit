@@ -73,8 +73,8 @@ Dataformat *rawdialog_execute(gchar *filename, gint filesize, guint *offset)
      gtk_window_set_title(w,_("Unknown file format"));
      gtk_window_set_modal(w,TRUE);
      gtk_container_set_border_width(GTK_CONTAINER(w),5);
-     gtk_signal_connect(GTK_OBJECT(w),"destroy",
-          GTK_SIGNAL_FUNC(rawdialog_destroy),NULL);
+     g_signal_connect(G_OBJECT(w),"destroy",
+          G_CALLBACK(rawdialog_destroy),NULL);
      a = gtk_vbox_new(FALSE,3);
      gtk_container_add(GTK_CONTAINER(w),a);
      ch = g_strdup_printf(_("The format of file '%s' could not be recognized.\n\n"
@@ -99,14 +99,14 @@ Dataformat *rawdialog_execute(gchar *filename, gint filesize, guint *offset)
      b = gtk_hbutton_box_new();
      gtk_container_add(GTK_CONTAINER(a),b);
      c = gtk_button_new_with_label(_("OK"));
-     gtk_signal_connect(GTK_OBJECT(c),"clicked",GTK_SIGNAL_FUNC(rawdialog_ok),
+     g_signal_connect(G_OBJECT(c),"clicked",G_CALLBACK(rawdialog_ok),
           NULL);
      gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-          GTK_SIGNAL_FUNC(gtk_widget_destroy),GTK_OBJECT(w));
+          G_CALLBACK(gtk_widget_destroy),GTK_OBJECT(w));
      gtk_container_add(GTK_CONTAINER(b),c);
      c = gtk_button_new_with_label(_("Cancel"));
      gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-          GTK_SIGNAL_FUNC(gtk_widget_destroy),GTK_OBJECT(w));
+          G_CALLBACK(gtk_widget_destroy),GTK_OBJECT(w));
      gtk_container_add(GTK_CONTAINER(b),c);
      
      ok_flag = destroy_flag = FALSE;
