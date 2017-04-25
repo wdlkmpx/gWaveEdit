@@ -100,9 +100,8 @@ static void alsa_show_preferences(void)
 			a);
      gtk_container_add(GTK_CONTAINER(c),d);
      d = gtk_button_new_with_label(_("Cancel"));
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       GTK_OBJECT(a));
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);     
      gtk_widget_show_all(a);
 }

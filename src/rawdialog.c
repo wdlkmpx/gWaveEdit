@@ -101,12 +101,12 @@ Dataformat *rawdialog_execute(gchar *filename, gint filesize, guint *offset)
      c = gtk_button_new_with_label(_("OK"));
      g_signal_connect(G_OBJECT(c),"clicked",G_CALLBACK(rawdialog_ok),
           NULL);
-     gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-          G_CALLBACK(gtk_widget_destroy),GTK_OBJECT(w));
+     g_signal_connect_swapped(G_OBJECT(c),"clicked",
+          G_CALLBACK(gtk_widget_destroy), w);
      gtk_container_add(GTK_CONTAINER(b),c);
      c = gtk_button_new_with_label(_("Cancel"));
-     gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-          G_CALLBACK(gtk_widget_destroy),GTK_OBJECT(w));
+     g_signal_connect_swapped(G_OBJECT(c),"clicked",
+          G_CALLBACK(gtk_widget_destroy), w);
      gtk_container_add(GTK_CONTAINER(b),c);
      
      ok_flag = destroy_flag = FALSE;

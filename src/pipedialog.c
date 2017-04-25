@@ -148,9 +148,8 @@ static GtkWidget *create_error_window(gchar *command)
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 
 				 (GtkAccelFlags) 0);
 
-     gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       GTK_OBJECT(a));
+     g_signal_connect_swapped(G_OBJECT(c),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
 
      q = g_strdup_printf(_("Output from command '%s':\n\n"),command);

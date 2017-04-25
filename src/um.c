@@ -220,9 +220,8 @@ gchar *user_input(gchar *label, gchar *title, gchar *defvalue,
      d = gtk_button_new_with_label(_("Cancel"));
      g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(modal_callback),
 			(gpointer)&mr_cancel);
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       GTK_OBJECT(a));
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);
      gtk_widget_show_all(a);
      uid.window = a;
@@ -335,9 +334,8 @@ gint user_choice(gchar **choices, guint def, gchar *windowtitle,
      d = gtk_button_new_with_label(_("OK"));
      g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(modal_callback),
 			(gpointer)&mr_ok);
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       GTK_OBJECT(a));
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);
      
      if (allow_cancel) {
@@ -345,9 +343,8 @@ gint user_choice(gchar **choices, guint def, gchar *windowtitle,
 	  g_signal_connect(G_OBJECT(d),"clicked",
 			     G_CALLBACK(modal_callback),
 			     (gpointer)&mr_cancel);
-	  gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-				    G_CALLBACK(gtk_widget_destroy),
-				    GTK_OBJECT(a));
+	  g_signal_connect_swapped(G_OBJECT(d),"clicked",
+				    G_CALLBACK(gtk_widget_destroy), a);
 	  gtk_container_add(GTK_CONTAINER(c),d);
      }
 

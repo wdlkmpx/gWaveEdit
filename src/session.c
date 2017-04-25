@@ -467,9 +467,8 @@ gboolean session_dialog(void)
      gtk_widget_set_sensitive(d,FALSE);
      g_signal_connect(G_OBJECT(d),"clicked",
 			G_CALLBACK(session_dialog_resume_click),&ddata);
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       (GtkObject *)a);
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);
 
      d = gtk_button_new_with_label(_("Delete selected"));
@@ -480,17 +479,15 @@ gboolean session_dialog(void)
      gtk_container_add(GTK_CONTAINER(c),d);
 
      d = gtk_button_new_with_label(_("Start new session"));
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       (GtkObject *)a);
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);
 
      d = gtk_button_new_with_label(_("Exit"));
      g_signal_connect(G_OBJECT(d),"clicked",
 			G_CALLBACK(session_dialog_exit),&ddata);
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       (GtkObject *)a);
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);
 
      c = gtk_hseparator_new();

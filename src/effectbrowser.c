@@ -810,9 +810,8 @@ static void effect_browser_init(EffectBrowser *eb)
      b252 = gtk_button_new_with_label(_("Close"));
 #endif
      gtk_widget_add_accelerator (b252, "clicked", ag, GDK_Escape, 0, (GtkAccelFlags) 0);
-     gtk_signal_connect_object(GTK_OBJECT(b252),"clicked",
-			       G_CALLBACK(effect_browser_close),
-			       GTK_OBJECT(eb));
+     g_signal_connect_swapped(G_OBJECT(b252),"clicked",
+			       G_CALLBACK(effect_browser_close), eb);
 
      b25 = gtk_hbutton_box_new(); 
      gtk_box_pack_start(GTK_BOX(b25),b251,FALSE,TRUE,3);

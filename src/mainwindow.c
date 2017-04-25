@@ -1427,9 +1427,9 @@ static void help_readme(GtkMenuItem *menuitem, gpointer user_data)
      gtk_widget_add_accelerator (button, "clicked", ag, GDK_Escape, 0, 
 				 (GtkAccelFlags) 0);
      GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
-     gtk_signal_connect_object(GTK_OBJECT(button),"clicked",
+     g_signal_connect_swapped(G_OBJECT(button),"clicked",
 			       G_CALLBACK(gtk_widget_destroy),
-			       GTK_OBJECT(window));
+			       window);
      gtk_box_pack_start (GTK_BOX (box2), button, TRUE, TRUE, 0);
      gtk_widget_show (button);
 
@@ -1494,8 +1494,8 @@ gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_KP_Enter, 0, (GtkAccelFlags) 0);
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, (GtkAccelFlags) 0);
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, (GtkAccelFlags) 0);
-     gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),GTK_OBJECT(a));
+     g_signal_connect_swapped(G_OBJECT(c),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      gtk_widget_show(c);
      

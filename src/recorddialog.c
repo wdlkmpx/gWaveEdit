@@ -605,9 +605,8 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
      gtk_widget_add_accelerator (d, "clicked", ag, GDK_Escape, 0, 
 				 (GtkAccelFlags) 0);
      gtk_container_add(GTK_CONTAINER(c),d );
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       GTK_OBJECT(a));
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_widget_show_all(a);
      gtk_window_add_accel_group(GTK_WINDOW (a), ag);
 

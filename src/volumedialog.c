@@ -108,8 +108,8 @@ static void volume_dialog_init(VolumeDialog *v)
      b = gtk_alignment_new(0,1,0,0);
      gtk_box_pack_start(GTK_BOX(a),b,FALSE,FALSE,0);
      c = gtk_button_new_with_label(_("Find top volume"));
-     gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-			       G_CALLBACK(findtop),GTK_OBJECT(v));
+     g_signal_connect_swapped(G_OBJECT(c),"clicked",
+			       G_CALLBACK(findtop), v);
      gtk_container_add(GTK_CONTAINER(b),c);
      gtk_widget_show_all(a);
 }

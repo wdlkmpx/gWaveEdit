@@ -285,8 +285,8 @@ static void colors_click(GtkButton *button, gpointer user_data)
      gtk_window_set_transient_for(GTK_WINDOW(a),GTK_WINDOW(cd));
      gtk_window_set_title(GTK_WINDOW(a),_("Colors"));
      gtk_window_set_policy(GTK_WINDOW(a),FALSE,FALSE,TRUE);
-     gtk_signal_connect_object(GTK_OBJECT(a),"delete_event",
-			       G_CALLBACK(g_free),(GtkObject *)ctable);
+     g_signal_connect_swapped(G_OBJECT(a),"delete_event",
+			       G_CALLBACK(g_free),ctable);
      b = gtk_vbox_new(FALSE,5);
      gtk_container_set_border_width(GTK_CONTAINER(b),5);
      gtk_container_add(GTK_CONTAINER(a),b);
@@ -334,11 +334,10 @@ static void colors_click(GtkButton *button, gpointer user_data)
 			ctable);
      g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(save_colors),
 			NULL);
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       (GtkObject *)a);
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(g_free),(GtkObject *)ctable);
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy),a);
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(g_free),ctable);
      gtk_container_add(GTK_CONTAINER(c),d);
      GTK_WIDGET_SET_FLAGS(d,GTK_CAN_DEFAULT);
      gtk_widget_grab_default(d);
@@ -349,14 +348,13 @@ static void colors_click(GtkButton *button, gpointer user_data)
 				 (GtkAccelFlags) 0);
      gtk_widget_add_accelerator (d, "clicked", ag, GDK_Escape, 0,
 				 (GtkAccelFlags) 0);
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
 			       G_CALLBACK(set_custom_colors),
-			       (GtkObject *)NULL);
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(g_free),(GtkObject *)ctable);
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       (GtkObject *)a);
+			       NULL);
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(g_free),ctable);
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);
 
      gtk_widget_show_all(a);
@@ -1214,9 +1212,9 @@ static void config_dialog_init(ConfigDialog *cd)
 				(GtkAccelFlags) 0);
     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 
 				(GtkAccelFlags) 0);
-    gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
+    g_signal_connect_swapped(G_OBJECT(c),"clicked",
                               G_CALLBACK(gtk_widget_destroy),
-                              GTK_OBJECT(cd));
+                              cd);
     gtk_container_add (GTK_CONTAINER (b), c);
     GTK_WIDGET_SET_FLAGS (c, GTK_CAN_DEFAULT);
     gtk_widget_show_all(a);

@@ -154,14 +154,12 @@ static void goto_dialog_init(GotoDialog *gd)
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, 
 				 (GtkAccelFlags) 0);
      c = gtk_button_new_with_label(_("Apply"));
-     gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-			       G_CALLBACK(goto_dialog_apply),
-			       GTK_OBJECT(gd));
+     g_signal_connect_swapped(G_OBJECT(c),"clicked",
+			       G_CALLBACK(goto_dialog_apply), gd);
      gtk_container_add(GTK_CONTAINER(b),c);
      c = gtk_button_new_with_label(_("Close"));
-     gtk_signal_connect_object(GTK_OBJECT(c),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       GTK_OBJECT(gd));
+     g_signal_connect_swapped(G_OBJECT(c),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), gd);
      gtk_container_add(GTK_CONTAINER(b),c);
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 
 				 (GtkAccelFlags) 0);

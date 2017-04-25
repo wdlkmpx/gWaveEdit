@@ -1204,9 +1204,8 @@ static gpointer mp3_get_settings(void)
      a = gtk_window_new(GTK_WINDOW_DIALOG);
      gtk_window_set_title(GTK_WINDOW(a),_("MP3 Preferences"));
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
-     gtk_signal_connect_object(GTK_OBJECT(a),"destroy",
+     g_signal_connect_swapped(G_OBJECT(a),"destroy",
 			       G_CALLBACK(set_flag),
-			       (GtkObject *)
 			       &(mp3_get_settings_data.destroyed_flag));
      b = gtk_vbox_new(FALSE,6);
      gtk_container_add(GTK_CONTAINER(a),b);
@@ -1247,17 +1246,15 @@ static gpointer mp3_get_settings(void)
      c = gtk_hbutton_box_new();
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_button_new_with_label(_("OK"));
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
+     g_signal_connect_swapped(GTK_OBJECT(d),"clicked",
 			       G_CALLBACK(set_flag),
-			       (GtkObject *)&(mp3_get_settings_data.ok_flag));
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       GTK_OBJECT(a));
+			       &(mp3_get_settings_data.ok_flag));
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);
      d = gtk_button_new_with_label(_("Cancel"));
-     gtk_signal_connect_object(GTK_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),
-			       GTK_OBJECT(a));
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
+			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);
      c = gtk_hseparator_new();
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
