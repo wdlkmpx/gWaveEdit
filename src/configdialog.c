@@ -40,8 +40,6 @@ G_DEFINE_TYPE(ConfigDialog,config_dialog,GTK_TYPE_WINDOW)
 
 static void config_dialog_destroy(GtkObject *obj)
 {
-     ConfigDialog *cd = CONFIG_DIALOG(obj);
-     cd->selected_tempdir = NULL;
      GTK_OBJECT_CLASS(config_dialog_parent_class)->destroy(obj);
 }
 
@@ -55,8 +53,10 @@ static void config_dialog_ok(GtkButton *button, gpointer user_data)
 {
     gchar *c;
     gboolean b = FALSE;
-    GList *la,*lb;
-    GtkWidget *w;
+    GList *l;
+    GtkTreeModel *model;
+    GtkTreeIter iter;
+    gboolean valid;
     ConfigDialog *cd = CONFIG_DIALOG(user_data);
     if (intbox_check(cd->sound_buffer_size) || 
         intbox_check(cd->disk_threshold) ||
@@ -132,16 +132,16 @@ static void config_dialog_ok(GtkButton *button, gpointer user_data)
     autoplay_mark_flag = gtk_toggle_button_get_active(cd->mark_autoplay);
     inifile_set_gboolean("autoPlayMark",autoplay_mark_flag);
 
-    la = gtk_container_children(GTK_CONTAINER(cd->tempdirs));
-    lb = NULL;
-    for (; la != NULL; la = la->next) {
-	 w = GTK_WIDGET(la->data);
-	 w = GTK_BIN(w)->child;
-	 gtk_label_get(GTK_LABEL(w),&c);
-	 lb = g_list_append(lb,c);
+    l = NULL;
+    model = GTK_TREE_MODEL(cd->tempdirs);
+    valid = gtk_tree_model_get_iter_first(model,&iter);
+    while(valid) {
+         gtk_tree_model_get (model, &iter, 0, &c, -1);
+         l = g_list_append(l,c);
+         valid = gtk_tree_model_iter_next (model, &iter);
     }
-    set_temp_directories(lb);
-    g_list_free(lb);
+    set_temp_directories(l);
+    g_list_free(l);
 
     inifile_set_guint32("recentFiles",cd->recent_files->val);
 
@@ -364,54 +364,44 @@ static void colors_click(GtkButton *button, gpointer user_data)
 static void tempdir_add_click(GtkButton *button, gpointer user_data)
 {
      ConfigDialog *cd = CONFIG_DIALOG(user_data);
-     GtkWidget *w;
      gchar *ch;
+     GtkTreeIter iter;
      ch = (gchar *)gtk_entry_get_text(cd->tempdir_add_entry);
      if (ch[0] == 0) return;
-     w = gtk_list_item_new_with_label(ch);
-     gtk_container_add(GTK_CONTAINER(cd->tempdirs),w);
-     gtk_widget_show(w);
+     gtk_list_store_append(cd->tempdirs,&iter);
+     gtk_list_store_set(cd->tempdirs,&iter,0,ch,-1);
      gtk_entry_set_text(cd->tempdir_add_entry,"");
 }
 
 static void tempdir_remove_click(GtkButton *button, gpointer user_data)
 {
      ConfigDialog *cd = CONFIG_DIALOG(user_data);
-     gtk_container_remove(GTK_CONTAINER(cd->tempdirs),cd->selected_tempdir);
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     if (gtk_tree_selection_get_selected (cd->tempsel, &model, &iter))
+          gtk_list_store_remove (cd->tempdirs, &iter);
 }
 
-static void tempdir_up_click(GtkButton *button, gpointer user_data)
+static void tempdir_up_down_click(GtkButton *button, gpointer user_data)
 {
      ConfigDialog *cd = CONFIG_DIALOG(user_data);
-     GtkWidget *w;
-     GList *l;
-     gint pos;
-     w = cd->selected_tempdir;
-     pos = gtk_list_child_position(cd->tempdirs,w);
-     if (pos == 0) return;
-     gtk_object_ref(GTK_OBJECT(w));
-     gtk_container_remove(GTK_CONTAINER(cd->tempdirs),w);
-     l = g_list_append(NULL,w);
-     gtk_list_insert_items(cd->tempdirs,l,pos-1);
-     gtk_list_toggle_row(cd->tempdirs,w);
-     gtk_object_unref(GTK_OBJECT(w));
-}
-
-static void tempdir_down_click(GtkButton *button, gpointer user_data)
-{
-     ConfigDialog *cd = CONFIG_DIALOG(user_data);
-     GtkWidget *w;
-     GList *l;
-     gint pos;
-     w = cd->selected_tempdir;
-     pos = gtk_list_child_position(cd->tempdirs,w);
-     /* if (pos == 0) return; */
-     gtk_object_ref(GTK_OBJECT(w));
-     gtk_container_remove(GTK_CONTAINER(cd->tempdirs),w);
-     l = g_list_append(NULL,w);
-     gtk_list_insert_items(cd->tempdirs,l,pos+1);
-     gtk_list_toggle_row(cd->tempdirs,w);
-     gtk_object_unref(GTK_OBJECT(w));
+     GtkTreeModel *model;
+     GtkTreeIter iter1, iter2;
+     GtkTreePath *path1, *path2;
+     if (gtk_tree_selection_get_selected (cd->tempsel, &model, &iter1)) {
+          path1 = gtk_tree_model_get_path (model, &iter1);
+          path2 = gtk_tree_path_copy (path1);
+          if (button == cd->tempdir_up)
+	       gtk_tree_path_prev (path2);
+	  else
+	       gtk_tree_path_next (path2);
+          if (gtk_tree_path_compare (path1,path2)) {
+               if (gtk_tree_model_get_iter (model, &iter2, path2))
+                    gtk_list_store_swap (cd->tempdirs, &iter1, &iter2);
+          }
+          gtk_tree_path_free(path1);
+          gtk_tree_path_free(path2);
+     }
 }
 
 static void tempdir_browse_click(GtkButton *button, gpointer user_data)
@@ -427,26 +417,17 @@ static void tempdir_browse_click(GtkButton *button, gpointer user_data)
 }
 
 
-static void tempdir_select(GtkList *list, GtkWidget *widget, 
+static void tempdir_select_changed(GtkTreeSelection *sel,
 			   gpointer user_data)
 {
      ConfigDialog *cd = CONFIG_DIALOG(user_data);
-     cd->selected_tempdir = widget;
-     gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_remove),TRUE);
-     gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_up),TRUE);
-     gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_down),TRUE);
-}
-
-static void tempdir_unselect(GtkList *list, GtkWidget *widget, 
-			     gpointer user_data)
-{
-     ConfigDialog *cd = CONFIG_DIALOG(user_data);
-     if (cd->selected_tempdir == widget) {
-	  cd->selected_tempdir = NULL;
-	  gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_remove),FALSE);
-	  gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_up),FALSE);
-	  gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_down),FALSE);
-     }
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     gboolean state;
+     state = gtk_tree_selection_get_selected (sel, &model, &iter);
+     gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_remove),state);
+     gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_up),state);
+     gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_down),state);
 }
 
 static void driver_autodetect_toggled(GtkToggleButton *button, 
@@ -461,11 +442,14 @@ static void driver_autodetect_toggled(GtkToggleButton *button,
 
 static void config_dialog_init(ConfigDialog *cd)
 {
-    GtkWidget *w,*a,*b,*c,*d,*e,*f,*g,*h;
+    GtkWidget *w,*a,*b,*c,*d,*e,*f,*g,*tempview;
     GList *l;
     GtkAccelGroup *ag;
     guint key,i,j;
     gchar *ch;
+    GtkTreeIter iter;
+    GtkTreeViewColumn *col;
+    GtkCellRenderer *renderer;
 
     ag = gtk_accel_group_new();
 
@@ -710,21 +694,23 @@ static void config_dialog_init(ConfigDialog *cd)
 				 inifile_get_gboolean("drawImprove",TRUE));
 
 
-    w = gtk_list_new();
-    cd->tempdirs = GTK_LIST(w);
-    gtk_list_set_selection_mode(cd->tempdirs,GTK_SELECTION_SINGLE);
+    tempview = gtk_tree_view_new();
+    gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(tempview),FALSE);
+    renderer = gtk_cell_renderer_text_new();
+    col = gtk_tree_view_column_new_with_attributes(NULL,renderer,"text",0,NULL);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(tempview),col);
+    cd->tempsel = gtk_tree_view_get_selection(GTK_TREE_VIEW(tempview));
+    gtk_tree_selection_set_mode(cd->tempsel,GTK_SELECTION_SINGLE);
+    cd->tempdirs = gtk_list_store_new(1,G_TYPE_STRING);
+    gtk_tree_view_set_model(GTK_TREE_VIEW(tempview),GTK_TREE_MODEL(cd->tempdirs));
     for (i=0; 1; i++) {
 	 ch = get_temp_directory(i);
 	 if (ch == NULL) break;
-	 a = gtk_list_item_new_with_label(ch);
-	 gtk_container_add(GTK_CONTAINER(w),a);
+         gtk_list_store_append(cd->tempdirs,&iter);
+         gtk_list_store_set(cd->tempdirs,&iter,0,ch,-1);
     }
-    g_signal_connect(G_OBJECT(w),"select_child",
-		       G_CALLBACK(tempdir_select),cd);
-    g_signal_connect(G_OBJECT(w),"unselect_child",
-		       G_CALLBACK(tempdir_unselect),cd);
-    cd->selected_tempdir = NULL;
-    
+    g_signal_connect(cd->tempsel,"changed",
+                     G_CALLBACK(tempdir_select_changed),cd);
 
     w = gtk_entry_new();
     cd->tempdir_add_entry = GTK_ENTRY(w);
@@ -757,7 +743,7 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
 			       (GtkAccelFlags) 0);
     g_signal_connect(G_OBJECT(w),"clicked",
-		       G_CALLBACK(tempdir_up_click),cd);
+		       G_CALLBACK(tempdir_up_down_click),cd);
     gtk_widget_set_sensitive(w,FALSE);
     cd->tempdir_up = GTK_BUTTON(w);
     w = gtk_button_new_with_label("");
@@ -765,7 +751,7 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
 			       (GtkAccelFlags) 0);
     g_signal_connect(G_OBJECT(w),"clicked",
-		       G_CALLBACK(tempdir_down_click),cd);
+		       G_CALLBACK(tempdir_up_down_click),cd);
     gtk_widget_set_sensitive(w,FALSE);
     cd->tempdir_down = GTK_BUTTON(w);
 
@@ -1009,8 +995,7 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_table_attach(GTK_TABLE(f),g,0,2,0,4,GTK_EXPAND|GTK_FILL,GTK_FILL,0,0);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(g),GTK_POLICY_NEVER,
 				   GTK_POLICY_AUTOMATIC);
-    h = GTK_WIDGET(cd->tempdirs);
-    gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(g),h);
+    gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(g),tempview);
     g = GTK_WIDGET(cd->tempdir_up);
     gtk_table_attach(GTK_TABLE(f),g,2,3,0,1,GTK_FILL,0,0,0);
     g = GTK_WIDGET(cd->tempdir_down);

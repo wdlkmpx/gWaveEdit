@@ -51,8 +51,8 @@ typedef struct {
      Combo *time_display,*time_display_timescale,*varispeed_method,
 	  *speed_method;
      GtkToggleButton *remember_geometry;
-     GtkList *tempdirs;
-     GtkWidget *selected_tempdir;
+     GtkListStore *tempdirs;
+     GtkTreeSelection *tempsel;
      GtkButton *tempdir_remove,*tempdir_up,*tempdir_down,*tempdir_add;
      GtkButton *tempdir_browse;
      GtkEntry *tempdir_add_entry;
