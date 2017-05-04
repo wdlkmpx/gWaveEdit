@@ -2157,172 +2157,216 @@ static GtkWidget *create_menu(Mainwindow *w)
      return gtk_item_factory_get_widget(item_factory,"<main>");
 }
 
-static void loopmode_toggle(GtkToggleButton *button, gboolean *user_data)
+static void loopmode_toggle(GtkToggleToolButton *button, gboolean *user_data)
 {
-     *user_data = gtk_toggle_button_get_active(button);
+     *user_data = gtk_toggle_tool_button_get_active(button);
      inifile_set_gboolean("loopMode", *user_data);
 }
 
-static void followmode_toggle(GtkToggleButton *button, gboolean *user_data)
+static void followmode_toggle(GtkToggleToolButton *button, gboolean *user_data)
 {
      Mainwindow *w = MAINWINDOW(user_data);
-     w->followmode = gtk_toggle_button_get_active(button);
+     w->followmode = gtk_toggle_tool_button_get_active(button);
      if (w->doc != NULL)
 	  document_set_followmode(w->doc, w->followmode);
      inifile_set_gboolean("followMode", w->followmode);
 }
 
-static void bouncemode_toggle(GtkToggleButton *button, gboolean *user_data)
+static void bouncemode_toggle(GtkToggleToolButton *button, gboolean *user_data)
 {
      Mainwindow *w = MAINWINDOW(user_data);
-     w->bouncemode = gtk_toggle_button_get_active(button);
-     inifile_set_gboolean("bounceMode", gtk_toggle_button_get_active(button));
+     w->bouncemode = gtk_toggle_tool_button_get_active(button);
+     inifile_set_gboolean("bounceMode", w->bouncemode);
 }
 
 static GtkWidget *create_toolbar(Mainwindow *w)
 {
-     GtkWidget *t,*b,*r;
+     GtkWidget *t,*b;
+     GtkToolItem *i;
      GdkPixbuf *pb;
      t = gtk_toolbar_new();
      pb = gdk_pixbuf_new_from_xpm_data (button_open_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Load a file from disk"),"X",b,G_CALLBACK(file_open),w);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Load a file from disk"));
+     g_signal_connect(i,"clicked",G_CALLBACK(file_open),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_save_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Save the current file to disk"),"X",b,G_CALLBACK(file_save),w);
-     w->need_chunk_items = g_list_append(w->need_chunk_items,r);
-     gtk_toolbar_append_space(GTK_TOOLBAR(t));
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Save the current file to disk"));
+     g_signal_connect(i,"clicked",G_CALLBACK(file_save),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_chunk_items = g_list_append(w->need_chunk_items,GTK_WIDGET(i));
+
+     i = gtk_separator_tool_item_new();
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_undo_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Undo the last change"),"X",b,G_CALLBACK(edit_undo),w);
-     w->need_undo_items = g_list_append(w->need_undo_items, r);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Undo the last change"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_undo),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_undo_items = g_list_append(w->need_undo_items, GTK_WIDGET(i));
+
      pb = gdk_pixbuf_new_from_xpm_data (button_redo_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Redo the last undo operation"),"X",b,G_CALLBACK(edit_redo),
-	  w);
-     w->need_redo_items = g_list_append(w->need_redo_items, r);
-     gtk_toolbar_append_space(GTK_TOOLBAR(t));
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Redo the last undo operation"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_redo),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_redo_items = g_list_append(w->need_redo_items, GTK_WIDGET(i));
+
+     i = gtk_separator_tool_item_new();
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_cut_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Cut out the current selection"),"X",b,G_CALLBACK(edit_cut),w);
-     w->need_selection_items = g_list_append(w->need_selection_items, r);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Cut out the current selection"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_cut),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_selection_items = g_list_append(w->need_selection_items, GTK_WIDGET(i));
+
      pb = gdk_pixbuf_new_from_xpm_data (button_copy_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Copy the current selection"),"X",b,G_CALLBACK(edit_copy),w);
-     w->need_selection_items = g_list_append(w->need_selection_items, r);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Copy the current selection"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_copy),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_selection_items = g_list_append(w->need_selection_items, GTK_WIDGET(i));
+
      pb = gdk_pixbuf_new_from_xpm_data (button_paste_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Paste at cursor position"),"X",b,G_CALLBACK(edit_paste),w);
-     w->need_clipboard_items = g_list_append(w->need_clipboard_items, r);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Paste at cursor position"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_paste),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_clipboard_items = g_list_append(w->need_clipboard_items, GTK_WIDGET(i));
+
      pb = gdk_pixbuf_new_from_xpm_data (button_pasteover_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Paste, overwriting the data after the cursor position"),"X",b,
-	  G_CALLBACK(edit_pasteover),w);
-     w->need_clipboard_items = g_list_append(w->need_clipboard_items, r);
-     gtk_widget_set_sensitive(r,FALSE);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Paste, overwriting the data after the cursor position"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_pasteover),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_clipboard_items = g_list_append(w->need_clipboard_items, GTK_WIDGET(i));
+     gtk_widget_set_sensitive(GTK_WIDGET(i),FALSE);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_delete_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Delete the selection"),"X",b,G_CALLBACK(edit_delete),w);
-     w->need_selection_items = g_list_append(w->need_selection_items, r);
-     gtk_toolbar_append_space(GTK_TOOLBAR(t));
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Delete the selection"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_delete),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_selection_items = g_list_append(w->need_selection_items, GTK_WIDGET(i));
+
+     i = gtk_separator_tool_item_new();
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_cursorstart_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Set selection start to cursor position"),"X",b,
-	  G_CALLBACK(edit_selstartcursor),w);
-     w->need_chunk_items = g_list_append(w->need_chunk_items, r);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Set selection start to cursor position"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_selstartcursor),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_chunk_items = g_list_append(w->need_chunk_items, GTK_WIDGET(i));
+
      pb = gdk_pixbuf_new_from_xpm_data (button_cursorend_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Set selection end to cursor position"),"X",b,
-	  G_CALLBACK(edit_selendcursor),w);
-     w->need_chunk_items = g_list_append(w->need_chunk_items, r);
-     gtk_toolbar_append_space(GTK_TOOLBAR(t));
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Set selection end to cursor position"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_selendcursor),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_chunk_items = g_list_append(w->need_chunk_items, GTK_WIDGET(i));
+
+     i = gtk_separator_tool_item_new();
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_play_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Play from cursor position"),"X",b,
-	  G_CALLBACK(edit_play),w);
-     w->need_chunk_items = g_list_append(w->need_chunk_items, r);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Play from cursor position"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_play),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_chunk_items = g_list_append(w->need_chunk_items, GTK_WIDGET(i));
+
      pb = gdk_pixbuf_new_from_xpm_data (button_playselection_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Play selected area"),"X",b,
-	  G_CALLBACK(edit_playselection),w);
-     w->need_chunk_items = g_list_append(w->need_chunk_items,r);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Play selected area"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_playselection),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_chunk_items = g_list_append(w->need_chunk_items, GTK_WIDGET(i));
+
      pb = gdk_pixbuf_new_from_xpm_data (button_stop_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Stop playing"),"X",b,
-	  G_CALLBACK(edit_stop),w);
-     w->need_chunk_items = g_list_append(w->need_chunk_items, r);
-     gtk_toolbar_append_space(GTK_TOOLBAR(t));
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Stop playing"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_stop),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     w->need_chunk_items = g_list_append(w->need_chunk_items, GTK_WIDGET(i));
+
+     i = gtk_separator_tool_item_new();
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_loop_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_TOGGLEBUTTON,NULL,NULL,
-	  _("Loop mode (play over and over)"),"X",b,
-	  G_CALLBACK(loopmode_toggle),&(w->loopmode));
+     i = gtk_toggle_tool_button_new();
+     gtk_tool_button_set_icon_widget(GTK_TOOL_BUTTON(i),b);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Loop mode (play over and over)"));
+     g_signal_connect(i,"toggled",G_CALLBACK(loopmode_toggle),&(w->loopmode));
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
      if ( inifile_get_gboolean("loopMode",FALSE) ) 
-	  gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON(r), TRUE);
+	  gtk_toggle_tool_button_set_active(GTK_TOGGLE_TOOL_BUTTON(i), TRUE);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_follow_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_TOGGLEBUTTON,NULL,NULL,
-	  _("Keep view and playback together"),"X",b,
-	  G_CALLBACK(followmode_toggle),w);
+     i = gtk_toggle_tool_button_new();
+     gtk_tool_button_set_icon_widget(GTK_TOOL_BUTTON(i),b);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Keep view and playback together"));
+     g_signal_connect(i,"toggled",G_CALLBACK(followmode_toggle),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
      if ( inifile_get_gboolean("followMode",FALSE) ) {
-	  gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON(r), TRUE);
+	  gtk_toggle_tool_button_set_active(GTK_TOGGLE_TOOL_BUTTON(i), TRUE);
 	  w->followmode = TRUE;
      } else
 	  w->followmode = FALSE;
+
      pb = gdk_pixbuf_new_from_xpm_data (button_bounce_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_TOGGLEBUTTON,NULL,NULL,
-	  _("Auto return to playback start"),"X",b,
-	  G_CALLBACK(bouncemode_toggle),w);
+     i = gtk_toggle_tool_button_new();
+     gtk_tool_button_set_icon_widget(GTK_TOOL_BUTTON(i),b);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Auto return to playback start"));
+     g_signal_connect(i,"toggled",G_CALLBACK(bouncemode_toggle),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
      if ( inifile_get_gboolean("bounceMode",FALSE) ) {
-	  gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON(r), TRUE);
+	  gtk_toggle_tool_button_set_active(GTK_TOGGLE_TOOL_BUTTON(i), TRUE);
 	  w->bouncemode = TRUE;
      }
      
-     gtk_toolbar_append_space(GTK_TOOLBAR(t));
+     i = gtk_separator_tool_item_new();
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_record_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Record"),"X",b,G_CALLBACK(edit_record),w);
-     gtk_widget_set_sensitive(r,input_supported());
-     gtk_toolbar_append_space(GTK_TOOLBAR(t));
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Record"));
+     g_signal_connect(i,"clicked",G_CALLBACK(edit_record),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+     gtk_widget_set_sensitive(GTK_WIDGET(i),input_supported());
+
+     i = gtk_separator_tool_item_new();
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_mixer_xpm);
      b = gtk_image_new_from_pixbuf(pb);
-     r = gtk_toolbar_append_element(
-	  GTK_TOOLBAR(t),GTK_TOOLBAR_CHILD_BUTTON,NULL,NULL,
-	  _("Launch mixer"),"X",b,G_CALLBACK(launch_mixer),w);
+     i = gtk_tool_button_new(b,NULL);
+     gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Launch mixer"));
+     g_signal_connect(i,"clicked",G_CALLBACK(launch_mixer),w);
+     gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
      return t;
 }
 
