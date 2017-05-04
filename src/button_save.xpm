@@ -1,5 +1,5 @@
 /* XPM */
-static char * button_save_xpm[] = {
+static const char * button_save_xpm[] = {
 "20 20 58 1",
 " 	c None",
 ".	c #000000",

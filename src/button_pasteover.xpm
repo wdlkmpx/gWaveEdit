@@ -1,5 +1,5 @@
 /* XPM */
-static char * button_pasteover_xpm[] = {
+static const char * button_pasteover_xpm[] = {
 "20 20 73 1",
 " 	c None",
 ".	c #000000",

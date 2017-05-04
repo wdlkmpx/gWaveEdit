@@ -1,5 +1,5 @@
 /* XPM */
-static char * button_cursorend_xpm[] = {
+static const char * button_cursorend_xpm[] = {
 "20 20 21 1",
 " 	c None",
 ".	c #9A6B2B",

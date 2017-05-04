@@ -1,5 +1,5 @@
 /* XPM */
-static char *button_redo_xpm[] = {
+static const char *button_redo_xpm[] = {
 "20 20 40 2",
 "  	c None",
 "01	c #000000",

@@ -51,7 +51,7 @@
 #include <sched.h>
 #endif
 
-GdkPixmap *icon = NULL;
+GdkPixbuf *icon = NULL;
 gboolean quitflag;
 gboolean quality_mode = TRUE;
 gchar *driver_option = NULL;

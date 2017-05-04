@@ -82,7 +82,7 @@
 #define XOR(x,y) (((x) && !(y)) || (!(x) && (y)))
 
 extern gboolean quitflag;
-extern GdkPixmap *icon;
+extern GdkPixbuf *icon;
 
 extern gboolean quality_mode;
 
