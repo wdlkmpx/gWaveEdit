@@ -206,66 +206,77 @@ static void sound_driver_changed(Combo *combo, gpointer user_data)
      g_free(c);
 }
 
-static gboolean color_expose(GtkWidget *widget, GdkEventExpose *event,
-			     gpointer user_data)
-{
-     GdkColor *c = (GdkColor *)user_data;
-     GdkGC *gc;
-     gc = gdk_gc_new(widget->window);     
-     gdk_gc_set_foreground(gc,c);
-     gdk_draw_rectangle(widget->window,gc,TRUE,
-			event->area.x,event->area.y,event->area.width,
-			event->area.height);
-     gdk_gc_unref(gc);
-     return TRUE;
-}
-
-
-static void color_select(GtkList *list, GtkWidget *widget,
-			 gpointer user_data)
+static void color_select(GtkTreeSelection *sel, gpointer user_data)
 {
      GtkColorSelection *cs = GTK_COLOR_SELECTION(user_data);
-     GdkColor *c = (GdkColor *)gtk_object_get_user_data(GTK_OBJECT(widget));
-     gdouble color[4];
-     
-     gtk_object_set_user_data(GTK_OBJECT(cs),widget);
-     color[0] = ((gdouble)(c->red))/65535.0;
-     color[1] = ((gdouble)(c->green))/65535.0;
-     color[2] = ((gdouble)(c->blue))/65535.0;
-     color[3] = 1.0;
-     gtk_color_selection_set_color(cs,color);
-     gtk_color_selection_set_previous_color(cs, c);
+     GdkColor *c;
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     if (gtk_tree_selection_get_selected (sel, &model, &iter)) {
+          gtk_tree_model_get (model, &iter, 2, &c, -1);
+          gtk_color_selection_set_current_color(cs, c);
+          gtk_color_selection_set_previous_color(cs, c);
+     }
 }
 
-static void color_set(GtkColorSelection *selection, gpointer user_data)
+static void color_set(GtkColorSelection *cs, gpointer user_data)
 {
-     gdouble color[4];
-     GtkWidget *widget;
-     GdkColor *c;
-     gtk_color_selection_get_color(selection,color);
-     widget = GTK_WIDGET(gtk_object_get_user_data(GTK_OBJECT(selection)));
-     c = gtk_object_get_user_data(GTK_OBJECT(widget));
-     c->red = (guint)(color[0]*65535.0);
-     c->green = (guint)(color[1]*65535.0);
-     c->blue = (guint)(color[2]*65535.0);
-     gdk_colormap_alloc_color(gdk_colormap_get_system(),c,FALSE,TRUE);     
-     gtk_widget_queue_draw(widget);
+     GtkTreeSelection *sel = GTK_TREE_SELECTION(user_data);
+     GdkColor c;
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     GdkPixbuf *pixbuf;
+     guint32 px;
+     gtk_color_selection_get_current_color(cs,&c);
+     if (gtk_tree_selection_get_selected (sel, &model, &iter)) {
+	  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,FALSE,8,20,20);
+	  px = 0;
+	  px += c.red / 256 << 24;
+	  px += c.green / 256 << 16;
+	  px += c.blue / 256 << 8;
+	  px += 255;
+	  gdk_pixbuf_fill(pixbuf,px);
+	  gtk_list_store_set(GTK_LIST_STORE(model),&iter,
+	                     0,pixbuf,2,&c,-1);
+     }
 }
 
 static void color_apply(GtkButton *button, gpointer user_data)
 {
-     GdkColor *c = (GdkColor *)user_data;
-     set_custom_colors(c);
+     GtkListStore *store = GTK_LIST_STORE(user_data);
+     GdkColor *c;
+     GdkColor *ctable;
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     gint i;
+     gboolean valid;
+     ctable = g_malloc((LAST_COLOR-FIRST_CUSTOM_COLOR)*sizeof(GdkColor));
+     model = GTK_TREE_MODEL(store);
+     valid = gtk_tree_model_get_iter_first(model,&iter);
+     i = 0;
+     while(valid) {
+          gtk_tree_model_get (model, &iter, 2, &c, -1);
+          memcpy(&ctable[i],c,sizeof(GdkColor));
+          valid = gtk_tree_model_iter_next (model, &iter);
+          i++;
+     }
+     set_custom_colors(ctable);
+     g_free(ctable);
 }
 
 static void colors_click(GtkButton *button, gpointer user_data)
 {
-     GtkWidget *a,*b,*c,*d,*e,*f,*g;
+     GtkWidget *a,*b,*c,*d;
      GtkWidget *cs;
      gint i,key;
      ConfigDialog *cd = CONFIG_DIALOG(user_data);
      GdkColor *ctable;
      GtkAccelGroup* ag;
+     GtkListStore *store;
+     GtkTreeSelection *sel;
+     GtkTreeIter iter;
+     GtkTreeViewColumn *col1, *col2;
+     GtkCellRenderer *rend1, *rend2;
      ag = gtk_accel_group_new();
           
      ctable = g_malloc((LAST_COLOR-FIRST_CUSTOM_COLOR)*sizeof(GdkColor));
@@ -277,44 +288,49 @@ static void colors_click(GtkButton *button, gpointer user_data)
 						  FALSE);
      gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION(cs), TRUE);
 
-     g_signal_connect(G_OBJECT(cs),"color_changed",
-			G_CALLBACK(color_set),NULL);
-
      a = gtk_window_new(GTK_WINDOW_DIALOG);
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_transient_for(GTK_WINDOW(a),GTK_WINDOW(cd));
      gtk_window_set_title(GTK_WINDOW(a),_("Colors"));
      gtk_window_set_policy(GTK_WINDOW(a),FALSE,FALSE,TRUE);
-     g_signal_connect_swapped(G_OBJECT(a),"delete_event",
-			       G_CALLBACK(g_free),ctable);
      b = gtk_vbox_new(FALSE,5);
      gtk_container_set_border_width(GTK_CONTAINER(b),5);
      gtk_container_add(GTK_CONTAINER(a),b);
      c = gtk_hbox_new(FALSE,10);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     d = gtk_list_new();
-     g_signal_connect(G_OBJECT(d),"select_child",
-			G_CALLBACK(color_select),cs);
-     gtk_list_set_selection_mode(GTK_LIST(d),GTK_SELECTION_BROWSE);
+     d = gtk_tree_view_new();
+     gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(d),FALSE);
+     rend1 = gtk_cell_renderer_pixbuf_new();
+     col1 = gtk_tree_view_column_new_with_attributes(NULL,rend1,"pixbuf",0,NULL);
+     rend2 = gtk_cell_renderer_text_new();
+     col2 = gtk_tree_view_column_new_with_attributes(NULL,rend2,"text",1,NULL);
+     gtk_tree_view_append_column(GTK_TREE_VIEW(d),col1);
+     gtk_tree_view_append_column(GTK_TREE_VIEW(d),col2);
+     sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(d));
+     g_signal_connect(sel,"changed",
+                      G_CALLBACK(color_select),cs);
+     g_signal_connect(G_OBJECT(cs),"color_changed",
+		      G_CALLBACK(color_set),sel);
+     gtk_tree_selection_set_mode(sel,GTK_SELECTION_BROWSE);
      gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
+     store = gtk_list_store_new(3,GDK_TYPE_PIXBUF,G_TYPE_STRING,GDK_TYPE_COLOR);
+     gtk_tree_view_set_model(GTK_TREE_VIEW(d),GTK_TREE_MODEL(store));
+     GdkPixbuf *pixbuf;
+     guint32 px;
      for (i=FIRST_CUSTOM_COLOR; i<LAST_COLOR; i++) {
-	  e = gtk_list_item_new();
-	  gtk_object_set_user_data(GTK_OBJECT(e),
-				   (gpointer)(&ctable[i-FIRST_CUSTOM_COLOR]));
-	  gtk_container_add(GTK_CONTAINER(d),e);
-	  f = gtk_hbox_new(FALSE,3);
-	  gtk_container_set_border_width(GTK_CONTAINER(f),3);
-	  gtk_container_add(GTK_CONTAINER(e),f);
-	  g = gtk_drawing_area_new();
-	  gtk_drawing_area_size(GTK_DRAWING_AREA(g),20,20);
-	  g_signal_connect(G_OBJECT(g),"expose_event",
-			     G_CALLBACK(color_expose),
-			     (gpointer)(&ctable[i-FIRST_CUSTOM_COLOR]));
-	  gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
-	  g = gtk_label_new(_(color_names[i]));
-	  gtk_misc_set_alignment(GTK_MISC(g),0.0,1.0);
-	  gtk_box_pack_start(GTK_BOX(f),g,TRUE,TRUE,0);
+	  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,FALSE,8,20,20);
+	  px = 0;
+	  px += ctable[i-FIRST_CUSTOM_COLOR].red / 256 << 24;
+	  px += ctable[i-FIRST_CUSTOM_COLOR].green / 256 << 16;
+	  px += ctable[i-FIRST_CUSTOM_COLOR].blue / 256 << 8;
+	  px += 255;
+	  gdk_pixbuf_fill(pixbuf,px);
+	  gtk_list_store_append(store,&iter);
+	  gtk_list_store_set(store,&iter,0,pixbuf,
+	                                 1,_(color_names[i]),
+	                                 2,&ctable[i-FIRST_CUSTOM_COLOR],-1);
      }
+     g_free(ctable);
      d = cs;
      gtk_box_pack_start(GTK_BOX(c),d,TRUE,TRUE,0);
      c = gtk_hbutton_box_new();
@@ -323,21 +339,17 @@ static void colors_click(GtkButton *button, gpointer user_data)
      key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(d)->child),_("_Preview"));
      gtk_widget_add_accelerator (d, "clicked", ag, key, GDK_MOD1_MASK,
 				 (GtkAccelFlags) 0);
-     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),
-			ctable);     
+     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),store);
      gtk_container_add(GTK_CONTAINER(c),d);
      d = gtk_button_new_with_label("");
      key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(d)->child),_("_OK"));
      gtk_widget_add_accelerator (d, "clicked", ag, key, GDK_MOD1_MASK,
 				 (GtkAccelFlags) 0);
-     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),
-			ctable);
+     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),store);
      g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(save_colors),
 			NULL);
      g_signal_connect_swapped(G_OBJECT(d),"clicked",
 			       G_CALLBACK(gtk_widget_destroy),a);
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(g_free),ctable);
      gtk_container_add(GTK_CONTAINER(c),d);
      GTK_WIDGET_SET_FLAGS(d,GTK_CAN_DEFAULT);
      gtk_widget_grab_default(d);
@@ -351,8 +363,6 @@ static void colors_click(GtkButton *button, gpointer user_data)
      g_signal_connect_swapped(G_OBJECT(d),"clicked",
 			       G_CALLBACK(set_custom_colors),
 			       NULL);
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(g_free),ctable);
      g_signal_connect_swapped(G_OBJECT(d),"clicked",
 			       G_CALLBACK(gtk_widget_destroy), a);
      gtk_container_add(GTK_CONTAINER(c),d);
