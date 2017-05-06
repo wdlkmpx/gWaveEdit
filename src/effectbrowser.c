@@ -451,29 +451,25 @@ static void move_top_bottom_main(EffectBrowser *eb, gboolean top)
      save_effect_order(eb);
 }
 
-static void list_item_moveup(gpointer user_data, guint callback_action,
-                             GtkWidget *widget)
+static void list_item_moveup(GtkWidget *widget, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      move_up_down_main(eb,TRUE);
 }
 
-static void list_item_movedown(gpointer user_data, guint callback_action,
-                               GtkWidget *widget)
+static void list_item_movedown(GtkWidget *widget, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      move_up_down_main(eb,FALSE);
 }
 
-static void list_item_movetotop(gpointer user_data, guint callback_action,
-                                GtkWidget *widget)
+static void list_item_movetotop(GtkWidget *widget, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      move_top_bottom_main(eb,TRUE);
 }
 
-static void list_item_movetobottom(gpointer user_data, guint callback_action,
-                                   GtkWidget *widget)
+static void list_item_movetobottom(GtkWidget *widget, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      move_top_bottom_main(eb,FALSE);
@@ -548,88 +544,89 @@ gint loc_sort_func(gconstpointer a, gconstpointer b)
 }
 
 
-static void list_item_sortbytitle(gpointer user_data, guint callback_action,
-                                  GtkWidget *widget)
+static void list_item_sortbytitle(GtkWidget *widget, gpointer user_data)
 {     
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      list_item_sort_main(eb, title_sort_func);
 }
 
-static void list_item_sortbytype(gpointer user_data, guint callback_action,
-                                 GtkWidget *widget)
+static void list_item_sortbytype(GtkWidget *widget, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      list_item_sort_main(eb, type_sort_func);
 }
 
-static void list_item_sortbyloc(gpointer user_data, guint callback_action,
-                                GtkWidget *widget)
+static void list_item_sortbyloc(GtkWidget *widget, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      list_item_sort_main(eb, loc_sort_func);
 }
 
-static void list_item_sortbyauth(gpointer user_data, guint callback_action,
-                                 GtkWidget *widget)
+static void list_item_sortbyauth(GtkWidget *widget, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      list_item_sort_main(eb, auth_sort_func);
 }
 
-static void list_item_unsort(gpointer user_data, guint callback_action,
-                             GtkWidget *widget)
+static void list_item_unsort(GtkWidget *widget, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      inifile_set("effectBrowserOrder0",NULL);
      list_widget_rebuild(NULL,NULL,eb);
 }
 
-static void list_item_rebuild(gpointer user_data, guint callback_action,
-                              GtkWidget *widget)
+static void list_item_rebuild(GtkWidget *widget, gpointer user_data)
 {
      effect_register_rebuild();
 }
 
-static gchar *translate_menu_path(const gchar *path, gpointer func_data)
-{
-    return _(path);
-}
-
-static gint list_item_button_press(GtkWidget *widget, GdkEventButton *event,
-				   gpointer user_data)
+static gboolean list_item_button_press(GtkWidget *widget, GdkEventButton *event,
+				       gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
-     static GtkItemFactory *item_factory = NULL;
-     GtkWidget *w;
-     static GtkItemFactoryEntry menu_items[] = {
-	  { N_("/Move Up"),        NULL, list_item_moveup,      0, NULL },
-	  { N_("/Move Down"),      NULL, list_item_movedown,    0, NULL },
-	  { N_("/Move to Top"),    NULL, list_item_movetotop,   0, NULL },
-	  { N_("/Move to Bottom"), NULL, list_item_movetobottom,0, NULL },
-	  { "/sep1",           NULL, NULL,                  0, "<Separator>" },
-	  { N_("/Sort by Name"), NULL, list_item_sortbytitle, 0, NULL },
-	  { N_("/Sort by Type"), NULL, list_item_sortbytype, 0, NULL },
-	  { N_("/Sort by Location"), NULL, list_item_sortbyloc,0,NULL },
-	  { N_("/Sort by Author"), NULL, list_item_sortbyauth,0, NULL },
-	  { "/sep2", NULL, NULL, 0, "<Separator>" },
-	  { N_("/Restore Order"), NULL, list_item_unsort, 0, NULL },
-	  { N_("/Rebuild Effect List"), NULL, list_item_rebuild,0,NULL }
-     };
+     GtkWidget *menu, *item;
 
      if (event->button == 3) {
-	  if (item_factory == NULL) {
-	       item_factory = gtk_item_factory_new(GTK_TYPE_MENU,"<popup>",NULL);
-#ifdef ENABLE_NLS
-	       gtk_item_factory_set_translate_func(item_factory, 
-						   translate_menu_path, NULL, NULL);
-#endif
-	       gtk_item_factory_create_items(item_factory,
-					     ARRAY_LENGTH(menu_items),
-					     menu_items,eb);
-	  }
-	  w = gtk_item_factory_get_widget(item_factory,"<popup>");
-	  gtk_menu_popup(GTK_MENU(w),NULL,NULL,NULL,NULL,event->button,
+          menu = gtk_menu_new();
+          item = gtk_menu_item_new_with_label(_("Move Up"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_moveup),eb);
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_menu_item_new_with_label(_("Move Down"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_movedown),eb);
+           gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_menu_item_new_with_label(_("Move to Top"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_movetotop),eb);
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_menu_item_new_with_label(_("Move to Bottom"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_movetobottom),eb);
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_separator_menu_item_new ();
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_menu_item_new_with_label(_("Sort by Name"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_sortbytitle),eb);
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_menu_item_new_with_label(_("Sort by Type"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_sortbytype),eb);
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_menu_item_new_with_label(_("Sort by Location"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_sortbyloc),eb);
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_menu_item_new_with_label(_("Sort by Author"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_sortbyauth),eb);
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_separator_menu_item_new ();
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_menu_item_new_with_label(_("Restore Order"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_unsort),eb);
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          item = gtk_menu_item_new_with_label(_("Rebuild Effect List"));
+          g_signal_connect(item, "activate",G_CALLBACK(list_item_rebuild),eb);
+          gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+          gtk_menu_attach_to_widget (GTK_MENU (menu), widget, NULL);
+          gtk_widget_show_all(menu);
+          gtk_menu_popup(GTK_MENU(menu),NULL,NULL,NULL,NULL,event->button,
 			 event->time);
+          return TRUE;
      }
      return FALSE;
 }
