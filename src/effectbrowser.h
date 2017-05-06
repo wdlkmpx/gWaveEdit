@@ -39,8 +39,8 @@ typedef struct {
      DocumentList *dl;
 
      GtkBox *mw_list_box;
-     GtkList *list_widget;
-     GtkListItem *list_widget_sel,*list_widget_clicked;
+     GtkListStore *liststore;
+     GtkTreeSelection *list_sel;
 
      GtkToggleButton *close_after;
 

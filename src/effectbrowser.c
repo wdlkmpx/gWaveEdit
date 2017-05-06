@@ -373,123 +373,133 @@ void effect_browser_invalidate_effect(EffectBrowser *eb, gchar *effect_name,
      if (displayed) effect_browser_set_effect_main(eb,e);
 }
 
-static void effect_browser_select_child(GtkList *list, GtkWidget *widget,
+static void effect_browser_selection_changed(GtkTreeSelection *sel,
 					gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);     
      struct effect *effect;
-     
-     effect = gtk_object_get_data(GTK_OBJECT(widget),"effectptr");
-     g_assert(effect != NULL);
-     effect_browser_set_effect_main(eb,effect);
-     eb->list_widget_sel = GTK_LIST_ITEM(widget);
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     if (gtk_tree_selection_get_selected (sel, &model, &iter)) {
+          gtk_tree_model_get (model, &iter, 1, &effect, -1);
+          effect_browser_set_effect_main(eb,effect);
+     }
 }
 
 static void save_effect_order(EffectBrowser *eb)
 {
-     GList *l;
      gint i;
      gchar *c,*d;
      struct effect *effect;
-     l = gtk_container_get_children(GTK_CONTAINER(eb->list_widget));
-     for (i=0; l!=NULL; l=l->next,i++) {
+     gboolean valid;
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     model = GTK_TREE_MODEL(eb->liststore);
+     valid = gtk_tree_model_get_iter_first(model,&iter);
+     i = 0;
+     while(valid) {
+          gtk_tree_model_get (model, &iter, 1, &effect, -1);
 	  c = g_strdup_printf("effectBrowserOrder%d",i);
-	  effect = gtk_object_get_data(GTK_OBJECT(l->data),"effectptr");
 	  d = g_strdup_printf("%c%s",effect->source_tag,effect->name);
 	  inifile_set(c,d);
 	  g_free(c);
 	  g_free(d);
+          valid = gtk_tree_model_iter_next (model, &iter);
+          i++;
      }
      c = g_strdup_printf("effectBrowserOrder%d",i);
      inifile_set(c,NULL);
      g_free(c);
-     g_list_free(l);
 }
 
-static void moveup_main(EffectBrowser *eb, GtkListItem *item)
+static void move_up_down_main(EffectBrowser *eb, gboolean up)
 {
-     gint i;
-     GList *l;
-     i = gtk_list_child_position(GTK_LIST(eb->list_widget),
-				 GTK_WIDGET(item));
-     if (i <= 0) return;
-     l = g_list_append(NULL, item);
-     gtk_list_remove_items_no_unref(GTK_LIST(eb->list_widget),l);
-     gtk_list_insert_items(GTK_LIST(eb->list_widget),l,i-1);
-     gtk_list_item_select(GTK_LIST_ITEM(eb->list_widget_sel));
-     save_effect_order(eb);    
+     GtkTreeModel *model;
+     GtkTreeIter iter1, iter2;
+     GtkTreePath *path1, *path2;
+     gboolean success = FALSE;
+     if (gtk_tree_selection_get_selected (eb->list_sel, &model, &iter1)) {
+          path1 = gtk_tree_model_get_path (model, &iter1);
+          path2 = gtk_tree_path_copy (path1);
+          if (up)
+	       gtk_tree_path_prev (path2);
+          else
+	       gtk_tree_path_next (path2);
+          if (gtk_tree_path_compare (path1,path2)) {
+               if (gtk_tree_model_get_iter (model, &iter2, path2)) {
+                    gtk_list_store_swap (eb->liststore, &iter1, &iter2);
+                    success = TRUE;
+               }
+          }
+          gtk_tree_path_free(path1);
+          gtk_tree_path_free(path2);
+     }
+     if (success)
+          save_effect_order(eb);
 }
 
-static void movedown_main(EffectBrowser *eb, GtkListItem *item)
+static void move_top_bottom_main(EffectBrowser *eb, gboolean top)
 {
-     gint i;
-     GList *l;
-     i = gtk_list_child_position(GTK_LIST(eb->list_widget),
-				 GTK_WIDGET(item));
-     l = g_list_append(NULL, item);
-     gtk_list_remove_items_no_unref(GTK_LIST(eb->list_widget),l);
-     gtk_list_insert_items(GTK_LIST(eb->list_widget),l,i+1);
-     gtk_list_item_select(GTK_LIST_ITEM(eb->list_widget_sel));
-     save_effect_order(eb);    
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     if (gtk_tree_selection_get_selected (eb->list_sel, &model, &iter)) {
+          if (top)
+               gtk_list_store_move_after (eb->liststore, &iter, NULL);
+          else
+               gtk_list_store_move_before (eb->liststore, &iter, NULL);
+     }
+     save_effect_order(eb);
 }
 
-static void movetop_main(EffectBrowser *eb, GtkListItem *item)
+static void list_item_moveup(gpointer user_data, guint callback_action,
+                             GtkWidget *widget)
 {
-     GList *l;
-     l = g_list_append(NULL, item);
-     gtk_list_remove_items_no_unref(GTK_LIST(eb->list_widget),l);
-     gtk_list_prepend_items(GTK_LIST(eb->list_widget),l);
-     gtk_list_item_select(GTK_LIST_ITEM(eb->list_widget_sel));
-     save_effect_order(eb);    
+     EffectBrowser *eb = EFFECT_BROWSER(user_data);
+     move_up_down_main(eb,TRUE);
 }
 
-static void movebot_main(EffectBrowser *eb, GtkListItem *item)
+static void list_item_movedown(gpointer user_data, guint callback_action,
+                               GtkWidget *widget)
 {
-     GList *l;
-     l = g_list_append(NULL, item);
-     gtk_list_remove_items_no_unref(GTK_LIST(eb->list_widget),l);
-     gtk_list_append_items(GTK_LIST(eb->list_widget),l);
-     gtk_list_item_select(GTK_LIST_ITEM(eb->list_widget_sel));
-     save_effect_order(eb);    
+     EffectBrowser *eb = EFFECT_BROWSER(user_data);
+     move_up_down_main(eb,FALSE);
 }
 
-static EffectBrowser *clicked_eb;
-
-static void list_item_moveup(GtkMenuItem *menuitem, gpointer user_data)
+static void list_item_movetotop(gpointer user_data, guint callback_action,
+                                GtkWidget *widget)
 {
-     moveup_main(clicked_eb, clicked_eb->list_widget_clicked);
+     EffectBrowser *eb = EFFECT_BROWSER(user_data);
+     move_top_bottom_main(eb,TRUE);
 }
 
-static void list_item_movedown(GtkMenuItem *menuitem, gpointer user_data)
+static void list_item_movetobottom(gpointer user_data, guint callback_action,
+                                   GtkWidget *widget)
 {
-     movedown_main(clicked_eb, clicked_eb->list_widget_clicked);
-}
-
-static void list_item_movetotop(GtkMenuItem *menuitem, gpointer user_data)
-{
-     movetop_main(clicked_eb, clicked_eb->list_widget_clicked);
-}
-
-static void list_item_movetobottom(GtkMenuItem *menuitem, gpointer user_data)
-{
-     movebot_main(clicked_eb, clicked_eb->list_widget_clicked);
+     EffectBrowser *eb = EFFECT_BROWSER(user_data);
+     move_top_bottom_main(eb,FALSE);
 }
 
 static void list_item_sort_main(EffectBrowser *eb, GCompareFunc compfunc)
 {
      /* Not the quickest way, but preserves original order if compfunc 
 	returns >0 when objects are equal */
-     GList *k,*l,*m=NULL;
+     GList *l,*m=NULL;
      gint i;
      struct effect *e;
      gchar *c,*d;
-     k = gtk_container_get_children(GTK_CONTAINER(eb->list_widget));
-     for (l=k; l!=NULL; l=l->next) {
-	  e = gtk_object_get_data(GTK_OBJECT(l->data),"effectptr");
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     gboolean valid;
+
+     model = GTK_TREE_MODEL(eb->liststore);
+     valid = gtk_tree_model_get_iter_first(model,&iter);
+     while(valid) {
+          gtk_tree_model_get (model, &iter, 1, &e, -1);
 	  g_assert(e != NULL);
 	  m = g_list_insert_sorted(m,e,compfunc);
+          valid = gtk_tree_model_iter_next (model, &iter);
      }
-     g_list_free(k);
+
      for (l=m,i=0; l!=NULL; l=l->next,i++) {
 	  e = (struct effect *)l->data;
 	  c = g_strdup_printf("effectBrowserOrder%d",i);
@@ -538,33 +548,44 @@ gint loc_sort_func(gconstpointer a, gconstpointer b)
 }
 
 
-static void list_item_sortbytitle(GtkMenuItem *menuitem, gpointer user_data)
+static void list_item_sortbytitle(gpointer user_data, guint callback_action,
+                                  GtkWidget *widget)
 {     
-     list_item_sort_main(clicked_eb, title_sort_func);
+     EffectBrowser *eb = EFFECT_BROWSER(user_data);
+     list_item_sort_main(eb, title_sort_func);
 }
 
-static void list_item_sortbytype(GtkMenuItem *menuitem, gpointer user_data)
+static void list_item_sortbytype(gpointer user_data, guint callback_action,
+                                 GtkWidget *widget)
 {
-     list_item_sort_main(clicked_eb, type_sort_func);
+     EffectBrowser *eb = EFFECT_BROWSER(user_data);
+     list_item_sort_main(eb, type_sort_func);
 }
 
-static void list_item_sortbyloc(GtkMenuItem *menuitem, gpointer user_data)
+static void list_item_sortbyloc(gpointer user_data, guint callback_action,
+                                GtkWidget *widget)
 {
-     list_item_sort_main(clicked_eb, loc_sort_func);
+     EffectBrowser *eb = EFFECT_BROWSER(user_data);
+     list_item_sort_main(eb, loc_sort_func);
 }
 
-static void list_item_sortbyauth(GtkMenuItem *menuitem, gpointer user_data)
+static void list_item_sortbyauth(gpointer user_data, guint callback_action,
+                                 GtkWidget *widget)
 {
-     list_item_sort_main(clicked_eb, auth_sort_func);
+     EffectBrowser *eb = EFFECT_BROWSER(user_data);
+     list_item_sort_main(eb, auth_sort_func);
 }
 
-static void list_item_unsort(GtkMenuItem *menuitem, gpointer user_data)
+static void list_item_unsort(gpointer user_data, guint callback_action,
+                             GtkWidget *widget)
 {
+     EffectBrowser *eb = EFFECT_BROWSER(user_data);
      inifile_set("effectBrowserOrder0",NULL);
-     list_widget_rebuild(NULL,NULL,clicked_eb);
+     list_widget_rebuild(NULL,NULL,eb);
 }
 
-static void list_item_rebuild(GtkMenuItem *menuitem, gpointer user_data)
+static void list_item_rebuild(gpointer user_data, guint callback_action,
+                              GtkWidget *widget)
 {
      effect_register_rebuild();
 }
@@ -604,10 +625,8 @@ static gint list_item_button_press(GtkWidget *widget, GdkEventButton *event,
 #endif
 	       gtk_item_factory_create_items(item_factory,
 					     ARRAY_LENGTH(menu_items),
-					     menu_items,NULL);
+					     menu_items,eb);
 	  }
-	  clicked_eb = eb;
-	  eb->list_widget_clicked = GTK_LIST_ITEM(widget);
 	  w = gtk_item_factory_get_widget(item_factory,"<popup>");
 	  gtk_menu_popup(GTK_MENU(w),NULL,NULL,NULL,NULL,event->button,
 			 event->time);
@@ -615,57 +634,53 @@ static gint list_item_button_press(GtkWidget *widget, GdkEventButton *event,
      return FALSE;
 }
 
-static void add_list_item_main(struct effect *e, GtkList *l, EffectBrowser *eb)
+static void add_list_item_main(struct effect *e, GtkListStore *l, EffectBrowser *eb)
 {
      gchar *c,*d;
-     GtkWidget *w;
+     GtkTreeIter iter;
      c = g_strdup_printf("[%c] %s",e->source_tag,e->title);
 
      /* Translate here for keeping compatibility with old translations */
      /* New translations should translate the title without the prefix */
      if (e->source_tag == 'B' || e->source_tag == 'S') d = _(c); else d = c;
 
-     w = gtk_list_item_new_with_label(d);
+     gtk_list_store_append(l,&iter);
+     gtk_list_store_set(l,&iter,0,d,1,e,-1);
      g_free(c);
-     gtk_object_set_data(GTK_OBJECT(w),"effectptr",e);
-     g_signal_connect(G_OBJECT(w),"button_press_event",
-			G_CALLBACK(list_item_button_press),eb);
-     gtk_container_add(GTK_CONTAINER(l),w);
-     gtk_widget_show(w);
 }
 
 static void add_list_item(gpointer item, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
      struct effect *e = (struct effect *)item;
-     add_list_item_main(e,eb->list_widget,eb);
+     add_list_item_main(e,eb->liststore,eb);
 }
 
 static void top_click(GtkButton *button, gpointer user_data)
 {     
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
-     movetop_main(eb,eb->list_widget_sel);
+     move_top_bottom_main(eb,TRUE);
 }
 
 static void bottom_click(GtkButton *button, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
-     movebot_main(eb,eb->list_widget_sel);
+     move_top_bottom_main(eb,FALSE);
 }
 
 static void up_click(GtkButton *button, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
-     moveup_main(eb, eb->list_widget_sel);
+     move_up_down_main(eb,TRUE);
 }
 
 static void down_click(GtkButton *button, gpointer user_data)
 {
      EffectBrowser *eb = EFFECT_BROWSER(user_data);
-     movedown_main(eb, eb->list_widget_sel);
+     move_up_down_main(eb,FALSE);
 }
 
-static void add_list_widget_items(GtkList *list, EffectBrowser *eb)
+static void add_list_widget_items(GtkListStore *list, EffectBrowser *eb)
 {
      gint i;
      gchar *c,*d;
@@ -703,8 +718,8 @@ static void add_list_widget_items(GtkList *list, EffectBrowser *eb)
 static void list_widget_rebuild(gpointer dummy, gpointer dummy2, 
 				EffectBrowser *eb)
 {
-     gtk_list_clear_items(eb->list_widget,0,-1);
-     add_list_widget_items(eb->list_widget, eb);
+     gtk_list_store_clear(eb->liststore);
+     add_list_widget_items(eb->liststore, eb);
 }
 
 static void effect_browser_init(EffectBrowser *eb)
@@ -714,8 +729,8 @@ static void effect_browser_init(EffectBrowser *eb)
      GtkAccelGroup* ag;
      gchar *c,*d;
      gint x;
-
-     eb->list_widget_sel = NULL;
+     GtkTreeViewColumn *col;
+     GtkCellRenderer *renderer;
 
      ag = gtk_accel_group_new();
 
@@ -723,12 +738,20 @@ static void effect_browser_init(EffectBrowser *eb)
      memset(eb->dialog_effects,0,sizeof(eb->dialog_effects));
      eb->current_dialog = -1;
      
-     b11w = gtk_list_new();
-     eb->list_widget = GTK_LIST(b11w);
-     gtk_list_set_selection_mode(GTK_LIST(b11w),GTK_SELECTION_SINGLE);
+     b11w = gtk_tree_view_new();
+     gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(b11w),FALSE);
+     renderer = gtk_cell_renderer_text_new();
+     col = gtk_tree_view_column_new_with_attributes(NULL,renderer,"text",0,NULL);
+     gtk_tree_view_append_column(GTK_TREE_VIEW(b11w),col);
+     eb->list_sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(b11w));
+     gtk_tree_selection_set_mode(eb->list_sel,GTK_SELECTION_SINGLE);
+     eb->liststore = gtk_list_store_new(2,G_TYPE_STRING,G_TYPE_POINTER);
+     gtk_tree_view_set_model(GTK_TREE_VIEW(b11w),GTK_TREE_MODEL(eb->liststore));
+     g_signal_connect(b11w,"button_press_event",
+                      G_CALLBACK(list_item_button_press),eb);
 
      effect_register_update_list();
-     add_list_widget_items(eb->list_widget,eb);
+     add_list_widget_items(eb->liststore,eb);
 
      g_signal_connect(G_OBJECT(effect_list),"item-notify",
 			G_CALLBACK(list_widget_rebuild),eb);
@@ -866,8 +889,8 @@ GtkWidget *effect_browser_new_with_effect(Document *doc, gchar *effect,
 {
      GtkWidget *w;
      EffectBrowser *eb = g_object_new(EFFECT_BROWSER_TYPE, NULL);
-     g_signal_connect(G_OBJECT(eb->list_widget),"select_child",
-			G_CALLBACK(effect_browser_select_child),eb);
+     g_signal_connect(eb->list_sel,"changed",
+		      G_CALLBACK(effect_browser_selection_changed),eb);
 
      w = document_list_new(doc);
      gtk_box_pack_end(GTK_BOX(eb->mw_list_box),w,TRUE,TRUE,0);
@@ -893,22 +916,25 @@ void effect_browser_set_effect(EffectBrowser *eb, gchar *effect,
 			       gchar source_tag)
 {
      struct effect *e;
-     GList *l,*w;
+     GList *l;
      gpointer p;
-     
+     gboolean valid;
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     model = GTK_TREE_MODEL(eb->liststore);
      for (l=effect_list->list; l!=NULL; l=l->next) {
 	  e = (struct effect *)l->data;
 	  if (e->source_tag == source_tag && !strcmp(e->name, effect)) {
 	       /* Find the list item which points to this effect */
-	       w = gtk_container_get_children(GTK_CONTAINER(eb->list_widget));
-	       for (; w!=NULL; w=w->next) {
-		    p = gtk_object_get_data(GTK_OBJECT(w->data),"effectptr");
+               valid = gtk_tree_model_get_iter_first(model,&iter);
+	       while(valid) {
+                    gtk_tree_model_get (model, &iter, 1, &p, -1);
 		    g_assert(p != NULL);
 		    if (p == e) {
-			 gtk_list_select_child(eb->list_widget,
-					       GTK_WIDGET(w->data));
+			 gtk_tree_selection_select_iter(eb->list_sel,&iter);
 			 return;
 		    }
+                    valid = gtk_tree_model_iter_next (model, &iter);
 	       }
 	       /* Effect exists but not in list, shouldn't happen */
 	       g_assert_not_reached();
