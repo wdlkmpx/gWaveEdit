@@ -582,44 +582,44 @@ msgid "This effect could not be loaded."
 msgstr "L'effetto non può essere caricato."
 
 #: src/effectbrowser.c:582
-msgid "/Move Up"
-msgstr "/Sposta su"
+msgid "Move Up"
+msgstr "Sposta su"
 
 #: src/effectbrowser.c:583
-msgid "/Move Down"
-msgstr "/Sposta giù"
+msgid "Move Down"
+msgstr "Sposta giù"
 
 #: src/effectbrowser.c:584
-msgid "/Move to Top"
-msgstr "/Sposta in cima"
+msgid "Move to Top"
+msgstr "Sposta in cima"
 
 #: src/effectbrowser.c:585
-msgid "/Move to Bottom"
-msgstr "/Sposta in fondo"
+msgid "Move to Bottom"
+msgstr "Sposta in fondo"
 
 #: src/effectbrowser.c:587
-msgid "/Sort by Name"
-msgstr "/Ordina per nome"
+msgid "Sort by Name"
+msgstr "Ordina per nome"
 
 #: src/effectbrowser.c:588
-msgid "/Sort by Type"
-msgstr "/Ordina per tipo"
+msgid "Sort by Type"
+msgstr "Ordina per tipo"
 
 #: src/effectbrowser.c:589
-msgid "/Sort by Location"
-msgstr "/Ordina per posizione"
+msgid "Sort by Location"
+msgstr "Ordina per posizione"
 
 #: src/effectbrowser.c:590
-msgid "/Sort by Author"
-msgstr "/Ordina per autore"
+msgid "Sort by Author"
+msgstr "Ordina per autore"
 
 #: src/effectbrowser.c:592
-msgid "/Restore Order"
-msgstr "/Ripristina ordine"
+msgid "Restore Order"
+msgstr "Ripristina ordine"
 
 #: src/effectbrowser.c:593
-msgid "/Rebuild Effect List"
-msgstr "/Rileggi lista effetti"
+msgid "Rebuild Effect List"
+msgstr "Rileggi lista effetti"
 
 #: src/effectbrowser.c:744
 msgid "Top"

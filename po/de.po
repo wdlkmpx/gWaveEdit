@@ -536,44 +536,44 @@ msgid "This effect could not be loaded."
 msgstr "Dieser Effekt konnte nicht geladen werden."
 
 #: src/effectbrowser.c:582
-msgid "/Move Up"
-msgstr "/Nach oben Bewegen"
+msgid "Move Up"
+msgstr "Nach oben Bewegen"
 
 #: src/effectbrowser.c:583
-msgid "/Move Down"
-msgstr "/Nach unten Bewegen"
+msgid "Move Down"
+msgstr "Nach unten Bewegen"
 
 #: src/effectbrowser.c:584
-msgid "/Move to Top"
-msgstr "/Zum Anfang bewegen"
+msgid "Move to Top"
+msgstr "Zum Anfang bewegen"
 
 #: src/effectbrowser.c:585
-msgid "/Move to Bottom"
-msgstr "/Zum Ende bewegen"
+msgid "Move to Bottom"
+msgstr "Zum Ende bewegen"
 
 #: src/effectbrowser.c:587
-msgid "/Sort by Name"
-msgstr "/Nach Namen sortieren"
+msgid "Sort by Name"
+msgstr "Nach Namen sortieren"
 
 #: src/effectbrowser.c:588
-msgid "/Sort by Type"
-msgstr "/Nach Typ sortieren"
+msgid "Sort by Type"
+msgstr "Nach Typ sortieren"
 
 #: src/effectbrowser.c:589
-msgid "/Sort by Location"
-msgstr "/Nach Ort sortieren"
+msgid "Sort by Location"
+msgstr "Nach Ort sortieren"
 
 #: src/effectbrowser.c:590
-msgid "/Sort by Author"
-msgstr "/Nach Author sortieren"
+msgid "Sort by Author"
+msgstr "Nach Author sortieren"
 
 #: src/effectbrowser.c:592
-msgid "/Restore Order"
-msgstr "/Stelle alte Reihenfolge wieder her"
+msgid "Restore Order"
+msgstr "Stelle alte Reihenfolge wieder her"
 
 #: src/effectbrowser.c:593
-msgid "/Rebuild Effect List"
-msgstr "/Aktualisiere Effekt Liste"
+msgid "Rebuild Effect List"
+msgstr "Aktualisiere Effekt Liste"
 
 #: src/effectbrowser.c:744
 msgid "Top"

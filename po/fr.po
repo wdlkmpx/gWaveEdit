@@ -591,43 +591,43 @@ msgid "This effect could not be loaded."
 msgstr "Cet effet n'a pas pu être chargé."
 
 #: src/effectbrowser.c:582
-msgid "/Move Up"
+msgid "Move Up"
 msgstr "Monter d'un cran"
 
 #: src/effectbrowser.c:583
-msgid "/Move Down"
+msgid "Move Down"
 msgstr "Descendre d'un cran"
 
 #: src/effectbrowser.c:584
-msgid "/Move to Top"
+msgid "Move to Top"
 msgstr "Monter tout en haut"
 
 #: src/effectbrowser.c:585
-msgid "/Move to Bottom"
+msgid "Move to Bottom"
 msgstr "Descendre tout en bas cran"
 
 #: src/effectbrowser.c:587
-msgid "/Sort by Name"
+msgid "Sort by Name"
 msgstr "Trier par nom"
 
 #: src/effectbrowser.c:588
-msgid "/Sort by Type"
+msgid "Sort by Type"
 msgstr "Trier par type"
 
 #: src/effectbrowser.c:589
-msgid "/Sort by Location"
+msgid "Sort by Location"
 msgstr "Trier par emplacement"
 
 #: src/effectbrowser.c:590
-msgid "/Sort by Author"
+msgid "Sort by Author"
 msgstr "Trier par auteur"
 
 #: src/effectbrowser.c:592
-msgid "/Restore Order"
+msgid "Restore Order"
 msgstr "Restorer l'ordre"
 
 #: src/effectbrowser.c:593
-msgid "/Rebuild Effect List"
+msgid "Rebuild Effect List"
 msgstr "Reconstruire la liste d'effets"
 
 #: src/effectbrowser.c:744

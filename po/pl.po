@@ -522,44 +522,44 @@ msgid "This effect could not be loaded."
 msgstr "Ten efekt nie może być wczytany."
 
 #: src/effectbrowser.c:582
-msgid "/Move Up"
-msgstr "/Podnieś"
+msgid "Move Up"
+msgstr "Podnieś"
 
 #: src/effectbrowser.c:583
-msgid "/Move Down"
-msgstr "/Opuść"
+msgid "Move Down"
+msgstr "Opuść"
 
 #: src/effectbrowser.c:584
-msgid "/Move to Top"
-msgstr "/Przesuń do szczyt"
+msgid "Move to Top"
+msgstr "Przesuń do szczyt"
 
 #: src/effectbrowser.c:585
-msgid "/Move to Bottom"
-msgstr "/Przesuń na dno"
+msgid "Move to Bottom"
+msgstr "Przesuń na dno"
 
 #: src/effectbrowser.c:587
-msgid "/Sort by Name"
-msgstr "/Sortuj według nazwy"
+msgid "Sort by Name"
+msgstr "Sortuj według nazwy"
 
 #: src/effectbrowser.c:588
-msgid "/Sort by Type"
-msgstr "/Sortuj według rodzaju"
+msgid "Sort by Type"
+msgstr "Sortuj według rodzaju"
 
 #: src/effectbrowser.c:589
-msgid "/Sort by Location"
-msgstr "/Sortuj według położenia"
+msgid "Sort by Location"
+msgstr "Sortuj według położenia"
 
 #: src/effectbrowser.c:590
-msgid "/Sort by Author"
-msgstr "/Sortuj według Autora"
+msgid "Sort by Author"
+msgstr "Sortuj według Autora"
 
 #: src/effectbrowser.c:592
-msgid "/Restore Order"
-msgstr "/Przywróc porządek"
+msgid "Restore Order"
+msgstr "Przywróc porządek"
 
 #: src/effectbrowser.c:593
-msgid "/Rebuild Effect List"
-msgstr "/Przebuduj listę efektu"
+msgid "Rebuild Effect List"
+msgstr "Przebuduj listę efektu"
 
 #: src/effectbrowser.c:744
 msgid "Top"

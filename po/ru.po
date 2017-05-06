@@ -12,39 +12,39 @@ msgstr ""
 "Last-Translator: Konstantin Korikov <lostclus@ua.fm>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/chunk.c:197
 msgid "Converting samplerate"
-msgstr "Преобразование частоты сэмплов"
+msgstr "п÷я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦п╣ я┤п╟я│я┌п╬я┌я▀ я│я█п╪п©п╩п╬п╡"
 
 #: src/chunk.c:224
 msgid "Adjusting speed"
-msgstr "Подстройка скорости"
+msgstr "п÷п╬п╢я│я┌я─п╬п╧п╨п╟ я│п╨п╬я─п╬я│я┌п╦"
 
 #: src/chunk.c:701
 msgid "Mixing"
-msgstr "Микширование"
+msgstr "п°п╦п╨я┬п╦я─п╬п╡п╟п╫п╦п╣"
 
 #: src/chunk.c:756
 #, c-format
 msgid "The mixed result was clipped %d times."
-msgstr "Результат микширования был обрезан %d раз."
+msgstr "п═п╣п╥я┐п╩я▄я┌п╟я┌ п╪п╦п╨я┬п╦я─п╬п╡п╟п╫п╦я▐ п╠я▀п╩ п╬п╠я─п╣п╥п╟п╫ %d я─п╟п╥."
 
 #: src/chunk.c:820
 #, fuzzy
 msgid "Combining channels"
-msgstr "[B] Скомбинировать каналы"
+msgstr "[B] п║п╨п╬п╪п╠п╦п╫п╦я─п╬п╡п╟я┌я▄ п╨п╟п╫п╟п╩я▀"
 
 #: src/chunk.c:1081
 #, fuzzy
 msgid "Mixing channels"
-msgstr "Добавление каналов"
+msgstr "п■п╬п╠п╟п╡п╩п╣п╫п╦п╣ п╨п╟п╫п╟п╩п╬п╡"
 
 #: src/chunk.c:1469
 msgid "Calculating peak level"
-msgstr "Подсчет пикового уровня"
+msgstr "п÷п╬п╢я│я┤п╣я┌ п©п╦п╨п╬п╡п╬пЁп╬ я┐я─п╬п╡п╫я▐"
 
 #: src/chunk.c:1540 src/chunk.c:1550 src/chunk.c:1588 src/chunk.c:1598
 msgid "Finding zero-crossing"
@@ -57,77 +57,77 @@ msgstr ""
 
 #: src/chunk.c:1667
 msgid "Amplifying"
-msgstr "Усиление"
+msgstr "пёя│п╦п╩п╣п╫п╦п╣"
 
 #: src/chunk.c:1865
 #, fuzzy, c-format
 msgid "The input was clipped %d times during processing."
-msgstr "Результат микширования был обрезан %d раз."
+msgstr "п═п╣п╥я┐п╩я▄я┌п╟я┌ п╪п╦п╨я┬п╦я─п╬п╡п╟п╫п╦я▐ п╠я▀п╩ п╬п╠я─п╣п╥п╟п╫ %d я─п╟п╥."
 
 #: src/configdialog.c:62
 msgid "number of recent files"
-msgstr "количество недавно использованных файлов"
+msgstr "п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п╫п╣п╢п╟п╡п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╫я▀я┘ я└п╟п╧п╩п╬п╡"
 
 #: src/configdialog.c:76
 msgid ""
 "Some of the settings you have changed will not be activated until you "
 "restart the program"
 msgstr ""
-"Некоторые установки, которые вы изменили, не будут активизированыпока вы не "
-"перезапустите программу"
+"п²п╣п╨п╬я┌п╬я─я▀п╣ я┐я│я┌п╟п╫п╬п╡п╨п╦, п╨п╬я┌п╬я─я▀п╣ п╡я▀ п╦п╥п╪п╣п╫п╦п╩п╦, п╫п╣ п╠я┐п╢я┐я┌ п╟п╨я┌п╦п╡п╦п╥п╦я─п╬п╡п╟п╫я▀п©п╬п╨п╟ п╡я▀ п╫п╣ "
+"п©п╣я─п╣п╥п╟п©я┐я│я┌п╦я┌п╣ п©я─п╬пЁя─п╟п╪п╪я┐"
 
 #: src/configdialog.c:273
 msgid "Colors"
-msgstr "Цвета"
+msgstr "п╕п╡п╣я┌п╟"
 
 #: src/configdialog.c:310
 msgid "_Preview"
-msgstr "_Предпросмотр"
+msgstr "_п÷я─п╣п╢п©я─п╬я│п╪п╬я┌я─"
 
 #: src/configdialog.c:317 src/configdialog.c:1112
 msgid "_OK"
-msgstr "_ОК"
+msgstr "_п·п "
 
 #: src/configdialog.c:335
 msgid "_Cancel"
-msgstr "О_тменить"
+msgstr "п·_я┌п╪п╣п╫п╦я┌я▄"
 
 #: src/configdialog.c:412
 msgid "Browse directory"
-msgstr "Выбрать каталог"
+msgstr "п▓я▀п╠я─п╟я┌я▄ п╨п╟я┌п╟п╩п╬пЁ"
 
 #: src/configdialog.c:462
 msgid "Preferences"
-msgstr "Настройки"
+msgstr "п²п╟я│я┌я─п╬п╧п╨п╦"
 
 #: src/configdialog.c:521
 msgid "Show _time scale by default"
-msgstr "По умолчанию отображать _временные отметки"
+msgstr "п÷п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ п╬я┌п╬п╠я─п╟п╤п╟я┌я▄ _п╡я─п╣п╪п╣п╫п╫я▀п╣ п╬я┌п╪п╣я┌п╨п╦"
 
 #: src/configdialog.c:531
 msgid "Show _horizontal zoom slider by default"
-msgstr "По умолчанию отображать управление _горизонтальным масштабом"
+msgstr "п÷п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ п╬я┌п╬п╠я─п╟п╤п╟я┌я▄ я┐п©я─п╟п╡п╩п╣п╫п╦п╣ _пЁп╬я─п╦п╥п╬п╫я┌п╟п╩я▄п╫я▀п╪ п╪п╟я│я┬я┌п╟п╠п╬п╪"
 
 #: src/configdialog.c:541
 msgid "Show _vertical zoom slider by default"
-msgstr "По умолчанию отображать управление _вертикальным масштабом"
+msgstr "п÷п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ п╬я┌п╬п╠я─п╟п╤п╟я┌я▄ я┐п©я─п╟п╡п╩п╣п╫п╦п╣ _п╡п╣я─я┌п╦п╨п╟п╩я▄п╫я▀п╪ п╪п╟я│я┬я┌п╟п╠п╬п╪"
 
 #: src/configdialog.c:551
 msgid "Show _speed slider by default"
-msgstr "По умолчанию отображать управление _скоростью"
+msgstr "п÷п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ п╬я┌п╬п╠я─п╟п╤п╟я┌я▄ я┐п©я─п╟п╡п╩п╣п╫п╦п╣ _я│п╨п╬я─п╬я│я┌я▄я▌"
 
 #: src/configdialog.c:560
 msgid "_Settings"
-msgstr "_Установки"
+msgstr "_пёя│я┌п╟п╫п╬п╡п╨п╦"
 
 #: src/configdialog.c:570
 msgid "_Keep sound driver opened (to avoid start/stop clicks)"
 msgstr ""
-"У_держивать звуковой драйвер открытым (чтобы избежать щелчков на границах)"
+"пё_п╢п╣я─п╤п╦п╡п╟я┌я▄ п╥п╡я┐п╨п╬п╡п╬п╧ п╢я─п╟п╧п╡п╣я─ п╬я┌п╨я─я▀я┌я▀п╪ (я┤я┌п╬п╠я▀ п╦п╥п╠п╣п╤п╟я┌я▄ я┴п╣п╩я┤п╨п╬п╡ п╫п╟ пЁя─п╟п╫п╦я├п╟я┘)"
 
 #: src/configdialog.c:579
 msgid "_Byte-swap output (try this if playback sounds horrible)"
-msgstr "Вывод с перестановкой байт (попробуйте это если звук противный)"
+msgstr "п▓я▀п╡п╬п╢ я│ п©п╣я─п╣я│я┌п╟п╫п╬п╡п╨п╬п╧ п╠п╟п╧я┌ (п©п╬п©я─п╬п╠я┐п╧я┌п╣ я█я┌п╬ п╣я│п╩п╦ п╥п╡я┐п╨ п©я─п╬я┌п╦п╡п╫я▀п╧)"
 
 #: src/configdialog.c:588
 msgid "Play _mono files as stereo"
@@ -135,44 +135,44 @@ msgstr ""
 
 #: src/configdialog.c:596
 msgid "_Update cursor information while playing"
-msgstr "_Обновлять информацию о курсоре при воспроизведении"
+msgstr "_п·п╠п╫п╬п╡п╩я▐я┌я▄ п╦п╫я└п╬я─п╪п╟я├п╦я▌ п╬ п╨я┐я─я│п╬я─п╣ п©я─п╦ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╦"
 
 #: src/configdialog.c:604
 msgid "_Keep cursor in center of view when following playback"
-msgstr "_Удерживать курсор по центру когда он следует воспроизведению"
+msgstr "_пёп╢п╣я─п╤п╦п╡п╟я┌я▄ п╨я┐я─я│п╬я─ п©п╬ я├п╣п╫я┌я─я┐ п╨п╬пЁп╢п╟ п╬п╫ я│п╩п╣п╢я┐п╣я┌ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦я▌"
 
 #: src/configdialog.c:614
 msgid "_Auto-start playback when jumping to mark"
-msgstr "_Автоматически начинать воспроизведение при переходе на метку"
+msgstr "_п░п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╦ п╫п╟я┤п╦п╫п╟я┌я▄ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣ п©я─п╦ п©п╣я─п╣я┘п╬п╢п╣ п╫п╟ п╪п╣я┌п╨я┐"
 
 #: src/configdialog.c:622
 msgid "Enable _variable speed playback"
-msgstr "Разрешить воспроизведение с _переменной скоростью"
+msgstr "п═п╟п╥я─п╣я┬п╦я┌я▄ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣ я│ _п©п╣я─п╣п╪п╣п╫п╫п╬п╧ я│п╨п╬я─п╬я│я┌я▄я▌"
 
 #: src/configdialog.c:631
 msgid "Auto-_reset speed"
-msgstr "Автоматически сбрасывать скорость"
+msgstr "п░п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╦ я│п╠я─п╟я│я▀п╡п╟я┌я▄ я│п╨п╬я─п╬я│я┌я▄"
 
 #: src/configdialog.c:638
 msgid "Use fast and noisy method"
-msgstr "Использовать быстрый и шумящий метод"
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╠я▀я│я┌я─я▀п╧ п╦ я┬я┐п╪я▐я┴п╦п╧ п╪п╣я┌п╬п╢"
 
 #: src/configdialog.c:646
 msgid "(H')MM:SS.t"
-msgstr "(Ч')ММ:СС.д"
+msgstr "(п╖')п°п°:п║п║.п╢"
 
 #: src/configdialog.c:647
 msgid "(H')MM:SS.mmmm"
-msgstr "(Ч')ММ:СС.мммм"
+msgstr "(п╖')п°п°:п║п║.п╪п╪п╪п╪"
 
 #: src/configdialog.c:648
 msgid "TimeDisplay|Samples"
-msgstr "Сэмплы"
+msgstr "п║я█п╪п©п╩я▀"
 
 #: src/configdialog.c:649
 #, fuzzy
 msgid "Time Code 24fps"
-msgstr "Время записи: "
+msgstr "п▓я─п╣п╪я▐ п╥п╟п©п╦я│п╦: "
 
 #: src/configdialog.c:650
 msgid "Time Code 25fps (PAL)"
@@ -185,51 +185,51 @@ msgstr ""
 #: src/configdialog.c:652
 #, fuzzy
 msgid "Time Code 30fps"
-msgstr "Время записи: "
+msgstr "п▓я─п╣п╪я▐ п╥п╟п©п╦я│п╦: "
 
 #: src/configdialog.c:665
 msgid "_Remember window sizes/positions"
-msgstr "_Запоминать размер/позицию окна"
+msgstr "_п≈п╟п©п╬п╪п╦п╫п╟я┌я▄ я─п╟п╥п╪п╣я─/п©п╬п╥п╦я├п╦я▌ п╬п╨п╫п╟"
 
 #: src/configdialog.c:674
 msgid "_Draw waveform a second time with improved quality"
-msgstr "_Отображать волновую форму второй раз с улучшенным качеством"
+msgstr "_п·я┌п╬п╠я─п╟п╤п╟я┌я▄ п╡п╬п╩п╫п╬п╡я┐я▌ я└п╬я─п╪я┐ п╡я┌п╬я─п╬п╧ я─п╟п╥ я│ я┐п╩я┐я┤я┬п╣п╫п╫я▀п╪ п╨п╟я┤п╣я│я┌п╡п╬п╪"
 
 #: src/configdialog.c:704
 msgid "_Remove"
-msgstr "_Удалить"
+msgstr "_пёп╢п╟п╩п╦я┌я▄"
 
 #: src/configdialog.c:712
 msgid "_Add"
-msgstr "_Добавить"
+msgstr "_п■п╬п╠п╟п╡п╦я┌я▄"
 
 #: src/configdialog.c:719
 msgid "_Browse..."
-msgstr "_Обзор..."
+msgstr "_п·п╠п╥п╬я─..."
 
 #: src/configdialog.c:726
 msgid "_Up"
-msgstr "_Вверх"
+msgstr "_п▓п╡п╣я─я┘"
 
 #: src/configdialog.c:734
 msgid "_Down"
-msgstr "В_низ"
+msgstr "п▓_п╫п╦п╥"
 
 #: src/configdialog.c:747
 msgid "Keep main _window in front after applying effect"
-msgstr "Оставить _главное окно впереди после применения эффекта"
+msgstr "п·я│я┌п╟п╡п╦я┌я▄ _пЁп╩п╟п╡п╫п╬п╣ п╬п╨п╫п╬ п╡п©п╣я─п╣п╢п╦ п©п╬я│п╩п╣ п©я─п╦п╪п╣п╫п╣п╫п╦я▐ я█я└я└п╣п╨я┌п╟"
 
 #: src/configdialog.c:763
 msgid "_Use floating-point temporary files"
-msgstr "_Для временных файлов использовать формат с плавающей точкой"
+msgstr "_п■п╩я▐ п╡я─п╣п╪п╣п╫п╫я▀я┘ я└п╟п╧п╩п╬п╡ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я└п╬я─п╪п╟я┌ я│ п©п╩п╟п╡п╟я▌я┴п╣п╧ я┌п╬я┤п╨п╬п╧"
 
 #: src/configdialog.c:772
 msgid "Enable _dithering for editing"
-msgstr "Сглаживание при _редактировании"
+msgstr "п║пЁп╩п╟п╤п╦п╡п╟п╫п╦п╣ п©я─п╦ _я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╦"
 
 #: src/configdialog.c:780
 msgid "Enable dithering for _playback"
-msgstr "Сглаживание при _воспроизведении"
+msgstr "п║пЁп╩п╟п╤п╦п╡п╟п╫п╦п╣ п©я─п╦ _п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╦"
 
 #: src/configdialog.c:788
 msgid "Auto dete_ct driver on each start-up"
@@ -237,39 +237,39 @@ msgstr ""
 
 #: src/configdialog.c:811
 msgid "Interface"
-msgstr "Интерфейс"
+msgstr "п≤п╫я┌п╣я─я└п╣п╧я│"
 
 #: src/configdialog.c:812
 msgid " Main window "
-msgstr " Главное окно "
+msgstr " п⌠п╩п╟п╡п╫п╬п╣ п╬п╨п╫п╬ "
 
 #: src/configdialog.c:823
 msgid "Number of recent files in File menu: "
-msgstr "Количество недавно использованных файлов в меню \"Файл\": "
+msgstr "п п╬п╩п╦я┤п╣я│я┌п╡п╬ п╫п╣п╢п╟п╡п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╫я▀я┘ я└п╟п╧п╩п╬п╡ п╡ п╪п╣п╫я▌ \"п╓п╟п╧п╩\": "
 
 #: src/configdialog.c:828
 msgid " View "
-msgstr " Вид "
+msgstr " п▓п╦п╢ "
 
 #: src/configdialog.c:839
 msgid "Customize co_lors..."
-msgstr "Настройка _цветов..."
+msgstr "п²п╟я│я┌я─п╬п╧п╨п╟ _я├п╡п╣я┌п╬п╡..."
 
 #: src/configdialog.c:846
 msgid " Window contents "
-msgstr " Содержание окна "
+msgstr " п║п╬п╢п╣я─п╤п╟п╫п╦п╣ п╬п╨п╫п╟ "
 
 #: src/configdialog.c:863
 msgid "Sound"
-msgstr "Звук"
+msgstr "п≈п╡я┐п╨"
 
 #: src/configdialog.c:864
 msgid " Driver options "
-msgstr " Опции драйвера "
+msgstr " п·п©я├п╦п╦ п╢я─п╟п╧п╡п╣я─п╟ "
 
 #: src/configdialog.c:872
 msgid "_Driver:"
-msgstr "_Драйвер:"
+msgstr "_п■я─п╟п╧п╡п╣я─:"
 
 #: src/configdialog.c:889
 msgid " Fallback format "
@@ -278,32 +278,32 @@ msgstr ""
 #: src/configdialog.c:894
 msgid "Sample format to try when the sound file's format isn't supported."
 msgstr ""
-"Попытаться использовать данный формат сэмплов если формат звукового файла не "
-"поддерживается."
+"п÷п╬п©я▀я┌п╟я┌я▄я│я▐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╢п╟п╫п╫я▀п╧ я└п╬я─п╪п╟я┌ я│я█п╪п©п╩п╬п╡ п╣я│п╩п╦ я└п╬я─п╪п╟я┌ п╥п╡я┐п╨п╬п╡п╬пЁп╬ я└п╟п╧п╩п╟ п╫п╣ "
+"п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐."
 
 #: src/configdialog.c:906
 msgid "Playback"
-msgstr "Воспроизведение"
+msgstr "п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣"
 
 #: src/configdialog.c:908
 msgid " Playback settings "
-msgstr " Установки воспроизведения "
+msgstr " пёя│я┌п╟п╫п╬п╡п╨п╦ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦я▐ "
 
 #: src/configdialog.c:920
 msgid " Variable speed "
-msgstr " Переменная скорость "
+msgstr " п÷п╣я─п╣п╪п╣п╫п╫п╟я▐ я│п╨п╬я─п╬я│я┌я▄ "
 
 #: src/configdialog.c:935 src/help.c:38
 msgid "Files"
-msgstr "Файлы"
+msgstr "п╓п╟п╧п╩я▀"
 
 #: src/configdialog.c:937
 msgid " Temporary file directories "
-msgstr " Каталоги для временных файлов "
+msgstr " п п╟я┌п╟п╩п╬пЁп╦ п╢п╩я▐ п╡я─п╣п╪п╣п╫п╫я▀я┘ я└п╟п╧п╩п╬п╡ "
 
 #: src/configdialog.c:963
 msgid " Temporary file settings "
-msgstr " Установки временных файлов "
+msgstr " пёя│я┌п╟п╫п╬п╡п╨п╦ п╡я─п╣п╪п╣п╫п╫я▀я┘ я└п╟п╧п╩п╬п╡ "
 
 #: src/configdialog.c:968
 msgid ""
@@ -311,152 +311,152 @@ msgid ""
 "data, floating-point temporary files can be used. However, this will "
 "increase disk and CPU usage."
 msgstr ""
-"Чтобы избежать неточность при округлении, когда применяется больше одного "
-"эффекта на одни и те же данные, можно использовать временные файлы с "
-"плавающей точкой. Однако, это потребует больше дискового пространства и "
-"времени центрального процессора."
+"п╖я┌п╬п╠я▀ п╦п╥п╠п╣п╤п╟я┌я▄ п╫п╣я┌п╬я┤п╫п╬я│я┌я▄ п©я─п╦ п╬п╨я─я┐пЁп╩п╣п╫п╦п╦, п╨п╬пЁп╢п╟ п©я─п╦п╪п╣п╫я▐п╣я┌я│я▐ п╠п╬п╩я▄я┬п╣ п╬п╢п╫п╬пЁп╬ "
+"я█я└я└п╣п╨я┌п╟ п╫п╟ п╬п╢п╫п╦ п╦ я┌п╣ п╤п╣ п╢п╟п╫п╫я▀п╣, п╪п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╡я─п╣п╪п╣п╫п╫я▀п╣ я└п╟п╧п╩я▀ я│ "
+"п©п╩п╟п╡п╟я▌я┴п╣п╧ я┌п╬я┤п╨п╬п╧. п·п╢п╫п╟п╨п╬, я█я┌п╬ п©п╬я┌я─п╣п╠я┐п╣я┌ п╠п╬п╩я▄я┬п╣ п╢п╦я│п╨п╬п╡п╬пЁп╬ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦ "
+"п╡я─п╣п╪п╣п╫п╦ я├п╣п╫я┌я─п╟п╩я▄п╫п╬пЁп╬ п©я─п╬я├п╣я│я│п╬я─п╟."
 
 #: src/configdialog.c:981 src/help.c:36
 msgid "Quality"
-msgstr "Качество"
+msgstr "п п╟я┤п╣я│я┌п╡п╬"
 
 #: src/configdialog.c:983
 msgid " Rate conversions "
-msgstr " Преобразование частоты сэмплов "
+msgstr " п÷я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦п╣ я┤п╟я│я┌п╬я┌я▀ я│я█п╪п©п╩п╬п╡ "
 
 #: src/configdialog.c:990
 msgid "Varispeed: "
-msgstr "Изменение скорости: "
+msgstr "п≤п╥п╪п╣п╫п╣п╫п╦п╣ я│п╨п╬я─п╬я│я┌п╦: "
 
 #: src/configdialog.c:991
 msgid "Speed effect: "
-msgstr "Эффект подстройки скорости: "
+msgstr "п╜я└я└п╣п╨я┌ п©п╬п╢я│я┌я─п╬п╧п╨п╦ я│п╨п╬я─п╬я│я┌п╦: "
 
 #: src/configdialog.c:998
 msgid " Dithering "
-msgstr " Сглаживание "
+msgstr " п║пЁп╩п╟п╤п╦п╡п╟п╫п╦п╣ "
 
 #: src/configdialog.c:1012
 msgid "Other"
-msgstr "Другое"
+msgstr "п■я─я┐пЁп╬п╣"
 
 #: src/configdialog.c:1014
 msgid " Time format "
-msgstr " Формат времени "
+msgstr " п╓п╬я─п╪п╟я┌ п╡я─п╣п╪п╣п╫п╦ "
 
 #: src/configdialog.c:1023
 msgid "Display t_imes as: "
-msgstr "Отображать _время как: "
+msgstr "п·я┌п╬п╠я─п╟п╤п╟я┌я▄ _п╡я─п╣п╪я▐ п╨п╟п╨: "
 
 #: src/configdialog.c:1034
 #, fuzzy
 msgid "Times_cale format: "
-msgstr " Формат времени "
+msgstr " п╓п╬я─п╪п╟я┌ п╡я─п╣п╪п╣п╫п╦ "
 
 #: src/configdialog.c:1045
 msgid " External applications "
-msgstr " Внешние приложения "
+msgstr " п▓п╫п╣я┬п╫п╦п╣ п©я─п╦п╩п╬п╤п╣п╫п╦я▐ "
 
 #: src/configdialog.c:1053
 msgid "Mi_xer utility: "
-msgstr "Утилита _микшера: "
+msgstr "пёя┌п╦п╩п╦я┌п╟ _п╪п╦п╨я┬п╣я─п╟: "
 
 #: src/configdialog.c:1063
 msgid "Advanced"
-msgstr "Продвинутые"
+msgstr "п÷я─п╬п╢п╡п╦п╫я┐я┌я▀п╣"
 
 #: src/configdialog.c:1064
 msgid " Advanced settings "
-msgstr " Продвинутые установки "
+msgstr " п÷я─п╬п╢п╡п╦п╫я┐я┌я▀п╣ я┐я│я┌п╟п╫п╬п╡п╨п╦ "
 
 #: src/configdialog.c:1072
 msgid "Disk editing _threshold: "
-msgstr "Порог редактирования на _диске: "
+msgstr "п÷п╬я─п╬пЁ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦я▐ п╫п╟ _п╢п╦я│п╨п╣: "
 
 #: src/configdialog.c:1083
 msgid "View _quality:"
-msgstr "_Качество отображения:"
+msgstr "_п п╟я┤п╣я│я┌п╡п╬ п╬я┌п╬п╠я─п╟п╤п╣п╫п╦я▐:"
 
 #: src/configdialog.c:1089
 msgid "samples/pixel"
-msgstr "сэмплы/пиксел"
+msgstr "я│я█п╪п©п╩я▀/п©п╦п╨я│п╣п╩"
 
 #: src/configdialog.c:1095
 msgid "Output _buffer size:"
-msgstr "Размер выходного _буфера:"
+msgstr "п═п╟п╥п╪п╣я─ п╡я▀я┘п╬п╢п╫п╬пЁп╬ _п╠я┐я└п╣я─п╟:"
 
 #: src/configdialog.c:1101
 msgid "bytes"
-msgstr "байт"
+msgstr "п╠п╟п╧я┌"
 
 #: src/configdialog.c:1126
 msgid "_Close"
-msgstr "_Закрыть"
+msgstr "_п≈п╟п╨я─я▀я┌я▄"
 
 #: src/dataformat.c:444
 msgid "Floating-point (single)"
-msgstr "Плавающая точка (одинарная точность)"
+msgstr "п÷п╩п╟п╡п╟я▌я┴п╟я▐ я┌п╬я┤п╨п╟ (п╬п╢п╦п╫п╟я─п╫п╟я▐ я┌п╬я┤п╫п╬я│я┌я▄)"
 
 #: src/dataformat.c:446
 msgid "Floating-point (double)"
-msgstr "Плавающая точка (двойная точность)"
+msgstr "п÷п╩п╟п╡п╟я▌я┴п╟я▐ я┌п╬я┤п╨п╟ (п╢п╡п╬п╧п╫п╟я▐ я┌п╬я┤п╫п╬я│я┌я▄)"
 
 #: src/dataformat.c:448
 #, c-format
 msgid "PCM, %d bit, %s %s\n"
-msgstr "PCM, %d бит, %s %s\n"
+msgstr "PCM, %d п╠п╦я┌, %s %s\n"
 
 #: src/dataformat.c:449 src/formatselector.c:74
 msgid "Signed"
-msgstr "Со знаком"
+msgstr "п║п╬ п╥п╫п╟п╨п╬п╪"
 
 #: src/dataformat.c:449 src/formatselector.c:73
 msgid "Unsigned"
-msgstr "Без знака"
+msgstr "п▒п╣п╥ п╥п╫п╟п╨п╟"
 
 #: src/dataformat.c:450
 msgid "Big-endian"
-msgstr "от старшего (big-endian)"
+msgstr "п╬я┌ я│я┌п╟я─я┬п╣пЁп╬ (big-endian)"
 
 #: src/dataformat.c:450
 msgid "Little-endian"
-msgstr "от младшего (little-endian)"
+msgstr "п╬я┌ п╪п╩п╟п╢я┬п╣пЁп╬ (little-endian)"
 
 #: src/dataformat.c:497
 msgid "Testing ranges..."
-msgstr "Тест границ..."
+msgstr "п╒п╣я│я┌ пЁя─п╟п╫п╦я├..."
 
 #: src/dataformat.c:513
 msgid "Range test failed for format: "
-msgstr "Тест границ провален для формата: "
+msgstr "п╒п╣я│я┌ пЁя─п╟п╫п╦я├ п©я─п╬п╡п╟п╩п╣п╫ п╢п╩я▐ я└п╬я─п╪п╟я┌п╟: "
 
 #: src/dataformat.c:521
 msgid "Testing all conversions.."
-msgstr "Тест всех преобразований.."
+msgstr "п╒п╣я│я┌ п╡я│п╣я┘ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦п╧.."
 
 #: src/dataformat.c:554
 msgid "(expected) "
-msgstr "(ожидается) "
+msgstr "(п╬п╤п╦п╢п╟п╣я┌я│я▐) "
 
 #: src/dataformat.c:555
 msgid "Conversion test failed, between: "
-msgstr "Тест преобразований провален между :"
+msgstr "п╒п╣я│я┌ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦п╧ п©я─п╬п╡п╟п╩п╣п╫ п╪п╣п╤п╢я┐ :"
 
 #: src/dataformat.c:557
 msgid "  and: "
-msgstr "  и: "
+msgstr "  п╦: "
 
 #: src/dataformat.c:565
 msgid "No errors detected!"
-msgstr "Ошибок не обнаружено!"
+msgstr "п·я┬п╦п╠п╬п╨ п╫п╣ п╬п╠п╫п╟я─я┐п╤п╣п╫п╬!"
 
 #: src/dataformat.c:599
 msgid "Preparing tests.."
-msgstr "Подготовка тестов.."
+msgstr "п÷п╬п╢пЁп╬я┌п╬п╡п╨п╟ я┌п╣я│я┌п╬п╡.."
 
 #: src/dataformat.c:607
 msgid "Running tests.."
-msgstr "Выполнение тестов.."
+msgstr "п▓я▀п©п╬п╩п╫п╣п╫п╦п╣ я┌п╣я│я┌п╬п╡.."
 
 #: src/dataformat.c:647
 #, c-format
@@ -467,26 +467,26 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Результаты теста (1 единица времени = %f мкс/сэмпл)\n"
+"п═п╣п╥я┐п╩я▄я┌п╟я┌я▀ я┌п╣я│я┌п╟ (1 п╣п╢п╦п╫п╦я├п╟ п╡я─п╣п╪п╣п╫п╦ = %f п╪п╨я│/я│я█п╪п©п╩)\n"
 
 #: src/datasource.c:367
 #, c-format
 msgid "Couldn't open %s"
-msgstr "Не могу отрыть %s"
+msgstr "п²п╣ п╪п╬пЁя┐ п╬я┌я─я▀я┌я▄ %s"
 
 #: src/datasource.c:500
 msgid "Unexpected end of file"
-msgstr "Неожиданный конец файла"
+msgstr "п²п╣п╬п╤п╦п╢п╟п╫п╫я▀п╧ п╨п╬п╫п╣я├ я└п╟п╧п╩п╟"
 
 #: src/datasource.c:501
 #, c-format
 msgid "Error reading %s: %s"
-msgstr "Ошибка чтения %s: %s"
+msgstr "п·я┬п╦п╠п╨п╟ я┤я┌п╣п╫п╦я▐ %s: %s"
 
 #: src/datasource.c:519 src/datasource.c:567
 #, c-format
 msgid "Error seeking in %s: %s"
-msgstr "Ошибка поиска в %s: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п©п╬п╦я│п╨п╟ п╡ %s: %s"
 
 #: src/effectbrowser.c:99
 msgid "Built-in"
@@ -495,27 +495,27 @@ msgstr ""
 #: src/effectbrowser.c:102
 #, fuzzy
 msgid "Volume adjust/fade"
-msgstr "[B] Подстройка громкости"
+msgstr "[B] п÷п╬п╢я│я┌я─п╬п╧п╨п╟ пЁя─п╬п╪п╨п╬я│я┌п╦"
 
 #: src/effectbrowser.c:104
 #, fuzzy
 msgid "Convert samplerate"
-msgstr "Преобразование частоты сэмплов"
+msgstr "п÷я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦п╣ я┤п╟я│я┌п╬я┌я▀ я│я█п╪п©п╩п╬п╡"
 
 #: src/effectbrowser.c:106
 #, fuzzy
 msgid "Convert sample format"
-msgstr "[B] Преобразовать формат сэмплов"
+msgstr "[B] п÷я─п╣п╬п╠я─п╟п╥п╬п╡п╟я┌я▄ я└п╬я─п╪п╟я┌ я│я█п╪п©п╩п╬п╡"
 
 #: src/effectbrowser.c:108
 #, fuzzy
 msgid "Map channels"
-msgstr "%d каналов"
+msgstr "%d п╨п╟п╫п╟п╩п╬п╡"
 
 #: src/effectbrowser.c:110
 #, fuzzy
 msgid "Combine channels"
-msgstr "[B] Скомбинировать каналы"
+msgstr "[B] п║п╨п╬п╪п╠п╦п╫п╦я─п╬п╡п╟я┌я▄ п╨п╟п╫п╟п╩я▀"
 
 #: src/effectbrowser.c:113
 msgid "Add channels from other file"
@@ -524,21 +524,21 @@ msgstr ""
 #: src/effectbrowser.c:114
 #, fuzzy
 msgid "Speed"
-msgstr "Скорость:"
+msgstr "п║п╨п╬я─п╬я│я┌я▄:"
 
 #: src/effectbrowser.c:115
 #, fuzzy
 msgid "Pipe through program"
-msgstr "[B] Пропустить через программу (pipe)"
+msgstr "[B] п÷я─п╬п©я┐я│я┌п╦я┌я▄ я┤п╣я─п╣п╥ п©я─п╬пЁя─п╟п╪п╪я┐ (pipe)"
 
 #: src/effectbrowser.c:250
 msgid "You have no open file to apply the effect to!"
-msgstr "Нет открытого файла, к которому можно было бы применить эффект!"
+msgstr "п²п╣я┌ п╬я┌п╨я─я▀я┌п╬пЁп╬ я└п╟п╧п╩п╟, п╨ п╨п╬я┌п╬я─п╬п╪я┐ п╪п╬п╤п╫п╬ п╠я▀п╩п╬ п╠я▀ п©я─п╦п╪п╣п╫п╦я┌я▄ я█я└я└п╣п╨я┌!"
 
 #: src/effectbrowser.c:275
 #, fuzzy
 msgid "This effect could not be loaded."
-msgstr "Этот эффект не имеет опций."
+msgstr "п╜я┌п╬я┌ я█я└я└п╣п╨я┌ п╫п╣ п╦п╪п╣п╣я┌ п╬п©я├п╦п╧."
 
 #: src/effectbrowser.c:582
 msgid "/Move Up"
@@ -587,12 +587,12 @@ msgstr ""
 #: src/effectbrowser.c:751
 #, fuzzy
 msgid "Up"
-msgstr "_Вверх"
+msgstr "_п▓п╡п╣я─я┘"
 
 #: src/effectbrowser.c:758
 #, fuzzy
 msgid "Down"
-msgstr "В_низ"
+msgstr "п▓_п╫п╦п╥"
 
 #: src/effectbrowser.c:765
 msgid "Bottom"
@@ -601,37 +601,37 @@ msgstr ""
 #: src/effectbrowser.c:793
 #, fuzzy
 msgid "Close dialog after applying effect"
-msgstr "Оставить _главное окно впереди после применения эффекта"
+msgstr "п·я│я┌п╟п╡п╦я┌я▄ _пЁп╩п╟п╡п╫п╬п╣ п╬п╨п╫п╬ п╡п©п╣я─п╣п╢п╦ п©п╬я│п╩п╣ п©я─п╦п╪п╣п╫п╣п╫п╦я▐ я█я└я└п╣п╨я┌п╟"
 
 #: src/effectbrowser.c:800 src/gotodialog.c:143
 msgid "Apply"
-msgstr "Применить"
+msgstr "п÷я─п╦п╪п╣п╫п╦я┌я▄"
 
 #: src/effectbrowser.c:810 src/gotodialog.c:148 src/mainwindow.c:1404
 #: src/pipedialog.c:166 src/recorddialog.c:603 src/recorddialog.c:979
 #: src/sound-esound.c:290 src/sound-jack.c:260 src/sound-oss.c:478
 msgid "Close"
-msgstr "Закрыть"
+msgstr "п≈п╟п╨я─я▀я┌я▄"
 
 #: src/effectbrowser.c:832 src/help.c:35
 msgid "Effects"
-msgstr "Эффекты"
+msgstr "п╜я└я└п╣п╨я┌я▀"
 
 #: src/effectbrowser.c:892
 msgid "Apply to: "
-msgstr "Применить к: "
+msgstr "п÷я─п╦п╪п╣п╫п╦я┌я▄ п╨: "
 
 #: src/filetypes.c:102
 msgid "putenv failed!"
-msgstr "putenv не удался!"
+msgstr "putenv п╫п╣ я┐п╢п╟п╩я│я▐!"
 
 #: src/filetypes.c:112
 msgid "unsetenv failed!"
-msgstr "unsetenv не удался!"
+msgstr "unsetenv п╫п╣ я┐п╢п╟п╩я│я▐!"
 
 #: src/filetypes.c:154
 msgid "Microsoft WAV format"
-msgstr "Microsoft WAV формат"
+msgstr "Microsoft WAV я└п╬я─п╪п╟я┌"
 
 #: src/filetypes.c:173
 msgid "Ogg Vorbis"
@@ -639,7 +639,7 @@ msgstr "Ogg Vorbis"
 
 #: src/filetypes.c:180
 msgid "Raw PCM data"
-msgstr "Голые PCM-данные"
+msgstr "п⌠п╬п╩я▀п╣ PCM-п╢п╟п╫п╫я▀п╣"
 
 #: src/filetypes.c:182
 msgid "Open with MPlayer"
@@ -648,16 +648,16 @@ msgstr ""
 #: src/filetypes.c:267
 #, c-format
 msgid "The file %s does not exist!"
-msgstr "Файл %s не существует!"
+msgstr "п╓п╟п╧п╩ %s п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌!"
 
 #: src/filetypes.c:274
 #, c-format
 msgid "The file %s is not a regular file!"
-msgstr "Файл %s не является обычным файлом!"
+msgstr "п╓п╟п╧п╩ %s п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╬п╠я▀я┤п╫я▀п╪ я└п╟п╧п╩п╬п╪!"
 
 #: src/filetypes.c:286
 msgid "Loading"
-msgstr "Загрузка"
+msgstr "п≈п╟пЁя─я┐п╥п╨п╟"
 
 #: src/filetypes.c:325
 #, c-format
@@ -665,16 +665,16 @@ msgid ""
 "The file name '%s' has an extension unknown to the program. Please specify "
 "in which format this file should be saved."
 msgstr ""
-"Имя файла '%s' имеет неизвестное для программы расширение. Пожалуйста "
-"укажите в каком формате он должен быть сохранен."
+"п≤п╪я▐ я└п╟п╧п╩п╟ '%s' п╦п╪п╣п╣я┌ п╫п╣п╦п╥п╡п╣я│я┌п╫п╬п╣ п╢п╩я▐ п©я─п╬пЁя─п╟п╪п╪я▀ я─п╟я│я┬п╦я─п╣п╫п╦п╣. п÷п╬п╤п╟п╩я┐п╧я│я┌п╟ "
+"я┐п╨п╟п╤п╦я┌п╣ п╡ п╨п╟п╨п╬п╪ я└п╬я─п╪п╟я┌п╣ п╬п╫ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п╬я┘я─п╟п╫п╣п╫."
 
 #: src/filetypes.c:330
 msgid "Unknown file type"
-msgstr "Неизвестный тип файла"
+msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ я┌п╦п© я└п╟п╧п╩п╟"
 
 #: src/filetypes.c:381
 msgid "Saving"
-msgstr "Сохранение"
+msgstr "п║п╬я┘я─п╟п╫п╣п╫п╦п╣"
 
 #: src/filetypes.c:385
 #, c-format
@@ -683,14 +683,14 @@ msgid ""
 "disk space and save again. If you exit now the file's contents could be in a "
 "bad state. "
 msgstr ""
-"Файл %s может быть уничтожен после того как сохранение пройдет не успешно. "
-"Попытайтесь освободить на диске место и сохранить еще раз. Если вы выйдете "
-"сейчас, содержимое файлов будет в плохом состоянии. "
+"п╓п╟п╧п╩ %s п╪п╬п╤п╣я┌ п╠я▀я┌я▄ я┐п╫п╦я┤я┌п╬п╤п╣п╫ п©п╬я│п╩п╣ я┌п╬пЁп╬ п╨п╟п╨ я│п╬я┘я─п╟п╫п╣п╫п╦п╣ п©я─п╬п╧п╢п╣я┌ п╫п╣ я┐я│п©п╣я┬п╫п╬. "
+"п÷п╬п©я▀я┌п╟п╧я┌п╣я│я▄ п╬я│п╡п╬п╠п╬п╢п╦я┌я▄ п╫п╟ п╢п╦я│п╨п╣ п╪п╣я│я┌п╬ п╦ я│п╬я┘я─п╟п╫п╦я┌я▄ п╣я┴п╣ я─п╟п╥. п∙я│п╩п╦ п╡я▀ п╡я▀п╧п╢п╣я┌п╣ "
+"я│п╣п╧я┤п╟я│, я│п╬п╢п╣я─п╤п╦п╪п╬п╣ я└п╟п╧п╩п╬п╡ п╠я┐п╢п╣я┌ п╡ п©п╩п╬я┘п╬п╪ я│п╬я│я┌п╬я▐п╫п╦п╦. "
 
 #: src/filetypes.c:449
 #, c-format
 msgid "%s is not a valid wav file"
-msgstr "%s не является правильным wav-файлом"
+msgstr "%s п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п©я─п╟п╡п╦п╩я▄п╫я▀п╪ wav-я└п╟п╧п╩п╬п╪"
 
 #: src/filetypes.c:464
 #, c-format
@@ -698,14 +698,14 @@ msgid ""
 "The file %s is a compressed wav file. This program can only work with "
 "uncompressed wav files."
 msgstr ""
-"Файл %s является сжатым wav-файлом. Эта программа может работать только с "
-"несжатыми wav-файлами."
+"п╓п╟п╧п╩ %s я▐п╡п╩я▐п╣я┌я│я▐ я│п╤п╟я┌я▀п╪ wav-я└п╟п╧п╩п╬п╪. п╜я┌п╟ п©я─п╬пЁя─п╟п╪п╪п╟ п╪п╬п╤п╣я┌ я─п╟п╠п╬я┌п╟я┌я▄ я┌п╬п╩я▄п╨п╬ я│ "
+"п╫п╣я│п╤п╟я┌я▀п╪п╦ wav-я└п╟п╧п╩п╟п╪п╦."
 
 #: src/filetypes.c:551
 msgid ""
 "On this system, libsndfile is required to save floating-point wav files."
 msgstr ""
-"В этой системе, libsndfile требует сохранять wav-файлы с плавающей точкой."
+"п▓ я█я┌п╬п╧ я│п╦я│я┌п╣п╪п╣, libsndfile я┌я─п╣п╠я┐п╣я┌ я│п╬я┘я─п╟п╫я▐я┌я▄ wav-я└п╟п╧п╩я▀ я│ п©п╩п╟п╡п╟я▌я┴п╣п╧ я┌п╬я┤п╨п╬п╧."
 
 #: src/filetypes.c:590
 msgid ""
@@ -714,29 +714,29 @@ msgid ""
 "\n"
 " (this warning will not be displayed again)"
 msgstr ""
-"Вы сохраняете wav-файл больший чем 2048Мб. Такие большие файлы являются "
-"нестандартными, они могут не читаться всеми программами.\n"
+"п▓я▀ я│п╬я┘я─п╟п╫я▐п╣я┌п╣ wav-я└п╟п╧п╩ п╠п╬п╩я▄я┬п╦п╧ я┤п╣п╪ 2048п°п╠. п╒п╟п╨п╦п╣ п╠п╬п╩я▄я┬п╦п╣ я└п╟п╧п╩я▀ я▐п╡п╩я▐я▌я┌я│я▐ "
+"п╫п╣я│я┌п╟п╫п╢п╟я─я┌п╫я▀п╪п╦, п╬п╫п╦ п╪п╬пЁя┐я┌ п╫п╣ я┤п╦я┌п╟я┌я▄я│я▐ п╡я│п╣п╪п╦ п©я─п╬пЁя─п╟п╪п╪п╟п╪п╦.\n"
 "\n"
-" (это предупреждение не будет больше появляться)"
+" (я█я┌п╬ п©я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣ п╫п╣ п╠я┐п╢п╣я┌ п╠п╬п╩я▄я┬п╣ п©п╬я▐п╡п╩я▐я┌я▄я│я▐)"
 
 #: src/filetypes.c:710 src/filetypes.c:844
 #, c-format
 msgid "Failed to open '%s'!"
-msgstr "Ошибка при открытии '%s'!"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ п╬я┌п╨я─я▀я┌п╦п╦ '%s'!"
 
 #: src/filetypes.c:819
 msgid "Invalid sample format or number of channels for this file format"
 msgstr ""
-"Неправильный формат сэмплов или количество каналов для данного формата файлов"
+"п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я└п╬я─п╪п╟я┌ я│я█п╪п©п╩п╬п╡ п╦п╩п╦ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п╨п╟п╫п╟п╩п╬п╡ п╢п╩я▐ п╢п╟п╫п╫п╬пЁп╬ я└п╬я─п╪п╟я┌п╟ я└п╟п╧п╩п╬п╡"
 
 #: src/filetypes.c:874
 #, c-format
 msgid "Failed to write to '%s'!"
-msgstr "Ошибка записи в '%s'!"
+msgstr "п·я┬п╦п╠п╨п╟ п╥п╟п©п╦я│п╦ п╡ '%s'!"
 
 #: src/filetypes.c:946
 msgid "Decoding"
-msgstr "Декодирование"
+msgstr "п■п╣п╨п╬п╢п╦я─п╬п╡п╟п╫п╦п╣"
 
 #: src/filetypes.c:1066
 msgid "Variable bitrate (default)"
@@ -753,7 +753,7 @@ msgstr ""
 #: src/filetypes.c:1069
 #, fuzzy
 msgid "Custom argument"
-msgstr "Формат пользователя"
+msgstr "п╓п╬я─п╪п╟я┌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐"
 
 #: src/filetypes.c:1073
 msgid "Standard (high quality)"
@@ -775,246 +775,246 @@ msgstr ""
 #: src/filetypes.c:1122
 #, fuzzy
 msgid "MP3 Preferences"
-msgstr "Настройки"
+msgstr "п²п╟я│я┌я─п╬п╧п╨п╦"
 
 #: src/filetypes.c:1133
 #, fuzzy
 msgid "Encoding type: "
-msgstr "Состояние записи: "
+msgstr "п║п╬я│я┌п╬я▐п╫п╦п╣ п╥п╟п©п╦я│п╦: "
 
 #: src/filetypes.c:1146
 #, fuzzy
 msgid "Quality: "
-msgstr "Качество"
+msgstr "п п╟я┤п╣я│я┌п╡п╬"
 
 #: src/filetypes.c:1155
 #, fuzzy
 msgid "Custom argument: "
-msgstr "Формат пользователя"
+msgstr "п╓п╬я─п╪п╟я┌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐"
 
 #: src/filetypes.c:1161
 #, fuzzy
 msgid "Use this setting by default"
-msgstr "По умолчанию отображать _временные отметки"
+msgstr "п÷п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ п╬я┌п╬п╠я─п╟п╤п╟я┌я▄ _п╡я─п╣п╪п╣п╫п╫я▀п╣ п╬я┌п╪п╣я┌п╨п╦"
 
 #: src/filetypes.c:1166 src/gotodialog.c:135 src/mainwindow.c:1475
 #: src/rawdialog.c:100 src/sound-alsalib.c:98 src/sound-esound.c:286
 #: src/sound-jack.c:256 src/sound-oss.c:474 src/um.c:108 src/um.c:141
 #: src/um.c:337 src/um.c:437
 msgid "OK"
-msgstr "ОК"
+msgstr "п·п "
 
 #: src/filetypes.c:1174 src/rawdialog.c:106 src/sound-alsalib.c:102
 #: src/um.c:132 src/um.c:149 src/um.c:341 src/um.c:446
 msgid "Cancel"
-msgstr "Отменить"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄"
 
 #: src/float_box.c:167 src/int_box.c:169
 #, c-format
 msgid "'%s' is not a number!"
-msgstr "'%s' не число!"
+msgstr "'%s' п╫п╣ я┤п╦я│п╩п╬!"
 
 #: src/float_box.c:185
 #, c-format
 msgid "Value for '%s' must be a number between %f and %f"
-msgstr "У '%s' должно быть численное значение в пределах от %f до %f"
+msgstr "пё '%s' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ я┤п╦я│п╩п╣п╫п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╡ п©я─п╣п╢п╣п╩п╟я┘ п╬я┌ %f п╢п╬ %f"
 
 #: src/formatselector.c:57
 msgid "Sample type: "
-msgstr "Тип сэмплов: "
+msgstr "п╒п╦п© я│я█п╪п©п╩п╬п╡: "
 
 #: src/formatselector.c:59
 msgid "8 bit PCM"
-msgstr "8-бит PCM"
+msgstr "8-п╠п╦я┌ PCM"
 
 #: src/formatselector.c:60
 msgid "16 bit PCM"
-msgstr "16-бит PCM"
+msgstr "16-п╠п╦я┌ PCM"
 
 #: src/formatselector.c:61
 msgid "24 bit PCM"
-msgstr "24-бит PCM"
+msgstr "24-п╠п╦я┌ PCM"
 
 #: src/formatselector.c:62
 msgid "32 bit PCM"
-msgstr "32-бит PCM"
+msgstr "32-п╠п╦я┌ PCM"
 
 #: src/formatselector.c:63
 msgid "Floating-point, single"
-msgstr "Плавающая точка, одинарная точность"
+msgstr "п÷п╩п╟п╡п╟я▌я┴п╟я▐ я┌п╬я┤п╨п╟, п╬п╢п╦п╫п╟я─п╫п╟я▐ я┌п╬я┤п╫п╬я│я┌я▄"
 
 #: src/formatselector.c:64
 msgid "Floating-point, double"
-msgstr "Плавающая точка, двойная точность"
+msgstr "п÷п╩п╟п╡п╟я▌я┴п╟я▐ я┌п╬я┤п╨п╟, п╢п╡п╬п╧п╫п╟я▐ я┌п╬я┤п╫п╬я│я┌я▄"
 
 #: src/formatselector.c:71
 msgid "Signedness: "
-msgstr "Знак: "
+msgstr "п≈п╫п╟п╨: "
 
 #: src/formatselector.c:79
 msgid "Endianness: "
-msgstr "Порядок байт: "
+msgstr "п÷п╬я─я▐п╢п╬п╨ п╠п╟п╧я┌: "
 
 #: src/formatselector.c:81
 msgid "Little endian"
-msgstr "от младшего (little-endian)"
+msgstr "п╬я┌ п╪п╩п╟п╢я┬п╣пЁп╬ (little-endian)"
 
 #: src/formatselector.c:82
 msgid "Big endian"
-msgstr "от старшего (big-endian)"
+msgstr "п╬я┌ я│я┌п╟я─я┬п╣пЁп╬ (big-endian)"
 
 #: src/formatselector.c:117
 msgid "Channels: "
-msgstr "Каналов: "
+msgstr "п п╟п╫п╟п╩п╬п╡: "
 
 #: src/formatselector.c:126
 msgid "Sample rate: "
-msgstr "Частота сэмплов: "
+msgstr "п╖п╟я│я┌п╬я┌п╟ я│я█п╪п©п╩п╬п╡: "
 
 #: src/formatselector.c:203
 msgid "sample rate"
-msgstr "частота сэмплов"
+msgstr "я┤п╟я│я┌п╬я┌п╟ я│я█п╪п©п╩п╬п╡"
 
 #: src/gotodialog.c:96
 msgid "Place cursor "
-msgstr "Поместить курсор "
+msgstr "п÷п╬п╪п╣я│я┌п╦я┌я▄ п╨я┐я─я│п╬я─ "
 
 #: src/gotodialog.c:101 src/soxdialog.c:525 src/soxdialog.c:530
 #: src/soxdialog.c:560
 msgid " seconds"
-msgstr " секунд"
+msgstr " я│п╣п╨я┐п╫п╢"
 
 #: src/gotodialog.c:104
 msgid "after beginning of file"
-msgstr "после начала файла"
+msgstr "п©п╬я│п╩п╣ п╫п╟я┤п╟п╩п╟ я└п╟п╧п╩п╟"
 
 #: src/gotodialog.c:109
 msgid "after end of file"
-msgstr "после конца файла"
+msgstr "п©п╬я│п╩п╣ п╨п╬п╫я├п╟ я└п╟п╧п╩п╟"
 
 #: src/gotodialog.c:114
 msgid "after current cursor position"
-msgstr "после текущей позиции курсора"
+msgstr "п©п╬я│п╩п╣ я┌п╣п╨я┐я┴п╣п╧ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟"
 
 #: src/gotodialog.c:119
 msgid "after selection start"
-msgstr "после начала выделения"
+msgstr "п©п╬я│п╩п╣ п╫п╟я┤п╟п╩п╟ п╡я▀п╢п╣п╩п╣п╫п╦я▐"
 
 #: src/gotodialog.c:124
 msgid "after selection end"
-msgstr "после конца выделения"
+msgstr "п©п╬я│п╩п╣ п╨п╬п╫я├п╟ п╡я▀п╢п╣п╩п╣п╫п╦я▐"
 
 #: src/gotodialog.c:128
 msgid ""
 "(use a negative number to place the cursor before instead of after the "
 "selected point)"
 msgstr ""
-"(чтобы поместить курсор до, а не после, выбранной точки используйте "
-"отрицательное число)"
+"(я┤я┌п╬п╠я▀ п©п╬п╪п╣я│я┌п╦я┌я▄ п╨я┐я─я│п╬я─ п╢п╬, п╟ п╫п╣ п©п╬я│п╩п╣, п╡я▀п╠я─п╟п╫п╫п╬п╧ я┌п╬я┤п╨п╦ п╦я│п©п╬п╩я▄п╥я┐п╧я┌п╣ "
+"п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫п╬п╣ я┤п╦я│п╩п╬)"
 
 #: src/gotodialog.c:163
 msgid "Position cursor"
-msgstr "Позиция курсора"
+msgstr "п÷п╬п╥п╦я├п╦я▐ п╨я┐я─я│п╬я─п╟"
 
 #: src/gtkfiles.c:48
 #, c-format
 msgid "Could not open %s: %s"
-msgstr "Не могу открыть %s: %s"
+msgstr "п²п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ %s: %s"
 
 #: src/gtkfiles.c:53
 #, c-format
 msgid "Warning: Unexpected error: %s"
-msgstr "Предупреждение: Неожиданная ошибка: %s"
+msgstr "п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣: п²п╣п╬п╤п╦п╢п╟п╫п╫п╟я▐ п╬я┬п╦п╠п╨п╟: %s"
 
 #: src/gtkfiles.c:110 src/gtkfiles.c:125
 #, c-format
 msgid "Error closing %s: %s"
-msgstr "Ошибка при закрытии %s: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ п╥п╟п╨я─я▀я┌п╦п╦ %s: %s"
 
 #: src/gtkfiles.c:140
 #, c-format
 msgid "Could not seek in %s: %s"
-msgstr "Не могу искать в %s: %s"
+msgstr "п²п╣ п╪п╬пЁя┐ п╦я│п╨п╟я┌я▄ п╡ %s: %s"
 
 #: src/gtkfiles.c:159 src/gtkfiles.c:204
 #, c-format
 msgid "Could not read from %s: %s"
-msgstr "Не могу прочитать из %s: %s"
+msgstr "п²п╣ п╪п╬пЁя┐ п©я─п╬я┤п╦я┌п╟я┌я▄ п╦п╥ %s: %s"
 
 #: src/gtkfiles.c:178
 #, c-format
 msgid "Unexpected end of file reading from %s"
-msgstr "Неожиданный конец файла при чтении из %s"
+msgstr "п²п╣п╬п╤п╦п╢п╟п╫п╫я▀п╧ п╨п╬п╫п╣я├ я└п╟п╧п╩п╟ п©я─п╦ я┤я┌п╣п╫п╦п╦ п╦п╥ %s"
 
 #: src/gtkfiles.c:196
 #, c-format
 msgid "Unable to write data to %s"
-msgstr "Не могу записать данные в %s"
+msgstr "п²п╣ п╪п╬пЁя┐ п╥п╟п©п╦я│п╟я┌я▄ п╢п╟п╫п╫я▀п╣ п╡ %s"
 
 #: src/gtkfiles.c:262
 #, c-format
 msgid "Could not get file position in %s: %s"
-msgstr "Невозможно получить позицию файла %s: %s"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ п©п╬п╥п╦я├п╦я▌ я└п╟п╧п╩п╟ %s: %s"
 
 #: src/gtkfiles.c:313 src/gtkfiles.c:473
 msgid "File already exists. Overwrite?"
-msgstr "Файл уже существует. Перезаписать?"
+msgstr "п╓п╟п╧п╩ я┐п╤п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌. п÷п╣я─п╣п╥п╟п©п╦я│п╟я┌я▄?"
 
 #: src/gtkfiles.c:321
 msgid "No file with that name!"
-msgstr "Нет файла с таким именем!"
+msgstr "п²п╣я┌ я└п╟п╧п╩п╟ я│ я┌п╟п╨п╦п╪ п╦п╪п╣п╫п╣п╪!"
 
 #: src/gtkfiles.c:705
 #, c-format
 msgid "Error reading from %s: %s"
-msgstr "Ошибка при чтении из %s: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ я┤я┌п╣п╫п╦п╦ п╦п╥ %s: %s"
 
 #: src/gtkfiles.c:737
 #, c-format
 msgid "Could not remove '%s': %s"
-msgstr "Не могу удалить '%s': %s"
+msgstr "п²п╣ п╪п╬пЁя┐ я┐п╢п╟п╩п╦я┌я▄ '%s': %s"
 
 #: src/gtkfiles.c:757
 #, c-format
 msgid "Error creating link to '%s': %s"
-msgstr "Ошибка при создании ссылки на '%s': %s"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ я│п╬п╥п╢п╟п╫п╦п╦ я│я│я▀п╩п╨п╦ п╫п╟ '%s': %s"
 
 #: src/help.c:30
 msgid "General"
-msgstr "Основное"
+msgstr "п·я│п╫п╬п╡п╫п╬п╣"
 
 #: src/help.c:31
 msgid "Sample view"
-msgstr "Отображение сэмплов"
+msgstr "п·я┌п╬п╠я─п╟п╤п╣п╫п╦п╣ я│я█п╪п©п╩п╬п╡"
 
 #: src/help.c:32
 msgid "Playing"
-msgstr "Воспроизведение"
+msgstr "п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣"
 
 #: src/help.c:33
 msgid "Recording"
-msgstr "Запись"
+msgstr "п≈п╟п©п╦я│я▄"
 
 #: src/help.c:34
 msgid "Editing"
-msgstr "Редактирование"
+msgstr "п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣"
 
 #: src/help.c:37
 msgid "File formats"
-msgstr "Форматы файлов"
+msgstr "п╓п╬я─п╪п╟я┌я▀ я└п╟п╧п╩п╬п╡"
 
 #: src/help.c:39
 msgid "Keyboard shortcuts"
-msgstr "Привязки клавиш"
+msgstr "п÷я─п╦п╡я▐п╥п╨п╦ п╨п╩п╟п╡п╦я┬"
 
 #: src/help.c:40
 msgid "Bug reporting"
-msgstr "Сообщать об ошибках"
+msgstr "п║п╬п╬п╠я┴п╟я┌я▄ п╬п╠ п╬я┬п╦п╠п╨п╟я┘"
 
 #: src/help.c:41
 #, fuzzy
 msgid "Helping out"
-msgstr "/Справка/_О программе"
+msgstr "/п║п©я─п╟п╡п╨п╟/_п· п©я─п╬пЁя─п╟п╪п╪п╣"
 
 #: src/help.c:42
 msgid "Contact"
@@ -1026,13 +1026,13 @@ msgid ""
 "mhWaveEdit is a graphical program for editing sound files. It is completely "
 "free (GPL).\n"
 msgstr ""
-"mhWaveEdit - это графическая программа для редактирования звуковых файлов. "
-"Она полностью свободна (GPL).\n"
+"mhWaveEdit - я█я┌п╬ пЁя─п╟я└п╦я┤п╣я│п╨п╟я▐ п©я─п╬пЁя─п╟п╪п╪п╟ п╢п╩я▐ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦я▐ п╥п╡я┐п╨п╬п╡я▀я┘ я└п╟п╧п╩п╬п╡. "
+"п·п╫п╟ п©п╬п╩п╫п╬я│я┌я▄я▌ я│п╡п╬п╠п╬п╢п╫п╟ (GPL).\n"
 
 #: src/help.c:49
 #, no-c-format
 msgid "You can find the latest release of mhWaveEdit at:\n"
-msgstr "Вы можете найти последний релиз mhWaveEdit на:\n"
+msgstr "п▓я▀ п╪п╬п╤п╣я┌п╣ п╫п╟п╧я┌п╦ п©п╬я│п╩п╣п╢п╫п╦п╧ я─п╣п╩п╦п╥ mhWaveEdit п╫п╟:\n"
 
 #: src/help.c:50
 #, no-c-format
@@ -1045,8 +1045,8 @@ msgid ""
 "The area where you 'see' the contents of the file you are editing, is called "
 "the 'sample view'. \n"
 msgstr ""
-"Область, в которой вы \"видите\" содержимое редактируемого файла, называется "
-"областью отображения сэмплов. \n"
+"п·п╠п╩п╟я│я┌я▄, п╡ п╨п╬я┌п╬я─п╬п╧ п╡я▀ \"п╡п╦п╢п╦я┌п╣\" я│п╬п╢п╣я─п╤п╦п╪п╬п╣ я─п╣п╢п╟п╨я┌п╦я─я┐п╣п╪п╬пЁп╬ я└п╟п╧п╩п╟, п╫п╟п╥я▀п╡п╟п╣я┌я│я▐ "
+"п╬п╠п╩п╟я│я┌я▄я▌ п╬я┌п╬п╠я─п╟п╤п╣п╫п╦я▐ я│я█п╪п©п╩п╬п╡. \n"
 
 #: src/help.c:57
 #, no-c-format
@@ -1058,13 +1058,13 @@ msgid ""
 "position. You can also position the cursor more exact by using the 'Position "
 "Cursor...' command on the Edit menu.\n"
 msgstr ""
-"В области отображения сэмплов есть серая вертикальная линия, которая "
-"называется курсор. Когда вы воспроизводите звук, курсор следует звуковой "
-"волне. Вы можете позиционировать курсор при помощи правой (второй) кнопки "
-"мыши. Если вы сделаете это во время воспроизведения файла, воспроизведение "
-"будет продолжено начиная с новой позиции курсора. Вы можете также "
-"позиционировать курсор более точно, используя команду \"Позиция курсора...\" "
-"в меню \"Правка\".\n"
+"п▓ п╬п╠п╩п╟я│я┌п╦ п╬я┌п╬п╠я─п╟п╤п╣п╫п╦я▐ я│я█п╪п©п╩п╬п╡ п╣я│я┌я▄ я│п╣я─п╟я▐ п╡п╣я─я┌п╦п╨п╟п╩я▄п╫п╟я▐ п╩п╦п╫п╦я▐, п╨п╬я┌п╬я─п╟я▐ "
+"п╫п╟п╥я▀п╡п╟п╣я┌я│я▐ п╨я┐я─я│п╬я─. п п╬пЁп╢п╟ п╡я▀ п╡п╬я│п©я─п╬п╦п╥п╡п╬п╢п╦я┌п╣ п╥п╡я┐п╨, п╨я┐я─я│п╬я─ я│п╩п╣п╢я┐п╣я┌ п╥п╡я┐п╨п╬п╡п╬п╧ "
+"п╡п╬п╩п╫п╣. п▓я▀ п╪п╬п╤п╣я┌п╣ п©п╬п╥п╦я├п╦п╬п╫п╦я─п╬п╡п╟я┌я▄ п╨я┐я─я│п╬я─ п©я─п╦ п©п╬п╪п╬я┴п╦ п©я─п╟п╡п╬п╧ (п╡я┌п╬я─п╬п╧) п╨п╫п╬п©п╨п╦ "
+"п╪я▀я┬п╦. п∙я│п╩п╦ п╡я▀ я│п╢п╣п╩п╟п╣я┌п╣ я█я┌п╬ п╡п╬ п╡я─п╣п╪я▐ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦я▐ я└п╟п╧п╩п╟, п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣ "
+"п╠я┐п╢п╣я┌ п©я─п╬п╢п╬п╩п╤п╣п╫п╬ п╫п╟я┤п╦п╫п╟я▐ я│ п╫п╬п╡п╬п╧ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟. п▓я▀ п╪п╬п╤п╣я┌п╣ я┌п╟п╨п╤п╣ "
+"п©п╬п╥п╦я├п╦п╬п╫п╦я─п╬п╡п╟я┌я▄ п╨я┐я─я│п╬я─ п╠п╬п╩п╣п╣ я┌п╬я┤п╫п╬, п╦я│п©п╬п╩я▄п╥я┐я▐ п╨п╬п╪п╟п╫п╢я┐ \"п÷п╬п╥п╦я├п╦я▐ п╨я┐я─я│п╬я─п╟...\" "
+"п╡ п╪п╣п╫я▌ \"п÷я─п╟п╡п╨п╟\".\n"
 
 #: src/help.c:59
 #, no-c-format
@@ -1076,13 +1076,13 @@ msgid ""
 "marks can be done while playing. To remove a mark, jump to the mark and set "
 "it again.\n"
 msgstr ""
-"Вы можете устанавливать метки в вашем файле. Для этого удерживайте клавишу "
-"Ctrl, затем нажмите на одну из клавиш от 0 до 9. Таким образом вы установите "
-"метку (зеленую вертикальную линию) с соответствующим номером в текущей "
-"позиции курсора. Позже вы можете опять переместить курсор на эту позицию, "
-"просто нажав на клавишу с нужным номером. Устанавливать и переходить на "
-"метки можно также и при воспроизведении. Чтобы удалить метку, перейдите на "
-"нее и установите ее снова.\n"
+"п▓я▀ п╪п╬п╤п╣я┌п╣ я┐я│я┌п╟п╫п╟п╡п╩п╦п╡п╟я┌я▄ п╪п╣я┌п╨п╦ п╡ п╡п╟я┬п╣п╪ я└п╟п╧п╩п╣. п■п╩я▐ я█я┌п╬пЁп╬ я┐п╢п╣я─п╤п╦п╡п╟п╧я┌п╣ п╨п╩п╟п╡п╦я┬я┐ "
+"Ctrl, п╥п╟я┌п╣п╪ п╫п╟п╤п╪п╦я┌п╣ п╫п╟ п╬п╢п╫я┐ п╦п╥ п╨п╩п╟п╡п╦я┬ п╬я┌ 0 п╢п╬ 9. п╒п╟п╨п╦п╪ п╬п╠я─п╟п╥п╬п╪ п╡я▀ я┐я│я┌п╟п╫п╬п╡п╦я┌п╣ "
+"п╪п╣я┌п╨я┐ (п╥п╣п╩п╣п╫я┐я▌ п╡п╣я─я┌п╦п╨п╟п╩я▄п╫я┐я▌ п╩п╦п╫п╦я▌) я│ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┴п╦п╪ п╫п╬п╪п╣я─п╬п╪ п╡ я┌п╣п╨я┐я┴п╣п╧ "
+"п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟. п÷п╬п╥п╤п╣ п╡я▀ п╪п╬п╤п╣я┌п╣ п╬п©я▐я┌я▄ п©п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╨я┐я─я│п╬я─ п╫п╟ я█я┌я┐ п©п╬п╥п╦я├п╦я▌, "
+"п©я─п╬я│я┌п╬ п╫п╟п╤п╟п╡ п╫п╟ п╨п╩п╟п╡п╦я┬я┐ я│ п╫я┐п╤п╫я▀п╪ п╫п╬п╪п╣я─п╬п╪. пёя│я┌п╟п╫п╟п╡п╩п╦п╡п╟я┌я▄ п╦ п©п╣я─п╣я┘п╬п╢п╦я┌я▄ п╫п╟ "
+"п╪п╣я┌п╨п╦ п╪п╬п╤п╫п╬ я┌п╟п╨п╤п╣ п╦ п©я─п╦ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╦. п╖я┌п╬п╠я▀ я┐п╢п╟п╩п╦я┌я▄ п╪п╣я┌п╨я┐, п©п╣я─п╣п╧п╢п╦я┌п╣ п╫п╟ "
+"п╫п╣п╣ п╦ я┐я│я┌п╟п╫п╬п╡п╦я┌п╣ п╣п╣ я│п╫п╬п╡п╟.\n"
 
 #: src/help.c:64
 #, no-c-format
@@ -1092,26 +1092,26 @@ msgid ""
 "plays the current selection, or the entire file if nothing is selected. Stop "
 "the playback with the stop button (with the red square). \n"
 msgstr ""
-"Воспроизводить файл довольно просто, загрузите нужный файл, и нажмите на "
-"кнопку \"Играть начиная с позиции курсора\" или на кнопку \"Играть "
-"выделенную область\". Кнопка \"Играть начиная с позиции курсора\" (зеленая) "
-"воспроизводит файл начиная с текущей позиции курсора. Кнопка \"Играть "
-"выделенную область\" (желтая) воспроизводит выделенную область файла, или "
-"весь файл, если ничего не выделено. Остановите воспроизведение нажатием на "
-"кнопку \"Остановить воспроизведение\" (красный квадрат).\n"
+"п▓п╬я│п©я─п╬п╦п╥п╡п╬п╢п╦я┌я▄ я└п╟п╧п╩ п╢п╬п╡п╬п╩я▄п╫п╬ п©я─п╬я│я┌п╬, п╥п╟пЁя─я┐п╥п╦я┌п╣ п╫я┐п╤п╫я▀п╧ я└п╟п╧п╩, п╦ п╫п╟п╤п╪п╦я┌п╣ п╫п╟ "
+"п╨п╫п╬п©п╨я┐ \"п≤пЁя─п╟я┌я▄ п╫п╟я┤п╦п╫п╟я▐ я│ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟\" п╦п╩п╦ п╫п╟ п╨п╫п╬п©п╨я┐ \"п≤пЁя─п╟я┌я▄ "
+"п╡я▀п╢п╣п╩п╣п╫п╫я┐я▌ п╬п╠п╩п╟я│я┌я▄\". п п╫п╬п©п╨п╟ \"п≤пЁя─п╟я┌я▄ п╫п╟я┤п╦п╫п╟я▐ я│ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟\" (п╥п╣п╩п╣п╫п╟я▐) "
+"п╡п╬я│п©я─п╬п╦п╥п╡п╬п╢п╦я┌ я└п╟п╧п╩ п╫п╟я┤п╦п╫п╟я▐ я│ я┌п╣п╨я┐я┴п╣п╧ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟. п п╫п╬п©п╨п╟ \"п≤пЁя─п╟я┌я▄ "
+"п╡я▀п╢п╣п╩п╣п╫п╫я┐я▌ п╬п╠п╩п╟я│я┌я▄\" (п╤п╣п╩я┌п╟я▐) п╡п╬я│п©я─п╬п╦п╥п╡п╬п╢п╦я┌ п╡я▀п╢п╣п╩п╣п╫п╫я┐я▌ п╬п╠п╩п╟я│я┌я▄ я└п╟п╧п╩п╟, п╦п╩п╦ "
+"п╡п╣я│я▄ я└п╟п╧п╩, п╣я│п╩п╦ п╫п╦я┤п╣пЁп╬ п╫п╣ п╡я▀п╢п╣п╩п╣п╫п╬. п·я│я┌п╟п╫п╬п╡п╦я┌п╣ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣ п╫п╟п╤п╟я┌п╦п╣п╪ п╫п╟ "
+"п╨п╫п╬п©п╨я┐ \"п·я│я┌п╟п╫п╬п╡п╦я┌я▄ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣\" (п╨я─п╟я│п╫я▀п╧ п╨п╡п╟п╢я─п╟я┌).\n"
 
 #: src/help.c:66
 #, no-c-format
 msgid ""
 "The playback speed can be varied by adjusting the slider to the far right. \n"
 msgstr ""
-"Скорость воспроизведения может быть изменена при помощи элемента управления, "
-"расположенного в правом краю окна, и помеченного двойной стрелкой.\n"
+"п║п╨п╬я─п╬я│я┌я▄ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦я▐ п╪п╬п╤п╣я┌ п╠я▀я┌я▄ п╦п╥п╪п╣п╫п╣п╫п╟ п©я─п╦ п©п╬п╪п╬я┴п╦ я█п╩п╣п╪п╣п╫я┌п╟ я┐п©я─п╟п╡п╩п╣п╫п╦я▐, "
+"я─п╟я│п©п╬п╩п╬п╤п╣п╫п╫п╬пЁп╬ п╡ п©я─п╟п╡п╬п╪ п╨я─п╟я▌ п╬п╨п╫п╟, п╦ п©п╬п╪п╣я┤п╣п╫п╫п╬пЁп╬ п╢п╡п╬п╧п╫п╬п╧ я│я┌я─п╣п╩п╨п╬п╧.\n"
 
 #: src/help.c:68
 #, no-c-format
 msgid "You can do normal editing while the file is playing.\n"
-msgstr "Вы можете редактировать файл во время его воспроизведения.\n"
+msgstr "п▓я▀ п╪п╬п╤п╣я┌п╣ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟я┌я▄ я└п╟п╧п╩ п╡п╬ п╡я─п╣п╪я▐ п╣пЁп╬ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦я▐.\n"
 
 #: src/help.c:73
 #, no-c-format
@@ -1121,11 +1121,11 @@ msgid ""
 "you want to record in. After selecting the format, meters and numbers will "
 "appear showing info about the volume level of the sound input. \n"
 msgstr ""
-"Запись можно выполнить при помощи команды \"Запись...\" из меню "
-"\"Воспроизведение\", или при помощи кнопки \"Запись\" (красный кружочек). В "
-"результате появится диалог, в котором вы можете выбрать формат записи. После "
-"того как формат будет выбран, начнут бегать цифры и стрелки, показывая вам "
-"информацию об уровне входного сигнала. \n"
+"п≈п╟п©п╦я│я▄ п╪п╬п╤п╫п╬ п╡я▀п©п╬п╩п╫п╦я┌я▄ п©я─п╦ п©п╬п╪п╬я┴п╦ п╨п╬п╪п╟п╫п╢я▀ \"п≈п╟п©п╦я│я▄...\" п╦п╥ п╪п╣п╫я▌ "
+"\"п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣\", п╦п╩п╦ п©я─п╦ п©п╬п╪п╬я┴п╦ п╨п╫п╬п©п╨п╦ \"п≈п╟п©п╦я│я▄\" (п╨я─п╟я│п╫я▀п╧ п╨я─я┐п╤п╬я┤п╣п╨). п▓ "
+"я─п╣п╥я┐п╩я▄я┌п╟я┌п╣ п©п╬я▐п╡п╦я┌я│я▐ п╢п╦п╟п╩п╬пЁ, п╡ п╨п╬я┌п╬я─п╬п╪ п╡я▀ п╪п╬п╤п╣я┌п╣ п╡я▀п╠я─п╟я┌я▄ я└п╬я─п╪п╟я┌ п╥п╟п©п╦я│п╦. п÷п╬я│п╩п╣ "
+"я┌п╬пЁп╬ п╨п╟п╨ я└п╬я─п╪п╟я┌ п╠я┐п╢п╣я┌ п╡я▀п╠я─п╟п╫, п╫п╟я┤п╫я┐я┌ п╠п╣пЁп╟я┌я▄ я├п╦я└я─я▀ п╦ я│я┌я─п╣п╩п╨п╦, п©п╬п╨п╟п╥я▀п╡п╟я▐ п╡п╟п╪ "
+"п╦п╫я└п╬я─п╪п╟я├п╦я▌ п╬п╠ я┐я─п╬п╡п╫п╣ п╡я┘п╬п╢п╫п╬пЁп╬ я│п╦пЁп╫п╟п╩п╟. \n"
 
 #: src/help.c:75
 #, no-c-format
@@ -1135,9 +1135,9 @@ msgid ""
 "record dialog will disappear and newly recorded sound will show up in a new "
 "window.\n"
 msgstr ""
-"Когда вы захотите начать запись, нажмите кнопку \"Начать запись\". Когда вы "
-"запишите все что хотели, нажмите кнопку \"Завершить\". В результате чего "
-"диалог записи исчезнет, и записанный звук будет отображен в новом окне.\n"
+"п п╬пЁп╢п╟ п╡я▀ п╥п╟я┘п╬я┌п╦я┌п╣ п╫п╟я┤п╟я┌я▄ п╥п╟п©п╦я│я▄, п╫п╟п╤п╪п╦я┌п╣ п╨п╫п╬п©п╨я┐ \"п²п╟я┤п╟я┌я▄ п╥п╟п©п╦я│я▄\". п п╬пЁп╢п╟ п╡я▀ "
+"п╥п╟п©п╦я┬п╦я┌п╣ п╡я│п╣ я┤я┌п╬ я┘п╬я┌п╣п╩п╦, п╫п╟п╤п╪п╦я┌п╣ п╨п╫п╬п©п╨я┐ \"п≈п╟п╡п╣я─я┬п╦я┌я▄\". п▓ я─п╣п╥я┐п╩я▄я┌п╟я┌п╣ я┤п╣пЁп╬ "
+"п╢п╦п╟п╩п╬пЁ п╥п╟п©п╦я│п╦ п╦я│я┤п╣п╥п╫п╣я┌, п╦ п╥п╟п©п╦я│п╟п╫п╫я▀п╧ п╥п╡я┐п╨ п╠я┐п╢п╣я┌ п╬я┌п╬п╠я─п╟п╤п╣п╫ п╡ п╫п╬п╡п╬п╪ п╬п╨п╫п╣.\n"
 
 #: src/help.c:77
 #, no-c-format
@@ -1145,8 +1145,8 @@ msgid ""
 "Currently it is impossible to play and record at the same time, so the "
 "playback will stop when you record.\n"
 msgstr ""
-"На данный момент невозможно одновременно воспроизводить и записывать звук, "
-"так что когда вы записываете, воспроизведение останавливается.\n"
+"п²п╟ п╢п╟п╫п╫я▀п╧ п╪п╬п╪п╣п╫я┌ п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬п╢п╫п╬п╡я─п╣п╪п╣п╫п╫п╬ п╡п╬я│п©я─п╬п╦п╥п╡п╬п╢п╦я┌я▄ п╦ п╥п╟п©п╦я│я▀п╡п╟я┌я▄ п╥п╡я┐п╨, "
+"я┌п╟п╨ я┤я┌п╬ п╨п╬пЁп╢п╟ п╡я▀ п╥п╟п©п╦я│я▀п╡п╟п╣я┌п╣, п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣ п╬я│я┌п╟п╫п╟п╡п╩п╦п╡п╟п╣я┌я│я▐.\n"
 
 #: src/help.c:82
 #, no-c-format
@@ -1156,11 +1156,11 @@ msgid ""
 "(the button with the yellow arrow) or by selecting 'Play selection' from the "
 "Play menu.\n"
 msgstr ""
-"Вы можете делать выделение в редактируемом файле. Для этого нажмите и "
-"удерживайте левую (первую) кнопку мыши, и перемещайте курсор мыши вдоль "
-"области отображения сэмплов. Вы можете прослушать выделенную область нажав "
-"на кнопку \"Играть выделенную область\" (кнопка с желтой стрелкой), или "
-"выбрав в меню \"Воспроизведение\" команду \"Играть выделение\".\n"
+"п▓я▀ п╪п╬п╤п╣я┌п╣ п╢п╣п╩п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣ п╡ я─п╣п╢п╟п╨я┌п╦я─я┐п╣п╪п╬п╪ я└п╟п╧п╩п╣. п■п╩я▐ я█я┌п╬пЁп╬ п╫п╟п╤п╪п╦я┌п╣ п╦ "
+"я┐п╢п╣я─п╤п╦п╡п╟п╧я┌п╣ п╩п╣п╡я┐я▌ (п©п╣я─п╡я┐я▌) п╨п╫п╬п©п╨я┐ п╪я▀я┬п╦, п╦ п©п╣я─п╣п╪п╣я┴п╟п╧я┌п╣ п╨я┐я─я│п╬я─ п╪я▀я┬п╦ п╡п╢п╬п╩я▄ "
+"п╬п╠п╩п╟я│я┌п╦ п╬я┌п╬п╠я─п╟п╤п╣п╫п╦я▐ я│я█п╪п©п╩п╬п╡. п▓я▀ п╪п╬п╤п╣я┌п╣ п©я─п╬я│п╩я┐я┬п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╫я┐я▌ п╬п╠п╩п╟я│я┌я▄ п╫п╟п╤п╟п╡ "
+"п╫п╟ п╨п╫п╬п©п╨я┐ \"п≤пЁя─п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╫я┐я▌ п╬п╠п╩п╟я│я┌я▄\" (п╨п╫п╬п©п╨п╟ я│ п╤п╣п╩я┌п╬п╧ я│я┌я─п╣п╩п╨п╬п╧), п╦п╩п╦ "
+"п╡я▀п╠я─п╟п╡ п╡ п╪п╣п╫я▌ \"п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣\" п╨п╬п╪п╟п╫п╢я┐ \"п≤пЁя─п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣\".\n"
 
 #: src/help.c:84
 #, no-c-format
@@ -1170,18 +1170,18 @@ msgid ""
 "point or the selection end point to the current cursor position. You can "
 "also drag the selection endpoints using the mouse.\n"
 msgstr ""
-"Вы можете использовать курсор для уточнения выделения. Используйте кнопки "
-"\"Установить начало выделения в позицию курсора\" и \"Установить конец "
-"выделения в позицию курсора\" для перемещения точки начала выделения или "
-"точки конца выделения в текущую позицию курсора. Также вы можете перемещать "
-"крайние точки выделения используя мышь.\n"
+"п▓я▀ п╪п╬п╤п╣я┌п╣ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╨я┐я─я│п╬я─ п╢п╩я▐ я┐я┌п╬я┤п╫п╣п╫п╦я▐ п╡я▀п╢п╣п╩п╣п╫п╦я▐. п≤я│п©п╬п╩я▄п╥я┐п╧я┌п╣ п╨п╫п╬п©п╨п╦ "
+"\"пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п╫п╟я┤п╟п╩п╬ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╡ п©п╬п╥п╦я├п╦я▌ п╨я┐я─я│п╬я─п╟\" п╦ \"пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п╨п╬п╫п╣я├ "
+"п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╡ п©п╬п╥п╦я├п╦я▌ п╨я┐я─я│п╬я─п╟\" п╢п╩я▐ п©п╣я─п╣п╪п╣я┴п╣п╫п╦я▐ я┌п╬я┤п╨п╦ п╫п╟я┤п╟п╩п╟ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╦п╩п╦ "
+"я┌п╬я┤п╨п╦ п╨п╬п╫я├п╟ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╡ я┌п╣п╨я┐я┴я┐я▌ п©п╬п╥п╦я├п╦я▌ п╨я┐я─я│п╬я─п╟. п╒п╟п╨п╤п╣ п╡я▀ п╪п╬п╤п╣я┌п╣ п©п╣я─п╣п╪п╣я┴п╟я┌я▄ "
+"п╨я─п╟п╧п╫п╦п╣ я┌п╬я┤п╨п╦ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╦я│п©п╬п╩я▄п╥я┐я▐ п╪я▀я┬я▄.\n"
 
 #: src/help.c:86
 #, no-c-format
 msgid "The 'Cut' and 'Copy' functions work like in any other software. \n"
 msgstr ""
-"Команды \"Вырезать\" и \"Вставить\" работают таким же образом как и в любых "
-"других программах.\n"
+"п п╬п╪п╟п╫п╢я▀ \"п▓я▀я─п╣п╥п╟я┌я▄\" п╦ \"п▓я│я┌п╟п╡п╦я┌я▄\" я─п╟п╠п╬я┌п╟я▌я┌ я┌п╟п╨п╦п╪ п╤п╣ п╬п╠я─п╟п╥п╬п╪ п╨п╟п╨ п╦ п╡ п╩я▌п╠я▀я┘ "
+"п╢я─я┐пЁп╦я┘ п©я─п╬пЁя─п╟п╪п╪п╟я┘.\n"
 
 #: src/help.c:88
 #, no-c-format
@@ -1190,11 +1190,11 @@ msgid ""
 "The 'Paste over' function works like 'Paste', except that it overwrites the "
 "data after the insert position. \n"
 msgstr ""
-"Команда \"Вставить\" вставляет в файл текущее содержимое буфера обмена "
-"начиная с позиции курсора (таким образом что данные, которые располагались "
-"после курсора, останутся за вставляемым фрагментом, прим. перев.). Команда "
-"\"Вставить поверх\" работает подобно команде \"Вставить\", за исключение "
-"того что она перезаписывает данные за позицией курсора.\n"
+"п п╬п╪п╟п╫п╢п╟ \"п▓я│я┌п╟п╡п╦я┌я▄\" п╡я│я┌п╟п╡п╩я▐п╣я┌ п╡ я└п╟п╧п╩ я┌п╣п╨я┐я┴п╣п╣ я│п╬п╢п╣я─п╤п╦п╪п╬п╣ п╠я┐я└п╣я─п╟ п╬п╠п╪п╣п╫п╟ "
+"п╫п╟я┤п╦п╫п╟я▐ я│ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟ (я┌п╟п╨п╦п╪ п╬п╠я─п╟п╥п╬п╪ я┤я┌п╬ п╢п╟п╫п╫я▀п╣, п╨п╬я┌п╬я─я▀п╣ я─п╟я│п©п╬п╩п╟пЁп╟п╩п╦я│я▄ "
+"п©п╬я│п╩п╣ п╨я┐я─я│п╬я─п╟, п╬я│я┌п╟п╫я┐я┌я│я▐ п╥п╟ п╡я│я┌п╟п╡п╩я▐п╣п╪я▀п╪ я└я─п╟пЁп╪п╣п╫я┌п╬п╪, п©я─п╦п╪. п©п╣я─п╣п╡.). п п╬п╪п╟п╫п╢п╟ "
+"\"п▓я│я┌п╟п╡п╦я┌я▄ п©п╬п╡п╣я─я┘\" я─п╟п╠п╬я┌п╟п╣я┌ п©п╬п╢п╬п╠п╫п╬ п╨п╬п╪п╟п╫п╢п╣ \"п▓я│я┌п╟п╡п╦я┌я▄\", п╥п╟ п╦я│п╨п╩я▌я┤п╣п╫п╦п╣ "
+"я┌п╬пЁп╬ я┤я┌п╬ п╬п╫п╟ п©п╣я─п╣п╥п╟п©п╦я│я▀п╡п╟п╣я┌ п╢п╟п╫п╫я▀п╣ п╥п╟ п©п╬п╥п╦я├п╦п╣п╧ п╨я┐я─я│п╬я─п╟.\n"
 
 #: src/help.c:90
 #, no-c-format
@@ -1202,8 +1202,8 @@ msgid ""
 "The 'Paste mix' function combines the clipboard data with the data at the "
 "cursor position.\n"
 msgstr ""
-"Команда \"Вставить смикшировав\" комбинирует содержимое буфера обмена с "
-"данными начиная с позиции курсора.\n"
+"п п╬п╪п╟п╫п╢п╟ \"п▓я│я┌п╟п╡п╦я┌я▄ я│п╪п╦п╨я┬п╦я─п╬п╡п╟п╡\" п╨п╬п╪п╠п╦п╫п╦я─я┐п╣я┌ я│п╬п╢п╣я─п╤п╦п╪п╬п╣ п╠я┐я└п╣я─п╟ п╬п╠п╪п╣п╫п╟ я│ "
+"п╢п╟п╫п╫я▀п╪п╦ п╫п╟я┤п╦п╫п╟я▐ я│ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟.\n"
 
 #: src/help.c:92
 #, no-c-format
@@ -1211,14 +1211,14 @@ msgid ""
 "The 'Paste as new' function opens a new window and puts the clipboard "
 "contents into it. \n"
 msgstr ""
-"Команда \"Вставить в новый\" открывает новое окно, и вставляет в него "
-"содержимое буфера обмена.\n"
+"п п╬п╪п╟п╫п╢п╟ \"п▓я│я┌п╟п╡п╦я┌я▄ п╡ п╫п╬п╡я▀п╧\" п╬я┌п╨я─я▀п╡п╟п╣я┌ п╫п╬п╡п╬п╣ п╬п╨п╫п╬, п╦ п╡я│я┌п╟п╡п╩я▐п╣я┌ п╡ п╫п╣пЁп╬ "
+"я│п╬п╢п╣я─п╤п╦п╪п╬п╣ п╠я┐я└п╣я─п╟ п╬п╠п╪п╣п╫п╟.\n"
 
 #: src/help.c:94
 #, no-c-format
 msgid ""
 "The 'Crop' function deletes all parts of the file that are not selected.\n"
-msgstr "Команда \"Обрезать\" удаляет все невыделенные части файла.\n"
+msgstr "п п╬п╪п╟п╫п╢п╟ \"п·п╠я─п╣п╥п╟я┌я▄\" я┐п╢п╟п╩я▐п╣я┌ п╡я│п╣ п╫п╣п╡я▀п╢п╣п╩п╣п╫п╫я▀п╣ я┤п╟я│я┌п╦ я└п╟п╧п╩п╟.\n"
 
 #: src/help.c:96
 #, no-c-format
@@ -1227,9 +1227,9 @@ msgid ""
 "avoid clicks, the silent part is a line that meets the wave at the "
 "endpoints.\n"
 msgstr ""
-"Команда \"Заглушить выделение\" заменяет выбранный фрагмент тишиной. Для "
-"избежания щелчков, область тишины представляет собой линию, которая "
-"соединяет волны с обеих краев.\n"
+"п п╬п╪п╟п╫п╢п╟ \"п≈п╟пЁп╩я┐я┬п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣\" п╥п╟п╪п╣п╫я▐п╣я┌ п╡я▀п╠я─п╟п╫п╫я▀п╧ я└я─п╟пЁп╪п╣п╫я┌ я┌п╦я┬п╦п╫п╬п╧. п■п╩я▐ "
+"п╦п╥п╠п╣п╤п╟п╫п╦я▐ я┴п╣п╩я┤п╨п╬п╡, п╬п╠п╩п╟я│я┌я▄ я┌п╦я┬п╦п╫я▀ п©я─п╣п╢я│я┌п╟п╡п╩я▐п╣я┌ я│п╬п╠п╬п╧ п╩п╦п╫п╦я▌, п╨п╬я┌п╬я─п╟я▐ "
+"я│п╬п╣п╢п╦п╫я▐п╣я┌ п╡п╬п╩п╫я▀ я│ п╬п╠п╣п╦я┘ п╨я─п╟п╣п╡.\n"
 
 #: src/help.c:98
 #, no-c-format
@@ -1238,9 +1238,9 @@ msgid ""
 "editing isn't actually changed until you save it (the effects also work this "
 "way).\n"
 msgstr ""
-"Все команды редактирования работают недеструктивно, это означает что файл, "
-"который вы редактируете, фактически не изменяется пока вы не сохраните его "
-"(эффекты работают аналогично).\n"
+"п▓я│п╣ п╨п╬п╪п╟п╫п╢я▀ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦я▐ я─п╟п╠п╬я┌п╟я▌я┌ п╫п╣п╢п╣я│я┌я─я┐п╨я┌п╦п╡п╫п╬, я█я┌п╬ п╬п╥п╫п╟я┤п╟п╣я┌ я┤я┌п╬ я└п╟п╧п╩, "
+"п╨п╬я┌п╬я─я▀п╧ п╡я▀ я─п╣п╢п╟п╨я┌п╦я─я┐п╣я┌п╣, я└п╟п╨я┌п╦я┤п╣я│п╨п╦ п╫п╣ п╦п╥п╪п╣п╫я▐п╣я┌я│я▐ п©п╬п╨п╟ п╡я▀ п╫п╣ я│п╬я┘я─п╟п╫п╦я┌п╣ п╣пЁп╬ "
+"(я█я└я└п╣п╨я┌я▀ я─п╟п╠п╬я┌п╟я▌я┌ п╟п╫п╟п╩п╬пЁп╦я┤п╫п╬).\n"
 
 #: src/help.c:104
 #, fuzzy, no-c-format
@@ -1248,23 +1248,23 @@ msgid ""
 "mhWaveEdit has a few simple effects, which are available from the 'Effects' "
 "menu. \n"
 msgstr ""
-"mhWaveEdit имеет несколько простых эффектов, которые доступны из меню "
-"\"Эффекты\". \n"
+"mhWaveEdit п╦п╪п╣п╣я┌ п╫п╣я│п╨п╬п╩я▄п╨п╬ п©я─п╬я│я┌я▀я┘ я█я└я└п╣п╨я┌п╬п╡, п╨п╬я┌п╬я─я▀п╣ п╢п╬я│я┌я┐п©п╫я▀ п╦п╥ п╪п╣п╫я▌ "
+"\"п╜я└я└п╣п╨я┌я▀\". \n"
 
 #: src/help.c:106
 #, fuzzy, no-c-format
 msgid " * Fade in/out\n"
-msgstr " * Плавное нарастание и плавное затухание\n"
+msgstr " * п÷п╩п╟п╡п╫п╬п╣ п╫п╟я─п╟я│я┌п╟п╫п╦п╣ п╦ п©п╩п╟п╡п╫п╬п╣ п╥п╟я┌я┐я┘п╟п╫п╦п╣\n"
 
 #: src/help.c:108
 #, fuzzy, no-c-format
 msgid "   This creates a linear fade in or fade out effect.\n"
-msgstr "   Это делает эффект линейного нарастания или затухания.\n"
+msgstr "   п╜я┌п╬ п╢п╣п╩п╟п╣я┌ я█я└я└п╣п╨я┌ п╩п╦п╫п╣п╧п╫п╬пЁп╬ п╫п╟я─п╟я│я┌п╟п╫п╦я▐ п╦п╩п╦ п╥п╟я┌я┐я┘п╟п╫п╦я▐.\n"
 
 #: src/help.c:110
 #, fuzzy, no-c-format
 msgid " * Normalize, Normalize to...\n"
-msgstr " * Нормализация\n"
+msgstr " * п²п╬я─п╪п╟п╩п╦п╥п╟я├п╦я▐\n"
 
 #: src/help.c:112
 #, fuzzy, no-c-format
@@ -1273,14 +1273,14 @@ msgid ""
 "distortion. The \"Normalize to...\" item lets you specify which level to "
 "normalize to.\n"
 msgstr ""
-"   Этот эффект усиливает звук настолько сильно, насколько это возможно "
-"сделать, не получая при этом искажения, возникающие в результате обрезания "
-"волны. \n"
+"   п╜я┌п╬я┌ я█я└я└п╣п╨я┌ я┐я│п╦п╩п╦п╡п╟п╣я┌ п╥п╡я┐п╨ п╫п╟я│я┌п╬п╩я▄п╨п╬ я│п╦п╩я▄п╫п╬, п╫п╟я│п╨п╬п╩я▄п╨п╬ я█я┌п╬ п╡п╬п╥п╪п╬п╤п╫п╬ "
+"я│п╢п╣п╩п╟я┌я▄, п╫п╣ п©п╬п╩я┐я┤п╟я▐ п©я─п╦ я█я┌п╬п╪ п╦я│п╨п╟п╤п╣п╫п╦я▐, п╡п╬п╥п╫п╦п╨п╟я▌я┴п╦п╣ п╡ я─п╣п╥я┐п╩я▄я┌п╟я┌п╣ п╬п╠я─п╣п╥п╟п╫п╦я▐ "
+"п╡п╬п╩п╫я▀. \n"
 
 #: src/help.c:114
 #, fuzzy, no-c-format
 msgid " * Volume adjust/fade...\n"
-msgstr " * Подстройка громкости...\n"
+msgstr " * п÷п╬п╢я│я┌я─п╬п╧п╨п╟ пЁя─п╬п╪п╨п╬я│я┌п╦...\n"
 
 #: src/help.c:116
 #, fuzzy, no-c-format
@@ -1289,9 +1289,9 @@ msgid ""
 "amplifies the selection fading from the starting volume to the ending "
 "volume.\n"
 msgstr ""
-"   Этот эффект предлагает вам выбрать начальную и конечную громкость, после "
-"чего усиливает выделенную область, плавно переходя от начальной громкости к "
-"конечной.\n"
+"   п╜я┌п╬я┌ я█я└я└п╣п╨я┌ п©я─п╣п╢п╩п╟пЁп╟п╣я┌ п╡п╟п╪ п╡я▀п╠я─п╟я┌я▄ п╫п╟я┤п╟п╩я▄п╫я┐я▌ п╦ п╨п╬п╫п╣я┤п╫я┐я▌ пЁя─п╬п╪п╨п╬я│я┌я▄, п©п╬я│п╩п╣ "
+"я┤п╣пЁп╬ я┐я│п╦п╩п╦п╡п╟п╣я┌ п╡я▀п╢п╣п╩п╣п╫п╫я┐я▌ п╬п╠п╩п╟я│я┌я▄, п©п╩п╟п╡п╫п╬ п©п╣я─п╣я┘п╬п╢я▐ п╬я┌ п╫п╟я┤п╟п╩я▄п╫п╬п╧ пЁя─п╬п╪п╨п╬я│я┌п╦ п╨ "
+"п╨п╬п╫п╣я┤п╫п╬п╧.\n"
 
 #: src/help.c:118
 #, fuzzy, no-c-format
@@ -1300,10 +1300,10 @@ msgid ""
 "top volume' to find out the maximum amplification possible without "
 "distortion. (You can use this for normalizing samples.) \n"
 msgstr ""
-"   Заметьте что громкость больше 100% может вызвать искажение звука. "
-"Используйте кнопку \"Найти лучшую громкость\" для того чтобы найти "
-"максимальное значение усиления, которое не вызовет искажение. (Вы можете "
-"использовать это для нормализации сэмплов.) \n"
+"   п≈п╟п╪п╣я┌я▄я┌п╣ я┤я┌п╬ пЁя─п╬п╪п╨п╬я│я┌я▄ п╠п╬п╩я▄я┬п╣ 100% п╪п╬п╤п╣я┌ п╡я▀п╥п╡п╟я┌я▄ п╦я│п╨п╟п╤п╣п╫п╦п╣ п╥п╡я┐п╨п╟. "
+"п≤я│п©п╬п╩я▄п╥я┐п╧я┌п╣ п╨п╫п╬п©п╨я┐ \"п²п╟п╧я┌п╦ п╩я┐я┤я┬я┐я▌ пЁя─п╬п╪п╨п╬я│я┌я▄\" п╢п╩я▐ я┌п╬пЁп╬ я┤я┌п╬п╠я▀ п╫п╟п╧я┌п╦ "
+"п╪п╟п╨я│п╦п╪п╟п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ я┐я│п╦п╩п╣п╫п╦я▐, п╨п╬я┌п╬я─п╬п╣ п╫п╣ п╡я▀п╥п╬п╡п╣я┌ п╦я│п╨п╟п╤п╣п╫п╦п╣. (п▓я▀ п╪п╬п╤п╣я┌п╣ "
+"п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я█я┌п╬ п╢п╩я▐ п╫п╬я─п╪п╟п╩п╦п╥п╟я├п╦п╦ я│я█п╪п©п╩п╬п╡.) \n"
 
 #: src/help.c:120
 #, fuzzy, no-c-format
@@ -1311,13 +1311,13 @@ msgid ""
 "   By setting starting volume and ending volume to the same value you get a "
 "simple amplification of the sound. \n"
 msgstr ""
-"   При использовании одинаковых значений для начальной и конечной громкости  "
-"вы получите простое усиление звука. \n"
+"   п÷я─п╦ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╦ п╬п╢п╦п╫п╟п╨п╬п╡я▀я┘ п╥п╫п╟я┤п╣п╫п╦п╧ п╢п╩я▐ п╫п╟я┤п╟п╩я▄п╫п╬п╧ п╦ п╨п╬п╫п╣я┤п╫п╬п╧ пЁя─п╬п╪п╨п╬я│я┌п╦  "
+"п╡я▀ п©п╬п╩я┐я┤п╦я┌п╣ п©я─п╬я│я┌п╬п╣ я┐я│п╦п╩п╣п╫п╦п╣ п╥п╡я┐п╨п╟. \n"
 
 #: src/help.c:122
 #, fuzzy, no-c-format
 msgid " * Convert samplerate...\n"
-msgstr " * Преобразование частоты сэмплов...\n"
+msgstr " * п÷я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦п╣ я┤п╟я│я┌п╬я┌я▀ я│я█п╪п©п╩п╬п╡...\n"
 
 #: src/help.c:124
 #, fuzzy, no-c-format
@@ -1326,20 +1326,20 @@ msgid ""
 "are different methods for doing this, usually the one in the top has the "
 "best quality but can take longer than the other methode.\n"
 msgstr ""
-"   Этот эффект преобразовывает частоту сэмплов всего файла в указанную "
-"частоту. Для выполнения данного преобразования существуют различные методы, "
-"обычно тот что выбран по умолчанию дает лучшее качество, но выполняется "
-"дольше чем другие методы.\n"
+"   п╜я┌п╬я┌ я█я└я└п╣п╨я┌ п©я─п╣п╬п╠я─п╟п╥п╬п╡я▀п╡п╟п╣я┌ я┤п╟я│я┌п╬я┌я┐ я│я█п╪п©п╩п╬п╡ п╡я│п╣пЁп╬ я└п╟п╧п╩п╟ п╡ я┐п╨п╟п╥п╟п╫п╫я┐я▌ "
+"я┤п╟я│я┌п╬я┌я┐. п■п╩я▐ п╡я▀п©п╬п╩п╫п╣п╫п╦я▐ п╢п╟п╫п╫п╬пЁп╬ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦я▐ я│я┐я┴п╣я│я┌п╡я┐я▌я┌ я─п╟п╥п╩п╦я┤п╫я▀п╣ п╪п╣я┌п╬п╢я▀, "
+"п╬п╠я▀я┤п╫п╬ я┌п╬я┌ я┤я┌п╬ п╡я▀п╠я─п╟п╫ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ п╢п╟п╣я┌ п╩я┐я┤я┬п╣п╣ п╨п╟я┤п╣я│я┌п╡п╬, п╫п╬ п╡я▀п©п╬п╩п╫я▐п╣я┌я│я▐ "
+"п╢п╬п╩я▄я┬п╣ я┤п╣п╪ п╢я─я┐пЁп╦п╣ п╪п╣я┌п╬п╢я▀.\n"
 
 #: src/help.c:126
 #, fuzzy, no-c-format
 msgid " * Convert sample format...\n"
-msgstr " * Преобразование формата сэмплов...\n"
+msgstr " * п÷я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦п╣ я└п╬я─п╪п╟я┌п╟ я│я█п╪п©п╩п╬п╡...\n"
 
 #: src/help.c:128
 #, fuzzy, no-c-format
 msgid "   This converts the sample format of the entire file.\n"
-msgstr "   Этот эффект преобразовывает формат сэмплов всего файла.\n"
+msgstr "   п╜я┌п╬я┌ я█я└я└п╣п╨я┌ п©я─п╣п╬п╠я─п╟п╥п╬п╡я▀п╡п╟п╣я┌ я└п╬я─п╪п╟я┌ я│я█п╪п©п╩п╬п╡ п╡я│п╣пЁп╬ я└п╟п╧п╩п╟.\n"
 
 #: src/help.c:130
 #, fuzzy, no-c-format
@@ -1347,13 +1347,13 @@ msgid ""
 "   The 'Don't actually change the data' option can be used if the program "
 "was wrong about the file's format.\n"
 msgstr ""
-"   Опция \"Фактически не изменять данные\" может оказаться полезной когда "
-"программа имеет неверные сведения о формате файла.\n"
+"   п·п©я├п╦я▐ \"п╓п╟п╨я┌п╦я┤п╣я│п╨п╦ п╫п╣ п╦п╥п╪п╣п╫я▐я┌я▄ п╢п╟п╫п╫я▀п╣\" п╪п╬п╤п╣я┌ п╬п╨п╟п╥п╟я┌я▄я│я▐ п©п╬п╩п╣п╥п╫п╬п╧ п╨п╬пЁп╢п╟ "
+"п©я─п╬пЁя─п╟п╪п╪п╟ п╦п╪п╣п╣я┌ п╫п╣п╡п╣я─п╫я▀п╣ я│п╡п╣п╢п╣п╫п╦я▐ п╬ я└п╬я─п╪п╟я┌п╣ я└п╟п╧п╩п╟.\n"
 
 #: src/help.c:132
 #, fuzzy, no-c-format
 msgid " * Byte swap\n"
-msgstr " * Перестановка байт\n"
+msgstr " * п÷п╣я─п╣я│я┌п╟п╫п╬п╡п╨п╟ п╠п╟п╧я┌\n"
 
 #: src/help.c:134
 #, fuzzy, no-c-format
@@ -1363,27 +1363,27 @@ msgid ""
 "but plays wrong, you should not use this option, instead you should use the "
 "\"byte-swap output\" option in the Preferences dialog.\n"
 msgstr ""
-"   Этот эффект переставляет местами байты в выделенном фрагменте. Он может "
-"быть использован для восстановления поврежденных файлов c неправильным "
-"порядком байт. Заметьте что если звук выглядит нормально, но воспроизводится "
-"неправильно, вы не должны использовать этот эффект, а должны воспользоваться "
-"опцией \"Вывод с перестановкой байт\" в диалоге \"Настройки\".\n"
+"   п╜я┌п╬я┌ я█я└я└п╣п╨я┌ п©п╣я─п╣я│я┌п╟п╡п╩я▐п╣я┌ п╪п╣я│я┌п╟п╪п╦ п╠п╟п╧я┌я▀ п╡ п╡я▀п╢п╣п╩п╣п╫п╫п╬п╪ я└я─п╟пЁп╪п╣п╫я┌п╣. п·п╫ п╪п╬п╤п╣я┌ "
+"п╠я▀я┌я▄ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╢п╩я▐ п╡п╬я│я│я┌п╟п╫п╬п╡п╩п╣п╫п╦я▐ п©п╬п╡я─п╣п╤п╢п╣п╫п╫я▀я┘ я└п╟п╧п╩п╬п╡ c п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╪ "
+"п©п╬я─я▐п╢п╨п╬п╪ п╠п╟п╧я┌. п≈п╟п╪п╣я┌я▄я┌п╣ я┤я┌п╬ п╣я│п╩п╦ п╥п╡я┐п╨ п╡я▀пЁп╩я▐п╢п╦я┌ п╫п╬я─п╪п╟п╩я▄п╫п╬, п╫п╬ п╡п╬я│п©я─п╬п╦п╥п╡п╬п╢п╦я┌я│я▐ "
+"п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬, п╡я▀ п╫п╣ п╢п╬п╩п╤п╫я▀ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я█я┌п╬я┌ я█я└я└п╣п╨я┌, п╟ п╢п╬п╩п╤п╫я▀ п╡п╬я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄я│я▐ "
+"п╬п©я├п╦п╣п╧ \"п▓я▀п╡п╬п╢ я│ п©п╣я─п╣я│я┌п╟п╫п╬п╡п╨п╬п╧ п╠п╟п╧я┌\" п╡ п╢п╦п╟п╩п╬пЁп╣ \"п²п╟я│я┌я─п╬п╧п╨п╦\".\n"
 
 #: src/help.c:136
 #, fuzzy, no-c-format
 msgid " * Mix to mono\n"
-msgstr " * Микшировать каналы...\n"
+msgstr " * п°п╦п╨я┬п╦я─п╬п╡п╟я┌я▄ п╨п╟п╫п╟п╩я▀...\n"
 
 #: src/help.c:138
 #, fuzzy, no-c-format
 msgid "   This mixes all channels of the file together to a mono sound.\n"
 msgstr ""
-"   Этот эффект смешивает все каналы файла в один канал, образуя моно-звук.\n"
+"   п╜я┌п╬я┌ я█я└я└п╣п╨я┌ я│п╪п╣я┬п╦п╡п╟п╣я┌ п╡я│п╣ п╨п╟п╫п╟п╩я▀ я└п╟п╧п╩п╟ п╡ п╬п╢п╦п╫ п╨п╟п╫п╟п╩, п╬п╠я─п╟п╥я┐я▐ п╪п╬п╫п╬-п╥п╡я┐п╨.\n"
 
 #: src/help.c:140
 #, fuzzy, no-c-format
 msgid " * Add channel\n"
-msgstr " * Разбить канал...\n"
+msgstr " * п═п╟п╥п╠п╦я┌я▄ п╨п╟п╫п╟п╩...\n"
 
 #: src/help.c:142
 #, fuzzy, no-c-format
@@ -1391,38 +1391,38 @@ msgid ""
 "   This copies the first channel to a new channel in the sound, converting "
 "mono to stereo etc.\n"
 msgstr ""
-"   Этот эффект копирует первый канал в новый канал звука, преобразуя моно в "
-"стерео, т.п.\n"
+"   п╜я┌п╬я┌ я█я└я└п╣п╨я┌ п╨п╬п©п╦я─я┐п╣я┌ п©п╣я─п╡я▀п╧ п╨п╟п╫п╟п╩ п╡ п╫п╬п╡я▀п╧ п╨п╟п╫п╟п╩ п╥п╡я┐п╨п╟, п©я─п╣п╬п╠я─п╟п╥я┐я▐ п╪п╬п╫п╬ п╡ "
+"я│я┌п╣я─п╣п╬, я┌.п©.\n"
 
 #: src/help.c:144
 #, fuzzy, no-c-format
 msgid " * Map channels...\n"
-msgstr " * Скомбинировать каналы...\n"
+msgstr " * п║п╨п╬п╪п╠п╦п╫п╦я─п╬п╡п╟я┌я▄ п╨п╟п╫п╟п╩я▀...\n"
 
 #: src/help.c:145
 #, fuzzy, no-c-format
 msgid "   \n"
 msgstr ""
-"   Этот эффект позволяет вам создавать новый звук, линейно комбинируя "
-"существующие каналы. Это означает что вы можете делать микширование / "
-"перестановку / баланс / усиление каналов, указывая различные значения. "
-"Например, для перестановки местами левого и правого канала, вы указываете "
-"что новый Канал 1 должен быть 0% старого Канала 1 и 100% старого Канала 2, и "
-"что новый Канал 2 должен быть 100% старого Канала 1 и 0% старого Канала 2.\n"
+"   п╜я┌п╬я┌ я█я└я└п╣п╨я┌ п©п╬п╥п╡п╬п╩я▐п╣я┌ п╡п╟п╪ я│п╬п╥п╢п╟п╡п╟я┌я▄ п╫п╬п╡я▀п╧ п╥п╡я┐п╨, п╩п╦п╫п╣п╧п╫п╬ п╨п╬п╪п╠п╦п╫п╦я─я┐я▐ "
+"я│я┐я┴п╣я│я┌п╡я┐я▌я┴п╦п╣ п╨п╟п╫п╟п╩я▀. п╜я┌п╬ п╬п╥п╫п╟я┤п╟п╣я┌ я┤я┌п╬ п╡я▀ п╪п╬п╤п╣я┌п╣ п╢п╣п╩п╟я┌я▄ п╪п╦п╨я┬п╦я─п╬п╡п╟п╫п╦п╣ / "
+"п©п╣я─п╣я│я┌п╟п╫п╬п╡п╨я┐ / п╠п╟п╩п╟п╫я│ / я┐я│п╦п╩п╣п╫п╦п╣ п╨п╟п╫п╟п╩п╬п╡, я┐п╨п╟п╥я▀п╡п╟я▐ я─п╟п╥п╩п╦я┤п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐. "
+"п²п╟п©я─п╦п╪п╣я─, п╢п╩я▐ п©п╣я─п╣я│я┌п╟п╫п╬п╡п╨п╦ п╪п╣я│я┌п╟п╪п╦ п╩п╣п╡п╬пЁп╬ п╦ п©я─п╟п╡п╬пЁп╬ п╨п╟п╫п╟п╩п╟, п╡я▀ я┐п╨п╟п╥я▀п╡п╟п╣я┌п╣ "
+"я┤я┌п╬ п╫п╬п╡я▀п╧ п п╟п╫п╟п╩ 1 п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ 0% я│я┌п╟я─п╬пЁп╬ п п╟п╫п╟п╩п╟ 1 п╦ 100% я│я┌п╟я─п╬пЁп╬ п п╟п╫п╟п╩п╟ 2, п╦ "
+"я┤я┌п╬ п╫п╬п╡я▀п╧ п п╟п╫п╟п╩ 2 п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ 100% я│я┌п╟я─п╬пЁп╬ п п╟п╫п╟п╩п╟ 1 п╦ 0% я│я┌п╟я─п╬пЁп╬ п п╟п╫п╟п╩п╟ 2.\n"
 
 #: src/help.c:146
 #, fuzzy, no-c-format
 msgid ""
 "   With this effect, you can change the number of channels in the file. You "
 "can also rearrange and add (i.e. mix) channels.\n"
-msgstr " * Подстройка скорости...\n"
+msgstr " * п÷п╬п╢я│я┌я─п╬п╧п╨п╟ я│п╨п╬я─п╬я│я┌п╦...\n"
 
 #: src/help.c:148
 #, fuzzy, no-c-format
 msgid " * Combine channels...\n"
 msgstr ""
-"   Этот эффект изменяет скорость выделенного фрагмента. Тон при этом также "
-"изменяется.\n"
+"   п╜я┌п╬я┌ я█я└я└п╣п╨я┌ п╦п╥п╪п╣п╫я▐п╣я┌ я│п╨п╬я─п╬я│я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╫п╬пЁп╬ я└я─п╟пЁп╪п╣п╫я┌п╟. п╒п╬п╫ п©я─п╦ я█я┌п╬п╪ я┌п╟п╨п╤п╣ "
+"п╦п╥п╪п╣п╫я▐п╣я┌я│я▐.\n"
 
 #: src/help.c:150
 #, fuzzy, no-c-format
@@ -1434,10 +1434,10 @@ msgid ""
 "0% of the old Channel 1 and 100% of the old Channel 2, and the new Channel 2 "
 "should be 100% of the old Channel 1 and 0% of the old Channel 2 \n"
 msgstr ""
-"mhWaveEdit поддерживает эффекты LADSPA, а также позволяет использовать "
-"большинство эффектов утилиты SoX. Все поддерживаемые эффекты могут быть "
-"найдены в диалоге \"Эффекты\", который вызывается при помощи команды "
-"\"Диалог эффектов...\" из меню \"Эффекты\". \n"
+"mhWaveEdit п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌ я█я└я└п╣п╨я┌я▀ LADSPA, п╟ я┌п╟п╨п╤п╣ п©п╬п╥п╡п╬п╩я▐п╣я┌ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ "
+"п╠п╬п╩я▄я┬п╦п╫я│я┌п╡п╬ я█я└я└п╣п╨я┌п╬п╡ я┐я┌п╦п╩п╦я┌я▀ SoX. п▓я│п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪я▀п╣ я█я└я└п╣п╨я┌я▀ п╪п╬пЁя┐я┌ п╠я▀я┌я▄ "
+"п╫п╟п╧п╢п╣п╫я▀ п╡ п╢п╦п╟п╩п╬пЁп╣ \"п╜я└я└п╣п╨я┌я▀\", п╨п╬я┌п╬я─я▀п╧ п╡я▀п╥я▀п╡п╟п╣я┌я│я▐ п©я─п╦ п©п╬п╪п╬я┴п╦ п╨п╬п╪п╟п╫п╢я▀ "
+"\"п■п╦п╟п╩п╬пЁ я█я└я└п╣п╨я┌п╬п╡...\" п╦п╥ п╪п╣п╫я▌ \"п╜я└я└п╣п╨я┌я▀\". \n"
 
 #: src/help.c:152
 #, fuzzy, no-c-format
@@ -1488,7 +1488,7 @@ msgstr " \n"
 #: src/help.c:167
 #, no-c-format
 msgid "Some notes on sound quality.\n"
-msgstr "Некоторые замечания относительно качества звука.\n"
+msgstr "п²п╣п╨п╬я┌п╬я─я▀п╣ п╥п╟п╪п╣я┤п╟п╫п╦я▐ п╬я┌п╫п╬я│п╦я┌п╣п╩я▄п╫п╬ п╨п╟я┤п╣я│я┌п╡п╟ п╥п╡я┐п╨п╟.\n"
 
 #: src/help.c:169
 #, no-c-format
@@ -1497,9 +1497,9 @@ msgid ""
 "the data more than necessary and keep an original copy whenever you're "
 "processing your important files. \n"
 msgstr ""
-"Основное правило при выполнении редактирования/обработки звука: не выполнять "
-"над данными больше операций чем это требуется, и всегда хранить копии "
-"оригиналов важных файлов, которые вы обрабатываете. \n"
+"п·я│п╫п╬п╡п╫п╬п╣ п©я─п╟п╡п╦п╩п╬ п©я─п╦ п╡я▀п©п╬п╩п╫п╣п╫п╦п╦ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦я▐/п╬п╠я─п╟п╠п╬я┌п╨п╦ п╥п╡я┐п╨п╟: п╫п╣ п╡я▀п©п╬п╩п╫я▐я┌я▄ "
+"п╫п╟п╢ п╢п╟п╫п╫я▀п╪п╦ п╠п╬п╩я▄я┬п╣ п╬п©п╣я─п╟я├п╦п╧ я┤п╣п╪ я█я┌п╬ я┌я─п╣п╠я┐п╣я┌я│я▐, п╦ п╡я│п╣пЁп╢п╟ я┘я─п╟п╫п╦я┌я▄ п╨п╬п©п╦п╦ "
+"п╬я─п╦пЁп╦п╫п╟п╩п╬п╡ п╡п╟п╤п╫я▀я┘ я└п╟п╧п╩п╬п╡, п╨п╬я┌п╬я─я▀п╣ п╡я▀ п╬п╠я─п╟п╠п╟я┌я▀п╡п╟п╣я┌п╣. \n"
 
 #: src/help.c:171
 #, no-c-format
@@ -1509,10 +1509,10 @@ msgid ""
 "get a \"step\" at the start and end of the inserted part, which can cause a "
 "small clicking sound. \n"
 msgstr ""
-"Операции \"Вырезать\", \"Копировать\" и \"Вставить\" перемещают данные не "
-"изменяя их, так что это не отражается на качестве звука. Отличия в уровнях "
-"сигнала могут породить \"ступеньки\" в начале и в конце вставляемого "
-"фрагмента, что вызывает небольшие щелчки. \n"
+"п·п©п╣я─п╟я├п╦п╦ \"п▓я▀я─п╣п╥п╟я┌я▄\", \"п п╬п©п╦я─п╬п╡п╟я┌я▄\" п╦ \"п▓я│я┌п╟п╡п╦я┌я▄\" п©п╣я─п╣п╪п╣я┴п╟я▌я┌ п╢п╟п╫п╫я▀п╣ п╫п╣ "
+"п╦п╥п╪п╣п╫я▐я▐ п╦я┘, я┌п╟п╨ я┤я┌п╬ я█я┌п╬ п╫п╣ п╬я┌я─п╟п╤п╟п╣я┌я│я▐ п╫п╟ п╨п╟я┤п╣я│я┌п╡п╣ п╥п╡я┐п╨п╟. п·я┌п╩п╦я┤п╦я▐ п╡ я┐я─п╬п╡п╫я▐я┘ "
+"я│п╦пЁп╫п╟п╩п╟ п╪п╬пЁя┐я┌ п©п╬я─п╬п╢п╦я┌я▄ \"я│я┌я┐п©п╣п╫я▄п╨п╦\" п╡ п╫п╟я┤п╟п╩п╣ п╦ п╡ п╨п╬п╫я├п╣ п╡я│я┌п╟п╡п╩я▐п╣п╪п╬пЁп╬ "
+"я└я─п╟пЁп╪п╣п╫я┌п╟, я┤я┌п╬ п╡я▀п╥я▀п╡п╟п╣я┌ п╫п╣п╠п╬п╩я▄я┬п╦п╣ я┴п╣п╩я┤п╨п╦. \n"
 
 #: src/help.c:173
 #, no-c-format
@@ -1520,9 +1520,9 @@ msgid ""
 "The mix paste function doesn't decrease quality, unless the peaks become too "
 "high and you get clipping. In that case you will get a warning message.\n"
 msgstr ""
-"Операция \"Вставить смикшировав\" не уменьшает качество, если только пики не "
-"переходят слишком высоко, что вызывает обрезание волны. В таких случаях вы "
-"получите предупреждающее сообщение.\n"
+"п·п©п╣я─п╟я├п╦я▐ \"п▓я│я┌п╟п╡п╦я┌я▄ я│п╪п╦п╨я┬п╦я─п╬п╡п╟п╡\" п╫п╣ я┐п╪п╣п╫я▄я┬п╟п╣я┌ п╨п╟я┤п╣я│я┌п╡п╬, п╣я│п╩п╦ я┌п╬п╩я▄п╨п╬ п©п╦п╨п╦ п╫п╣ "
+"п©п╣я─п╣я┘п╬п╢я▐я┌ я│п╩п╦я┬п╨п╬п╪ п╡я▀я│п╬п╨п╬, я┤я┌п╬ п╡я▀п╥я▀п╡п╟п╣я┌ п╬п╠я─п╣п╥п╟п╫п╦п╣ п╡п╬п╩п╫я▀. п▓ я┌п╟п╨п╦я┘ я│п╩я┐я┤п╟я▐я┘ п╡я▀ "
+"п©п╬п╩я┐я┤п╦я┌п╣ п©я─п╣п╢я┐п©я─п╣п╤п╢п╟я▌я┴п╣п╣ я│п╬п╬п╠я┴п╣п╫п╦п╣.\n"
 
 #: src/help.c:175
 #, no-c-format
@@ -1533,12 +1533,12 @@ msgid ""
 "problem, but if you use 8 or 16 bits sample size, this rounding causes a "
 "decrease in quality. \n"
 msgstr ""
-"Звуковые данные обычно хранятся как целые числа. Следовательно, когда вы "
-"нормализируете, подстраиваете громкость, уменьшаете размер сэмплов или "
-"фильтруете звук, результат должен быть округлен. Когда вы используете 24- "
-"или 32-битные сэмплы, это не является большой проблемой, но когда вы "
-"используете 8- или 16-битные сэмплы, это округление вызывает заметное "
-"снижение качества. \n"
+"п≈п╡я┐п╨п╬п╡я▀п╣ п╢п╟п╫п╫я▀п╣ п╬п╠я▀я┤п╫п╬ я┘я─п╟п╫я▐я┌я│я▐ п╨п╟п╨ я├п╣п╩я▀п╣ я┤п╦я│п╩п╟. п║п╩п╣п╢п╬п╡п╟я┌п╣п╩я▄п╫п╬, п╨п╬пЁп╢п╟ п╡я▀ "
+"п╫п╬я─п╪п╟п╩п╦п╥п╦я─я┐п╣я┌п╣, п©п╬п╢я│я┌я─п╟п╦п╡п╟п╣я┌п╣ пЁя─п╬п╪п╨п╬я│я┌я▄, я┐п╪п╣п╫я▄я┬п╟п╣я┌п╣ я─п╟п╥п╪п╣я─ я│я█п╪п©п╩п╬п╡ п╦п╩п╦ "
+"я└п╦п╩я▄я┌я─я┐п╣я┌п╣ п╥п╡я┐п╨, я─п╣п╥я┐п╩я▄я┌п╟я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╨я─я┐пЁп╩п╣п╫. п п╬пЁп╢п╟ п╡я▀ п╦я│п©п╬п╩я▄п╥я┐п╣я┌п╣ 24- "
+"п╦п╩п╦ 32-п╠п╦я┌п╫я▀п╣ я│я█п╪п©п╩я▀, я█я┌п╬ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╠п╬п╩я▄я┬п╬п╧ п©я─п╬п╠п╩п╣п╪п╬п╧, п╫п╬ п╨п╬пЁп╢п╟ п╡я▀ "
+"п╦я│п©п╬п╩я▄п╥я┐п╣я┌п╣ 8- п╦п╩п╦ 16-п╠п╦я┌п╫я▀п╣ я│я█п╪п©п╩я▀, я█я┌п╬ п╬п╨я─я┐пЁп╩п╣п╫п╦п╣ п╡я▀п╥я▀п╡п╟п╣я┌ п╥п╟п╪п╣я┌п╫п╬п╣ "
+"я│п╫п╦п╤п╣п╫п╦п╣ п╨п╟я┤п╣я│я┌п╡п╟. \n"
 
 #: src/help.c:177
 #, no-c-format
@@ -1548,10 +1548,10 @@ msgid ""
 "mhWaveEdit supports basic triangular dithering and it's enabled by "
 "default. \n"
 msgstr ""
-"Уменьшение качества, вызванное округлением, может быть замаскировано "
-"добавлением небольшого уровня шума перед округлением. Это называется "
-"\"сглаживание\" (\"dithering\"). mhWaveEdit поддерживает обычное треугольное "
-"сглаживание, которое включено по умолчанию. \n"
+"пёп╪п╣п╫я▄я┬п╣п╫п╦п╣ п╨п╟я┤п╣я│я┌п╡п╟, п╡я▀п╥п╡п╟п╫п╫п╬п╣ п╬п╨я─я┐пЁп╩п╣п╫п╦п╣п╪, п╪п╬п╤п╣я┌ п╠я▀я┌я▄ п╥п╟п╪п╟я│п╨п╦я─п╬п╡п╟п╫п╬ "
+"п╢п╬п╠п╟п╡п╩п╣п╫п╦п╣п╪ п╫п╣п╠п╬п╩я▄я┬п╬пЁп╬ я┐я─п╬п╡п╫я▐ я┬я┐п╪п╟ п©п╣я─п╣п╢ п╬п╨я─я┐пЁп╩п╣п╫п╦п╣п╪. п╜я┌п╬ п╫п╟п╥я▀п╡п╟п╣я┌я│я▐ "
+"\"я│пЁп╩п╟п╤п╦п╡п╟п╫п╦п╣\" (\"dithering\"). mhWaveEdit п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌ п╬п╠я▀я┤п╫п╬п╣ я┌я─п╣я┐пЁп╬п╩я▄п╫п╬п╣ "
+"я│пЁп╩п╟п╤п╦п╡п╟п╫п╦п╣, п╨п╬я┌п╬я─п╬п╣ п╡п╨п╩я▌я┤п╣п╫п╬ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌. \n"
 
 #: src/help.c:179
 #, no-c-format
@@ -1559,9 +1559,9 @@ msgid ""
 "By default, mhWaveEdit uses floating-point temporary files for storing "
 "processed results to avoid rounding until the file is saved.\n"
 msgstr ""
-"По умолчанию mhWaveEdit использует временные файлы с плавающей точкой для "
-"сохранения результатов обработки, это позволяет избежать округления до "
-"сохранения файла.\n"
+"п÷п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ mhWaveEdit п╦я│п©п╬п╩я▄п╥я┐п╣я┌ п╡я─п╣п╪п╣п╫п╫я▀п╣ я└п╟п╧п╩я▀ я│ п©п╩п╟п╡п╟я▌я┴п╣п╧ я┌п╬я┤п╨п╬п╧ п╢п╩я▐ "
+"я│п╬я┘я─п╟п╫п╣п╫п╦я▐ я─п╣п╥я┐п╩я▄я┌п╟я┌п╬п╡ п╬п╠я─п╟п╠п╬я┌п╨п╦, я█я┌п╬ п©п╬п╥п╡п╬п╩я▐п╣я┌ п╦п╥п╠п╣п╤п╟я┌я▄ п╬п╨я─я┐пЁп╩п╣п╫п╦я▐ п╢п╬ "
+"я│п╬я┘я─п╟п╫п╣п╫п╦я▐ я└п╟п╧п╩п╟.\n"
 
 #: src/help.c:184
 #, fuzzy, no-c-format
@@ -1571,11 +1571,11 @@ msgid ""
 "wav and raw files, but if it's compiled with the libsndfile library, "
 "mhWaveEdit supports a couple of other formats as well. \n"
 msgstr ""
-"Несмотря на то что mhWaveEdit изначально был создан для редактирования wav-"
-"файлов, имеется возможность также загружать и сохранять файлы в некоторых "
-"других форматах. mhWaveEdit всегда поддерживает wav- и raw-файлы, но когда "
-"он скомпилирован с поддержкой библиотеки libsndfile, он поддерживает еще "
-"парочку других форматов. \n"
+"п²п╣я│п╪п╬я┌я─я▐ п╫п╟ я┌п╬ я┤я┌п╬ mhWaveEdit п╦п╥п╫п╟я┤п╟п╩я▄п╫п╬ п╠я▀п╩ я│п╬п╥п╢п╟п╫ п╢п╩я▐ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦я▐ wav-"
+"я└п╟п╧п╩п╬п╡, п╦п╪п╣п╣я┌я│я▐ п╡п╬п╥п╪п╬п╤п╫п╬я│я┌я▄ я┌п╟п╨п╤п╣ п╥п╟пЁя─я┐п╤п╟я┌я▄ п╦ я│п╬я┘я─п╟п╫я▐я┌я▄ я└п╟п╧п╩я▀ п╡ п╫п╣п╨п╬я┌п╬я─я▀я┘ "
+"п╢я─я┐пЁп╦я┘ я└п╬я─п╪п╟я┌п╟я┘. mhWaveEdit п╡я│п╣пЁп╢п╟ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌ wav- п╦ raw-я└п╟п╧п╩я▀, п╫п╬ п╨п╬пЁп╢п╟ "
+"п╬п╫ я│п╨п╬п╪п©п╦п╩п╦я─п╬п╡п╟п╫ я│ п©п╬п╢п╢п╣я─п╤п╨п╬п╧ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ libsndfile, п╬п╫ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌ п╣я┴п╣ "
+"п©п╟я─п╬я┤п╨я┐ п╢я─я┐пЁп╦я┘ я└п╬я─п╪п╟я┌п╬п╡. \n"
 
 #: src/help.c:186
 #, fuzzy, no-c-format
@@ -1583,10 +1583,10 @@ msgid ""
 "To save a file with a different file format, use \"Save as...\" and choose a "
 "format in the file type selection box. \n"
 msgstr ""
-"Чтобы сохранить файл в произвольном формате, сохраните его под именем, "
-"которое заканчивается соответствующим суффиксом (расширением). Если суффикс "
-"не будет распознан программой, появится окно диалога, которое предложит вам "
-"выбрать формат сохраняемого файла.\n"
+"п╖я┌п╬п╠я▀ я│п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩ п╡ п©я─п╬п╦п╥п╡п╬п╩я▄п╫п╬п╪ я└п╬я─п╪п╟я┌п╣, я│п╬я┘я─п╟п╫п╦я┌п╣ п╣пЁп╬ п©п╬п╢ п╦п╪п╣п╫п╣п╪, "
+"п╨п╬я┌п╬я─п╬п╣ п╥п╟п╨п╟п╫я┤п╦п╡п╟п╣я┌я│я▐ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┴п╦п╪ я│я┐я└я└п╦п╨я│п╬п╪ (я─п╟я│я┬п╦я─п╣п╫п╦п╣п╪). п∙я│п╩п╦ я│я┐я└я└п╦п╨я│ "
+"п╫п╣ п╠я┐п╢п╣я┌ я─п╟я│п©п╬п╥п╫п╟п╫ п©я─п╬пЁя─п╟п╪п╪п╬п╧, п©п╬я▐п╡п╦я┌я│я▐ п╬п╨п╫п╬ п╢п╦п╟п╩п╬пЁп╟, п╨п╬я┌п╬я─п╬п╣ п©я─п╣п╢п╩п╬п╤п╦я┌ п╡п╟п╪ "
+"п╡я▀п╠я─п╟я┌я▄ я└п╬я─п╪п╟я┌ я│п╬я┘я─п╟п╫я▐п╣п╪п╬пЁп╬ я└п╟п╧п╩п╟.\n"
 
 #: src/help.c:188
 #, fuzzy, no-c-format
@@ -1596,11 +1596,11 @@ msgid ""
 "support. If you have these programs, you can open and save mp3/ogg files "
 "just like any other file format.\n"
 msgstr ""
-"mhWaveEdit имеет базовую поддержку MP3 и OGG форматов. Для того чтобы это "
-"работало, вы должны иметь установленный LAME, для поддержки MP3, и OggDec/"
-"OggEnc, для поддержки OGG. Если у вас есть эти программы, вы можете "
-"открывать и сохранять mp3- и ogg-файлы точно также как и файлы в других "
-"форматах.\n"
+"mhWaveEdit п╦п╪п╣п╣я┌ п╠п╟п╥п╬п╡я┐я▌ п©п╬п╢п╢п╣я─п╤п╨я┐ MP3 п╦ OGG я└п╬я─п╪п╟я┌п╬п╡. п■п╩я▐ я┌п╬пЁп╬ я┤я┌п╬п╠я▀ я█я┌п╬ "
+"я─п╟п╠п╬я┌п╟п╩п╬, п╡я▀ п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫п╫я▀п╧ LAME, п╢п╩я▐ п©п╬п╢п╢п╣я─п╤п╨п╦ MP3, п╦ OggDec/"
+"OggEnc, п╢п╩я▐ п©п╬п╢п╢п╣я─п╤п╨п╦ OGG. п∙я│п╩п╦ я┐ п╡п╟я│ п╣я│я┌я▄ я█я┌п╦ п©я─п╬пЁя─п╟п╪п╪я▀, п╡я▀ п╪п╬п╤п╣я┌п╣ "
+"п╬я┌п╨я─я▀п╡п╟я┌я▄ п╦ я│п╬я┘я─п╟п╫я▐я┌я▄ mp3- п╦ ogg-я└п╟п╧п╩я▀ я┌п╬я┤п╫п╬ я┌п╟п╨п╤п╣ п╨п╟п╨ п╦ я└п╟п╧п╩я▀ п╡ п╢я─я┐пЁп╦я┘ "
+"я└п╬я─п╪п╟я┌п╟я┘.\n"
 
 #: src/help.c:190
 #, fuzzy, no-c-format
@@ -1617,8 +1617,8 @@ msgid ""
 "mhWaveEdit creates a directory ~/.mhwaveedit where it stores configuration "
 "information. \n"
 msgstr ""
-"mhWaveEdit создает каталог ~/.mhwaveedit, где он сохраняет конфигурационную "
-"информацию. \n"
+"mhWaveEdit я│п╬п╥п╢п╟п╣я┌ п╨п╟я┌п╟п╩п╬пЁ ~/.mhwaveedit, пЁп╢п╣ п╬п╫ я│п╬я┘я─п╟п╫я▐п╣я┌ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я┐я▌ "
+"п╦п╫я└п╬я─п╪п╟я├п╦я▌. \n"
 
 #: src/help.c:197
 #, fuzzy, no-c-format
@@ -1626,9 +1626,9 @@ msgid ""
 "The configuration file is called config. It can be hand edited, but the "
 "easiest way is through 'Preferences' on the Edit menu.\n"
 msgstr ""
-"Конфигурационный файл имеет имя config. Его можно редактировать вручную, но "
-"гораздо проще воспользоваться диалогом \"Настройки\", который вызывается из "
-"меню \"Правка\".\n"
+"п п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩ п╦п╪п╣п╣я┌ п╦п╪я▐ config. п∙пЁп╬ п╪п╬п╤п╫п╬ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟я┌я▄ п╡я─я┐я┤п╫я┐я▌, п╫п╬ "
+"пЁп╬я─п╟п╥п╢п╬ п©я─п╬я┴п╣ п╡п╬я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄я│я▐ п╢п╦п╟п╩п╬пЁп╬п╪ \"п²п╟я│я┌я─п╬п╧п╨п╦\", п╨п╬я┌п╬я─я▀п╧ п╡я▀п╥я▀п╡п╟п╣я┌я│я▐ п╦п╥ "
+"п╪п╣п╫я▌ \"п÷я─п╟п╡п╨п╟\".\n"
 
 #: src/help.c:199
 #, fuzzy, no-c-format
@@ -1638,13 +1638,13 @@ msgid ""
 "session ID number and <state> is a character code showing the state of the "
 "session ('r' for running sessions). \n"
 msgstr ""
-"По умолчанию временные файлы тоже хранятся в каталоге ~/.mhwaveedit. Какие "
-"каталоги программа будет использовать для временных фалов, можно указать в "
-"диалоге \"Настройки\". Для получения наилучшей производительности, вы должны "
-"иметь по одному каталогу временных фалов на каждой локальной файловой "
-"системе. Временные файлы имеют имена в форме \"mhwaveedit-temp-<pid>-nnnn\". "
-"НЕ открывайте и НЕ удаляйте временные файлы с тем же pid (идентификатором "
-"процесса) что и запущенный mhWaveEdit.\n"
+"п÷п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ п╡я─п╣п╪п╣п╫п╫я▀п╣ я└п╟п╧п╩я▀ я┌п╬п╤п╣ я┘я─п╟п╫я▐я┌я│я▐ п╡ п╨п╟я┌п╟п╩п╬пЁп╣ ~/.mhwaveedit. п п╟п╨п╦п╣ "
+"п╨п╟я┌п╟п╩п╬пЁп╦ п©я─п╬пЁя─п╟п╪п╪п╟ п╠я┐п╢п╣я┌ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╢п╩я▐ п╡я─п╣п╪п╣п╫п╫я▀я┘ я└п╟п╩п╬п╡, п╪п╬п╤п╫п╬ я┐п╨п╟п╥п╟я┌я▄ п╡ "
+"п╢п╦п╟п╩п╬пЁп╣ \"п²п╟я│я┌я─п╬п╧п╨п╦\". п■п╩я▐ п©п╬п╩я┐я┤п╣п╫п╦я▐ п╫п╟п╦п╩я┐я┤я┬п╣п╧ п©я─п╬п╦п╥п╡п╬п╢п╦я┌п╣п╩я▄п╫п╬я│я┌п╦, п╡я▀ п╢п╬п╩п╤п╫я▀ "
+"п╦п╪п╣я┌я▄ п©п╬ п╬п╢п╫п╬п╪я┐ п╨п╟я┌п╟п╩п╬пЁя┐ п╡я─п╣п╪п╣п╫п╫я▀я┘ я└п╟п╩п╬п╡ п╫п╟ п╨п╟п╤п╢п╬п╧ п╩п╬п╨п╟п╩я▄п╫п╬п╧ я└п╟п╧п╩п╬п╡п╬п╧ "
+"я│п╦я│я┌п╣п╪п╣. п▓я─п╣п╪п╣п╫п╫я▀п╣ я└п╟п╧п╩я▀ п╦п╪п╣я▌я┌ п╦п╪п╣п╫п╟ п╡ я└п╬я─п╪п╣ \"mhwaveedit-temp-<pid>-nnnn\". "
+"п²п∙ п╬я┌п╨я─я▀п╡п╟п╧я┌п╣ п╦ п²п∙ я┐п╢п╟п╩я▐п╧я┌п╣ п╡я─п╣п╪п╣п╫п╫я▀п╣ я└п╟п╧п╩я▀ я│ я┌п╣п╪ п╤п╣ pid (п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─п╬п╪ "
+"п©я─п╬я├п╣я│я│п╟) я┤я┌п╬ п╦ п╥п╟п©я┐я┴п╣п╫п╫я▀п╧ mhWaveEdit.\n"
 
 #: src/help.c:201
 #, fuzzy, no-c-format
@@ -1668,193 +1668,193 @@ msgstr " \n"
 #: src/help.c:208
 #, fuzzy, no-c-format
 msgid "F1            Help\n"
-msgstr "F12           Запись\n"
+msgstr "F12           п≈п╟п©п╦я│я▄\n"
 
 #: src/help.c:209
 #, fuzzy, no-c-format
 msgid "F12           Record\n"
-msgstr "Ctrl+(цифра)  Установить метку\n"
+msgstr "Ctrl+(я├п╦я└я─п╟)  пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п╪п╣я┌п╨я┐\n"
 
 #: src/help.c:211
 #, fuzzy, no-c-format
 msgid "Ctrl+(number) Set mark\n"
-msgstr "(цифра)       Перейти на метку\n"
+msgstr "(я├п╦я└я─п╟)       п÷п╣я─п╣п╧я┌п╦ п╫п╟ п╪п╣я┌п╨я┐\n"
 
 #: src/help.c:212
 #, fuzzy, no-c-format
 msgid "(number)      Goto mark\n"
-msgstr "Ctrl+P        Настройки\n"
+msgstr "Ctrl+P        п²п╟я│я┌я─п╬п╧п╨п╦\n"
 
 #: src/help.c:214
 #, fuzzy, no-c-format
 msgid "Ctrl+P        Preferences\n"
-msgstr "Ctrl+E        Эффекты\n"
+msgstr "Ctrl+E        п╜я└я└п╣п╨я┌я▀\n"
 
 #: src/help.c:215
 #, fuzzy, no-c-format
 msgid "Ctrl+E        Effects\n"
-msgstr "Ctrl+O        Открыть файл\n"
+msgstr "Ctrl+O        п·я┌п╨я─я▀я┌я▄ я└п╟п╧п╩\n"
 
 #: src/help.c:217
 #, fuzzy, no-c-format
 msgid "Ctrl+O        Open file\n"
-msgstr "Ctrl+S        Сохранить файл\n"
+msgstr "Ctrl+S        п║п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩\n"
 
 #: src/help.c:218
 #, fuzzy, no-c-format
 msgid "Ctrl+S        Save file\n"
-msgstr "Ctrl+U        Сохранить выделение как\n"
+msgstr "Ctrl+U        п║п╬я┘я─п╟п╫п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣ п╨п╟п╨\n"
 
 #: src/help.c:219
 #, fuzzy, no-c-format
 msgid "Ctrl+U        Save selection as\n"
-msgstr "Ctrl+C        Копировать\n"
+msgstr "Ctrl+C        п п╬п©п╦я─п╬п╡п╟я┌я▄\n"
 
 #: src/help.c:221
 #, fuzzy, no-c-format
 msgid "Ctrl+C        Copy\n"
-msgstr "Ctrl+X        Вырезать\n"
+msgstr "Ctrl+X        п▓я▀я─п╣п╥п╟я┌я▄\n"
 
 #: src/help.c:222
 #, fuzzy, no-c-format
 msgid "Ctrl+X        Cut\n"
-msgstr "Ctrl+D        Удалить\n"
+msgstr "Ctrl+D        пёп╢п╟п╩п╦я┌я▄\n"
 
 #: src/help.c:223
 #, fuzzy, no-c-format
 msgid "Ctrl+D        Delete\n"
-msgstr "Ctrl+V        Вставить\n"
+msgstr "Ctrl+V        п▓я│я┌п╟п╡п╦я┌я▄\n"
 
 #: src/help.c:224
 #, fuzzy, no-c-format
 msgid "Ctrl+V        Paste\n"
-msgstr "Ctrl+Z        Отменить\n"
+msgstr "Ctrl+Z        п·я┌п╪п╣п╫п╦я┌я▄\n"
 
 #: src/help.c:225
 #, fuzzy, no-c-format
 msgid "Ctrl+Z        Undo\n"
-msgstr "Ctrl+A        Выделить все\n"
+msgstr "Ctrl+A        п▓я▀п╢п╣п╩п╦я┌я▄ п╡я│п╣\n"
 
 #: src/help.c:226
 #, fuzzy, no-c-format
 msgid "Ctrl+A        Select all\n"
-msgstr "Ctrl+G        Позиция курсора (переход)\n"
+msgstr "Ctrl+G        п÷п╬п╥п╦я├п╦я▐ п╨я┐я─я│п╬я─п╟ (п©п╣я─п╣я┘п╬п╢)\n"
 
 #: src/help.c:228
 #, fuzzy, no-c-format
 msgid "Ctrl+G        Position cursor (Go to)\n"
-msgstr "Ctrl+H        Позиция курсора в начале файла\n"
+msgstr "Ctrl+H        п÷п╬п╥п╦я├п╦я▐ п╨я┐я─я│п╬я─п╟ п╡ п╫п╟я┤п╟п╩п╣ я└п╟п╧п╩п╟\n"
 
 #: src/help.c:229
 #, fuzzy, no-c-format
 msgid "Ctrl+H        Position cursor at file start\n"
-msgstr "Ctrl+J        Позиция курсора в конце файла\n"
+msgstr "Ctrl+J        п÷п╬п╥п╦я├п╦я▐ п╨я┐я─я│п╬я─п╟ п╡ п╨п╬п╫я├п╣ я└п╟п╧п╩п╟\n"
 
 #: src/help.c:230
 #, fuzzy, no-c-format
 msgid "Ctrl+J        Position cursor at file end\n"
-msgstr "Ctrl+K        Позиция курсора в начале\n"
+msgstr "Ctrl+K        п÷п╬п╥п╦я├п╦я▐ п╨я┐я─я│п╬я─п╟ п╡ п╫п╟я┤п╟п╩п╣\n"
 
 #: src/help.c:231
 #, fuzzy, no-c-format
 msgid "Ctrl+K        Position cursor at selection start\n"
-msgstr "              выделения\n"
+msgstr "              п╡я▀п╢п╣п╩п╣п╫п╦я▐\n"
 
 #: src/help.c:232
 #, fuzzy, no-c-format
 msgid "Ctrl+L        Position cursor at selection end\n"
-msgstr "Ctrl+L        Позиция курсора в конце\n"
+msgstr "Ctrl+L        п÷п╬п╥п╦я├п╦я▐ п╨я┐я─я│п╬я─п╟ п╡ п╨п╬п╫я├п╣\n"
 
 #: src/help.c:233
 #, fuzzy, no-c-format
 msgid "Y,U           Move cursor to nearest all-channel zero-crossing\n"
-msgstr "              выделения\n"
+msgstr "              п╡я▀п╢п╣п╩п╣п╫п╦я▐\n"
 
 #: src/help.c:234
 #, fuzzy, no-c-format
 msgid "I,O           Move cursor to nearest any-channel zero-crossing\n"
-msgstr "Ctrl+Q        Начало выделения в позиции\n"
+msgstr "Ctrl+Q        п²п╟я┤п╟п╩п╬ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╡ п©п╬п╥п╦я├п╦п╦\n"
 
 #: src/help.c:236
 #, fuzzy, no-c-format
 msgid "Ctrl+Q        Selection start at cursor\n"
-msgstr "              курсора\n"
+msgstr "              п╨я┐я─я│п╬я─п╟\n"
 
 #: src/help.c:237
 #, fuzzy, no-c-format
 msgid "Ctrl+W        Selection end at cursor\n"
-msgstr "Ctrl+W        Конец выделения в позиции\n"
+msgstr "Ctrl+W        п п╬п╫п╣я├ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╡ п©п╬п╥п╦я├п╦п╦\n"
 
 #: src/help.c:239
 #, fuzzy, no-c-format
 msgid "+,=           Zoom in\n"
-msgstr "              курсора\n"
+msgstr "              п╨я┐я─я│п╬я─п╟\n"
 
 #: src/help.c:240
 #, fuzzy, no-c-format
 msgid "-             Zoom out\n"
-msgstr "+,=           Увеличить масштаб\n"
+msgstr "+,=           пёп╡п╣п╩п╦я┤п╦я┌я▄ п╪п╟я│я┬я┌п╟п╠\n"
 
 #: src/help.c:241
 #, fuzzy, no-c-format
 msgid ">             Zoom to selection\n"
-msgstr "-             Уменьшить масштаб\n"
+msgstr "-             пёп╪п╣п╫я▄я┬п╦я┌я▄ п╪п╟я│я┬я┌п╟п╠\n"
 
 #: src/help.c:242
 #, fuzzy, no-c-format
 msgid "<             Zoom all\n"
-msgstr ">             Подогнать масштаб по выделению\n"
+msgstr ">             п÷п╬п╢п╬пЁп╫п╟я┌я▄ п╪п╟я│я┬я┌п╟п╠ п©п╬ п╡я▀п╢п╣п╩п╣п╫п╦я▌\n"
 
 #: src/help.c:243
 #, fuzzy, no-c-format
 msgid "Arrow keys    Scroll left/right\n"
-msgstr "<             Показать все\n"
+msgstr "<             п÷п╬п╨п╟п╥п╟я┌я▄ п╡я│п╣\n"
 
 #: src/help.c:245
 #, fuzzy, no-c-format
 msgid "<space>       Play/Stop\n"
-msgstr "Стрелки       Прокрутка влево/вправо\n"
+msgstr "п║я┌я─п╣п╩п╨п╦       п÷я─п╬п╨я─я┐я┌п╨п╟ п╡п╩п╣п╡п╬/п╡п©я─п╟п╡п╬\n"
 
 #: src/help.c:246
 #, fuzzy, no-c-format
 msgid ",             Play from cursor pos\n"
-msgstr "<пробел>      Начать или остановить\n"
+msgstr "<п©я─п╬п╠п╣п╩>      п²п╟я┤п╟я┌я▄ п╦п╩п╦ п╬я│я┌п╟п╫п╬п╡п╦я┌я▄\n"
 
 #: src/help.c:247
 #, fuzzy, no-c-format
 msgid ".             Stop\n"
-msgstr "              воспроизведение\n"
+msgstr "              п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣\n"
 
 #: src/help.c:248
 #, fuzzy, no-c-format
 msgid "/             Play selection\n"
-msgstr ",             Играть начиная с позиции\n"
+msgstr ",             п≤пЁя─п╟я┌я▄ п╫п╟я┤п╦п╫п╟я▐ я│ п©п╬п╥п╦я├п╦п╦\n"
 
 #: src/help.c:249
 #, fuzzy, no-c-format
 msgid "H,J           Move cursor (and playback) 1/8 of view\n"
-msgstr "              курсора\n"
+msgstr "              п╨я┐я─я│п╬я─п╟\n"
 
 #: src/help.c:250
 #, fuzzy, no-c-format
 msgid "K,L           Move cursor one sample\n"
-msgstr ".             Стоп\n"
+msgstr ".             п║я┌п╬п©\n"
 
 #: src/help.c:251
 #, fuzzy, no-c-format
 msgid "Ctrl+arrow    Move cursor (and playback) half second\n"
-msgstr "/             Играть выделение\n"
+msgstr "/             п≤пЁя─п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣\n"
 
 #: src/help.c:252
 #, fuzzy, no-c-format
 msgid "(             Play first 3 seconds of selection\n"
 msgstr ""
-"Ctrl+стрелка  Подтолкнуть воспроизведение\n"
-"              вперед/назад\n"
-"(             Играть первые 3 секунды\n"
-"              выделения\n"
-")             Играть последние 3 секунды\n"
-"              выделения\n"
+"Ctrl+я│я┌я─п╣п╩п╨п╟  п÷п╬п╢я┌п╬п╩п╨п╫я┐я┌я▄ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣\n"
+"              п╡п©п╣я─п╣п╢/п╫п╟п╥п╟п╢\n"
+"(             п≤пЁя─п╟я┌я▄ п©п╣я─п╡я▀п╣ 3 я│п╣п╨я┐п╫п╢я▀\n"
+"              п╡я▀п╢п╣п╩п╣п╫п╦я▐\n"
+")             п≤пЁя─п╟я┌я▄ п©п╬я│п╩п╣п╢п╫п╦п╣ 3 я│п╣п╨я┐п╫п╢я▀\n"
+"              п╡я▀п╢п╣п╩п╣п╫п╦я▐\n"
 
 #: src/help.c:253
 #, fuzzy, no-c-format
@@ -2025,42 +2025,42 @@ msgstr ""
 #: src/inifile.c:84 src/inifile.c:91
 #, c-format
 msgid "%s: Expected '=': %s\n"
-msgstr "%s: Ожидалось '=': %s\n"
+msgstr "%s: п·п╤п╦п╢п╟п╩п╬я│я▄ '=': %s\n"
 
 #: src/inifile.c:97
 #, c-format
 msgid "%s: Expected value: %s\n"
-msgstr "%s: Ожидалось значение: %s\n"
+msgstr "%s: п·п╤п╦п╢п╟п╩п╬я│я▄ п╥п╫п╟я┤п╣п╫п╦п╣: %s\n"
 
 #: src/int_box.c:187
 #, c-format
 msgid "Value for %s must be a number between %ld and %ld"
-msgstr "У %s должно быть численное значение в пределах от %ld до %ld"
+msgstr "пё %s п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ я┤п╦я│п╩п╣п╫п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╡ п©я─п╣п╢п╣п╩п╟я┘ п╬я┌ %ld п╢п╬ %ld"
 
 #: src/ladspacore.c:94
 #, c-format
 msgid "Effect %s contains invalid port %s"
-msgstr "Эффект %s содержит неправильный порт %s"
+msgstr "п╜я└я└п╣п╨я┌ %s я│п╬п╢п╣я─п╤п╦я┌ п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п©п╬я─я┌ %s"
 
 #: src/ladspacore.c:140
 #, c-format
 msgid "Ladspa: Error scanning %s"
-msgstr "Ladspa: Ошибка сканирования %s"
+msgstr "Ladspa: п·я┬п╦п╠п╨п╟ я│п╨п╟п╫п╦я─п╬п╡п╟п╫п╦я▐ %s"
 
 #: src/ladspacore.c:409
 #, c-format
 msgid "Applying effect '%s'"
-msgstr "Применяется эффект '%s'"
+msgstr "п÷я─п╦п╪п╣п╫я▐п╣я┌я│я▐ я█я└я└п╣п╨я┌ '%s'"
 
 #: src/ladspadialog.c:87
 #, c-format
 msgid "Value for '%s' must not be below %f"
-msgstr "Значение для '%s' не должно быть ниже %f"
+msgstr "п≈п╫п╟я┤п╣п╫п╦п╣ п╢п╩я▐ '%s' п╫п╣ п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╫п╦п╤п╣ %f"
 
 #: src/ladspadialog.c:94
 #, c-format
 msgid "Value for '%s' must not be above %f"
-msgstr "Значение для '%s' не должно быть выше %f"
+msgstr "п≈п╫п╟я┤п╣п╫п╦п╣ п╢п╩я▐ '%s' п╫п╣ п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╡я▀я┬п╣ %f"
 
 #: src/ladspadialog.c:127
 #, c-format
@@ -2068,13 +2068,13 @@ msgid ""
 "You have mapped more than one output port to channel '%s'. You can only map "
 "one output port to each channel."
 msgstr ""
-"Вы подключили несколько портов вывода к каналу '%s'. Вы можете подключать "
-"только один порт вывода к каждому каналу."
+"п▓я▀ п©п╬п╢п╨п╩я▌я┤п╦п╩п╦ п╫п╣я│п╨п╬п╩я▄п╨п╬ п©п╬я─я┌п╬п╡ п╡я▀п╡п╬п╢п╟ п╨ п╨п╟п╫п╟п╩я┐ '%s'. п▓я▀ п╪п╬п╤п╣я┌п╣ п©п╬п╢п╨п╩я▌я┤п╟я┌я▄ "
+"я┌п╬п╩я▄п╨п╬ п╬п╢п╦п╫ п©п╬я─я┌ п╡я▀п╡п╬п╢п╟ п╨ п╨п╟п╤п╢п╬п╪я┐ п╨п╟п╫п╟п╩я┐."
 
 #: src/ladspadialog.c:191
 #, c-format
 msgid "Author: %s"
-msgstr "Автор: %s"
+msgstr "п░п╡я┌п╬я─: %s"
 
 #: src/ladspadialog.c:196
 #, c-format
@@ -2083,23 +2083,23 @@ msgstr "Copyright: %s"
 
 #: src/ladspadialog.c:203
 msgid " Input controls "
-msgstr " Вход управления "
+msgstr " п▓я┘п╬п╢ я┐п©я─п╟п╡п╩п╣п╫п╦я▐ "
 
 #: src/ladspadialog.c:290
 msgid " Output controls "
-msgstr " Выход управления "
+msgstr " п▓я▀я┘п╬п╢ я┐п©я─п╟п╡п╩п╣п╫п╦я▐ "
 
 #: src/ladspadialog.c:309 src/recorddialog.c:310 src/recorddialog.c:732
 msgid "None"
-msgstr "Нет"
+msgstr "п²п╣я┌"
 
 #: src/ladspadialog.c:317
 msgid " Input audio "
-msgstr " Вход аудио "
+msgstr " п▓я┘п╬п╢ п╟я┐п╢п╦п╬ "
 
 #: src/ladspadialog.c:317
 msgid " Output audio "
-msgstr " Выход аудио "
+msgstr " п▓я▀я┘п╬п╢ п╟я┐п╢п╦п╬ "
 
 #: src/ladspadialog.c:348
 msgid "Keep data in unmapped output channels"
@@ -2108,87 +2108,87 @@ msgstr ""
 #: src/main.c:157
 #, c-format
 msgid "Syntax: %s [files]\n"
-msgstr "Синтаксис: %s [файлы]\n"
+msgstr "п║п╦п╫я┌п╟п╨я│п╦я│: %s [я└п╟п╧п╩я▀]\n"
 
 #: src/main.c:160
 msgid "Testing conversion functions:"
-msgstr "Тест функций преобразования:"
+msgstr "п╒п╣я│я┌ я└я┐п╫п╨я├п╦п╧ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦я▐:"
 
 #: src/main.c:162
 msgid "Testing conversion functions finished."
-msgstr "Тест функций преобразования завершен."
+msgstr "п╒п╣я│я┌ я└я┐п╫п╨я├п╦п╧ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦я▐ п╥п╟п╡п╣я─я┬п╣п╫."
 
 #: src/main.c:181
 msgid "Expected driver name after --driver option"
-msgstr "После опции --driver ожидается имя драйвера"
+msgstr "п÷п╬я│п╩п╣ п╬п©я├п╦п╦ --driver п╬п╤п╦п╢п╟п╣я┌я│я▐ п╦п╪я▐ п╢я─п╟п╧п╡п╣я─п╟"
 
 #: src/main.c:187
 #, c-format
 msgid "Unknown option '%s'"
-msgstr "Неизвестная опция '%s'"
+msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ п╬п©я├п╦я▐ '%s'"
 
 #: src/main.c:328
 msgid ""
 "Could not find home directory. Using current directory as home directory."
 msgstr ""
-"Невозможно найти домашний каталог. Вместо него используется текущий каталог."
+"п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╫п╟п╧я┌п╦ п╢п╬п╪п╟я┬п╫п╦п╧ п╨п╟я┌п╟п╩п╬пЁ. п▓п╪п╣я│я┌п╬ п╫п╣пЁп╬ п╦я│п©п╬п╩я▄п╥я┐п╣я┌я│я▐ я┌п╣п╨я┐я┴п╦п╧ п╨п╟я┌п╟п╩п╬пЁ."
 
 #: src/main.c:356
 msgid "Black"
-msgstr "Черный"
+msgstr "п╖п╣я─п╫я▀п╧"
 
 #: src/main.c:357
 msgid "White"
-msgstr "Белый"
+msgstr "п▒п╣п╩я▀п╧"
 
 #: src/main.c:358
 msgid "Background"
-msgstr "Фон"
+msgstr "п╓п╬п╫"
 
 #: src/main.c:359
 msgid "L Waveform"
-msgstr "Левая волновая форма"
+msgstr "п⌡п╣п╡п╟я▐ п╡п╬п╩п╫п╬п╡п╟я▐ я└п╬я─п╪п╟"
 
 #: src/main.c:360
 msgid "R Waveform"
-msgstr "Правая волновая форма"
+msgstr "п÷я─п╟п╡п╟я▐ п╡п╬п╩п╫п╬п╡п╟я▐ я└п╬я─п╪п╟"
 
 #: src/main.c:361
 msgid "Cursor"
-msgstr "Курсор"
+msgstr "п я┐я─я│п╬я─"
 
 #: src/main.c:362
 msgid "Marks"
-msgstr "Метки"
+msgstr "п°п╣я┌п╨п╦"
 
 #: src/main.c:363
 msgid "Selection"
-msgstr "Выделение"
+msgstr "п▓я▀п╢п╣п╩п╣п╫п╦п╣"
 
 #: src/main.c:364
 msgid "Progress bar"
-msgstr "Линия прогресса"
+msgstr "п⌡п╦п╫п╦я▐ п©я─п╬пЁя─п╣я│я│п╟"
 
 #: src/main.c:365
 msgid "Zero-level"
-msgstr "Нулевой уровень"
+msgstr "п²я┐п╩п╣п╡п╬п╧ я┐я─п╬п╡п╣п╫я▄"
 
 #: src/main.c:488
 #, c-format
 msgid "Error launching mixer: fork: %s"
-msgstr "Ошибка запуска микшера: fork: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п╥п╟п©я┐я│п╨п╟ п╪п╦п╨я┬п╣я─п╟: fork: %s"
 
 #: src/main.c:539 src/main.c:558
 msgid "Mono"
-msgstr "Моно"
+msgstr "п°п╬п╫п╬"
 
 #: src/main.c:540
 msgid "Left"
-msgstr "Левый"
+msgstr "п⌡п╣п╡я▀п╧"
 
 #: src/main.c:541
 msgid "Right"
-msgstr "Правый"
+msgstr "п÷я─п╟п╡я▀п╧"
 
 #: src/main.c:543
 #, c-format
@@ -2197,39 +2197,39 @@ msgstr ""
 
 #: src/main.c:559
 msgid "Stereo"
-msgstr "Стерео"
+msgstr "п║я┌п╣я─п╣п╬"
 
 #: src/main.c:561
 #, c-format
 msgid "%d channels"
-msgstr "%d каналов"
+msgstr "%d п╨п╟п╫п╟п╩п╬п╡"
 
 #: src/main.c:1137
 msgid "Ignoring extreme old window size/position values\n"
-msgstr "Игнорируем экстремальные старые значения размера/позиции окна\n"
+msgstr "п≤пЁп╫п╬я─п╦я─я┐п╣п╪ я█п╨я│я┌я─п╣п╪п╟п╩я▄п╫я▀п╣ я│я┌п╟я─я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ я─п╟п╥п╪п╣я─п╟/п©п╬п╥п╦я├п╦п╦ п╬п╨п╫п╟\n"
 
 #: src/mainwindow.c:206
 #, c-format
 msgid "mhWaveEdit: %s (%s): %d Hz, %s"
-msgstr "mhWaveEdit: %s (%s): %d Гц, %s"
+msgstr "mhWaveEdit: %s (%s): %d п⌠я├, %s"
 
 #: src/mainwindow.c:214
 msgid "double"
-msgstr "двойной"
+msgstr "п╢п╡п╬п╧п╫п╬п╧"
 
 #: src/mainwindow.c:214
 msgid "float"
-msgstr "плавающий"
+msgstr "п©п╩п╟п╡п╟я▌я┴п╦п╧"
 
 #: src/mainwindow.c:216
 #, c-format
 msgid "mhWaveEdit: %s (%s): %d Hz, %d bit"
-msgstr "mhWaveEdit: %s (%s): %d Гц, %d бит"
+msgstr "mhWaveEdit: %s (%s): %d п⌠я├, %d п╠п╦я┌"
 
 #: src/mainwindow.c:301
 #, fuzzy
 msgid "Use default settings"
-msgstr " Продвинутые установки "
+msgstr " п÷я─п╬п╢п╡п╦п╫я┐я┌я▀п╣ я┐я│я┌п╟п╫п╬п╡п╨п╦ "
 
 #: src/mainwindow.c:305
 msgid "Auto-detect from extension"
@@ -2238,32 +2238,32 @@ msgstr ""
 #: src/mainwindow.c:320
 #, fuzzy
 msgid "File type: "
-msgstr "Тип фильтра: "
+msgstr "п╒п╦п© я└п╦п╩я▄я┌я─п╟: "
 
 #: src/mainwindow.c:366
 msgid ""
 "The file has not changed since last save. Press OK if you want to save it "
 "anyway?"
 msgstr ""
-"Файл не был изменен со времен последнего сохранения. Если вы все равно "
-"хотите сохранить его, нажмите ОК."
+"п╓п╟п╧п╩ п╫п╣ п╠я▀п╩ п╦п╥п╪п╣п╫п╣п╫ я│п╬ п╡я─п╣п╪п╣п╫ п©п╬я│п╩п╣п╢п╫п╣пЁп╬ я│п╬я┘я─п╟п╫п╣п╫п╦я▐. п∙я│п╩п╦ п╡я▀ п╡я│п╣ я─п╟п╡п╫п╬ "
+"я┘п╬я┌п╦я┌п╣ я│п╬я┘я─п╟п╫п╦я┌я▄ п╣пЁп╬, п╫п╟п╤п╪п╦я┌п╣ п·п ."
 
 #: src/mainwindow.c:375
 msgid "Save File"
-msgstr "Сохранить файл"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩"
 
 #: src/mainwindow.c:400
 #, c-format
 msgid "Save changes to %s?"
-msgstr "Сохранить изменения в %s?"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╦п╥п╪п╣п╫п╣п╫п╦я▐ п╡ %s?"
 
 #: src/mainwindow.c:764 src/mainwindow.c:768
 msgid "Load File"
-msgstr "Загрузить файл"
+msgstr "п≈п╟пЁя─я┐п╥п╦я┌я▄ я└п╟п╧п╩"
 
 #: src/mainwindow.c:793
 msgid "Save selection as ..."
-msgstr "Сохранить выделение как..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣ п╨п╟п╨..."
 
 #: src/mainwindow.c:1082
 #, c-format
@@ -2277,27 +2277,27 @@ msgid ""
 "Window '%s'\n"
 msgstr ""
 "\n"
-"Окно '%s'\n"
+"п·п╨п╫п╬ '%s'\n"
 
 #: src/mainwindow.c:1166
 msgid "  Current chunk:"
-msgstr "  Текущий кусок:"
+msgstr "  п╒п╣п╨я┐я┴п╦п╧ п╨я┐я│п╬п╨:"
 
 #: src/mainwindow.c:1168
 msgid "  History:"
-msgstr "  История:"
+msgstr "  п≤я│я┌п╬я─п╦я▐:"
 
 #: src/mainwindow.c:1223
 msgid "There already is only one channel!"
-msgstr "Уже и так только один канал!"
+msgstr "пёп╤п╣ п╦ я┌п╟п╨ я┌п╬п╩я▄п╨п╬ п╬п╢п╦п╫ п╨п╟п╫п╟п╩!"
 
 #: src/mainwindow.c:1332
 msgid "mhWaveEdit Help"
-msgstr "Справка mhWaveEdit"
+msgstr "п║п©я─п╟п╡п╨п╟ mhWaveEdit"
 
 #: src/mainwindow.c:1431
 msgid "About mhWaveEdit"
-msgstr "О mhWaveEdit"
+msgstr "п· mhWaveEdit"
 
 #: src/mainwindow.c:1443
 #, fuzzy
@@ -2305,38 +2305,38 @@ msgid ""
 "Created by Magnus Hjorth (magnus.hjorth@home.se)\n"
 "Copyright 2002-2007, Magnus Hjorth"
 msgstr ""
-"Создал Magnus Hjorth (magnus.hjorth@home.se)\n"
+"п║п╬п╥п╢п╟п╩ Magnus Hjorth (magnus.hjorth@home.se)\n"
 "Copyright 2002-2005, Magnus Hjorth"
 
 #: src/mainwindow.c:1450
 #, c-format
 msgid "Current sound driver: %s"
-msgstr "Текущий звуковой драйвер: %s"
+msgstr "п╒п╣п╨я┐я┴п╦п╧ п╥п╡я┐п╨п╬п╡п╬п╧ п╢я─п╟п╧п╡п╣я─: %s"
 
 #: src/mainwindow.c:1458
 #, c-format
 msgid "Compiled %s %s"
-msgstr "Скомпилировано %s %s"
+msgstr "п║п╨п╬п╪п©п╦п╩п╦я─п╬п╡п╟п╫п╬ %s %s"
 
 #: src/mainwindow.c:1464
 msgid "Uses double-precision math"
-msgstr "Используются вычисления с двойной точностью"
+msgstr "п≤я│п©п╬п╩я▄п╥я┐я▌я┌я│я▐ п╡я▀я┤п╦я│п╩п╣п╫п╦я▐ я│ п╢п╡п╬п╧п╫п╬п╧ я┌п╬я┤п╫п╬я│я┌я▄я▌"
 
 #: src/mainwindow.c:1471
 msgid ""
 "Distributed under GNU General Public License.\n"
 "For information, see the file COPYING"
 msgstr ""
-"Распространяется под Стандартной Общественной Лицензии GNU.\n"
-"Подробности смотрите в файле COPYING"
+"п═п╟я│п©я─п╬я│я┌я─п╟п╫я▐п╣я┌я│я▐ п©п╬п╢ п║я┌п╟п╫п╢п╟я─я┌п╫п╬п╧ п·п╠я┴п╣я│я┌п╡п╣п╫п╫п╬п╧ п⌡п╦я├п╣п╫п╥п╦п╦ GNU.\n"
+"п÷п╬п╢я─п╬п╠п╫п╬я│я┌п╦ я│п╪п╬я┌я─п╦я┌п╣ п╡ я└п╟п╧п╩п╣ COPYING"
 
 #: src/mainwindow.c:1590
 msgid "Seconds of silence: "
-msgstr "Секунд тишины: "
+msgstr "п║п╣п╨я┐п╫п╢ я┌п╦я┬п╦п╫я▀: "
 
 #: src/mainwindow.c:1590
 msgid "Insert Silence"
-msgstr "Вставить тишину"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ я┌п╦я┬п╦п╫я┐"
 
 #: src/mainwindow.c:1639
 msgid "Level: "
@@ -2348,220 +2348,220 @@ msgstr ""
 
 #: src/mainwindow.c:1849
 msgid "/_File"
-msgstr "/_Файл"
+msgstr "/_п╓п╟п╧п╩"
 
 #: src/mainwindow.c:1850
 msgid "/File/_Open..."
-msgstr "/Файл/_Открыть..."
+msgstr "/п╓п╟п╧п╩/_п·я┌п╨я─я▀я┌я▄..."
 
 #: src/mainwindow.c:1851
 msgid "/File/_Save"
-msgstr "/Файл/_Сохранить"
+msgstr "/п╓п╟п╧п╩/_п║п╬я┘я─п╟п╫п╦я┌я▄"
 
 #: src/mainwindow.c:1852
 msgid "/File/Save _as..."
-msgstr "/Файл/Сохранить _как..."
+msgstr "/п╓п╟п╧п╩/п║п╬я┘я─п╟п╫п╦я┌я▄ _п╨п╟п╨..."
 
 #: src/mainwindow.c:1853
 msgid "/File/Save selection as..."
-msgstr "/Файл/Сохранить выделение как..."
+msgstr "/п╓п╟п╧п╩/п║п╬я┘я─п╟п╫п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣ п╨п╟п╨..."
 
 #: src/mainwindow.c:1854
 msgid "/_Edit"
-msgstr "/_Правка"
+msgstr "/_п÷я─п╟п╡п╨п╟"
 
 #: src/mainwindow.c:1855
 msgid "/Edit/_Undo"
-msgstr "/Правка/_Отменить"
+msgstr "/п÷я─п╟п╡п╨п╟/_п·я┌п╪п╣п╫п╦я┌я▄"
 
 #: src/mainwindow.c:1856
 #, fuzzy
 msgid "/Edit/_Redo"
-msgstr "/Правка/_Отменить"
+msgstr "/п÷я─п╟п╡п╨п╟/_п·я┌п╪п╣п╫п╦я┌я▄"
 
 #: src/mainwindow.c:1857
 msgid "/Edit/sep1"
-msgstr "/Правка/sep1"
+msgstr "/п÷я─п╟п╡п╨п╟/sep1"
 
 #: src/mainwindow.c:1858
 msgid "/Edit/Cu_t"
-msgstr "/Правка/В_ырезать"
+msgstr "/п÷я─п╟п╡п╨п╟/п▓_я▀я─п╣п╥п╟я┌я▄"
 
 #: src/mainwindow.c:1859
 msgid "/Edit/_Copy"
-msgstr "/Правка/_Копировать"
+msgstr "/п÷я─п╟п╡п╨п╟/_п п╬п©п╦я─п╬п╡п╟я┌я▄"
 
 #: src/mainwindow.c:1860
 msgid "/Edit/_Paste"
-msgstr "/Правка/_Вставить"
+msgstr "/п÷я─п╟п╡п╨п╟/_п▓я│я┌п╟п╡п╦я┌я▄"
 
 #: src/mainwindow.c:1861
 msgid "/Edit/Paste _over"
-msgstr "/Правка/Вставить _поверх"
+msgstr "/п÷я─п╟п╡п╨п╟/п▓я│я┌п╟п╡п╦я┌я▄ _п©п╬п╡п╣я─я┘"
 
 #: src/mainwindow.c:1862
 msgid "/Edit/_Mix paste"
-msgstr "/Правка/Вставить _смикшировав"
+msgstr "/п÷я─п╟п╡п╨п╟/п▓я│я┌п╟п╡п╦я┌я▄ _я│п╪п╦п╨я┬п╦я─п╬п╡п╟п╡"
 
 #: src/mainwindow.c:1863
 msgid "/Edit/Insert _silence"
-msgstr "/Правка/Вставить _тишину"
+msgstr "/п÷я─п╟п╡п╨п╟/п▓я│я┌п╟п╡п╦я┌я▄ _я┌п╦я┬п╦п╫я┐"
 
 #: src/mainwindow.c:1864
 msgid "/Edit/Paste to _new"
-msgstr "/Правка/Вставить в н_овый"
+msgstr "/п÷я─п╟п╡п╨п╟/п▓я│я┌п╟п╡п╦я┌я▄ п╡ п╫_п╬п╡я▀п╧"
 
 #: src/mainwindow.c:1865
 msgid "/Edit/Cr_op"
-msgstr "/Правка/О_брезать"
+msgstr "/п÷я─п╟п╡п╨п╟/п·_п╠я─п╣п╥п╟я┌я▄"
 
 #: src/mainwindow.c:1866
 msgid "/Edit/_Delete"
-msgstr "/Правка/_Удалить"
+msgstr "/п÷я─п╟п╡п╨п╟/_пёп╢п╟п╩п╦я┌я▄"
 
 #: src/mainwindow.c:1867
 msgid "/Edit/Silence selection"
-msgstr "/Правка/Заглушить выделение"
+msgstr "/п÷я─п╟п╡п╨п╟/п≈п╟пЁп╩я┐я┬п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣"
 
 #: src/mainwindow.c:1868
 msgid "/Edit/sep2"
-msgstr "/Правка/sep2"
+msgstr "/п÷я─п╟п╡п╨п╟/sep2"
 
 #: src/mainwindow.c:1869
 msgid "/Edit/Select _all"
-msgstr "/Правка/Выделить вс_е"
+msgstr "/п÷я─п╟п╡п╨п╟/п▓я▀п╢п╣п╩п╦я┌я▄ п╡я│_п╣"
 
 #: src/mainwindow.c:1870
 #, fuzzy
 msgid "/Edit/Select none"
-msgstr "/Правка/Выделить вс_е"
+msgstr "/п÷я─п╟п╡п╨п╟/п▓я▀п╢п╣п╩п╦я┌я▄ п╡я│_п╣"
 
 #: src/mainwindow.c:1871
 msgid "/Edit/sep3"
-msgstr "/Правка/sep3"
+msgstr "/п÷я─п╟п╡п╨п╟/sep3"
 
 #: src/mainwindow.c:1872
 msgid "/Edit/Clear clipboard"
-msgstr "/Правка/Очистить буфер обмена"
+msgstr "/п÷я─п╟п╡п╨п╟/п·я┤п╦я│я┌п╦я┌я▄ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #: src/mainwindow.c:1873
 msgid "/Edit/sep4"
-msgstr "/Правка/sep4"
+msgstr "/п÷я─п╟п╡п╨п╟/sep4"
 
 #: src/mainwindow.c:1874
 #, fuzzy
 msgid "/Edit/Preferences"
-msgstr "/Правка/_Настройки"
+msgstr "/п÷я─п╟п╡п╨п╟/_п²п╟я│я┌я─п╬п╧п╨п╦"
 
 #: src/mainwindow.c:1875
 msgid "/_View"
-msgstr "/_Вид"
+msgstr "/_п▓п╦п╢"
 
 #: src/mainwindow.c:1876
 msgid "/View/Zoom _in"
-msgstr "/Вид/У_величить масштаб"
+msgstr "/п▓п╦п╢/пё_п╡п╣п╩п╦я┤п╦я┌я▄ п╪п╟я│я┬я┌п╟п╠"
 
 #: src/mainwindow.c:1877
 msgid "/View/Zoom _out"
-msgstr "/Вид/У_меньшить масштаб"
+msgstr "/п▓п╦п╢/пё_п╪п╣п╫я▄я┬п╦я┌я▄ п╪п╟я│я┬я┌п╟п╠"
 
 #: src/mainwindow.c:1878
 msgid "/View/Zoom to _selection"
-msgstr "/Вид/Подогнать масштаб по в_ыделению"
+msgstr "/п▓п╦п╢/п÷п╬п╢п╬пЁп╫п╟я┌я▄ п╪п╟я│я┬я┌п╟п╠ п©п╬ п╡_я▀п╢п╣п╩п╣п╫п╦я▌"
 
 #: src/mainwindow.c:1879
 msgid "/View/sep1"
-msgstr "/Вид/sep1"
+msgstr "/п▓п╦п╢/sep1"
 
 #: src/mainwindow.c:1880
 msgid "/View/Zoom _all"
-msgstr "/Вид/Показать вс_е"
+msgstr "/п▓п╦п╢/п÷п╬п╨п╟п╥п╟я┌я▄ п╡я│_п╣"
 
 #: src/mainwindow.c:1881
 msgid "/View/sep2"
-msgstr "/Вид/sep2"
+msgstr "/п▓п╦п╢/sep2"
 
 #: src/mainwindow.c:1882
 msgid "/View/_Time scale"
-msgstr "/Вид/В_ременные отметки"
+msgstr "/п▓п╦п╢/п▓_я─п╣п╪п╣п╫п╫я▀п╣ п╬я┌п╪п╣я┌п╨п╦"
 
 #: src/mainwindow.c:1883
 msgid "/View/_Horizontal zoom"
-msgstr "/Вид/Управление _горизонтальным масштабом"
+msgstr "/п▓п╦п╢/пёп©я─п╟п╡п╩п╣п╫п╦п╣ _пЁп╬я─п╦п╥п╬п╫я┌п╟п╩я▄п╫я▀п╪ п╪п╟я│я┬я┌п╟п╠п╬п╪"
 
 #: src/mainwindow.c:1884
 msgid "/View/_Vertical zoom"
-msgstr "/Вид/Управление вер_тикальным масштабом"
+msgstr "/п▓п╦п╢/пёп©я─п╟п╡п╩п╣п╫п╦п╣ п╡п╣я─_я┌п╦п╨п╟п╩я▄п╫я▀п╪ п╪п╟я│я┬я┌п╟п╠п╬п╪"
 
 #: src/mainwindow.c:1885
 msgid "/View/Sp_eed slider"
-msgstr "/Вид/Управление _скоростью"
+msgstr "/п▓п╦п╢/пёп©я─п╟п╡п╩п╣п╫п╦п╣ _я│п╨п╬я─п╬я│я┌я▄я▌"
 
 #: src/mainwindow.c:1886
 msgid "/_Cursor"
-msgstr "/_Курсор"
+msgstr "/_п я┐я─я│п╬я─"
 
 #: src/mainwindow.c:1887
 msgid "/Cursor/Set selection start"
-msgstr "/Курсор/Установить начало выделения"
+msgstr "/п я┐я─я│п╬я─/пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п╫п╟я┤п╟п╩п╬ п╡я▀п╢п╣п╩п╣п╫п╦я▐"
 
 #: src/mainwindow.c:1889
 msgid "/Cursor/Set selection end"
-msgstr "/Курсор/Установить конец выделения"
+msgstr "/п я┐я─я│п╬я─/пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п╨п╬п╫п╣я├ п╡я▀п╢п╣п╩п╣п╫п╦я▐"
 
 #: src/mainwindow.c:1890
 msgid "/Cursor/sep1"
-msgstr "/Курсор/sep1"
+msgstr "/п я┐я─я│п╬я─/sep1"
 
 #: src/mainwindow.c:1891
 #, fuzzy
 msgid "/Cursor/Move to"
-msgstr "/Курсор/Переместить в конец"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╨п╬п╫п╣я├"
 
 #: src/mainwindow.c:1892
 #, fuzzy
 msgid "/Cursor/Move to/Beginning"
-msgstr "/Курсор/Переместить в начало"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╫п╟я┤п╟п╩п╬"
 
 #: src/mainwindow.c:1894
 #, fuzzy
 msgid "/Cursor/Move to/End"
-msgstr "/Курсор/Переместить в конец"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╨п╬п╫п╣я├"
 
 #: src/mainwindow.c:1895
 #, fuzzy
 msgid "/Cursor/Move to/Selection start"
-msgstr "/Курсор/Переместить в начало выделения"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╫п╟я┤п╟п╩п╬ п╡я▀п╢п╣п╩п╣п╫п╦я▐"
 
 #: src/mainwindow.c:1897
 #, fuzzy
 msgid "/Cursor/Move to/Selection end"
-msgstr "/Курсор/Переместить в конец выделения"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╨п╬п╫п╣я├ п╡я▀п╢п╣п╩п╣п╫п╦я▐"
 
 #: src/mainwindow.c:1899
 #, fuzzy
 msgid "/Cursor/Move"
-msgstr "/Курсор/Переместить в конец"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╨п╬п╫п╣я├"
 
 #: src/mainwindow.c:1900
 #, fuzzy
 msgid "/Cursor/Move/Left"
-msgstr "/Курсор/Переместить в конец"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╨п╬п╫п╣я├"
 
 #: src/mainwindow.c:1901
 #, fuzzy
 msgid "/Cursor/Move/Right"
-msgstr "/Курсор/Переместить в конец"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╨п╬п╫п╣я├"
 
 #: src/mainwindow.c:1902
 #, fuzzy
 msgid "/Cursor/Move/Left sample"
-msgstr "/Курсор/Переместить в конец"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╨п╬п╫п╣я├"
 
 #: src/mainwindow.c:1903
 #, fuzzy
 msgid "/Cursor/Move/Right sample"
-msgstr "/Курсор/Переместить в конец"
+msgstr "/п я┐я─я│п╬я─/п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╡ п╨п╬п╫п╣я├"
 
 #: src/mainwindow.c:1904
 msgid "/Cursor/Find zero-crossing"
@@ -2585,128 +2585,128 @@ msgstr ""
 
 #: src/mainwindow.c:1913
 msgid "/Cursor/sep2"
-msgstr "Курсор/sep2"
+msgstr "п я┐я─я│п╬я─/sep2"
 
 #: src/mainwindow.c:1914
 msgid "/Cursor/Position cursor..."
-msgstr "/Курсор/Позиция курсора..."
+msgstr "/п я┐я─я│п╬я─/п÷п╬п╥п╦я├п╦я▐ п╨я┐я─я│п╬я─п╟..."
 
 #: src/mainwindow.c:1916
 msgid "/_Play"
-msgstr "/В_оспроизведение"
+msgstr "/п▓_п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣"
 
 #: src/mainwindow.c:1917
 msgid "/Play/_Play from cursor"
-msgstr "/Воспроизведение/_Играть с позиции курсора"
+msgstr "/п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣/_п≤пЁя─п╟я┌я▄ я│ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟"
 
 #: src/mainwindow.c:1918
 msgid "/Play/Play _all"
-msgstr "/Воспроизведение/Играть вс_е"
+msgstr "/п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣/п≤пЁя─п╟я┌я▄ п╡я│_п╣"
 
 #: src/mainwindow.c:1919
 msgid "/Play/Play se_lection"
-msgstr "/Воспроизведение/Играть в_ыделение"
+msgstr "/п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣/п≤пЁя─п╟я┌я▄ п╡_я▀п╢п╣п╩п╣п╫п╦п╣"
 
 #: src/mainwindow.c:1920
 msgid "/Play/_Stop"
-msgstr "/Воспроизведение/_Стоп"
+msgstr "/п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣/_п║я┌п╬п©"
 
 #: src/mainwindow.c:1921
 msgid "/Play/sep1"
-msgstr "/Воспроизведение/sep1"
+msgstr "/п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣/sep1"
 
 #: src/mainwindow.c:1922
 msgid "/Play/_Record..."
-msgstr "/Воспроизведение/_Запись..."
+msgstr "/п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣/_п≈п╟п©п╦я│я▄..."
 
 #: src/mainwindow.c:1923
 msgid "/Effec_ts"
-msgstr "/_Эффекты"
+msgstr "/_п╜я└я└п╣п╨я┌я▀"
 
 #: src/mainwindow.c:1924
 msgid "/Effects/Fade _in"
-msgstr "/Эффекты/Плавное _нарастание"
+msgstr "/п╜я└я└п╣п╨я┌я▀/п÷п╩п╟п╡п╫п╬п╣ _п╫п╟я─п╟я│я┌п╟п╫п╦п╣"
 
 #: src/mainwindow.c:1925
 msgid "/Effects/Fade o_ut"
-msgstr "/Эффекты/Плавное _затухание"
+msgstr "/п╜я└я└п╣п╨я┌я▀/п÷п╩п╟п╡п╫п╬п╣ _п╥п╟я┌я┐я┘п╟п╫п╦п╣"
 
 #: src/mainwindow.c:1926
 msgid "/Effects/_Normalize"
-msgstr "/Эффекты/Н_ормализация"
+msgstr "/п╜я└я└п╣п╨я┌я▀/п²_п╬я─п╪п╟п╩п╦п╥п╟я├п╦я▐"
 
 #: src/mainwindow.c:1927
 #, fuzzy
 msgid "/Effects/Normali_ze to..."
-msgstr "/Эффекты/Н_ормализация"
+msgstr "/п╜я└я└п╣п╨я┌я▀/п²_п╬я─п╪п╟п╩п╦п╥п╟я├п╦я▐"
 
 #: src/mainwindow.c:1928
 msgid "/Effects/_Volume adjust (fade)..."
-msgstr "/Эффекты/Подстройка _громкости (fade)..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/п÷п╬п╢я│я┌я─п╬п╧п╨п╟ _пЁя─п╬п╪п╨п╬я│я┌п╦ (fade)..."
 
 #: src/mainwindow.c:1929
 msgid "/Effects/sep1"
-msgstr "/Эффекты/sep1"
+msgstr "/п╜я└я└п╣п╨я┌я▀/sep1"
 
 #: src/mainwindow.c:1930
 msgid "/Effects/Convert sample_rate..."
-msgstr "/Эффекты/Преобразование _частоты сэмплов..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/п÷я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦п╣ _я┤п╟я│я┌п╬я┌я▀ я│я█п╪п©п╩п╬п╡..."
 
 #: src/mainwindow.c:1931
 msgid "/Effects/Convert sample _format..."
-msgstr "/Эффекты/Преобразование _формата сэмплов..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/п÷я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦п╣ _я└п╬я─п╪п╟я┌п╟ я│я█п╪п©п╩п╬п╡..."
 
 #: src/mainwindow.c:1933
 msgid "/Effects/B_yte swap"
-msgstr "/Эффекты/Перестановка _байт"
+msgstr "/п╜я└я└п╣п╨я┌я▀/п÷п╣я─п╣я│я┌п╟п╫п╬п╡п╨п╟ _п╠п╟п╧я┌"
 
 #: src/mainwindow.c:1934
 msgid "/Effects/sep2"
-msgstr "/Эффекты/sep2"
+msgstr "/п╜я└я└п╣п╨я┌я▀/sep2"
 
 #: src/mainwindow.c:1935
 #, fuzzy
 msgid "/Effects/_Mix to mono"
-msgstr "/Эффекты/_Микшировать каналы..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/_п°п╦п╨я┬п╦я─п╬п╡п╟я┌я▄ п╨п╟п╫п╟п╩я▀..."
 
 #: src/mainwindow.c:1936
 #, fuzzy
 msgid "/Effects/Add channe_l"
-msgstr "/Эффекты/_Микшировать каналы..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/_п°п╦п╨я┬п╦я─п╬п╡п╟я┌я▄ п╨п╟п╫п╟п╩я▀..."
 
 #: src/mainwindow.c:1937
 #, fuzzy
 msgid "/Effects/Ma_p channels..."
-msgstr "/Эффекты/_Микшировать каналы..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/_п°п╦п╨я┬п╦я─п╬п╡п╟я┌я▄ п╨п╟п╫п╟п╩я▀..."
 
 #: src/mainwindow.c:1938
 msgid "/Effects/_Combine channels..."
-msgstr "/Эффекты/_Скомбинировать каналы..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/_п║п╨п╬п╪п╠п╦п╫п╦я─п╬п╡п╟я┌я▄ п╨п╟п╫п╟п╩я▀..."
 
 #: src/mainwindow.c:1939
 #, fuzzy
 msgid "/Effects/Add channels from other file..."
-msgstr "/Эффекты/_Микшировать каналы..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/_п°п╦п╨я┬п╦я─п╬п╡п╟я┌я▄ п╨п╟п╫п╟п╩я▀..."
 
 #: src/mainwindow.c:1940
 msgid "/Effects/sep3"
-msgstr "/Эффекты/sep3"
+msgstr "/п╜я└я└п╣п╨я┌я▀/sep3"
 
 #: src/mainwindow.c:1941
 msgid "/Effects/_Speed adjustment..."
-msgstr "/Эффекты/Подстройка с_корости..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/п÷п╬п╢я│я┌я─п╬п╧п╨п╟ я│_п╨п╬я─п╬я│я┌п╦..."
 
 #: src/mainwindow.c:1942
 msgid "/Effects/Pipe through program..."
-msgstr "/Эффекты/Пропустить через внешнюю программу (pipe)..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/п÷я─п╬п©я┐я│я┌п╦я┌я▄ я┤п╣я─п╣п╥ п╡п╫п╣я┬п╫я▌я▌ п©я─п╬пЁя─п╟п╪п╪я┐ (pipe)..."
 
 #: src/mainwindow.c:1943
 msgid "/Effects/sep4"
-msgstr "/Эффекты/sep4"
+msgstr "/п╜я└я└п╣п╨я┌я▀/sep4"
 
 #: src/mainwindow.c:1944
 msgid "/Effects/Effects dialog..."
-msgstr "/Эффекты/Диалог эффектов..."
+msgstr "/п╜я└я└п╣п╨я┌я▀/п■п╦п╟п╩п╬пЁ я█я└я└п╣п╨я┌п╬п╡..."
 
 #: src/mainwindow.c:1946
 msgid "/Debug"
@@ -2726,43 +2726,43 @@ msgstr ""
 
 #: src/mainwindow.c:1952
 msgid "/_Help"
-msgstr "/_Справка"
+msgstr "/_п║п©я─п╟п╡п╨п╟"
 
 #: src/mainwindow.c:1953
 msgid "/Help/_Documentation"
-msgstr "/Справка/_Документация"
+msgstr "/п║п©я─п╟п╡п╨п╟/_п■п╬п╨я┐п╪п╣п╫я┌п╟я├п╦я▐"
 
 #: src/mainwindow.c:1954
 msgid "/Help/_About"
-msgstr "/Справка/_О программе"
+msgstr "/п║п©я─п╟п╡п╨п╟/_п· п©я─п╬пЁя─п╟п╪п╪п╣"
 
 #: src/mainwindow.c:1958
 msgid "/File/sep1"
-msgstr "/Файл/sep1"
+msgstr "/п╓п╟п╧п╩/sep1"
 
 #: src/mainwindow.c:1959
 msgid "/File/_Close"
-msgstr "/Файл/_Закрыть"
+msgstr "/п╓п╟п╧п╩/_п≈п╟п╨я─я▀я┌я▄"
 
 #: src/mainwindow.c:1960
 msgid "/File/sep2"
-msgstr "/Файл/sep2"
+msgstr "/п╓п╟п╧п╩/sep2"
 
 #: src/mainwindow.c:1961
 msgid "/File/_Exit"
-msgstr "/Файл/_Выход"
+msgstr "/п╓п╟п╧п╩/_п▓я▀я┘п╬п╢"
 
 #: src/mainwindow.c:2120
 msgid "Load a file from disk"
-msgstr "Загрузить файл с диска"
+msgstr "п≈п╟пЁя─я┐п╥п╦я┌я▄ я└п╟п╧п╩ я│ п╢п╦я│п╨п╟"
 
 #: src/mainwindow.c:2127
 msgid "Save the current file to disk"
-msgstr "Сохранить текущий файл на диск"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я└п╟п╧п╩ п╫п╟ п╢п╦я│п╨"
 
 #: src/mainwindow.c:2136
 msgid "Undo the last change"
-msgstr "Отменить последнее изменение"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄ п©п╬я│п╩п╣п╢п╫п╣п╣ п╦п╥п╪п╣п╫п╣п╫п╦п╣"
 
 #: src/mainwindow.c:2144
 msgid "Redo the last undo operation"
@@ -2770,51 +2770,51 @@ msgstr ""
 
 #: src/mainwindow.c:2154
 msgid "Cut out the current selection"
-msgstr "Вырезать текущее выделение"
+msgstr "п▓я▀я─п╣п╥п╟я┌я▄ я┌п╣п╨я┐я┴п╣п╣ п╡я▀п╢п╣п╩п╣п╫п╦п╣"
 
 #: src/mainwindow.c:2162
 msgid "Copy the current selection"
-msgstr "Копировать текущее выделение"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄ я┌п╣п╨я┐я┴п╣п╣ п╡я▀п╢п╣п╩п╣п╫п╦п╣"
 
 #: src/mainwindow.c:2170
 msgid "Paste at cursor position"
-msgstr "Вставить в позицию курсора"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╡ п©п╬п╥п╦я├п╦я▌ п╨я┐я─я│п╬я─п╟"
 
 #: src/mainwindow.c:2178
 msgid "Paste, overwriting the data after the cursor position"
-msgstr "Вставить, перезаписав данные после позиции курсора"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄, п©п╣я─п╣п╥п╟п©п╦я│п╟п╡ п╢п╟п╫п╫я▀п╣ п©п╬я│п╩п╣ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟"
 
 #: src/mainwindow.c:2188
 msgid "Delete the selection"
-msgstr "Удалить выделение"
+msgstr "пёп╢п╟п╩п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣"
 
 #: src/mainwindow.c:2197
 msgid "Set selection start to cursor position"
-msgstr "Установить начало выделения в позицию курсора"
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п╫п╟я┤п╟п╩п╬ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╡ п©п╬п╥п╦я├п╦я▌ п╨я┐я─я│п╬я─п╟"
 
 #: src/mainwindow.c:2206
 msgid "Set selection end to cursor position"
-msgstr "Установить конец выделения в позицию курсора"
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п╨п╬п╫п╣я├ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╡ п©п╬п╥п╦я├п╦я▌ п╨я┐я─я│п╬я─п╟"
 
 #: src/mainwindow.c:2216
 msgid "Play from cursor position"
-msgstr "Играть начиная с позиции курсора"
+msgstr "п≤пЁя─п╟я┌я▄ п╫п╟я┤п╦п╫п╟я▐ я│ п©п╬п╥п╦я├п╦п╦ п╨я┐я─я│п╬я─п╟"
 
 #: src/mainwindow.c:2225
 msgid "Play selected area"
-msgstr "Играть выделенную область"
+msgstr "п≤пЁя─п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╫я┐я▌ п╬п╠п╩п╟я│я┌я▄"
 
 #: src/mainwindow.c:2234
 msgid "Stop playing"
-msgstr "Остановить воспроизведение"
+msgstr "п·я│я┌п╟п╫п╬п╡п╦я┌я▄ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣"
 
 #: src/mainwindow.c:2244
 msgid "Loop mode (play over and over)"
-msgstr "Режим петли (играть еще и еще)"
+msgstr "п═п╣п╤п╦п╪ п©п╣я┌п╩п╦ (п╦пЁя─п╟я┌я▄ п╣я┴п╣ п╦ п╣я┴п╣)"
 
 #: src/mainwindow.c:2254
 msgid "Follow cursor while playing"
-msgstr "Следовать курсору при воспроизведении"
+msgstr "п║п╩п╣п╢п╬п╡п╟я┌я▄ п╨я┐я─я│п╬я─я┐ п©я─п╦ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╦"
 
 #: src/mainwindow.c:2267
 msgid "Auto return to playback start"
@@ -2822,23 +2822,23 @@ msgstr ""
 
 #: src/mainwindow.c:2281 src/recorddialog.c:866
 msgid "Record"
-msgstr "Запись"
+msgstr "п≈п╟п©п╦я│я▄"
 
 #: src/mainwindow.c:2290 src/recorddialog.c:975
 msgid "Launch mixer"
-msgstr "Запустить микшер"
+msgstr "п≈п╟п©я┐я│я┌п╦я┌я▄ п╪п╦п╨я┬п╣я─"
 
 #: src/pipedialog.c:92
 msgid "Command line: "
-msgstr "Командная строка: "
+msgstr "п п╬п╪п╟п╫п╢п╫п╟я▐ я│я┌я─п╬п╨п╟: "
 
 #: src/pipedialog.c:99
 msgid "Send wav header"
-msgstr "Передать wav-заголовок"
+msgstr "п÷п╣я─п╣п╢п╟я┌я▄ wav-п╥п╟пЁп╬п╩п╬п╡п╬п╨"
 
 #: src/pipedialog.c:154
 msgid "Process output"
-msgstr "Вывод процесса"
+msgstr "п▓я▀п╡п╬п╢ п©я─п╬я├п╣я│я│п╟"
 
 #: src/pipedialog.c:179
 #, c-format
@@ -2846,80 +2846,80 @@ msgid ""
 "Output from command '%s':\n"
 "\n"
 msgstr ""
-"Вывод команды '%s':\n"
+"п▓я▀п╡п╬п╢ п╨п╬п╪п╟п╫п╢я▀ '%s':\n"
 "\n"
 
 #: src/pipedialog.c:202
 #, c-format
 msgid "Could not create pipe: %s"
-msgstr "Не могу создать канал (pipe): %s"
+msgstr "п²п╣ п╪п╬пЁя┐ я│п╬п╥п╢п╟я┌я▄ п╨п╟п╫п╟п╩ (pipe): %s"
 
 #: src/pipedialog.c:217
 #, c-format
 msgid "Error: fork: %s"
-msgstr "Ошибка: fork: %s"
+msgstr "п·я┬п╦п╠п╨п╟: fork: %s"
 
 #: src/pipedialog.c:269
 msgid "Should not reach this point!"
-msgstr "Не должен доходить до этой точки!"
+msgstr "п²п╣ п╢п╬п╩п╤п╣п╫ п╢п╬я┘п╬п╢п╦я┌я▄ п╢п╬ я█я┌п╬п╧ я┌п╬я┤п╨п╦!"
 
 #: src/pipedialog.c:479
 msgid "Command failed without returning any data"
-msgstr "Команда выполнилась не успешно, и не возвратила каких либо данных"
+msgstr "п п╬п╪п╟п╫п╢п╟ п╡я▀п©п╬п╩п╫п╦п╩п╟я│я▄ п╫п╣ я┐я│п©п╣я┬п╫п╬, п╦ п╫п╣ п╡п╬п╥п╡я─п╟я┌п╦п╩п╟ п╨п╟п╨п╦я┘ п╩п╦п╠п╬ п╢п╟п╫п╫я▀я┘"
 
 #: src/pipedialog.c:489
 #, c-format
 msgid "Error: %s"
-msgstr "Ошибка: %s"
+msgstr "п·я┬п╦п╠п╨п╟: %s"
 
 #: src/player.c:273
 msgid "The sound format of this file is not supported for playing."
-msgstr "Воспроизведение звукового формата данного файла не поддерживается."
+msgstr "п▓п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦п╣ п╥п╡я┐п╨п╬п╡п╬пЁп╬ я└п╬я─п╪п╟я┌п╟ п╢п╟п╫п╫п╬пЁп╬ я└п╟п╧п╩п╟ п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐."
 
 #: src/rateconv.c:97
 #, c-format
 msgid "Error initialising sample rate conversion: %s"
-msgstr "Ошибка инициализации преобразования частоты сэмплов: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п╦п╫п╦я├п╦п╟п╩п╦п╥п╟я├п╦п╦ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦я▐ я┤п╟я│я┌п╬я┌я▀ я│я█п╪п©п╩п╬п╡: %s"
 
 #: src/rateconv.c:162
 #, c-format
 msgid "Error converting samplerate: %s\n"
-msgstr "Ошибка преобразования частоты сэмплов: %s\n"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦я▐ я┤п╟я│я┌п╬я┌я▀ я│я█п╪п©п╩п╬п╡: %s\n"
 
 #: src/rateconv.c:201
 #, c-format
 msgid "Error changing samplerate conversion ratio: %s\n"
-msgstr "Ошибка при изменении коэффициента преобразования частоты сэмплов: %s\n"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ п╦п╥п╪п╣п╫п╣п╫п╦п╦ п╨п╬я█я└я└п╦я├п╦п╣п╫я┌п╟ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦я▐ я┤п╟я│я┌п╬я┌я▀ я│я█п╪п©п╩п╬п╡: %s\n"
 
 #: src/rateconv.c:319
 msgid "Unexpected EOF in connection to subprocess"
-msgstr "Неожиданный конец файла при подключении к подпроцессу"
+msgstr "п²п╣п╬п╤п╦п╢п╟п╫п╫я▀п╧ п╨п╬п╫п╣я├ я└п╟п╧п╩п╟ п©я─п╦ п©п╬п╢п╨п╩я▌я┤п╣п╫п╦п╦ п╨ п©п╬п╢п©я─п╬я├п╣я│я│я┐"
 
 #: src/rateconv.c:323
 #, c-format
 msgid "Error writing to subprocess: %s"
-msgstr "Ошибка записи в подпроцесс: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п╥п╟п©п╦я│п╦ п╡ п©п╬п╢п©я─п╬я├п╣я│я│: %s"
 
 #: src/rateconv.c:379 src/rateconv.c:401
 #, c-format
 msgid "Error reading from sub process: %s"
-msgstr "Ошибка чтения из подпроцесса: %s"
+msgstr "п·я┬п╦п╠п╨п╟ я┤я┌п╣п╫п╦я▐ п╦п╥ п©п╬п╢п©я─п╬я├п╣я│я│п╟: %s"
 
 #: src/rateconv.c:409
 msgid "SoX closed connection too early!"
-msgstr "SoX закрыл соединение слишком рано!"
+msgstr "SoX п╥п╟п╨я─я▀п╩ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ я│п╩п╦я┬п╨п╬п╪ я─п╟п╫п╬!"
 
 #: src/rateconv.c:593
 msgid "(SoX) Simulated analog filtration"
-msgstr "(SoX) Симулированная аналоговая фильтрация"
+msgstr "(SoX) п║п╦п╪я┐п╩п╦я─п╬п╡п╟п╫п╫п╟я▐ п╟п╫п╟п╩п╬пЁп╬п╡п╟я▐ я└п╦п╩я▄я┌я─п╟я├п╦я▐"
 
 #: src/rateconv.c:599
 msgid "(SoX) Polyphase interpolation"
-msgstr "(SoX) Полифазовая интерполяция"
+msgstr "(SoX) п÷п╬п╩п╦я└п╟п╥п╬п╡п╟я▐ п╦п╫я┌п╣я─п©п╬п╩я▐я├п╦я▐"
 
 #: src/rateconv.c:606
 msgid "Sample repeat/skip (low quality)"
-msgstr "Повтор/пропуск сэмплов (низкое качество)"
+msgstr "п÷п╬п╡я┌п╬я─/п©я─п╬п©я┐я│п╨ я│я█п╪п©п╩п╬п╡ (п╫п╦п╥п╨п╬п╣ п╨п╟я┤п╣я│я┌п╡п╬)"
 
 #: src/rawdialog.c:42
 msgid "header size"
@@ -2927,7 +2927,7 @@ msgstr ""
 
 #: src/rawdialog.c:72
 msgid "Unknown file format"
-msgstr "Неизвестный формат файла"
+msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ я└п╬я─п╪п╟я┌ я└п╟п╧п╩п╟"
 
 #: src/rawdialog.c:79
 #, c-format
@@ -2936,9 +2936,9 @@ msgid ""
 "\n"
 "Please specify the sample format below."
 msgstr ""
-"Формат файла '%s' не распознан.\n"
+"п╓п╬я─п╪п╟я┌ я└п╟п╧п╩п╟ '%s' п╫п╣ я─п╟я│п©п╬п╥п╫п╟п╫.\n"
 "\n"
-"Пожалуйста укажите формат сэмплов ниже."
+"п÷п╬п╤п╟п╩я┐п╧я│я┌п╟ я┐п╨п╟п╤п╦я┌п╣ я└п╬я─п╪п╟я┌ я│я█п╪п©п╩п╬п╡ п╫п╦п╤п╣."
 
 #: src/rawdialog.c:91
 msgid "Header bytes: "
@@ -2946,15 +2946,15 @@ msgstr ""
 
 #: src/recorddialog.c:206 src/recorddialog.c:664 src/recorddialog.c:910
 msgid "(no limit)"
-msgstr "(без ограничения)"
+msgstr "(п╠п╣п╥ п╬пЁя─п╟п╫п╦я┤п╣п╫п╦я▐)"
 
 #: src/recorddialog.c:313
 msgid "Mild"
-msgstr "Слабо"
+msgstr "п║п╩п╟п╠п╬"
 
 #: src/recorddialog.c:315
 msgid "Heavy"
-msgstr "Сильно"
+msgstr "п║п╦п╩я▄п╫п╬"
 
 #: src/recorddialog.c:423
 msgid "Update preset"
@@ -2966,19 +2966,19 @@ msgstr ""
 
 #: src/recorddialog.c:507
 msgid "Custom format"
-msgstr "Формат пользователя"
+msgstr "п╓п╬я─п╪п╟я┌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐"
 
 #: src/recorddialog.c:545
 msgid ""
 "The sign and endian-ness can usually be left at their defaults, but should "
 "be changed if you're unable to record or get bad sound."
 msgstr ""
-"Знак и порядок байт обычно остаются по умолчанию, но вы должны их изменить "
-"если запись не происходит, или записанный звук ужасный."
+"п≈п╫п╟п╨ п╦ п©п╬я─я▐п╢п╬п╨ п╠п╟п╧я┌ п╬п╠я▀я┤п╫п╬ п╬я│я┌п╟я▌я┌я│я▐ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌, п╫п╬ п╡я▀ п╢п╬п╩п╤п╫я▀ п╦я┘ п╦п╥п╪п╣п╫п╦я┌я▄ "
+"п╣я│п╩п╦ п╥п╟п©п╦я│я▄ п╫п╣ п©я─п╬п╦я│я┘п╬п╢п╦я┌, п╦п╩п╦ п╥п╟п©п╦я│п╟п╫п╫я▀п╧ п╥п╡я┐п╨ я┐п╤п╟я│п╫я▀п╧."
 
 #: src/recorddialog.c:559
 msgid "Name :"
-msgstr "Имя :"
+msgstr "п≤п╪я▐ :"
 
 #: src/recorddialog.c:571
 msgid "Presets:"
@@ -2987,7 +2987,7 @@ msgstr ""
 #: src/recorddialog.c:586
 #, fuzzy
 msgid "Set format"
-msgstr "Форматы файлов"
+msgstr "п╓п╬я─п╪п╟я┌я▀ я└п╟п╧п╩п╬п╡"
 
 #: src/recorddialog.c:594
 msgid "Add/Update preset"
@@ -2997,28 +2997,28 @@ msgstr ""
 msgid ""
 "Invalid time value. Time must be specified in the form (HH')MM:SS(.mmmm)"
 msgstr ""
-"Неправильное значение времени. Время должно быть указано в форме (ЧЧ')ММ:СС(."
-"мммм)"
+"п²п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╡я─п╣п╪п╣п╫п╦. п▓я─п╣п╪я▐ п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ я┐п╨п╟п╥п╟п╫п╬ п╡ я└п╬я─п╪п╣ (п╖п╖')п°п°:п║п║(."
+"п╪п╪п╪п╪)"
 
 #: src/recorddialog.c:691 src/recorddialog.c:940
 msgid "Format not selected"
-msgstr "Формат не выбран"
+msgstr "п╓п╬я─п╪п╟я┌ п╫п╣ п╡я▀п╠я─п╟п╫"
 
 #: src/recorddialog.c:698
 msgid "This format is not supported by the input driver!"
-msgstr "Этот формат не поддерживается драйвером ввода!"
+msgstr "п╜я┌п╬я┌ я└п╬я─п╪п╟я┌ п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐ п╢я─п╟п╧п╡п╣я─п╬п╪ п╡п╡п╬п╢п╟!"
 
 #: src/recorddialog.c:703
 msgid "Ready for recording"
-msgstr "Готов записывать"
+msgstr "п⌠п╬я┌п╬п╡ п╥п╟п©п╦я│я▀п╡п╟я┌я▄"
 
 #: src/recorddialog.c:716
 msgid "Peak: "
-msgstr "Пика: "
+msgstr "п÷п╦п╨п╟: "
 
 #: src/recorddialog.c:717
 msgid "Peak max: "
-msgstr "Максимальная пика"
+msgstr "п°п╟п╨я│п╦п╪п╟п╩я▄п╫п╟я▐ п©п╦п╨п╟"
 
 #: src/recorddialog.c:718
 msgid "RMS: "
@@ -3026,27 +3026,27 @@ msgstr ""
 
 #: src/recorddialog.c:719
 msgid "Clipping: "
-msgstr "Обрезание: "
+msgstr "п·п╠я─п╣п╥п╟п╫п╦п╣: "
 
 #: src/recorddialog.c:788
 msgid "Resume recording"
-msgstr "Восстановить запись"
+msgstr "п▓п╬я│я│я┌п╟п╫п╬п╡п╦я┌я▄ п╥п╟п©п╦я│я▄"
 
 #: src/recorddialog.c:788 src/recorddialog.c:808
 msgid "Pause recording"
-msgstr "Приостановить запись"
+msgstr "п÷я─п╦п╬я│я┌п╟п╫п╬п╡п╦я┌я▄ п╥п╟п©п╦я│я▄"
 
 #: src/recorddialog.c:790
 msgid "RecordStatus|Paused"
-msgstr "Остановлено"
+msgstr "п·я│я┌п╟п╫п╬п╡п╩п╣п╫п╬"
 
 #: src/recorddialog.c:791 src/recorddialog.c:816
 msgid "RecordStatus|Recording"
-msgstr "Запись"
+msgstr "п≈п╟п©п╦я│я▄"
 
 #: src/recorddialog.c:811
 msgid "Finish"
-msgstr "Завершить"
+msgstr "п≈п╟п╡п╣я─я┬п╦я┌я▄"
 
 #: src/recorddialog.c:819
 msgid "Overruns: "
@@ -3054,71 +3054,71 @@ msgstr ""
 
 #: src/recorddialog.c:821
 msgid "Bytes written: "
-msgstr "Записано байт: "
+msgstr "п≈п╟п©п╦я│п╟п╫п╬ п╠п╟п╧я┌: "
 
 #: src/recorddialog.c:822
 msgid "Auto stop in: "
-msgstr "Автостоп через: "
+msgstr "п░п╡я┌п╬я│я┌п╬п© я┤п╣я─п╣п╥: "
 
 #: src/recorddialog.c:886
 msgid "Recording settings"
-msgstr "Установки записи"
+msgstr "пёя│я┌п╟п╫п╬п╡п╨п╦ п╥п╟п©п╦я│п╦"
 
 #: src/recorddialog.c:893
 msgid "Sample format: "
-msgstr "Формат сэмплов: "
+msgstr "п╓п╬я─п╪п╟я┌ я│я█п╪п©п╩п╬п╡: "
 
 #: src/recorddialog.c:908
 msgid "Time limit: "
-msgstr "Лимит времени: "
+msgstr "п⌡п╦п╪п╦я┌ п╡я─п╣п╪п╣п╫п╦: "
 
 #: src/recorddialog.c:916
 msgid "Disable"
-msgstr "Выключить"
+msgstr "п▓я▀п╨п╩я▌я┤п╦я┌я▄"
 
 #: src/recorddialog.c:922
 msgid "Set"
-msgstr "Установить"
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄"
 
 #: src/recorddialog.c:934
 msgid "Input levels"
-msgstr "Входные уровни"
+msgstr "п▓я┘п╬п╢п╫я▀п╣ я┐я─п╬п╡п╫п╦"
 
 #: src/recorddialog.c:939
 msgid "Recording status: "
-msgstr "Состояние записи: "
+msgstr "п║п╬я│я┌п╬я▐п╫п╦п╣ п╥п╟п©п╦я│п╦: "
 
 #: src/recorddialog.c:944
 msgid "Time recorded: "
-msgstr "Время записи: "
+msgstr "п▓я─п╣п╪я▐ п╥п╟п©п╦я│п╦: "
 
 #: src/recorddialog.c:945
 msgid "N/A"
-msgstr "Не установлено"
+msgstr "п²п╣ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫п╬"
 
 #: src/recorddialog.c:958
 msgid "Start recording"
-msgstr "Начать запись"
+msgstr "п²п╟я┤п╟я┌я▄ п╥п╟п©п╦я│я▄"
 
 #: src/recorddialog.c:969
 msgid "Reset max peaks"
-msgstr "Сбросить максимальные пики"
+msgstr "п║п╠я─п╬я│п╦я┌я▄ п╪п╟п╨я│п╦п╪п╟п╩я▄п╫я▀п╣ п©п╦п╨п╦"
 
 #: src/sampleratedialog.c:87
 msgid ""
 "(This changes the sample rate of \n"
 "the entire file, not just the selection)"
 msgstr ""
-"(Это изменит частоту сэмплов всего файла, \n"
-"не только выделения)"
+"(п╜я┌п╬ п╦п╥п╪п╣п╫п╦я┌ я┤п╟я│я┌п╬я┌я┐ я│я█п╪п©п╩п╬п╡ п╡я│п╣пЁп╬ я└п╟п╧п╩п╟, \n"
+"п╫п╣ я┌п╬п╩я▄п╨п╬ п╡я▀п╢п╣п╩п╣п╫п╦я▐)"
 
 #: src/sampleratedialog.c:92
 msgid "New samplerate: "
-msgstr "Новая частота сэмплов: "
+msgstr "п²п╬п╡п╟я▐ я┤п╟я│я┌п╬я┌п╟ я│я█п╪п©п╩п╬п╡: "
 
 #: src/sampleratedialog.c:99
 msgid "Method: "
-msgstr "Метод: "
+msgstr "п°п╣я┌п╬п╢: "
 
 #: src/samplesizedialog.c:37
 msgid "File already has the selected sample format"
@@ -3127,24 +3127,24 @@ msgstr ""
 #: src/samplesizedialog.c:86
 msgid ""
 "(This changes the sample type of the entire file, not just the selection)"
-msgstr "(Это изменит тип сэмплов всего файла, не только выделения)"
+msgstr "(п╜я┌п╬ п╦п╥п╪п╣п╫п╦я┌ я┌п╦п© я│я█п╪п©п╩п╬п╡ п╡я│п╣пЁп╬ я└п╟п╧п╩п╟, п╫п╣ я┌п╬п╩я▄п╨п╬ п╡я▀п╢п╣п╩п╣п╫п╦я▐)"
 
 #: src/samplesizedialog.c:98
 msgid "Don't actually change the data (for repairing bad files etc)"
 msgstr ""
-"Фактически не изменять данные (для восстановления плохих файлов, и т.д.)"
+"п╓п╟п╨я┌п╦я┤п╣я│п╨п╦ п╫п╣ п╦п╥п╪п╣п╫я▐я┌я▄ п╢п╟п╫п╫я▀п╣ (п╢п╩я▐ п╡п╬я│я│я┌п╟п╫п╬п╡п╩п╣п╫п╦я▐ п©п╩п╬я┘п╦я┘ я└п╟п╧п╩п╬п╡, п╦ я┌.п╢.)"
 
 #: src/sound-alsalib.c:73
 msgid "ALSA Preferences"
-msgstr "Настройки ALSA"
+msgstr "п²п╟я│я┌я─п╬п╧п╨п╦ ALSA"
 
 #: src/sound-alsalib.c:81
 msgid "Playback device: "
-msgstr "Устройство воспроизведения: "
+msgstr "пёя│я┌я─п╬п╧я│я┌п╡п╬ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦я▐: "
 
 #: src/sound-alsalib.c:85
 msgid "Recording device: "
-msgstr "Устройство записи: "
+msgstr "пёя│я┌я─п╬п╧я│я┌п╡п╬ п╥п╟п©п╦я│п╦: "
 
 #: src/sound-alsalib.c:91
 msgid "Event driven I/O"
@@ -3153,12 +3153,12 @@ msgstr ""
 #: src/sound-alsalib.c:123
 #, c-format
 msgid "Error opening ALSA device '%s' for recording: %s"
-msgstr "Ошибка при открытии устройства ALSA '%s' для записи: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ п╬я┌п╨я─я▀я┌п╦п╦ я┐я│я┌я─п╬п╧я│я┌п╡п╟ ALSA '%s' п╢п╩я▐ п╥п╟п©п╦я│п╦: %s"
 
 #: src/sound-alsalib.c:125
 #, c-format
 msgid "Error opening ALSA device '%s' for playback: %s"
-msgstr "Ошибка при открытии устройства ALSA '%s' для воспроизведения: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ п╬я┌п╨я─я▀я┌п╦п╦ я┐я│я┌я─п╬п╧я│я┌п╡п╟ ALSA '%s' п╢п╩я▐ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦я▐: %s"
 
 #: src/sound-alsalib.c:260
 msgid "snd_pcm_hw_params_set_access failed"
@@ -3190,11 +3190,11 @@ msgstr ""
 
 #: src/sound.c:167
 msgid "SDL (output only)"
-msgstr "SDL (только вывод)"
+msgstr "SDL (я┌п╬п╩я▄п╨п╬ п╡я▀п╡п╬п╢)"
 
 #: src/sound.c:209
 msgid "Dummy (no sound)"
-msgstr "Фальшивый (без звука)"
+msgstr "п╓п╟п╩я▄я┬п╦п╡я▀п╧ (п╠п╣п╥ п╥п╡я┐п╨п╟)"
 
 #: src/sound.c:334
 #, c-format
@@ -3202,21 +3202,21 @@ msgid ""
 "Invalid driver name: %s\n"
 "Using '%s' driver instead"
 msgstr ""
-"Неправильное имя драйвера: %s\n"
-"Вместо него использую '%s'"
+"п²п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐ п╢я─п╟п╧п╡п╣я─п╟: %s\n"
+"п▓п╪п╣я│я┌п╬ п╫п╣пЁп╬ п╦я│п©п╬п╩я▄п╥я┐я▌ '%s'"
 
 #: src/sound-esound.c:59
 #, c-format
 msgid "Couldn't connect to ESD daemon: %s"
-msgstr "Не могу подключится к демону ESD: %s"
+msgstr "п²п╣ п╪п╬пЁя┐ п©п╬п╢п╨п╩я▌я┤п╦я┌я│я▐ п╨ п╢п╣п╪п╬п╫я┐ ESD: %s"
 
 #: src/sound-esound.c:114
 msgid "EsounD: Unable to open playback stream"
-msgstr "EsounD: Невозможно открыть поток воспроизведения"
+msgstr "EsounD: п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ п©п╬я┌п╬п╨ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦я▐"
 
 #: src/sound-esound.c:130
 msgid "EsounD: Unable to open recording stream"
-msgstr "EsounD: Невозможно открыть поток записи"
+msgstr "EsounD: п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ п©п╬я┌п╬п╨ п╥п╟п©п╦я│п╦"
 
 #: src/sound-esound.c:145 src/sound-esound.c:217
 msgid "EsounD driver: select"
@@ -3228,7 +3228,7 @@ msgstr ""
 
 #: src/sound-esound.c:221
 msgid "Esound connection closed by server"
-msgstr "Соединение с Esound закрыто сервером"
+msgstr "п║п╬п╣п╢п╦п╫п╣п╫п╦п╣ я│ Esound п╥п╟п╨я─я▀я┌п╬ я│п╣я─п╡п╣я─п╬п╪"
 
 #: src/sound-esound.c:227
 msgid "EsounD driver: read"
@@ -3236,79 +3236,79 @@ msgstr ""
 
 #: src/sound-esound.c:241
 msgid "jump delay"
-msgstr "задержка прыжка"
+msgstr "п╥п╟п╢п╣я─п╤п╨п╟ п©я─я▀п╤п╨п╟"
 
 #: src/sound-esound.c:255
 msgid "ESD preferences"
-msgstr "Настройки ESD"
+msgstr "п²п╟я│я┌я─п╬п╧п╨п╦ ESD"
 
 #: src/sound-esound.c:263
 msgid ""
 "If the cursor starts running too early when jumping, this delay should be "
 "increased."
 msgstr ""
-"Если при прыжке курсор начинает бежать слишком рано, это значение должно "
-"быть увеличено."
+"п∙я│п╩п╦ п©я─п╦ п©я─я▀п╤п╨п╣ п╨я┐я─я│п╬я─ п╫п╟я┤п╦п╫п╟п╣я┌ п╠п╣п╤п╟я┌я▄ я│п╩п╦я┬п╨п╬п╪ я─п╟п╫п╬, я█я┌п╬ п╥п╫п╟я┤п╣п╫п╦п╣ п╢п╬п╩п╤п╫п╬ "
+"п╠я▀я┌я▄ я┐п╡п╣п╩п╦я┤п╣п╫п╬."
 
 #: src/sound-esound.c:269
 msgid "Jump delay:"
-msgstr "Задержка прыжка:"
+msgstr "п≈п╟п╢п╣я─п╤п╨п╟ п©я─я▀п╤п╨п╟:"
 
 #: src/sound-esound.c:274
 msgid "seconds"
-msgstr "секунд"
+msgstr "я│п╣п╨я┐п╫п╢"
 
 #: src/sound-esound.c:278
 msgid ""
 "Selecting the ESD host to connect to is done through the ESPEAKER "
 "environment variable."
 msgstr ""
-"Адрес ESD-сервера можно указать при помощи переменной окружения ESPEAKER."
+"п░п╢я─п╣я│ ESD-я│п╣я─п╡п╣я─п╟ п╪п╬п╤п╫п╬ я┐п╨п╟п╥п╟я┌я▄ п©я─п╦ п©п╬п╪п╬я┴п╦ п©п╣я─п╣п╪п╣п╫п╫п╬п╧ п╬п╨я─я┐п╤п╣п╫п╦я▐ ESPEAKER."
 
 #: src/sound-jack.c:113
 msgid "Invalid number of input ports."
-msgstr "Неправильное количество портов ввода."
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п©п╬я─я┌п╬п╡ п╡п╡п╬п╢п╟."
 
 #: src/sound-jack.c:117
 msgid "Invalid number of output ports."
-msgstr "Неправильное количество портов вывода."
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п©п╬я─я┌п╬п╡ п╡я▀п╡п╬п╢п╟."
 
 #: src/sound-jack.c:126
 msgid "The client name change won't take effect until you restart the program."
-msgstr "Изменение имени клиента вступит в силу после перезапуска программы."
+msgstr "п≤п╥п╪п╣п╫п╣п╫п╦п╣ п╦п╪п╣п╫п╦ п╨п╩п╦п╣п╫я┌п╟ п╡я│я┌я┐п©п╦я┌ п╡ я│п╦п╩я┐ п©п╬я│п╩п╣ п©п╣я─п╣п╥п╟п©я┐я│п╨п╟ п©я─п╬пЁя─п╟п╪п╪я▀."
 
 #: src/sound-jack.c:183
 msgid " Input ports "
-msgstr " Порты ввода "
+msgstr " п÷п╬я─я┌я▀ п╡п╡п╬п╢п╟ "
 
 #: src/sound-jack.c:184
 msgid " Output ports "
-msgstr " Порты вывода "
+msgstr " п÷п╬я─я┌я▀ п╡я▀п╡п╬п╢п╟ "
 
 #: src/sound-jack.c:193
 msgid "Jack Preferences"
-msgstr "Настройки Jack"
+msgstr "п²п╟я│я┌я─п╬п╧п╨п╦ Jack"
 
 #: src/sound-jack.c:202
 msgid "Client name: "
-msgstr "Имя клиента: "
+msgstr "п≤п╪я▐ п╨п╩п╦п╣п╫я┌п╟: "
 
 #: src/sound-jack.c:219
 msgid "Number of ports (0-8): "
-msgstr "Количество портов (0-8): "
+msgstr "п п╬п╩п╦я┤п╣я│я┌п╡п╬ п©п╬я─я┌п╬п╡ (0-8): "
 
 #: src/sound-jack.c:227
 #, c-format
 msgid "Port #%d"
-msgstr "Порт #%d"
+msgstr "п÷п╬я─я┌ #%d"
 
 #: src/sound-jack.c:240
 msgid "Automatically connect input ports on startup"
-msgstr "Автоматически подключать порты ввода при запуске"
+msgstr "п░п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╦ п©п╬п╢п╨п╩я▌я┤п╟я┌я▄ п©п╬я─я┌я▀ п╡п╡п╬п╢п╟ п©я─п╦ п╥п╟п©я┐я│п╨п╣"
 
 #: src/sound-jack.c:246
 msgid "Automatically connect output ports on startup"
-msgstr "Автоматически подключать порты вывода при запуске"
+msgstr "п░п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╦ п©п╬п╢п╨п╩я▌я┤п╟я┌я▄ п©п╬я─я┌я▀ п╡я▀п╡п╬п╢п╟ п©я─п╦ п╥п╟п©я┐я│п╨п╣"
 
 #: src/sound-jack.c:375
 msgid "Over/underrun in JACK driver"
@@ -3321,15 +3321,15 @@ msgstr ""
 #: src/sound-jack.c:406
 #, c-format
 msgid "Connection from %s to %s failed: %s"
-msgstr "Ошибка при подключении %s к %s: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ п©п╬п╢п╨п╩я▌я┤п╣п╫п╦п╦ %s п╨ %s: %s"
 
 #: src/sound-jack.c:428
 msgid "Could not connect to the JACK server."
-msgstr "Не могу подключится к JACK-серверу."
+msgstr "п²п╣ п╪п╬пЁя┐ п©п╬п╢п╨п╩я▌я┤п╦я┌я│я▐ п╨ JACK-я│п╣я─п╡п╣я─я┐."
 
 #: src/sound-jack.c:442
 msgid "Activation failed!"
-msgstr "Активизация не удалась!"
+msgstr "п░п╨я┌п╦п╡п╦п╥п╟я├п╦я▐ п╫п╣ я┐п╢п╟п╩п╟я│я▄!"
 
 #: src/sound-jack.c:714
 #, c-format
@@ -3337,59 +3337,59 @@ msgid ""
 "With JACK, the only supported recording format is Floating-point, single "
 "precision, %d Hz"
 msgstr ""
-"При использовании JACK поддерживается только один формат записи - Плавающая "
-"точка, одинарная точность, %d Гц"
+"п÷я─п╦ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╦ JACK п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐ я┌п╬п╩я▄п╨п╬ п╬п╢п╦п╫ я└п╬я─п╪п╟я┌ п╥п╟п©п╦я│п╦ - п÷п╩п╟п╡п╟я▌я┴п╟я▐ "
+"я┌п╬я┤п╨п╟, п╬п╢п╦п╫п╟я─п╫п╟я▐ я┌п╬я┤п╫п╬я│я┌я▄, %d п⌠я├"
 
 #: src/sound-oss.c:96
 #, c-format
 msgid "Could not open '%s': %s"
-msgstr "Не могу открыть '%s': %s"
+msgstr "п²п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ '%s': %s"
 
 #: src/sound-oss.c:109
 #, c-format
 msgid "Error in sound driver: ioctl failed: %s"
-msgstr "Ошибка в звуковом драйвере: ioctl не удался: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п╡ п╥п╡я┐п╨п╬п╡п╬п╪ п╢я─п╟п╧п╡п╣я─п╣: ioctl п╫п╣ я┐п╢п╟п╩я│я▐: %s"
 
 #: src/sound-oss.c:215
 #, c-format
 msgid "Error in sound driver: write failed: %s"
-msgstr "Ошибка в звуковом драйвере: write не удался: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п╡ п╥п╡я┐п╨п╬п╡п╬п╪ п╢я─п╟п╧п╡п╣я─п╣: write п╫п╣ я┐п╢п╟п╩я│я▐: %s"
 
 #: src/sound-oss.c:228
 #, c-format
 msgid "Error in sound driver: read failed: %s"
-msgstr "Ошибка в звуковом драйвере: read не удался: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п╡ п╥п╡я┐п╨п╬п╡п╬п╪ п╢я─п╟п╧п╡п╣я─п╣: read п╫п╣ я┐п╢п╟п╩я│я▐: %s"
 
 #: src/sound-oss.c:252 src/sound-oss.c:384
 #, c-format
 msgid "Error in sound driver: select failed: %s"
-msgstr "Ошибка в звуковом драйвере: select не удался: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п╡ п╥п╡я┐п╨п╬п╡п╬п╪ п╢я─п╟п╧п╡п╣я─п╣: select п╫п╣ я┐п╢п╟п╩я│я▐: %s"
 
 #: src/sound-oss.c:439
 msgid "OSS preferences"
-msgstr "Настройки OSS"
+msgstr "п²п╟я│я┌я─п╬п╧п╨п╦ OSS"
 
 #: src/sound-oss.c:449
 #, fuzzy
 msgid "Playback device file:"
-msgstr "Устройство воспроизведения: "
+msgstr "пёя│я┌я─п╬п╧я│я┌п╡п╬ п╡п╬я│п©я─п╬п╦п╥п╡п╣п╢п╣п╫п╦я▐: "
 
 #: src/sound-oss.c:458
 #, fuzzy
 msgid "Recording device file:"
-msgstr "Устройство записи: "
+msgstr "пёя│я┌я─п╬п╧я│я┌п╡п╬ п╥п╟п©п╦я│п╦: "
 
 #: src/sound-oss.c:464
 msgid "Avoid select calls (try this if recording locks up)"
-msgstr "Избегать вызовов select (попробуйте это если запись блокируется)"
+msgstr "п≤п╥п╠п╣пЁп╟я┌я▄ п╡я▀п╥п╬п╡п╬п╡ select (п©п╬п©я─п╬п╠я┐п╧я┌п╣ я█я┌п╬ п╣я│п╩п╦ п╥п╟п©п╦я│я▄ п╠п╩п╬п╨п╦я─я┐п╣я┌я│я▐)"
 
 #: src/sound-portaudio.c:61
 msgid "sound-portaudio: No output devices available!"
-msgstr "sound-portaudio: Устройства вывода не доступны!"
+msgstr "sound-portaudio: пёя│я┌я─п╬п╧я│я┌п╡п╟ п╡я▀п╡п╬п╢п╟ п╫п╣ п╢п╬я│я┌я┐п©п╫я▀!"
 
 #: src/sound-portaudio.c:63
 msgid "sound-portaudio: No input devices available!"
-msgstr "sound-portaudio: Устройства ввода не доступны!"
+msgstr "sound-portaudio: пёя│я┌я─п╬п╧я│я┌п╡п╟ п╡п╡п╬п╢п╟ п╫п╣ п╢п╬я│я┌я┐п©п╫я▀!"
 
 #: src/sound-portaudio.c:186 src/sound-portaudio.c:273
 #, c-format
@@ -3403,45 +3403,45 @@ msgstr ""
 #: src/sound-sdl.c:38
 #, c-format
 msgid "Could not initialize SDL: %s"
-msgstr "Ошибка инициализации SDL: %s"
+msgstr "п·я┬п╦п╠п╨п╟ п╦п╫п╦я├п╦п╟п╩п╦п╥п╟я├п╦п╦ SDL: %s"
 
 #: src/sound-sdl.c:89
 #, c-format
 msgid "SDL: Couldn't open audio: %s"
-msgstr "SDL: Не могу открыть аудио: %s"
+msgstr "SDL: п²п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ п╟я┐п╢п╦п╬: %s"
 
 #: src/sound-sun.c:72
 #, c-format
 msgid "SunAudio: Couldn't open %s"
-msgstr "SunAudio: Не могу открыть %s"
+msgstr "SunAudio: п²п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ %s"
 
 #: src/sound-sun.c:159
 msgid "SunAudio: Error writing to sound device"
-msgstr "SunAudio: Ошибка записи в звуковое устройство"
+msgstr "SunAudio: п·я┬п╦п╠п╨п╟ п╥п╟п©п╦я│п╦ п╡ п╥п╡я┐п╨п╬п╡п╬п╣ я┐я│я┌я─п╬п╧я│я┌п╡п╬"
 
 #: src/sound-sun.c:241
 msgid "SunAudio: Error reading from sound device"
-msgstr "SunAudio: Ошибка чтения из звукового устройства"
+msgstr "SunAudio: п·я┬п╦п╠п╨п╟ я┤я┌п╣п╫п╦я▐ п╦п╥ п╥п╡я┐п╨п╬п╡п╬пЁп╬ я┐я│я┌я─п╬п╧я│я┌п╡п╟"
 
 #: src/soxdialog.c:53
 #, fuzzy
 msgid "Echo"
-msgstr "[S] Эхо"
+msgstr "[S] п╜я┘п╬"
 
 #: src/soxdialog.c:54
 #, fuzzy
 msgid "Echo sequence"
-msgstr "[S] Последовательность эхо"
+msgstr "[S] п÷п╬я│п╩п╣п╢п╬п╡п╟я┌п╣п╩я▄п╫п╬я│я┌я▄ я█я┘п╬"
 
 #: src/soxdialog.c:55
 #, fuzzy
 msgid "Reverb"
-msgstr "[S] Ревербератор"
+msgstr "[S] п═п╣п╡п╣я─п╠п╣я─п╟я┌п╬я─"
 
 #: src/soxdialog.c:56
 #, fuzzy
 msgid "Chorus"
-msgstr "Цвета"
+msgstr "п╕п╡п╣я┌п╟"
 
 #: src/soxdialog.c:57
 msgid "Flanger"
@@ -3458,12 +3458,12 @@ msgstr ""
 #: src/soxdialog.c:60
 #, fuzzy
 msgid "Pitch adjust"
-msgstr "[S] Подстройка высоты тона"
+msgstr "[S] п÷п╬п╢я│я┌я─п╬п╧п╨п╟ п╡я▀я│п╬я┌я▀ я┌п╬п╫п╟"
 
 #: src/soxdialog.c:61
 #, fuzzy
 msgid "Time stretch"
-msgstr "[S] Протягивание времени"
+msgstr "[S] п÷я─п╬я┌я▐пЁп╦п╡п╟п╫п╦п╣ п╡я─п╣п╪п╣п╫п╦"
 
 #: src/soxdialog.c:62
 msgid "DC Shift"
@@ -3472,12 +3472,12 @@ msgstr ""
 #: src/soxdialog.c:63
 #, fuzzy
 msgid "Masking noise"
-msgstr "[S] Маскирующий шум"
+msgstr "[S] п°п╟я│п╨п╦я─я┐я▌я┴п╦п╧ я┬я┐п╪"
 
 #: src/soxdialog.c:64
 #, fuzzy
 msgid "Reverse"
-msgstr "[S] Реверс"
+msgstr "[S] п═п╣п╡п╣я─я│"
 
 #: src/soxdialog.c:65
 msgid "Earwax"
@@ -3486,7 +3486,7 @@ msgstr ""
 #: src/soxdialog.c:66
 #, fuzzy
 msgid "Vibro"
-msgstr "[S] Вибрато"
+msgstr "[S] п▓п╦п╠я─п╟я┌п╬"
 
 #: src/soxdialog.c:67
 msgid "Lowpass filter (single-pole)"
@@ -3522,69 +3522,69 @@ msgstr ""
 
 #: src/soxdialog.c:307
 msgid "Frequency: "
-msgstr "Частота: "
+msgstr "п╖п╟я│я┌п╬я┌п╟: "
 
 #: src/soxdialog.c:312 src/soxdialog.c:319 src/soxdialog.c:478
 #: src/soxdialog.c:480
 msgid "Hz"
-msgstr "Гц"
+msgstr "п⌠я├"
 
 #: src/soxdialog.c:322
 msgid "Noise mode"
-msgstr "Режим шума"
+msgstr "п═п╣п╤п╦п╪ я┬я┐п╪п╟"
 
 #: src/soxdialog.c:382
 msgid "Reverb time: "
-msgstr "Время реверберации: "
+msgstr "п▓я─п╣п╪я▐ я─п╣п╡п╣я─п╠п╣я─п╟я├п╦п╦: "
 
 #: src/soxdialog.c:387
 msgid "ms"
-msgstr "мс"
+msgstr "п╪я│"
 
 #: src/soxdialog.c:392
 msgid "Delay (ms)  "
-msgstr "Задержка (мс)  "
+msgstr "п≈п╟п╢п╣я─п╤п╨п╟ (п╪я│)  "
 
 #: src/soxdialog.c:395
 msgid "Decay  "
-msgstr "Спад  "
+msgstr "п║п©п╟п╢  "
 
 #: src/soxdialog.c:399
 msgid "Speed (Hz)  "
-msgstr "Скорость (Гц)  "
+msgstr "п║п╨п╬я─п╬я│я┌я▄ (п⌠я├)  "
 
 #: src/soxdialog.c:403
 msgid "Depth (ms)  "
-msgstr "Глубина (мс)  "
+msgstr "п⌠п╩я┐п╠п╦п╫п╟ (п╪я│)  "
 
 #: src/soxdialog.c:407
 msgid "Modulation  "
-msgstr "Модуляция  "
+msgstr "п°п╬п╢я┐п╩я▐я├п╦я▐  "
 
 #: src/soxdialog.c:410
 msgid "Modulation|Sinusoidal"
-msgstr "Синусоидальная"
+msgstr "п║п╦п╫я┐я│п╬п╦п╢п╟п╩я▄п╫п╟я▐"
 
 #: src/soxdialog.c:411
 msgid "Modulation|Triangular"
-msgstr "Треугольная"
+msgstr "п╒я─п╣я┐пЁп╬п╩я▄п╫п╟я▐"
 
 #: src/soxdialog.c:424
 msgid "(Lines with delay=0 will be ignored.)"
-msgstr "(Строки с нулевой задержкой будут проигнорированы.)"
+msgstr "(п║я┌я─п╬п╨п╦ я│ п╫я┐п╩п╣п╡п╬п╧ п╥п╟п╢п╣я─п╤п╨п╬п╧ п╠я┐п╢я┐я┌ п©я─п╬п╦пЁп╫п╬я─п╦я─п╬п╡п╟п╫я▀.)"
 
 #: src/soxdialog.c:443 src/soxdialog.c:445 src/soxdialog.c:449
 #: src/soxdialog.c:451 src/soxdialog.c:453
 msgid "Input gain: "
-msgstr "Входной уровень: "
+msgstr "п▓я┘п╬п╢п╫п╬п╧ я┐я─п╬п╡п╣п╫я▄: "
 
 #: src/soxdialog.c:447
 msgid "Output gain: "
-msgstr "Выходной уровень: "
+msgstr "п▓я▀я┘п╬п╢п╫п╬п╧ я┐я─п╬п╡п╣п╫я▄: "
 
 #: src/soxdialog.c:459
 msgid "Width: "
-msgstr "Ширина: "
+msgstr "п╗п╦я─п╦п╫п╟: "
 
 #: src/soxdialog.c:465 src/soxdialog.c:467
 msgid "Bandwidth: "
@@ -3592,7 +3592,7 @@ msgstr ""
 
 #: src/soxdialog.c:476
 msgid "Filter type: "
-msgstr "Тип фильтра: "
+msgstr "п╒п╦п© я└п╦п╩я▄я┌я─п╟: "
 
 #: src/soxdialog.c:477
 msgid "Low 6dB corner: "
@@ -3604,11 +3604,11 @@ msgstr ""
 
 #: src/soxdialog.c:481
 msgid "Window length: "
-msgstr "Длина окна: "
+msgstr "п■п╩п╦п╫п╟ п╬п╨п╫п╟: "
 
 #: src/soxdialog.c:482
 msgid "samples"
-msgstr "сэмплов"
+msgstr "я│я█п╪п©п╩п╬п╡"
 
 #: src/soxdialog.c:483
 msgid "Beta"
@@ -3636,27 +3636,27 @@ msgstr ""
 
 #: src/soxdialog.c:533
 msgid "Input level (dB)"
-msgstr "Входной уровень (дБ)"
+msgstr "п▓я┘п╬п╢п╫п╬п╧ я┐я─п╬п╡п╣п╫я▄ (п╢п▒)"
 
 #: src/soxdialog.c:534
 msgid "Output level (dB)"
-msgstr "Выходной уровень (дБ)"
+msgstr "п▓я▀я┘п╬п╢п╫п╬п╧ я┐я─п╬п╡п╣п╫я▄ (п╢п▒)"
 
 #: src/soxdialog.c:547
 msgid "Post-processing gain: "
-msgstr "Уровень после обработки: "
+msgstr "пёя─п╬п╡п╣п╫я▄ п©п╬я│п╩п╣ п╬п╠я─п╟п╠п╬я┌п╨п╦: "
 
 #: src/soxdialog.c:551
 msgid " dB"
-msgstr " дБ"
+msgstr " п╢п▒"
 
 #: src/soxdialog.c:552
 msgid "Initial volume: "
-msgstr "Начальная громкость: "
+msgstr "п²п╟я┤п╟п╩я▄п╫п╟я▐ пЁя─п╬п╪п╨п╬я│я┌я▄: "
 
 #: src/soxdialog.c:556
 msgid "Delay time: "
-msgstr "Время задержки: "
+msgstr "п▓я─п╣п╪я▐ п╥п╟п╢п╣я─п╤п╨п╦: "
 
 #: src/soxdialog.c:565
 msgid "Shift amount: "
@@ -3680,27 +3680,27 @@ msgstr ""
 
 #: src/soxdialog.c:588
 msgid "Window width: "
-msgstr "Ширина окна: "
+msgstr "п╗п╦я─п╦п╫п╟ п╬п╨п╫п╟: "
 
 #: src/soxdialog.c:589 src/soxdialog.c:620
 msgid " ms"
-msgstr " мс"
+msgstr " п╪я│"
 
 #: src/soxdialog.c:590
 msgid "Interpolation: "
-msgstr "Интерполяция: "
+msgstr "п≤п╫я┌п╣я─п©п╬п╩я▐я├п╦я▐: "
 
 #: src/soxdialog.c:591
 msgid "Fade: "
-msgstr "Затухание: "
+msgstr "п≈п╟я┌я┐я┘п╟п╫п╦п╣: "
 
 #: src/soxdialog.c:600
 msgid "Interpolation|Cubic"
-msgstr "Кубическая"
+msgstr "п я┐п╠п╦я┤п╣я│п╨п╟я▐"
 
 #: src/soxdialog.c:601
 msgid "Interpolation|Linear"
-msgstr "Линейная"
+msgstr "п⌡п╦п╫п╣п╧п╫п╟я▐"
 
 #: src/soxdialog.c:607
 msgid "Fade|Cos"
@@ -3712,39 +3712,39 @@ msgstr ""
 
 #: src/soxdialog.c:609
 msgid "Fade|Linear"
-msgstr "Линейное"
+msgstr "п⌡п╦п╫п╣п╧п╫п╬п╣"
 
 #: src/soxdialog.c:610
 msgid "Fade|Trapezoid"
-msgstr "Трапециобразное"
+msgstr "п╒я─п╟п©п╣я├п╦п╬п╠я─п╟п╥п╫п╬п╣"
 
 #: src/soxdialog.c:618
 msgid "Factor: "
-msgstr "Коэффициент: "
+msgstr "п п╬я█я└я└п╦я├п╦п╣п╫я┌: "
 
 #: src/soxdialog.c:619
 msgid "Window size: "
-msgstr "Размер окна: "
+msgstr "п═п╟п╥п╪п╣я─ п╬п╨п╫п╟: "
 
 #: src/soxdialog.c:631
 msgid "Speed: "
-msgstr "Скорость: "
+msgstr "п║п╨п╬я─п╬я│я┌я▄: "
 
 #: src/soxdialog.c:632
 msgid " Hz"
-msgstr " Гц"
+msgstr " п⌠я├"
 
 #: src/soxdialog.c:633
 msgid "Depth: "
-msgstr "Глубина: "
+msgstr "п⌠п╩я┐п╠п╦п╫п╟: "
 
 #: src/soxdialog.c:644
 msgid "This effect has no options."
-msgstr "Этот эффект не имеет опций."
+msgstr "п╜я┌п╬я┌ я█я└я└п╣п╨я┌ п╫п╣ п╦п╪п╣п╣я┌ п╬п©я├п╦п╧."
 
 #: src/soxdialog.c:718
 msgid "Error creating pipe"
-msgstr "Ошибка при создании канала (pipe)"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ я│п╬п╥п╢п╟п╫п╦п╦ п╨п╟п╫п╟п╩п╟ (pipe)"
 
 #: src/soxdialog.c:725
 msgid "Couldn't fork"
@@ -3753,58 +3753,58 @@ msgstr ""
 #: src/soxdialog.c:740
 #, c-format
 msgid "Error running 'sox -h': %s\n"
-msgstr "Ошибка выполнения 'sox -h': %s\n"
+msgstr "п·я┬п╦п╠п╨п╟ п╡я▀п©п╬п╩п╫п╣п╫п╦я▐ 'sox -h': %s\n"
 
 #: src/soxdialog.c:742
 msgid "Should not reach this point"
-msgstr "Не должен доходить до этой точки"
+msgstr "п²п╣ п╢п╬п╩п╤п╣п╫ п╢п╬я┘п╬п╢п╦я┌я▄ п╢п╬ я█я┌п╬п╧ я┌п╬я┤п╨п╦"
 
 #: src/soxdialog.c:757
 msgid "Error reading sox output"
-msgstr "Ошибка чтения вывода sox"
+msgstr "п·я┬п╦п╠п╨п╟ я┤я┌п╣п╫п╦я▐ п╡я▀п╡п╬п╢п╟ sox"
 
 #: src/soxdialog.c:786
 msgid "Unable to detect supported SoX effects"
-msgstr "Не могу определить поддерживаемые эффекты SoX"
+msgstr "п²п╣ п╪п╬пЁя┐ п╬п©я─п╣п╢п╣п╩п╦я┌я▄ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪я▀п╣ я█я└я└п╣п╨я┌я▀ SoX"
 
 #: src/soxdialog.c:824
 msgid "Sox support couldn't be initialized"
-msgstr "Поддержка Sox не инициализирована"
+msgstr "п÷п╬п╢п╢п╣я─п╤п╨п╟ Sox п╫п╣ п╦п╫п╦я├п╦п╟п╩п╦п╥п╦я─п╬п╡п╟п╫п╟"
 
 #: src/speeddialog.c:58
 msgid "Speed:"
-msgstr "Скорость:"
+msgstr "п║п╨п╬я─п╬я│я┌я▄:"
 
 #: src/statusbar.c:72
 msgid "(no file loaded)"
-msgstr "(файл не загружен)"
+msgstr "(я└п╟п╧п╩ п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫)"
 
 #: src/statusbar.c:235
 msgid "Cursor: running"
-msgstr "Курсор: бежит"
+msgstr "п я┐я─я│п╬я─: п╠п╣п╤п╦я┌"
 
 #: src/statusbar.c:237
 msgid "Cursor: "
-msgstr "Курсор: "
+msgstr "п я┐я─я│п╬я─: "
 
 #: src/statusbar.c:260
 #, c-format
 msgid "View: [ %s - %s ]"
-msgstr "Вид: [ %s - %s ]"
+msgstr "п▓п╦п╢: [ %s - %s ]"
 
 #: src/statusbar.c:281
 #, c-format
 msgid "Selection: %s+%s"
-msgstr "Выделение: %s+%s"
+msgstr "п▓я▀п╢п╣п╩п╣п╫п╦п╣: %s+%s"
 
 #: src/statusbar.c:304
 msgid "Processing data"
-msgstr "Обработка данных"
+msgstr "п·п╠я─п╟п╠п╬я┌п╨п╟ п╢п╟п╫п╫я▀я┘"
 
 #: src/statusbar.c:306
 #, c-format
 msgid "%s... (Press ESC to cancel)"
-msgstr "%s... (Нажмите ESC для отмены)"
+msgstr "%s... (п²п╟п╤п╪п╦я┌п╣ ESC п╢п╩я▐ п╬я┌п╪п╣п╫я▀)"
 
 #: src/um.c:50
 msgid "mhWaveEdit: "
@@ -3817,44 +3817,44 @@ msgstr "mhWaveEdit: %s: %s\n"
 
 #: src/um.c:96
 msgid "Message"
-msgstr "Сообщение"
+msgstr "п║п╬п╬п╠я┴п╣п╫п╦п╣"
 
 #: src/um.c:116
 msgid "Yes"
-msgstr "Да"
+msgstr "п■п╟"
 
 #: src/um.c:124
 msgid "No"
-msgstr "Нет"
+msgstr "п²п╣я┌"
 
 #: src/um.c:317
 msgid "Input"
-msgstr "Ввод"
+msgstr "п▓п╡п╬п╢"
 
 #: src/um.c:401
 msgid "Choice"
-msgstr "Выбор"
+msgstr "п▓я▀п╠п╬я─"
 
 #: src/volumedialog.c:71
 msgid "Calculating peak volume..."
-msgstr "Подсчет пиковой громкости..."
+msgstr "п÷п╬п╢я│я┤п╣я┌ п©п╦п╨п╬п╡п╬п╧ пЁя─п╬п╪п╨п╬я│я┌п╦..."
 
 #: src/volumedialog.c:87
 msgid "Start:"
-msgstr "Начало:"
+msgstr "п²п╟я┤п╟п╩п╬:"
 
 #: src/volumedialog.c:90
 msgid "End:"
-msgstr "Конец:"
+msgstr "п п╬п╫п╣я├:"
 
 #: src/volumedialog.c:109
 msgid "Find top volume"
-msgstr "Найти лучшую громкость"
+msgstr "п²п╟п╧я┌п╦ п╩я┐я┤я┬я┐я▌ пЁя─п╬п╪п╨п╬я│я┌я▄"
 
 #: src/document.c:229
 #, c-format
 msgid "untitled #%d"
-msgstr "без имени #%d"
+msgstr "п╠п╣п╥ п╦п╪п╣п╫п╦ #%d"
 
 #: src/document.c:281
 msgid ""
@@ -3869,12 +3869,12 @@ msgstr ""
 #: src/session.c:104 src/session.c:164
 #, fuzzy, c-format
 msgid "%s: Wrong file type"
-msgstr "Неизвестный тип файла"
+msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ я┌п╦п© я└п╟п╧п╩п╟"
 
 #: src/session.c:238
 #, fuzzy
 msgid "Could not create session file"
-msgstr "Не могу создать канал (pipe): %s"
+msgstr "п²п╣ п╪п╬пЁя┐ я│п╬п╥п╢п╟я┌я▄ п╨п╟п╫п╟п╩ (pipe): %s"
 
 #: src/session.c:280
 msgid ""
@@ -3887,7 +3887,7 @@ msgstr ""
 #: src/session.c:380
 #, fuzzy
 msgid "Suspended"
-msgstr "Скорость:"
+msgstr "п║п╨п╬я─п╬я│я┌я▄:"
 
 #: src/session.c:380 src/session.c:381
 msgid "Crash"
@@ -3914,12 +3914,12 @@ msgstr ""
 #: src/session.c:439
 #, fuzzy
 msgid "Resume selected"
-msgstr "Восстановить запись"
+msgstr "п▓п╬я│я│я┌п╟п╫п╬п╡п╦я┌я▄ п╥п╟п©п╦я│я▄"
 
 #: src/session.c:449
 #, fuzzy
 msgid "Delete selected"
-msgstr "Удалить выделение"
+msgstr "пёп╢п╟п╩п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣"
 
 #: src/session.c:456
 msgid "Start new session"
@@ -3928,17 +3928,17 @@ msgstr ""
 #: src/session.c:462
 #, fuzzy
 msgid "Exit"
-msgstr "/_Правка"
+msgstr "/_п÷я─п╟п╡п╨п╟"
 
 #: src/mapchannelsdialog.c:116
 #, fuzzy
 msgid "This effect applies to the whole file, not just the selection"
-msgstr "(Это изменит тип сэмплов всего файла, не только выделения)"
+msgstr "(п╜я┌п╬ п╦п╥п╪п╣п╫п╦я┌ я┌п╦п© я│я█п╪п©п╩п╬п╡ п╡я│п╣пЁп╬ я└п╟п╧п╩п╟, п╫п╣ я┌п╬п╩я▄п╨п╬ п╡я▀п╢п╣п╩п╣п╫п╦я▐)"
 
 #: src/mapchannelsdialog.c:123
 #, fuzzy
 msgid "Output channels: "
-msgstr "Выходной уровень: "
+msgstr "п▓я▀я┘п╬п╢п╫п╬п╧ я┐я─п╬п╡п╣п╫я▄: "
 
 #: src/mapchannelsdialog.c:130
 msgid "Map"
@@ -3955,101 +3955,101 @@ msgstr ""
 #: src/sandwichdialog.c:107
 #, fuzzy
 msgid "Align beginning of files"
-msgstr "после начала файла"
+msgstr "п©п╬я│п╩п╣ п╫п╟я┤п╟п╩п╟ я└п╟п╧п╩п╟"
 
 #: src/sandwichdialog.c:110
 #, fuzzy
 msgid "Align end of files"
-msgstr "после конца файла"
+msgstr "п©п╬я│п╩п╣ п╨п╬п╫я├п╟ я└п╟п╧п╩п╟"
 
 #: src/sandwichdialog.c:113
 #, fuzzy
 msgid "Align at marker: "
-msgstr "Имя клиента: "
+msgstr "п≤п╪я▐ п╨п╩п╦п╣п╫я┌п╟: "
 
 #: src/sandwichdialog.c:126
 #, fuzzy
 msgid "Add channels from: "
-msgstr "Добавление каналов"
+msgstr "п■п╬п╠п╟п╡п╩п╣п╫п╦п╣ п╨п╟п╫п╟п╩п╬п╡"
 
 #: src/sandwichdialog.c:130
 msgid "Alignment"
 msgstr ""
 
 #~ msgid "Removing channel"
-#~ msgstr "Удаление канала"
+#~ msgstr "пёп╢п╟п╩п╣п╫п╦п╣ п╨п╟п╫п╟п╩п╟"
 
 #, fuzzy
 #~ msgid "Mapping channels"
-#~ msgstr "Добавление каналов"
+#~ msgstr "п■п╬п╠п╟п╡п╩п╣п╫п╦п╣ п╨п╟п╫п╟п╩п╬п╡"
 
 #~ msgid "Removing channels"
-#~ msgstr "Удаление каналов"
+#~ msgstr "пёп╢п╟п╩п╣п╫п╦п╣ п╨п╟п╫п╟п╩п╬п╡"
 
 #~ msgid "Choose a sample format"
-#~ msgstr "Выберите формат сэмплов"
+#~ msgstr "п▓я▀п╠п╣я─п╦я┌п╣ я└п╬я─п╪п╟я┌ я│я█п╪п©п╩п╬п╡"
 
 #~ msgid "%d-bit"
-#~ msgstr "%d-бит"
+#~ msgstr "%d-п╠п╦я┌"
 
 #~ msgid "%s (%s %s %d Hz)"
-#~ msgstr "%s (%s %s %d Гц)"
+#~ msgstr "%s (%s %s %d п⌠я├)"
 
 #~ msgid "%s %s %d Hz"
-#~ msgstr "%s %s %d Гц"
+#~ msgstr "%s %s %d п⌠я├"
 
 #~ msgid "Other format..."
-#~ msgstr "Другой формат..."
+#~ msgstr "п■я─я┐пЁп╬п╧ я└п╬я─п╪п╟я┌..."
 
 #~ msgid ""
 #~ "To add this format to the presets, enter a name below. Otherwise, leave "
 #~ "it blank."
 #~ msgstr ""
-#~ "Чтобы добавить этот формат в список предопределенных форматов, введите "
-#~ "имя ниже. Иначе оставьте его пустым."
+#~ "п╖я┌п╬п╠я▀ п╢п╬п╠п╟п╡п╦я┌я▄ я█я┌п╬я┌ я└п╬я─п╪п╟я┌ п╡ я│п©п╦я│п╬п╨ п©я─п╣п╢п╬п©я─п╣п╢п╣п╩п╣п╫п╫я▀я┘ я└п╬я─п╪п╟я┌п╬п╡, п╡п╡п╣п╢п╦я┌п╣ "
+#~ "п╦п╪я▐ п╫п╦п╤п╣. п≤п╫п╟я┤п╣ п╬я│я┌п╟п╡я▄я┌п╣ п╣пЁп╬ п©я┐я│я┌я▀п╪."
 
 #~ msgid "Sound device file:"
-#~ msgstr "Файл звукового устройства:"
+#~ msgstr "п╓п╟п╧п╩ п╥п╡я┐п╨п╬п╡п╬пЁп╬ я┐я│я┌я─п╬п╧я│я┌п╡п╟:"
 
 #~ msgid ""
 #~ "Environment variable LADSPA_PATH not set.\n"
 #~ "LADSPA support is disabled."
 #~ msgstr ""
-#~ "Переменная окружения LADSPA_PATH не установлена.\n"
-#~ "Поддержка LADSPA отключена."
+#~ "п÷п╣я─п╣п╪п╣п╫п╫п╟я▐ п╬п╨я─я┐п╤п╣п╫п╦я▐ LADSPA_PATH п╫п╣ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫п╟.\n"
+#~ "п÷п╬п╢п╢п╣я─п╤п╨п╟ LADSPA п╬я┌п╨п╩я▌я┤п╣п╫п╟."
 
 #~ msgid "8-bit wav-files must be in unsigned format!"
-#~ msgstr "8-битные wav-файлы должны быть в формате без знака!"
+#~ msgstr "8-п╠п╦я┌п╫я▀п╣ wav-я└п╟п╧п╩я▀ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╡ я└п╬я─п╪п╟я┌п╣ п╠п╣п╥ п╥п╫п╟п╨п╟!"
 
 #~ msgid "16/24/32-bit wav-files must be in signed format!"
-#~ msgstr "16/24/32-битные wav-файлы должны быть в формате со знаком!"
+#~ msgstr "16/24/32-п╠п╦я┌п╫я▀п╣ wav-я└п╟п╧п╩я▀ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╡ я└п╬я─п╪п╟я┌п╣ я│п╬ п╥п╫п╟п╨п╬п╪!"
 
 #~ msgid "[B] Convert samplerate"
-#~ msgstr "[B] Преобразовать частоту сэмплов"
+#~ msgstr "[B] п÷я─п╣п╬п╠я─п╟п╥п╬п╡п╟я┌я▄ я┤п╟я│я┌п╬я┌я┐ я│я█п╪п©п╩п╬п╡"
 
 #~ msgid "[B] Speed"
-#~ msgstr "[B] Скорость"
+#~ msgstr "[B] п║п╨п╬я─п╬я│я┌я▄"
 
 #~ msgid "Channel %d"
-#~ msgstr "Канал %d"
+#~ msgstr "п п╟п╫п╟п╩ %d"
 
 #~ msgid "/Effects/Sp_lit channel..."
-#~ msgstr "/Эффекты/_Разбить канал..."
+#~ msgstr "/п╜я└я└п╣п╨я┌я▀/_п═п╟п╥п╠п╦я┌я▄ п╨п╟п╫п╟п╩..."
 
 #~ msgid "SoX only supports 8, 16 and 32-bit sample sizes"
-#~ msgstr "SoX поддерживает только 8, 16 и 32-битные сэмплы"
+#~ msgstr "SoX п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌ я┌п╬п╩я▄п╨п╬ 8, 16 п╦ 32-п╠п╦я┌п╫я▀п╣ я│я█п╪п©п╩я▀"
 
 #~ msgid "This will clear the entire undo buffer!"
-#~ msgstr "Это очистит весь буфер отката!"
+#~ msgstr "п╜я┌п╬ п╬я┤п╦я│я┌п╦я┌ п╡п╣я│я▄ п╠я┐я└п╣я─ п╬я┌п╨п╟я┌п╟!"
 
 #~ msgid "This will clear the undo buffer up to the last save"
-#~ msgstr "Это очистит буфер отката до последнего сохранения"
+#~ msgstr "п╜я┌п╬ п╬я┤п╦я│я┌п╦я┌ п╠я┐я└п╣я─ п╬я┌п╨п╟я┌п╟ п╢п╬ п©п╬я│п╩п╣п╢п╫п╣пЁп╬ я│п╬я┘я─п╟п╫п╣п╫п╦я▐"
 
 #~ msgid "/Edit/Clear undo buffer"
-#~ msgstr "/Правка/Очистить буфер отката"
+#~ msgstr "/п÷я─п╟п╡п╨п╟/п·я┤п╦я│я┌п╦я┌я▄ п╠я┐я└п╣я─ п╬я┌п╨п╟я┌п╟"
 
 #~ msgid "Conversion method: "
-#~ msgstr "Метод преобразования: "
+#~ msgstr "п°п╣я┌п╬п╢ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦я▐: "
 
 #~ msgid "mhWaveEdit: Couldn't open %s: %s\n"
-#~ msgstr "mhWaveEdit: Не могу открыть %s: %s\n"
+#~ msgstr "mhWaveEdit: п²п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ %s: %s\n"
