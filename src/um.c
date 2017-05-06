@@ -215,7 +215,7 @@ gchar *user_input(gchar *label, gchar *title, gchar *defvalue,
      g_signal_connect(G_OBJECT(d),"clicked",
 			G_CALLBACK(user_input_ok),&uid);
      gtk_container_add(GTK_CONTAINER(c),d);
-     GTK_WIDGET_SET_FLAGS(d,GTK_CAN_DEFAULT);
+     gtk_widget_set_can_default(d,TRUE);
      gtk_widget_grab_default(d);
      d = gtk_button_new_with_label(_("Cancel"));
      g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(modal_callback),

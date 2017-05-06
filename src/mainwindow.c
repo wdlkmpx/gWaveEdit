@@ -1397,7 +1397,7 @@ static void help_readme(GtkMenuItem *menuitem, gpointer user_data)
 	     pango_font_description_free(pfd);
 	}
 	gtk_container_add (GTK_CONTAINER (viewport1), label2);
-	GTK_WIDGET_SET_FLAGS (label2, GTK_CAN_FOCUS);
+	gtk_widget_set_can_focus (label2, TRUE);
 	gtk_label_set_justify (GTK_LABEL (label2), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap (GTK_LABEL (label2), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (label2), 0, 0);
@@ -1425,7 +1425,7 @@ static void help_readme(GtkMenuItem *menuitem, gpointer user_data)
 				 (GtkAccelFlags) 0);
      gtk_widget_add_accelerator (button, "clicked", ag, GDK_Escape, 0, 
 				 (GtkAccelFlags) 0);
-     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+     gtk_widget_set_can_default (button, TRUE);
      g_signal_connect_swapped(G_OBJECT(button),"clicked",
 			       G_CALLBACK(gtk_widget_destroy),
 			       window);

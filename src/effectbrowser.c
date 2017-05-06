@@ -873,7 +873,7 @@ static void effect_browser_init(EffectBrowser *eb)
      }
      gtk_container_set_border_width(GTK_CONTAINER(eb),5);
      gtk_container_add(GTK_CONTAINER(eb),b);
-     GTK_WIDGET_SET_FLAGS(GTK_WIDGET(b251),GTK_CAN_DEFAULT);
+     gtk_widget_set_can_default (b251, TRUE);
      gtk_widget_grab_default(GTK_WIDGET(b251));
      gtk_widget_show_all(b);
 }

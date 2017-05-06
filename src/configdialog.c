@@ -351,7 +351,7 @@ static void colors_click(GtkButton *button, gpointer user_data)
      g_signal_connect_swapped(G_OBJECT(d),"clicked",
 			       G_CALLBACK(gtk_widget_destroy),a);
      gtk_container_add(GTK_CONTAINER(c),d);
-     GTK_WIDGET_SET_FLAGS(d,GTK_CAN_DEFAULT);
+     gtk_widget_set_can_default(d,TRUE);
      gtk_widget_grab_default(d);
 
      d = gtk_button_new_with_label("");
@@ -1199,7 +1199,7 @@ static void config_dialog_init(ConfigDialog *cd)
 		       G_CALLBACK(config_dialog_ok),cd);
 
     gtk_container_add (GTK_CONTAINER (b), c);
-    GTK_WIDGET_SET_FLAGS (c, GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default (c, TRUE);
 
     c = gtk_button_new_with_label("");
     key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (c)->child), _("_Close"));
@@ -1211,7 +1211,7 @@ static void config_dialog_init(ConfigDialog *cd)
                               G_CALLBACK(gtk_widget_destroy),
                               cd);
     gtk_container_add (GTK_CONTAINER (b), c);
-    GTK_WIDGET_SET_FLAGS (c, GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default (c, TRUE);
     gtk_widget_show_all(a);
 
     gtk_window_add_accel_group(GTK_WINDOW (cd), ag);
