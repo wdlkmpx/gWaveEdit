@@ -268,7 +268,7 @@ static void colors_click(GtkButton *button, gpointer user_data)
 {
      GtkWidget *a,*b,*c,*d;
      GtkWidget *cs;
-     gint i,key;
+     gint i;
      ConfigDialog *cd = CONFIG_DIALOG(user_data);
      GdkColor *ctable;
      GtkAccelGroup* ag;
@@ -335,16 +335,10 @@ static void colors_click(GtkButton *button, gpointer user_data)
      gtk_box_pack_start(GTK_BOX(c),d,TRUE,TRUE,0);
      c = gtk_hbutton_box_new();
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     d = gtk_button_new_with_label("");
-     key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(d)->child),_("_Preview"));
-     gtk_widget_add_accelerator (d, "clicked", ag, key, GDK_MOD1_MASK,
-				 (GtkAccelFlags) 0);
+     d = gtk_button_new_with_mnemonic(_("_Preview"));
      g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),store);
      gtk_container_add(GTK_CONTAINER(c),d);
-     d = gtk_button_new_with_label("");
-     key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(d)->child),_("_OK"));
-     gtk_widget_add_accelerator (d, "clicked", ag, key, GDK_MOD1_MASK,
-				 (GtkAccelFlags) 0);
+     d = gtk_button_new_with_mnemonic(_("_OK"));
      g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),store);
      g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(save_colors),
 			NULL);
@@ -354,10 +348,7 @@ static void colors_click(GtkButton *button, gpointer user_data)
      gtk_widget_set_can_default(d,TRUE);
      gtk_widget_grab_default(d);
 
-     d = gtk_button_new_with_label("");
-     key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(d)->child),_("_Cancel"));
-     gtk_widget_add_accelerator (d, "clicked", ag, key, GDK_MOD1_MASK,
-				 (GtkAccelFlags) 0);
+     d = gtk_button_new_with_mnemonic(_("_Cancel"));
      gtk_widget_add_accelerator (d, "clicked", ag, GDK_Escape, 0,
 				 (GtkAccelFlags) 0);
      g_signal_connect_swapped(G_OBJECT(d),"clicked",
@@ -455,7 +446,7 @@ static void config_dialog_init(ConfigDialog *cd)
     GtkWidget *w,*a,*b,*c,*d,*e,*f,*g,*tempview;
     GList *l;
     GtkAccelGroup *ag;
-    guint key,i,j;
+    guint i,j;
     gchar *ch;
     GtkTreeIter iter;
     GtkTreeViewColumn *col;
@@ -520,147 +511,91 @@ static void config_dialog_init(ConfigDialog *cd)
 				       INI_SETTING_VIEW_QUALITY_DEFAULT));
     cd->view_quality = INTBOX(w);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("Show _time scale by default"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("Show _time scale by default"));
     cd->time_scale_default = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->time_scale_default,inifile_get_gboolean(
 				      INI_SETTING_TIMESCALE, 
 				      INI_SETTING_TIMESCALE_DEFAULT));
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("Show _horizontal zoom slider by default"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("Show _horizontal zoom slider by "
+                                             "default"));
     cd->hzoom_default = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->hzoom_default,inifile_get_gboolean(
 				      INI_SETTING_HZOOM, 
 				      INI_SETTING_HZOOM_DEFAULT));
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("Show _vertical zoom slider by default"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("Show _vertical zoom slider by "
+                                             "default"));
     cd->vzoom_default = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->vzoom_default,inifile_get_gboolean(
 				      INI_SETTING_VZOOM, 
 				      INI_SETTING_VZOOM_DEFAULT));
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("Show _speed slider by default"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("Show _speed slider by default"));
     cd->speed_default = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->speed_default,inifile_get_gboolean(
 				      INI_SETTING_SPEED, 
 				      INI_SETTING_SPEED_DEFAULT));
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child),
-				_("Show slider l_abels by default"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK,
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("Show slider l_abels by default"));
     cd->labels_default = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->labels_default,
 				 inifile_get_gboolean(INI_SETTING_SLABELS,
 						      INI_SETTING_SLABELS_DEFAULT));
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child),
-				_("Show playback buffer positio_n by default"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK,
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("Show playback buffer positio_n "
+                                             "by default"));
     cd->bufpos_default = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->bufpos_default,
 				 inifile_get_gboolean(INI_SETTING_BUFPOS,
 						      INI_SETTING_BUFPOS_DEFAULT));
 
-    w = gtk_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Settings"));
-    gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
+    w = gtk_button_new_with_label(_("_Settings"));
     g_signal_connect(G_OBJECT(w),"clicked",
 		       G_CALLBACK(sound_settings_click),cd);
     gtk_widget_set_sensitive(w,sound_driver_has_preferences(NULL));
     cd->sound_driver_prefs = GTK_BUTTON(w);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("_Keep sound driver opened (to avoid start/stop"
-				" clicks)"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("_Keep sound driver opened (to "
+                                             "avoid start/stop clicks)"));
     cd->sound_lock = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->sound_lock,sound_lock_driver);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child),
-				_("_Byte-swap output (try this if playback "
-				"sounds horrible)"));
-    gtk_widget_add_accelerator(w,"clicked",ag,key,GDK_MOD1_MASK,
-			       (GtkAccelFlags)0);
+    w = gtk_check_button_new_with_mnemonic(_("_Byte-swap output (try this if "
+                                             "playback sounds horrible)"));
     cd->output_bswap = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->output_bswap,output_byteswap_flag);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child),
-				_("Play _mono files as stereo"));
-    gtk_widget_add_accelerator(w,"clicked",ag,key,GDK_MOD1_MASK,
-			       (GtkAccelFlags)0);
+    w = gtk_check_button_new_with_mnemonic(_("Play _mono files as stereo"));
     cd->output_stereo = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->output_stereo,output_stereo_flag);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("_Update cursor information while playing"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("_Update cursor information "
+                                             "while playing"));
     cd->roll_cursor = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->roll_cursor,status_bar_roll_cursor);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("_Keep cursor in center of view when "
-				"following playback"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("_Keep cursor in center of view "
+                                             "when following playback"));
     cd->center_cursor = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->center_cursor,
 				 view_follow_strict_flag);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child),
-				_("_Auto-start playback when jumping to mark"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK,
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("_Auto-start playback when "
+                                             "jumping to mark"));
     cd->mark_autoplay = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->mark_autoplay,autoplay_mark_flag);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child),
-				_("Enable _variable speed playback"));
-    gtk_widget_add_accelerator (w,"clicked", ag, key, GDK_MOD1_MASK,
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("Enable _variable speed playback"));
     cd->varispeed_enable = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->varispeed_enable,
 				 inifile_get_gboolean("varispeed",TRUE));
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child),
-				_("Auto-_reset speed"));
-    gtk_widget_add_accelerator(w,"clicked",ag,key,GDK_MOD1_MASK,0);
+    w = gtk_check_button_new_with_mnemonic(_("Auto-_reset speed"));
     cd->varispeed_autoreset = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->varispeed_autoreset,varispeed_reset_flag);
     
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child),
-				_("Use fast and noisy method"));
-    gtk_widget_add_accelerator(w,"clicked",ag,key,GDK_MOD1_MASK,0);
+    w = gtk_check_button_new_with_mnemonic(_("Use fast and noisy method"));
     cd->varispeed_fast = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->varispeed_fast,!varispeed_smooth_flag);
     
@@ -684,21 +619,14 @@ static void config_dialog_init(ConfigDialog *cd)
 
     g_list_free(l);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("_Remember window sizes/positions"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("_Remember window "
+                                             "sizes/positions"));
     cd->remember_geometry = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->remember_geometry,
 				 inifile_get_gboolean("useGeometry",FALSE));
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("_Draw waveform a second time with improved "
-				"quality"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("_Draw waveform a second time "
+                                             "with improved quality"));
     cd->improve = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->improve,
 				 inifile_get_gboolean("drawImprove",TRUE));
@@ -726,40 +654,25 @@ static void config_dialog_init(ConfigDialog *cd)
     cd->tempdir_add_entry = GTK_ENTRY(w);
 
 
-    w = gtk_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Remove"));
-    gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
+    w = gtk_button_new_with_mnemonic(_("_Remove"));
     g_signal_connect(G_OBJECT(w),"clicked",
 		       G_CALLBACK(tempdir_remove_click),cd);
     gtk_widget_set_sensitive(w,FALSE);
     cd->tempdir_remove = GTK_BUTTON(w);
-    w = gtk_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Add"));
-    gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
+    w = gtk_button_new_with_mnemonic(_("_Add"));
     g_signal_connect(G_OBJECT(w),"clicked",
 		       G_CALLBACK(tempdir_add_click),cd);
     cd->tempdir_add = GTK_BUTTON(w);
-    w = gtk_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Browse..."));
-    gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
+    w = gtk_button_new_with_mnemonic(_("_Browse..."));
     g_signal_connect(G_OBJECT(w),"clicked",
 		       G_CALLBACK(tempdir_browse_click),cd);
     cd->tempdir_browse = GTK_BUTTON(w);
-    w = gtk_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Up"));
-    gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
+    w = gtk_button_new_with_mnemonic(_("_Up"));
     g_signal_connect(G_OBJECT(w),"clicked",
 		       G_CALLBACK(tempdir_up_down_click),cd);
     gtk_widget_set_sensitive(w,FALSE);
     cd->tempdir_up = GTK_BUTTON(w);
-    w = gtk_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child), _("_Down"));
-    gtk_widget_add_accelerator(w, "clicked", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
+    w = gtk_button_new_with_mnemonic(_("_Down"));
     g_signal_connect(G_OBJECT(w),"clicked",
 		       G_CALLBACK(tempdir_up_down_click),cd);
     gtk_widget_set_sensitive(w,FALSE);
@@ -771,12 +684,8 @@ static void config_dialog_init(ConfigDialog *cd)
     w = intbox_new(inifile_get_guint32("vzoomMax",100));
     cd->vzoom_max = INTBOX(w);
     
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("Keep main _window in front after "
-				"applying effect"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("Keep main _window in front after "
+				             "applying effect"));
     cd->mainwin_front = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->mainwin_front,
 				 inifile_get_gboolean("mainwinFront",TRUE));
@@ -787,36 +696,22 @@ static void config_dialog_init(ConfigDialog *cd)
     cd->fallback_format = FORMAT_SELECTOR(w);
 
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (w)->child), 
-				_("_Use floating-point temporary files"));
-    gtk_widget_add_accelerator (w, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    w = gtk_check_button_new_with_mnemonic(_("_Use floating-point temporary "
+                                             "files"));
     cd->floating_tempfiles = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->floating_tempfiles,
 				 chunk_filter_use_floating_tempfiles);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child),
-				_("Enable _dithering for editing"));
-    gtk_widget_add_accelerator(w,"clicked",ag,key,GDK_MOD1_MASK,
-			       (GtkAccelFlags)0);
+    w = gtk_check_button_new_with_mnemonic(_("Enable _dithering for editing"));
     cd->dither_editing = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->dither_editing,dither_editing);
     
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child),
-				_("Enable dithering for _playback"));
-    gtk_widget_add_accelerator(w,"clicked",ag,key,GDK_MOD1_MASK,
-			       (GtkAccelFlags)0);
+    w = gtk_check_button_new_with_mnemonic(_("Enable dithering for _playback"));
     cd->dither_playback = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->dither_playback,dither_playback);
 
-    w = gtk_check_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(w)->child),
-				_("Auto dete_ct driver on each start-up"));
-    gtk_widget_add_accelerator(w,"clicked",ag,key,GDK_MOD1_MASK,
-			       (GtkAccelFlags)0);
+    w = gtk_check_button_new_with_mnemonic(_("Auto dete_ct driver on each "
+                                             "start-up"));
     cd->driver_autodetect = GTK_TOGGLE_BUTTON(w);
     if (!strcmp(inifile_get(INI_SETTING_SOUNDDRIVER,DEFAULT_DRIVER),"auto")) {
 	 gtk_widget_set_sensitive(GTK_WIDGET(cd->sound_driver),FALSE);
@@ -884,11 +779,7 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_box_pack_start(GTK_BOX(e),f,FALSE,FALSE,0);
     f = gtk_hbox_new(FALSE,3);
     gtk_box_pack_start(GTK_BOX(e),f,FALSE,FALSE,0);
-    g = gtk_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (g)->child), 
-				_("Customize co_lors..."));
-    gtk_widget_add_accelerator (g,"clicked",ag,key,GDK_MOD1_MASK,
-				(GtkAccelFlags) 0);
+    g = gtk_button_new_with_mnemonic(_("Customize co_lors..."));
     g_signal_connect(G_OBJECT(g),"clicked",G_CALLBACK(colors_click),
 		       cd);
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
@@ -928,12 +819,10 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_container_add(GTK_CONTAINER(d),e);
     f = gtk_hbox_new(FALSE,3);
     gtk_box_pack_start(GTK_BOX(e),f,FALSE,FALSE,0);
-    g = gtk_label_new("");
-    key = gtk_label_parse_uline(GTK_LABEL (g), _("_Driver:"));
+    g = gtk_label_new_with_mnemonic(_("_Driver:"));
+    gtk_label_set_mnemonic_widget (GTK_LABEL(g), GTK_WIDGET(cd->sound_driver));
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
     g = GTK_WIDGET(cd->sound_driver);
-    gtk_widget_add_accelerator(g, "grab_focus", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,8);
     g = GTK_WIDGET(cd->sound_driver_prefs);
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,3);
@@ -951,8 +840,8 @@ static void config_dialog_init(ConfigDialog *cd)
     e = gtk_vbox_new(FALSE,3);
     gtk_container_set_border_width(GTK_CONTAINER(e),5);
     gtk_container_add(GTK_CONTAINER(d),e);
-    f = gtk_label_new(_("Sample format to try when the sound file's format isn't"
-		      " supported."));
+    f = gtk_label_new(_("Sample format to try when the sound file's format"
+		        " isn't supported."));
     gtk_label_set_line_wrap(GTK_LABEL(f),TRUE);
     gtk_box_pack_start(GTK_BOX(e),f,FALSE,FALSE,0);
     f = GTK_WIDGET(cd->fallback_format);
@@ -1098,25 +987,21 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_container_add(GTK_CONTAINER(d),e);
     gtk_table_set_row_spacings(GTK_TABLE(e),4);
 
-    g = gtk_label_new("");
-    key = gtk_label_parse_uline(GTK_LABEL(g), _("Display t_imes as: "));
+    g = gtk_label_new_with_mnemonic(_("Display t_imes as: "));
+    gtk_label_set_mnemonic_widget (GTK_LABEL(g), GTK_WIDGET(cd->time_display));
     gtk_misc_set_alignment(GTK_MISC(g),0.0,0.5);
     gtk_table_attach(GTK_TABLE(e),g,0,1,0,1,GTK_FILL,0,0,0);
 
     g = GTK_WIDGET(cd->time_display);
-    gtk_widget_add_accelerator(g, "grab_focus", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
     gtk_table_attach(GTK_TABLE(e),g,1,2,0,1,GTK_FILL|GTK_EXPAND,0,0,0);
 
-
-    g = gtk_label_new("");
-    key = gtk_label_parse_uline(GTK_LABEL(g), _("Times_cale format: "));
+    g = gtk_label_new_with_mnemonic(_("Times_cale format: "));
+    gtk_label_set_mnemonic_widget (GTK_LABEL(g),
+                                   GTK_WIDGET(cd->time_display_timescale));
     gtk_misc_set_alignment(GTK_MISC(g),0.0,0.5);
     gtk_table_attach(GTK_TABLE(e),g,0,1,1,2,GTK_FILL,0,0,0);
 
     g = GTK_WIDGET(cd->time_display_timescale);
-    gtk_widget_add_accelerator(g, "grab_focus", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
     gtk_table_attach(GTK_TABLE(e),g,1,2,1,2,GTK_FILL|GTK_EXPAND,0,0,0);
 
 
@@ -1128,12 +1013,10 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_container_add(GTK_CONTAINER(d),e);
     f = gtk_hbox_new(FALSE,3);
     gtk_box_pack_start(GTK_BOX(e),f,FALSE,FALSE,3);
-    g = gtk_label_new("");
-    key = gtk_label_parse_uline(GTK_LABEL (g), _("Mi_xer utility: "));
+    g = gtk_label_new_with_mnemonic(_("Mi_xer utility: "));
+    gtk_label_set_mnemonic_widget (GTK_LABEL(g), GTK_WIDGET(cd->mixer_utility));
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
     g = GTK_WIDGET(cd->mixer_utility);
-    gtk_widget_add_accelerator(g, "grab_focus", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,8);
 
     
@@ -1147,35 +1030,32 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_container_add(GTK_CONTAINER(d),e);
     f = gtk_hbox_new(FALSE,3);
     gtk_box_pack_start(GTK_BOX(e),f,FALSE,FALSE,0);
-    g = gtk_label_new("");
-    key = gtk_label_parse_uline(GTK_LABEL (g), _("Disk editing _threshold: "));
+    g = gtk_label_new_with_mnemonic(_("Disk editing _threshold: "));
+    gtk_label_set_mnemonic_widget (GTK_LABEL(g),
+                                   GTK_WIDGET(cd->disk_threshold));
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);    
     g = GTK_WIDGET(cd->disk_threshold);
-    gtk_widget_add_accelerator(g, "grab_focus", ag, key, GDK_MOD1_MASK, (GtkAccelFlags) 0);
     gtk_box_pack_start(GTK_BOX(f),g,TRUE,TRUE,8);
     g = gtk_label_new("K ");
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
     
     f = gtk_hbox_new(FALSE,3);
     gtk_box_pack_start(GTK_BOX(e),f,FALSE,FALSE,0);
-    g = gtk_label_new("");
-    key = gtk_label_parse_uline(GTK_LABEL (g), _("View _quality:"));
+    g = gtk_label_new_with_mnemonic(_("View _quality:"));
+    gtk_label_set_mnemonic_widget (GTK_LABEL(g), GTK_WIDGET(cd->view_quality));
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
     g = GTK_WIDGET(cd->view_quality);
-    gtk_widget_add_accelerator(g, "grab_focus", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
     gtk_box_pack_start(GTK_BOX(f),g,TRUE,TRUE,8);
     g = gtk_label_new(_("samples/pixel"));
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);    
 
     f = gtk_hbox_new(FALSE,3);
     gtk_box_pack_start(GTK_BOX(e),f,FALSE,FALSE,0);    
-    g = gtk_label_new("");
-    key = gtk_label_parse_uline(GTK_LABEL (g), _("Output _buffer size:"));
+    g = gtk_label_new_with_mnemonic(_("Output _buffer size:"));
+    gtk_label_set_mnemonic_widget (GTK_LABEL(g),
+                                   GTK_WIDGET(cd->sound_buffer_size));
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
     g = GTK_WIDGET(cd->sound_buffer_size);
-    gtk_widget_add_accelerator(g, "grab_focus", ag, key, GDK_MOD1_MASK, 
-			       (GtkAccelFlags) 0);
     gtk_box_pack_start(GTK_BOX(f),g,TRUE,TRUE,8);
     g = gtk_label_new(_("bytes"));
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
@@ -1187,10 +1067,7 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_box_pack_start(GTK_BOX(a),b,FALSE,TRUE,0);
 
 
-    c = gtk_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (c)->child), _("_OK"));
-    gtk_widget_add_accelerator (c, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    c = gtk_button_new_with_mnemonic(_("_OK"));
     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KP_Enter, 0, 
 				(GtkAccelFlags) 0);
     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, 
@@ -1201,10 +1078,7 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_container_add (GTK_CONTAINER (b), c);
     gtk_widget_set_can_default (c, TRUE);
 
-    c = gtk_button_new_with_label("");
-    key = gtk_label_parse_uline(GTK_LABEL (GTK_BIN (c)->child), _("_Close"));
-    gtk_widget_add_accelerator (c, "clicked", ag, key, GDK_MOD1_MASK, 
-				(GtkAccelFlags) 0);
+    c = gtk_button_new_with_mnemonic(_("_Close"));
     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 
 				(GtkAccelFlags) 0);
     g_signal_connect_swapped(G_OBJECT(c),"clicked",
