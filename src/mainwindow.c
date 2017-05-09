@@ -1887,274 +1887,457 @@ static void file_recent(GtkMenuItem *menuitem, gpointer user_data)
      g_free(fn);
 }
 
-static gchar *translate_menu_path(const gchar *path, gpointer func_data)
-{
-    return _(path);
-}
-
-static GtkWidget *xgtk_item_factory_get_item(GtkItemFactory *itemf, 
-					     gchar *caption)
-{
-     GtkWidget *w;
-     w = gtk_item_factory_get_item(itemf,caption);
-     g_assert(w != NULL);
-     return w;
-}
-
 static GtkWidget *create_menu(Mainwindow *w)
 {
      guint i,j;
-     GtkWidget *item;
-     GtkItemFactoryEntry entry = {};
+     GtkWidget *item, *subitem;
+     GtkWidget *file_menu, *edit_menu, *view_menu, *cursor_menu, *play_menu,
+               *effects_menu, *help_menu;
+     GtkWidget *file_item, *edit_item, *view_item, *cursor_item, *play_item,
+               *effects_item, *help_item;
+     GtkAccelGroup *accel_group = NULL;
+     GtkWidget *menubar, *submenu;
+     gchar *desc;
 
-     GtkItemFactoryEntry menu_items1[] = {
-	  { N_("/_File"),         NULL,         NULL,           0, "<Branch>"    },
-	  { N_("/File/_Open..."), "<control>O", file_open,      0, NULL          },
-	  { N_("/File/_Save"),    "<control>S", file_save,      0, NULL          },
-	  { N_("/File/Save _as..."),NULL,       file_saveas,    0, NULL          },
-	  {N_("/File/Save selection as..."),"<control>U",file_saveselection,0,NULL},
-	  { N_("/_Edit"),         NULL,         NULL,           0, "<Branch>"    },
-	  { N_("/Edit/_Undo"),    "<control>Z", edit_undo,      0, NULL          },
-	  { N_("/Edit/_Redo"), "<shift><control>Z", edit_redo,  0, NULL },
-	  { N_("/Edit/sep1"),     NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Edit/Cu_t"),     "<control>X", edit_cut,       0, NULL          },
-	  { N_("/Edit/_Copy"),    "<control>C", edit_copy,      0, NULL          },
-	  { N_("/Edit/_Paste"),   "<control>V", edit_paste,     0, NULL          },
-	  { N_("/Edit/Paste _over"),NULL,       edit_pasteover, 0, NULL          },
-	  { N_("/Edit/_Mix paste"),NULL,        edit_mixpaste,  0, NULL          },
-	  { N_("/Edit/Insert _silence"),NULL,   edit_insertsilence,0,NULL        },
-	  { N_("/Edit/Paste to _new"),NULL,     edit_pastetonew,0, NULL          },
-	  { N_("/Edit/Cr_op"),    NULL,         edit_crop,      0, NULL          },
-	  { N_("/Edit/_Delete"),  "<control>D", edit_delete,    0, NULL          },
-	  { N_("/Edit/Silence selection"),NULL,edit_silence,   0, NULL           },
-	  { N_("/Edit/sep2"),     NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Edit/Select _all"),"<control>A",edit_selectall,0, NULL          },
-	  { N_("/Edit/Select none"),NULL,edit_selectnone,0, NULL                 },
-	  { N_("/Edit/sep3"),     NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Edit/Clear clipboard"),NULL,   edit_clearclipboard,0,NULL       },
-	  { N_("/Edit/sep4"),     NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Edit/Preferences"),"<control>P",      edit_preferences,0,NULL          },
-	  { N_("/_View"),         NULL,         NULL,           0, "<Branch>"    },
-	  { N_("/View/Zoom _in"), NULL,         view_zoomin,    0, NULL          },
-	  { N_("/View/Zoom _out"),NULL,         view_zoomout,   0, NULL          },
-	  { N_("/View/Zoom to _selection"),NULL,view_zoomtoselection,0,NULL      },
-	  { N_("/View/sep1"),     NULL,         NULL,           0, "<Separator>" },
-	  { N_("/View/Zoom _all"),NULL,         view_zoomall,   0, NULL          },
-	  { N_("/View/sep2"),     NULL,         NULL,           0, "<Separator>" },
-	  { N_("/View/_Time scale"),NULL,       view_timescale, 0, "<CheckItem>" },
-	  { N_("/View/_Horizontal zoom"),NULL,  view_horizoom,  0, "<CheckItem>" },
-	  { N_("/View/_Vertical zoom"),NULL,    view_vertzoom,  0, "<CheckItem>" },
-	  { N_("/View/Sp_eed slider"),NULL,     view_speed,     0, "<CheckItem>" },
-	  { N_("/View/Slider labels"),NULL,     view_sliderlabels,0,"<CheckItem>"},
-	  { N_("/View/Buffer position"),NULL,   view_bufpos,    0, "<CheckItem>" },
-	  { N_("/_Cursor"),       NULL,         NULL,           0, "<Branch>"    },
-	  {N_("/Cursor/Set selection start"),"<control>Q",edit_selstartcursor,0,
-	   NULL},
-	  { N_("/Cursor/Set selection end"),"<control>W",edit_selendcursor,0,NULL},
-	  { N_("/Cursor/sep1"),   NULL,         NULL,           0, "<Separator>" },
-      { N_("/Cursor/Move to"),   NULL,         NULL,           0, "<Branch>" },
-	  { N_("/Cursor/Move to/Beginning"),"<control>H",cursor_moveto_beginning,0,
-	   NULL},
-	  { N_("/Cursor/Move to/End"),"<control>J",cursor_moveto_end, 0, NULL   },
-	  { N_("/Cursor/Move to/Selection start"),"<control>K",
-       cursor_moveto_selstart,0,NULL},
-	  { N_("/Cursor/Move to/Selection end"),"<control>L",
-       cursor_moveto_selend,0,NULL},
-      { N_("/Cursor/Move"),   NULL,         NULL,           0, "<Branch>" },
-	  { N_("/Cursor/Move/Left"),"H",cursor_move_left,0,NULL},
-	  { N_("/Cursor/Move/Right"),"J",cursor_move_right,0,NULL},
-	  { N_("/Cursor/Move/Left sample"),"K",cursor_move_leftsample,0,NULL},
-	  { N_("/Cursor/Move/Right sample"),"L",cursor_move_rightsample,0,NULL},
-      { N_("/Cursor/Find zero-crossing"),NULL,NULL,0,"<Branch>"},
-	  { N_("/Cursor/Find zero-crossing/Left (all channels)"),"Y",
-       cursor_findzerocrossing_leftall,0,NULL},
-	  { N_("/Cursor/Find zero-crossing/Right (all channels)"),"U",
-       cursor_findzerocrossing_rightall,0,NULL},
-	  { N_("/Cursor/Find zero-crossing/Left (any channel)"),"I",
-       cursor_findzerocrossing_leftany,0,NULL},
-	  { N_("/Cursor/Find zero-crossing/Right (any channel)"),"O",
-       cursor_findzerocrossing_rightany,0,NULL},
-	  { N_("/Cursor/sep2"),   NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Cursor/Position cursor..."),"<control>G",edit_positioncursor,0,
-	   NULL},
-	  { N_("/_Play"),         NULL,         NULL,           0, "<Branch>"    },
-	  { N_("/Play/_Play from cursor"),NULL, edit_play,      0, NULL          },
-	  { N_("/Play/Play _all"),NULL,         edit_playall,   0, NULL          },
-	  { N_("/Play/Play se_lection"),NULL,   edit_playselection,0,NULL        },
-	  { N_("/Play/_Stop"),    NULL,         edit_stop,      0, NULL          },
-	  { N_("/Play/sep1"),     NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Play/_Record..."),  "F12",        edit_record,    0, NULL       },
-	  { N_("/Effec_ts"),      NULL,         NULL,           0, "<Branch>"    },
-	  { N_("/Effects/Fade _in"),NULL,       effects_fadein, 0, NULL          },
-	  { N_("/Effects/Fade o_ut"),NULL,      effects_fadeout,0, NULL          },
-	  { N_("/Effects/_Normalize"),"<control>N",effects_normalize,0, NULL     },
-	  { N_("/Effects/Normali_ze to..."),NULL,effects_normalizeto,0,NULL },
-	  { N_("/Effects/_Volume adjust (fade)..."),NULL,effects_volume,0,NULL   },
-	  { N_("/Effects/sep1"),  NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Effects/Convert sample_rate..."),NULL,effects_samplerate,0,NULL },
-	  { N_("/Effects/Convert sample _format..."),NULL,effects_samplesize,0,
-	    NULL},
-	  { N_("/Effects/B_yte swap"),NULL,      effects_byteswap,0,NULL         },
-	  { N_("/Effects/sep2"),  NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Effects/_Mix to mono"),NULL,effects_mixchannels,0,NULL      },
-	  { N_("/Effects/Add channe_l"),NULL,effects_splitchannel,0,NULL    },
-	  { N_("/Effects/Ma_p channels..."),NULL,effects_mapchannels,0,NULL },
-	  {N_("/Effects/_Combine channels..."),NULL,effects_combinechannels,0,NULL},
-	  { N_("/Effects/Add channels from other file..."),NULL,effects_sandwich,0,NULL},
-	  { N_("/Effects/sep3"),  NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Effects/_Speed adjustment..."),NULL,effects_speed, 0, NULL      },
-	  { N_("/Effects/Pipe through program..."),NULL,effects_pipe,0,NULL      },
-	  { N_("/Effects/sep4"),  NULL,         NULL,           0, "<Separator>" },
-	  { N_("/Effects/Effects dialog..."),"<control>E",effects_dialog,0,NULL  },
-#ifdef SHOW_DEBUG_MENU
-	  { N_("/Debug"),         NULL,         NULL,           0, "<Branch>"    },
-	  /*	  { N_("/Debug/Mark as modified"),NULL, debug_mark,     0, NULL          }, */
-	  { N_("/Debug/Dummy effect"),NULL,     debug_dummy,    0, NULL          },
-	  { N_("/Debug/Dummy effect FP"),NULL,  debug_dummy2,   0, NULL          },
-	  { N_("/Debug/Check opencount"),NULL,  debug_checkoc,  0, NULL          },
-	  { N_("/Debug/Dump chunk info"),NULL,  debug_chunkinfo,0, NULL          },
-#endif
-	  { N_("/_Help"),         NULL,         NULL,           0, "<LastBranch>"},
-	  { N_("/Help/_Documentation"),"F1",    help_readme,    0, NULL          },
-	  { N_("/Help/_About"),   NULL,         help_about,     0, NULL          }
-     };
-
-     GtkItemFactoryEntry menu_items2[] = {
-	  { N_("/File/sep1"),     NULL,         NULL,           0, "<Separator>" },
-	  { N_("/File/_Close"),   NULL,         file_close,     0, NULL          },
-	  { N_("/File/sep2"),     NULL,         NULL,           0, "<Separator>" },
-	  { N_("/File/_Exit"),    NULL,         file_exit,      0, NULL          }
-     };
-
-     gchar *need_chunk_names[] = {
-	  "/File/Save", "/File/Save as...", 
-	  "/Edit/Insert silence", 
-	  "/Edit/Select all", "/Cursor", "/View", "/Play/Play from cursor",
-	  "/Play/Play all", "/Play/Stop", "/Effects", 
-	  "/Effects/Normalize",
-	  "/Effects/Effects dialog...",
-	  "/Edit/Select none"
-     };
-
-     gchar *need_selection_names[] = {
-	  "/Edit/Cut", "/Edit/Copy", "/Edit/Delete", "/Edit/Crop", 
-	  "/Edit/Silence selection",
-	  "/View/Zoom to selection", "/File/Save selection as...",
-	  "/Play/Play selection" 
-     };
-
-     gchar *need_clipboard_names[] = {
-	  "/Edit/Paste", "/Edit/Paste over", "/Edit/Mix paste", 
-	  "/Edit/Paste to new", "/Edit/Clear clipboard"
-     };
-
-     GtkAccelGroup *accel_group;
-     GtkItemFactory *item_factory;
-     
      accel_group = gtk_accel_group_new();
-     item_factory = gtk_item_factory_new(GTK_TYPE_MENU_BAR,"<main>",
-					 accel_group);
+     gtk_window_add_accel_group(GTK_WINDOW(w), accel_group);
+     menubar = gtk_menu_bar_new();
 
-#ifdef ENABLE_NLS
-     gtk_item_factory_set_translate_func(item_factory,
-	     translate_menu_path, NULL, NULL);
-#endif
-
-     gtk_item_factory_create_items_ac(item_factory,ARRAY_LENGTH(menu_items1),
-				      menu_items1,w,2);
+     file_menu = gtk_menu_new();
+     item = gtk_menu_item_new_with_mnemonic(_("_Open..."));
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_o,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(file_open),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Save"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, item);
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_s,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(file_save),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Save _as..."));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(file_saveas),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
+     item = gtk_menu_item_new_with_label(_("Save selection as..."));
+     w->need_selection_items = g_list_append(w->need_selection_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(file_saveselection),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
      w->recent = NULL;
      j = inifile_get_guint32("recentFiles",4);
      if (j > MAINWINDOW_RECENT_MAX) j=4;
      if (j > 0) {
-	  entry.path = "/File/sep3";
-	  entry.item_type = "<Separator>";
-	  entry.callback = NULL;
-	  gtk_item_factory_create_item(item_factory,&entry,w,2);
-	  item = gtk_item_factory_get_item(item_factory,entry.path);
+	  item = gtk_separator_menu_item_new ();
+          gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
      }
      for (i=1; i<=j; i++) {
-	  entry.item_type = NULL;	  
-	  entry.path = g_strdup_printf("/File/Last%d",i);
-	  entry.callback = (GtkItemFactoryCallback)file_recent;
-	  gtk_item_factory_create_item(item_factory,&entry,w,2);
-	  item = gtk_item_factory_get_item(item_factory,entry.path);
+          desc = g_strdup_printf("Last%d", i);
+          item = gtk_menu_item_new_with_label(desc);
+          g_signal_connect(item, "activate",G_CALLBACK(file_recent),w);
+          gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
 	  w->recent = g_list_append(w->recent, item);
 	  gtk_widget_set_sensitive(item,FALSE);
-	  g_free(entry.path);
+	  g_free(desc);
      }
-     gtk_item_factory_create_items_ac(item_factory,ARRAY_LENGTH(menu_items2),
-				      menu_items2,w,2);
-     gtk_window_add_accel_group(GTK_WINDOW(w),accel_group);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Close"));
+     g_signal_connect(item, "activate",G_CALLBACK(file_close),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Exit"));
+     g_signal_connect(item, "activate",G_CALLBACK(file_exit),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(file_menu), item);
 
-     for (i=0; i<ARRAY_LENGTH(need_chunk_names); i++)
-	  w->need_chunk_items = 
-	       g_list_append(w->need_chunk_items,xgtk_item_factory_get_item(
-				  item_factory,need_chunk_names[i]));
+     edit_menu = gtk_menu_new();
+     item = gtk_menu_item_new_with_mnemonic(_("_Undo"));
+     w->need_undo_items = g_list_append(w->need_undo_items, item);
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_z,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_undo),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Redo"));
+     w->need_redo_items = g_list_append(w->need_redo_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_redo),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Cu_t"));
+     w->need_selection_items = g_list_append(w->need_selection_items, item);
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_x,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_cut),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Copy"));
+     w->need_selection_items = g_list_append(w->need_selection_items, item);
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_c,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_copy),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Paste"));
+     w->need_clipboard_items = g_list_append(w->need_clipboard_items, item);
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_v,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_paste),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Paste _over"));
+     w->need_clipboard_items = g_list_append(w->need_clipboard_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_pasteover),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Mix paste"));
+     w->need_clipboard_items = g_list_append(w->need_clipboard_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_mixpaste),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Insert _silence"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_insertsilence),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Paste to _new"));
+     w->need_clipboard_items = g_list_append(w->need_clipboard_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_pastetonew),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Cr_op"));
+     w->need_selection_items = g_list_append(w->need_selection_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_crop),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Delete"));
+     w->need_selection_items = g_list_append(w->need_selection_items, item);
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_Delete,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_delete),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_label(_("Silence selection"));
+     w->need_selection_items = g_list_append(w->need_selection_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_silence),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Select _all"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, item);
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_a,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_selectall),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_label(_("Select none"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_selectnone),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_label(_("Clear clipboard"));
+     w->need_clipboard_items = g_list_append(w->need_clipboard_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_clearclipboard),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
+     item = gtk_menu_item_new_with_label(_("Preferences"));
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_p,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_preferences),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), item);
 
-     for (i=0; i<ARRAY_LENGTH(need_selection_names); i++)
-	  w->need_selection_items = 
-	       g_list_append(w->need_selection_items,
-			     xgtk_item_factory_get_item(
-				 item_factory,need_selection_names[i]));
-
-     for (i=0; i<ARRAY_LENGTH(need_clipboard_names); i++)
-	  w->need_clipboard_items = 
-	       g_list_append(w->need_clipboard_items,
-			     xgtk_item_factory_get_item(
-				  item_factory,need_clipboard_names[i]));
-     
-     w->need_undo_items = 
-	  g_list_append(w->need_undo_items,gtk_item_factory_get_item
-			(item_factory,"/Edit/Undo") );
-     w->need_redo_items = 
-	  g_list_append(w->need_redo_items,
-			xgtk_item_factory_get_item(item_factory,"/Edit/Redo"));
-
-     update_file_recent(w);
-
-     item = gtk_item_factory_get_item(item_factory,"/View/Zoom in");
+     view_menu = gtk_menu_new();
+     item = gtk_menu_item_new_with_mnemonic(_("Zoom _in"));
      w->zoom_items = g_list_append(w->zoom_items,item);
-     item = gtk_item_factory_get_item(item_factory,"/View/Zoom out");
-     w->zoom_items = g_list_append(w->zoom_items,item);     
-
-     item = gtk_item_factory_get_item(item_factory,"/View/Time scale");
+     g_signal_connect(item, "activate",G_CALLBACK(view_zoomin),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Zoom _out"));
+     w->zoom_items = g_list_append(w->zoom_items,item);
+     g_signal_connect(item, "activate",G_CALLBACK(view_zoomout),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Zoom to _selection"));
+     w->need_selection_items = g_list_append(w->need_selection_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(view_zoomtoselection),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Zoom _all"));
+     g_signal_connect(item, "activate",G_CALLBACK(view_zoomall),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_check_menu_item_new_with_mnemonic(_("_Time scale"));
      gtk_check_menu_item_set_active(
 	  GTK_CHECK_MENU_ITEM(item),
 	  inifile_get_gboolean(INI_SETTING_TIMESCALE,
 			       INI_SETTING_TIMESCALE_DEFAULT));
-
-     item = gtk_item_factory_get_item(item_factory,"/View/Horizontal zoom");
+     g_signal_connect(item, "activate",G_CALLBACK(view_timescale),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_check_menu_item_new_with_mnemonic(_("_Horizontal zoom"));
      gtk_check_menu_item_set_active
 	  (GTK_CHECK_MENU_ITEM(item),
 	   inifile_get_gboolean(INI_SETTING_HZOOM,INI_SETTING_HZOOM_DEFAULT));
-
-     item = gtk_item_factory_get_item(item_factory,"/View/Vertical zoom");
+     g_signal_connect(item, "activate",G_CALLBACK(view_horizoom),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_check_menu_item_new_with_mnemonic(_("_Vertical zoom"));
      gtk_check_menu_item_set_active
 	  (GTK_CHECK_MENU_ITEM(item),
 	   inifile_get_gboolean(INI_SETTING_VZOOM,INI_SETTING_VZOOM_DEFAULT));
-
-     item = gtk_item_factory_get_item(item_factory,"/View/Speed slider");
+     g_signal_connect(item, "activate",G_CALLBACK(view_vertzoom),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_check_menu_item_new_with_mnemonic(_("Sp_eed slider"));
      gtk_check_menu_item_set_active
 	  (GTK_CHECK_MENU_ITEM(item),
 	   inifile_get_gboolean(INI_SETTING_SPEED,INI_SETTING_SPEED_DEFAULT));
-							  
-     item = gtk_item_factory_get_item(item_factory,"/View/Slider labels");
+     g_signal_connect(item, "activate",G_CALLBACK(view_speed),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_check_menu_item_new_with_label(_("Slider labels"));
      gtk_check_menu_item_set_active
 	  (GTK_CHECK_MENU_ITEM(item),
 	   inifile_get_gboolean(INI_SETTING_SLABELS,INI_SETTING_SLABELS_DEFAULT));
-
-     item = gtk_item_factory_get_item(item_factory,"/View/Buffer position");
+     g_signal_connect(item, "activate",G_CALLBACK(view_sliderlabels),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
+     item = gtk_check_menu_item_new_with_label(_("Buffer position"));
      gtk_check_menu_item_set_active
 	  (GTK_CHECK_MENU_ITEM(item),
 	   inifile_get_gboolean(INI_SETTING_BUFPOS,INI_SETTING_BUFPOS_DEFAULT));
+     g_signal_connect(item, "activate",G_CALLBACK(view_bufpos),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(view_menu), item);
 
-     item = gtk_item_factory_get_item(item_factory,"/Play/Record...");
+     cursor_menu = gtk_menu_new();
+     item = gtk_menu_item_new_with_label(_("Set selection start"));
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_q,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_selstartcursor),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(cursor_menu), item);
+     item = gtk_menu_item_new_with_label(_("Set selection end"));
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_w,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_selendcursor),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(cursor_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(cursor_menu), item);
+     submenu = gtk_menu_new();
+     item = gtk_menu_item_new_with_label(_("Move to"));
+     gtk_menu_shell_append(GTK_MENU_SHELL(cursor_menu), item);
+     subitem = gtk_menu_item_new_with_label(_("Beginning"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_h,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_moveto_beginning),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     subitem = gtk_menu_item_new_with_label(_("End"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_j,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_moveto_end),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     subitem = gtk_menu_item_new_with_label(_("Selection start"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_k,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_moveto_selstart),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     subitem = gtk_menu_item_new_with_label(_("Selection end"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_l,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_moveto_selend),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), submenu);
+     submenu = gtk_menu_new();
+     item = gtk_menu_item_new_with_label(_("Move"));
+     gtk_menu_shell_append(GTK_MENU_SHELL(cursor_menu), item);
+     subitem = gtk_menu_item_new_with_label(_("Left"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_h,
+                                0, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_move_left),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     subitem = gtk_menu_item_new_with_label(_("Right"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_j,
+                                0, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_move_right),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     subitem = gtk_menu_item_new_with_label(_("Left sample"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_k,
+                                0, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_move_leftsample),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     subitem = gtk_menu_item_new_with_label(_("Right sample"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_l,
+                                0, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_move_rightsample),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), submenu);
+     submenu = gtk_menu_new();
+     item = gtk_menu_item_new_with_label(_("Find zero-crossing"));
+     gtk_menu_shell_append(GTK_MENU_SHELL(cursor_menu), item);
+     subitem = gtk_menu_item_new_with_label(_("Left (all channels)"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_y,
+                                0, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_findzerocrossing_leftall),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     subitem = gtk_menu_item_new_with_label(_("Right (all channels)"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_u,
+                                0, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_findzerocrossing_rightall),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     subitem = gtk_menu_item_new_with_label(_("Left (any channel)"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_i,
+                                0, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_findzerocrossing_leftany),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     subitem = gtk_menu_item_new_with_label(_("Right (any channel)"));
+     gtk_widget_add_accelerator(subitem, "activate", accel_group, GDK_o,
+                                0, GTK_ACCEL_VISIBLE);
+     g_signal_connect(subitem, "activate",G_CALLBACK(cursor_findzerocrossing_rightany),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), subitem);
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), submenu);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(cursor_menu), item);
+     item = gtk_menu_item_new_with_label(_("Position cursor..."));
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_g,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_positioncursor),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(cursor_menu), item);
+
+     play_menu = gtk_menu_new();
+     item = gtk_menu_item_new_with_mnemonic(_("_Play from cursor"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_play),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(play_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Play _all"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_playall),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(play_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Play se_lection"));
+     w->need_selection_items = g_list_append(w->need_selection_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_playselection),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(play_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Stop"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, item);
+     g_signal_connect(item, "activate",G_CALLBACK(edit_stop),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(play_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(play_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Record..."));
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_F12,
+                                0, GTK_ACCEL_VISIBLE);
      gtk_widget_set_sensitive(item,input_supported());
+     g_signal_connect(item, "activate",G_CALLBACK(edit_record),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(play_menu), item);
 
-     item = gtk_item_factory_get_item(item_factory,"/Edit/Delete");
-     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_Delete, 0, 0);
+     effects_menu = gtk_menu_new();
+     item = gtk_menu_item_new_with_mnemonic(_("Fade _in"));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_fadein),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Fade o_ut"));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_fadeout),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Normalize"));
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_n,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(effects_normalize),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Normali_ze to..."));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_normalizeto),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Volume adjust (fade)..."));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_volume),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Convert sample_rate..."));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_samplerate),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Convert sample _format..."));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_samplesize),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("B_yte swap"));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_byteswap),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Mix to mono"));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_mixchannels),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Add channe_l"));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_splitchannel),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Ma_p channels..."));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_mapchannels),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Combine channels..."));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_combinechannels),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Add channels from other file..."));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_sandwich),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_Speed adjustment..."));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_speed),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Pipe through program..."));
+     g_signal_connect(item, "activate",G_CALLBACK(effects_pipe),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_separator_menu_item_new ();
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("Effects dialog..."));
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_e,
+                                GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(effects_dialog),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(effects_menu), item);
 
-     return gtk_item_factory_get_widget(item_factory,"<main>");
+#ifdef SHOW_DEBUG_MENU
+     GtkWidget *debug_menu, *debug_item;
+     debug_menu = gtk_menu_new();
+     /*item = gtk_menu_item_new_with_label(_("Mark as modified"));
+     g_signal_connect(item, "activate",G_CALLBACK(debug_mark),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(debug_menu), item);*/
+     item = gtk_menu_item_new_with_label(_("Dummy effect"));
+     g_signal_connect(item, "activate",G_CALLBACK(debug_dummy),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(debug_menu), item);
+     item = gtk_menu_item_new_with_label(_("Dummy effect FP"));
+     g_signal_connect(item, "activate",G_CALLBACK(debug_dummy2),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(debug_menu), item);
+     item = gtk_menu_item_new_with_label(_("Check opencount"));
+     g_signal_connect(item, "activate",G_CALLBACK(debug_checkoc),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(debug_menu), item);
+     item = gtk_menu_item_new_with_label(_("Dump chunk info"));
+     g_signal_connect(item, "activate",G_CALLBACK(debug_chunkinfo),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(debug_menu), item);
+#endif
+
+     help_menu = gtk_menu_new();
+     item = gtk_menu_item_new_with_mnemonic(_("_Documentation"));
+     gtk_widget_add_accelerator(item, "activate", accel_group, GDK_F1,
+                                0, GTK_ACCEL_VISIBLE);
+     g_signal_connect(item, "activate",G_CALLBACK(help_readme),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(help_menu), item);
+     item = gtk_menu_item_new_with_mnemonic(_("_About"));
+     g_signal_connect(item, "activate",G_CALLBACK(help_about),w);
+     gtk_menu_shell_append(GTK_MENU_SHELL(help_menu), item);
+
+     file_item = gtk_menu_item_new_with_mnemonic(_("_File"));
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(file_item), file_menu);
+     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), file_item);
+     edit_item = gtk_menu_item_new_with_mnemonic(_("_Edit"));
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit_item), edit_menu);
+     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), edit_item);
+     view_item = gtk_menu_item_new_with_mnemonic(_("_View"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, view_item);
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_item), view_menu);
+     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), view_item);
+     cursor_item = gtk_menu_item_new_with_mnemonic(_("_Cursor"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, cursor_item);
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(cursor_item), cursor_menu);
+     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), cursor_item);
+     play_item = gtk_menu_item_new_with_mnemonic(_("_Play"));
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(play_item), play_menu);
+     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), play_item);
+     effects_item = gtk_menu_item_new_with_mnemonic(_("Effec_ts"));
+     w->need_chunk_items = g_list_append(w->need_chunk_items, effects_item);
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(effects_item), effects_menu);
+     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), effects_item);
+#ifdef SHOW_DEBUG_MENU
+     debug_item = gtk_menu_item_new_with_label(_("Debug"));
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(debug_item), debug_menu);
+     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), debug_item);
+#endif
+     help_item = gtk_menu_item_new_with_mnemonic(_("_Help"));
+     gtk_menu_item_set_submenu(GTK_MENU_ITEM(help_item), help_menu);
+     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), help_item);
+
+     update_file_recent(w);
+     return menubar;
 }
 
 static void loopmode_toggle(GtkToggleToolButton *button, gboolean *user_data)
