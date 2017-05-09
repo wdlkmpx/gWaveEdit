@@ -1626,9 +1626,9 @@ static void view_sliderlabels(GtkCheckMenuItem *checkmenuitem, gpointer user_dat
      w->show_labels = checkmenuitem->active;
      if (w->vzoom_slider == NULL) return;
      if (w->show_labels) {
-	  if (GTK_WIDGET_VISIBLE(w->vzoom_slider))
+	  if (gtk_widget_get_visible(w->vzoom_slider))
 	       gtk_widget_show(GTK_WIDGET(w->vzoom_label));
-	  if (GTK_WIDGET_VISIBLE(w->speed_slider))
+	  if (gtk_widget_get_visible(w->speed_slider))
 	       gtk_widget_show(GTK_WIDGET(w->speed_label));
      } else {
 	  gtk_widget_hide(GTK_WIDGET(w->vzoom_label));
