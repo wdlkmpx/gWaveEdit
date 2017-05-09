@@ -132,7 +132,8 @@ static void chunk_view_destroy (GtkObject *object)
 	  cv->image = NULL;
      }
      if (cv->doc != NULL) {
-	  gtk_signal_disconnect_by_data(GTK_OBJECT(cv->doc),cv);
+	  g_signal_handlers_disconnect_matched(cv->doc, G_SIGNAL_MATCH_DATA,
+	                                       0, 0, NULL, NULL, cv);
 	  gtk_object_unref(GTK_OBJECT(cv->doc));
      }
      cv->doc = NULL;
@@ -762,7 +763,8 @@ void chunk_view_set_document(ChunkView *cv, Document *doc)
 {
      if (cv->doc == doc) return;
      if (cv->doc != NULL) {
-	  gtk_signal_disconnect_by_data(GTK_OBJECT(cv->doc),cv);
+	  g_signal_handlers_disconnect_matched(cv->doc, G_SIGNAL_MATCH_DATA,
+	                                       0, 0, NULL, NULL, cv);
 	  gtk_object_unref(GTK_OBJECT(cv->doc));
      }
      cv->doc = doc;

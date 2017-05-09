@@ -410,7 +410,8 @@ static void mainwindow_destroy(GtkObject *obj)
      list_object_remove(mainwindow_objects, obj);
 
      if ( w->doc != NULL ) {
-	  gtk_signal_disconnect_by_data(GTK_OBJECT(w->doc),obj);
+	  g_signal_handlers_disconnect_matched(w->doc, G_SIGNAL_MATCH_DATA,
+	                                       0, 0, NULL, NULL, obj);
 	  gtk_object_unref(GTK_OBJECT(w->doc));
 	  w->doc = NULL;
      }
@@ -829,7 +830,8 @@ static void file_close(GtkMenuItem *menuitem, gpointer user_data)
      if (list_object_get_size(mainwindow_objects)==1 &&
 	 w->doc != NULL) {
 	  chunk_view_set_document(w->view, NULL);
-	  gtk_signal_disconnect_by_data(GTK_OBJECT(w->doc),w);
+	  g_signal_handlers_disconnect_matched(w->doc, G_SIGNAL_MATCH_DATA,
+	                                       0, 0, NULL, NULL, w);
 	  gtk_object_unref(GTK_OBJECT(w->doc));
 	  w->doc = NULL;
 	  fix_title(w);
