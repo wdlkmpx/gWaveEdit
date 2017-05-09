@@ -35,14 +35,6 @@ enum {
      LAST_SIGNAL
 };
 
-typedef void (*GtkSignal_NONE__LONG) (GtkObject *object, long int arg1, 
-				       gpointer user_data);
-
-
-#    include "int_box_marsh.c"
-#    define gtk_marshal_NONE__LONG gtk_marshal_VOID__LONG
-
-
 static guint intbox_signals[LAST_SIGNAL] = { 0 };
 
 static void intbox_update_text(Intbox *box)
@@ -91,7 +83,7 @@ static void intbox_class_init(IntboxClass *klass)
 		       G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(IntboxClass,numchange),
 		       NULL, NULL,
-		       gtk_marshal_NONE__LONG,G_TYPE_NONE,1,
+		       g_cclosure_marshal_VOID__LONG,G_TYPE_NONE,1,
 		       G_TYPE_LONG);
 
      gtk_object_class_add_signals(oc,intbox_signals,

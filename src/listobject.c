@@ -48,19 +48,19 @@ static void list_object_class_init(ListObjectClass *klass)
 	  g_signal_new("item-added", G_TYPE_FROM_CLASS(klass), G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(ListObjectClass,item_added),
 		       NULL, NULL,
-		       gtk_marshal_NONE__POINTER, G_TYPE_NONE,
+		       g_cclosure_marshal_VOID__POINTER, G_TYPE_NONE,
 		       1, G_TYPE_POINTER);
      list_object_signals[ITEM_REMOVED_SIGNAL] = 
 	  g_signal_new("item-removed", G_TYPE_FROM_CLASS(klass), G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(ListObjectClass,item_removed),
 		       NULL, NULL,
-		       gtk_marshal_NONE__POINTER, G_TYPE_NONE,
+		       g_cclosure_marshal_VOID__POINTER, G_TYPE_NONE,
 		       1, G_TYPE_POINTER);
      list_object_signals[ITEM_NOTIFY_SIGNAL] = 
 	  g_signal_new("item-notify", G_TYPE_FROM_CLASS(klass), G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(ListObjectClass,item_notify),
 		       NULL, NULL,
-		       gtk_marshal_NONE__POINTER, G_TYPE_NONE,
+		       g_cclosure_marshal_VOID__POINTER, G_TYPE_NONE,
 		       1, G_TYPE_POINTER);
      gtk_object_class_add_signals(oc,list_object_signals,LAST_SIGNAL);
 }

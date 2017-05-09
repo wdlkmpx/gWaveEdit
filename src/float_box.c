@@ -36,10 +36,6 @@ enum {
 };
 
 
-#include "float_box_marsh.c"
-#define gtk_marshal_NONE__FLOAT gtk_marshal_VOID__FLOAT
-
-
 static guint floatbox_signals[LAST_SIGNAL] = { 0 };
 
 static void floatbox_update_text(Floatbox *box)
@@ -91,7 +87,7 @@ static void floatbox_class_init(FloatboxClass *klass)
 		       G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(FloatboxClass,numchange),
 		       NULL, NULL,
-		       gtk_marshal_NONE__FLOAT,G_TYPE_NONE,1,
+		       g_cclosure_marshal_VOID__FLOAT,G_TYPE_NONE,1,
 		       G_TYPE_FLOAT);
 
      gtk_object_class_add_signals(oc,floatbox_signals,

@@ -114,12 +114,12 @@ static void status_bar_class_init(StatusBarClass *klass)
 	  g_signal_new("progress-begin", G_TYPE_FROM_CLASS(klass), G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(StatusBarClass,progress_begin),
 		       NULL, NULL,
-		       gtk_marshal_NONE__NONE, G_TYPE_NONE, 0);
+		       g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
      status_bar_signals[PROGRESS_END_SIGNAL] = 
 	  g_signal_new("progress-end", G_TYPE_FROM_CLASS(klass), G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(StatusBarClass,progress_end),
 		       NULL, NULL,
-		       gtk_marshal_NONE__NONE, G_TYPE_NONE, 0);
+		       g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
      gtk_object_class_add_signals(oc,status_bar_signals,LAST_SIGNAL);
 }
 

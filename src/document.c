@@ -164,24 +164,24 @@ static void document_class_init(DocumentClass *klass)
 	  g_signal_new("view-changed", G_TYPE_FROM_CLASS(klass), G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(DocumentClass,view_changed),
 		       NULL, NULL,
-		       gtk_marshal_NONE__NONE, G_TYPE_NONE, 0);
+		       g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
      document_signals[SELECTION_CHANGED_SIGNAL] = 
 	  g_signal_new("selection-changed", G_TYPE_FROM_CLASS(klass),
 		       G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(DocumentClass,selection_changed),
 		       NULL, NULL,
-		       gtk_marshal_NONE__NONE, G_TYPE_NONE, 0);
+		       g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
      document_signals[CURSOR_CHANGED_SIGNAL] = 
 	  g_signal_new("cursor-changed", G_TYPE_FROM_CLASS(klass), G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(DocumentClass,cursor_changed),
 		       NULL, NULL,
-		       gtk_marshal_NONE__BOOL, G_TYPE_NONE, 1,
+		       g_cclosure_marshal_VOID__BOOLEAN, G_TYPE_NONE, 1,
 		       G_TYPE_BOOLEAN);
      document_signals[STATE_CHANGED_SIGNAL] = 
 	  g_signal_new("state-changed", G_TYPE_FROM_CLASS(klass), G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(DocumentClass,state_changed),
 		       NULL, NULL,
-		       gtk_marshal_NONE__NONE, G_TYPE_NONE, 0);
+		       g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
 
      gtk_object_class_add_signals(oc,document_signals,LAST_SIGNAL);
 

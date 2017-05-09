@@ -45,17 +45,17 @@ static void effect_dialog_class_init(EffectDialogClass *klass)
           g_signal_new("apply",G_TYPE_FROM_CLASS(klass),G_SIGNAL_RUN_LAST,
 		       G_STRUCT_OFFSET(EffectDialogClass,apply),
 		       NULL, NULL,
-		       gtk_marshal_BOOL__NONE,G_TYPE_BOOLEAN,0);
+		       g_cclosure_marshal_VOID__BOOLEAN,G_TYPE_NONE,1,G_TYPE_BOOLEAN);
      effect_dialog_signals[SETUP_SIGNAL] =
           g_signal_new("setup",G_TYPE_FROM_CLASS(klass),G_SIGNAL_RUN_FIRST,
                        G_STRUCT_OFFSET(EffectDialogClass,setup),
                        NULL, NULL,
-                       gtk_marshal_NONE__NONE,G_TYPE_NONE,0);
+                       g_cclosure_marshal_VOID__VOID,G_TYPE_NONE,0);
      effect_dialog_signals[TARGET_CHANGED_SIGNAL] = 
 	  g_signal_new("target-changed",G_TYPE_FROM_CLASS(klass),G_SIGNAL_RUN_FIRST,
 		       G_STRUCT_OFFSET(EffectDialogClass,target_changed),
 		       NULL, NULL,
-		       gtk_marshal_NONE__NONE,G_TYPE_NONE,0);
+		       g_cclosure_marshal_VOID__VOID,G_TYPE_NONE,0);
 
      gtk_object_class_add_signals(oc,effect_dialog_signals,LAST_SIGNAL);
 }
