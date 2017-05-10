@@ -38,7 +38,8 @@ typedef struct {
      gint i1;
      Floatbox *fb1,*fb2,*fb3,*fb4,*fb5;
      Floatbox **fba[4];
-     Combo **ca,*c1,*c2;
+     GtkComboBoxText **ca;
+     Combo *c1,*c2;
      Intbox *ib1,*ib2,*ib3;
      GtkToggleButton *tb1;
 } SoxDialog;

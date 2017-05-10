@@ -143,7 +143,7 @@ static Chunk *sox_dialog_apply_proc_main(Chunk *chunk, StatusBar *bar,
 			 }
 		    if (sd->ca != NULL) {
 			 c = strchr(c,0);
-			 idx = combo_selected_index(sd->ca[i]);
+			 idx = gtk_combo_box_get_active(GTK_COMBO_BOX(sd->ca[i]));
 			 if (idx == 0) strcpy(c," -s");
 			 else strcpy(c," -t");
 		    }
@@ -367,7 +367,6 @@ static void setup_echos(EffectDialog *ed, gchar *gain_name, gint lines,
      GtkWidget *a,*b,*c;
      gchar buf[64];
      guint i;
-     GList *l;
      GtkRequisition req;
 
      sd->i1 = lines;
@@ -410,21 +409,16 @@ static void setup_echos(EffectDialog *ed, gchar *gain_name, gint lines,
      }
      if (show_mtype) {
 	  attach_label(_("Modulation  "),b,0,4);
-	  sd->ca = g_malloc(lines*sizeof(GtkCombo *));
-	  l = NULL;
-	  l = g_list_append(l,translate_strip(N_("Modulation|Sinusoidal")));
-	  l = g_list_append(l,translate_strip(N_("Modulation|Triangular")));
+	  sd->ca = g_malloc(lines*sizeof(GtkComboBoxText *));
 	  for (i=0; i<lines; i++) {
-	       c = combo_new();
+	       c = gtk_combo_box_text_new();
 	       gtk_widget_size_request(c,&req);
-#ifdef COMBO_OLDSCHOOL
-	       gtk_widget_set_usize(c,req.width/2,req.height);
-#endif
-	       sd->ca[i] = COMBO(c);
-	       combo_set_items(COMBO(c),l,0);
+	       sd->ca[i] = GTK_COMBO_BOX_TEXT(c);
+	       gtk_combo_box_text_append_text(sd->ca[i], translate_strip(N_("Modulation|Sinusoidal")));
+	       gtk_combo_box_text_append_text(sd->ca[i], translate_strip(N_("Modulation|Triangular")));
+	       gtk_combo_box_set_active(GTK_COMBO_BOX(sd->ca[i]), 0);
 	       gtk_table_attach(GTK_TABLE(b),c,4,5,i+1,i+2,GTK_FILL,0,0,0);
 	  }
-	  g_list_free(l);
      }
      b = gtk_label_new(_("(Lines with delay=0 will be ignored.)"));
      gtk_box_pack_start(GTK_BOX(a),b,FALSE,FALSE,0);
