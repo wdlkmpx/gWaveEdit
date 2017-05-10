@@ -55,9 +55,9 @@ static void alsa_prefs_ok(GtkButton *button, gpointer user_data)
      GtkWidget *w = GTK_WIDGET(user_data);
      GtkWidget *ep,*er;
      GtkToggleButton *tb;
-     ep = gtk_object_get_data(GTK_OBJECT(w),"playentry");
-     er = gtk_object_get_data(GTK_OBJECT(w),"recentry");
-     tb = gtk_object_get_data(GTK_OBJECT(w),"eventtb");
+     ep = g_object_get_data(G_OBJECT(w),"playentry");
+     er = g_object_get_data(G_OBJECT(w),"recentry");
+     tb = g_object_get_data(G_OBJECT(w),"eventtb");
      alsa_data.eventdriv = gtk_toggle_button_get_active(tb);
      inifile_set("ALSAPlayDevice",(gchar *)gtk_entry_get_text(GTK_ENTRY(ep)));
      inifile_set("ALSARecDevice",(gchar *)gtk_entry_get_text(GTK_ENTRY(er)));
