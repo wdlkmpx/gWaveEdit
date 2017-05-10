@@ -73,7 +73,6 @@ static gint intbox_focus_out(GtkWidget *widget, GdkEventFocus *event)
 
 static void intbox_class_init(IntboxClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      GTK_ENTRY_CLASS(klass)->activate = intbox_activate;
      wc->focus_out_event = intbox_focus_out;

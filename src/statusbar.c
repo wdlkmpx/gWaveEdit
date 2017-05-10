@@ -104,7 +104,6 @@ static void status_bar_size_request(GtkWidget *widget,
 
 static void status_bar_class_init(StatusBarClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
      wc->size_allocate = status_bar_size_allocate;
      wc->size_request = status_bar_size_request;

@@ -101,7 +101,7 @@ static void chunk_view_cursor_changed(Document *d, gboolean rolling,
 {     
      ChunkView *cv = CHUNKVIEW(user_data);
      off_t pos[4];
-     int npos,pix[4],npix,i,p,j, w=GTK_WIDGET(cv)->allocation.width;
+     int npos,pix[4],npix,i,w=GTK_WIDGET(cv)->allocation.width;
 
      npos = 0;
      pos[npos++] = d->old_cursorpos;

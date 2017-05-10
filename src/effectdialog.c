@@ -36,7 +36,6 @@ static guint effect_dialog_signals[LAST_SIGNAL] = { 0 };
 
 static void effect_dialog_class_init(EffectDialogClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      klass->apply = NULL;
      klass->setup = NULL;
      klass->target_changed = NULL;

@@ -108,7 +108,6 @@ static void document_list_init(DocumentList *mwl)
 
 static void document_list_class_init(DocumentListClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      klass->document_changed = NULL;
      COMBO_CLASS(klass)->selection_changed = document_list_changed;
 

@@ -75,7 +75,6 @@ static gint floatbox_focus_out(GtkWidget *widget, GdkEventFocus *event)
 
 static void floatbox_class_init(FloatboxClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
 
      GTK_ENTRY_CLASS(klass)->activate = floatbox_activate;

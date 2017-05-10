@@ -273,7 +273,7 @@ static void user_choice_select(GtkTreeSelection *sel, gpointer user_data)
 gint user_choice(gchar **choices, guint def, gchar *windowtitle, 
 		 gchar *windowtext, gboolean allow_cancel)
 {
-     GtkWidget *a,*b,*c,*d,*list=NULL,*w;
+     GtkWidget *a,*b,*c,*d,*list=NULL;
      guint i;
      GtkListStore *store;
      GtkTreeSelection *sel;
