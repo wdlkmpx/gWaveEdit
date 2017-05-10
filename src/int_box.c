@@ -183,6 +183,6 @@ GtkWidget *intbox_create_scale(Intbox *box, long minval, long maxval)
      w = gtk_hscale_new(box->adj);
      gtk_scale_set_digits(GTK_SCALE(w),0);
      gtk_widget_size_request(w,&req);
-     gtk_widget_set_usize(w,req.width*5,req.height);
+     gtk_widget_set_size_request(w,req.width*5,req.height);
      return w;
 }

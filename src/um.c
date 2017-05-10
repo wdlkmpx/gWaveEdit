@@ -306,7 +306,7 @@ gint user_choice(gchar **choices, guint def, gchar *windowtitle,
      gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(c),
 				    GTK_POLICY_NEVER,
 				    GTK_POLICY_AUTOMATIC);
-     gtk_widget_set_usize(GTK_WIDGET(c),-1,300);
+     gtk_widget_set_size_request(GTK_WIDGET(c),-1,300);
      gtk_box_pack_start(GTK_BOX(b),c,TRUE,TRUE,0);
      d = list = gtk_tree_view_new();
      gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(list),FALSE);

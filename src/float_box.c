@@ -187,6 +187,6 @@ GtkWidget *floatbox_create_scale(Floatbox *box, float minval, float maxval)
      }
      w = gtk_hscale_new(box->adj);
      gtk_widget_size_request(w,&req);
-     gtk_widget_set_usize(w,req.width*5,req.height);
+     gtk_widget_set_size_request(w,req.width*5,req.height);
      return w;
 }

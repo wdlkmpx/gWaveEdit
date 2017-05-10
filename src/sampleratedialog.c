@@ -106,7 +106,7 @@ static void samplerate_dialog_init(SamplerateDialog *v)
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      gtk_widget_size_request(c,&req);
 #ifdef COMBO_OLDSCHOOL
-     gtk_widget_set_usize(c,req.width*3/2,req.height);
+     gtk_widget_set_size_request(c,req.width*3/2,req.height);
 #endif
      i = rateconv_driver_count(FALSE);
      for (j=0; j<i; j++)

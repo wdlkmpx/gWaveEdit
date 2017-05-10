@@ -2797,11 +2797,11 @@ static void mainwindow_init(Mainwindow *obj)
      obj->speed_label = GTK_LABEL(gtk_label_new("S: 500%"));
      gtk_misc_set_alignment(GTK_MISC(obj->speed_label),0.0,0.0);
      gtk_widget_size_request(GTK_WIDGET(obj->speed_label),&req);
-     gtk_widget_set_usize(GTK_WIDGET(obj->speed_label),req.width,req.height);
+     gtk_widget_set_size_request(GTK_WIDGET(obj->speed_label),req.width,req.height);
      obj->vzoom_label = GTK_LABEL(gtk_label_new("V: 1.000"));
      gtk_misc_set_alignment(GTK_MISC(obj->vzoom_label),0.0,0.0);
      gtk_widget_size_request(GTK_WIDGET(obj->vzoom_label),&req);
-     gtk_widget_set_usize(GTK_WIDGET(obj->vzoom_label),req.width,req.height);
+     gtk_widget_set_size_request(GTK_WIDGET(obj->vzoom_label),req.width,req.height);
 
      obj->need_chunk_items = NULL;
      obj->need_selection_items = NULL;
@@ -2826,7 +2826,7 @@ static void mainwindow_init(Mainwindow *obj)
      c = gtk_event_box_new();
      gtk_container_add(GTK_CONTAINER(c),GTK_WIDGET(obj->toolbar));
      gtk_widget_size_request(c,&req);
-     gtk_widget_set_usize(c,10,req.height);
+     gtk_widget_set_size_request(c,10,req.height);
 
      gtk_table_attach(GTK_TABLE(b),c,0,1,0,1,GTK_SHRINK|GTK_FILL,GTK_FILL,0,0);
 

@@ -749,7 +749,7 @@ static void record_dialog_start(GtkButton *button, gpointer user_data)
 	  /* This is a hack to prevent the window from resizing when we 
 	   * change the button's caption */
 	  gtk_widget_size_request(rd->record_button,&req);
-	  gtk_widget_set_usize(rd->record_button,req.width,req.height);
+	  gtk_widget_set_size_request(rd->record_button,req.width,req.height);
 
 	  /* Toggle pause mode */
 	  rd->paused = !rd->paused;	  
@@ -915,7 +915,7 @@ void record_dialog_init(RecordDialog *obj)
      obj->time_label = attach_label(_("N/A"),b,1,1);
      gtk_widget_size_request(GTK_WIDGET(obj->time_label),&req);
      /* Stops wobble during recording */
-     gtk_widget_set_usize(GTK_WIDGET(obj->time_label),150,req.height);	
+     gtk_widget_set_size_request(GTK_WIDGET(obj->time_label),150,req.height);
 
      obj->limit_text_label = attach_label("",b,2,0);
      obj->limit_label = attach_label("",b,2,1);

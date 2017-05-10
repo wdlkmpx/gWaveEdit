@@ -90,7 +90,7 @@ static void status_bar_size_allocate(GtkWidget *widget,
      GtkWidget *daw = GTK_WIDGET(sb->da);
      if (daw->allocation.height != allocation->height || 
 	 daw->allocation.width != allocation->width) {
-	  gtk_widget_set_usize(daw,allocation->width,allocation->height);
+	  gtk_widget_set_size_request(daw,allocation->width,allocation->height);
      }
      GTK_WIDGET_CLASS(status_bar_parent_class)->size_allocate(widget,allocation);
 }
