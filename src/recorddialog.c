@@ -41,7 +41,7 @@ static struct {
      FormatSelector *fs;
      GtkEntry *name_entry;
      int old_choice;
-     GtkList *preset_list;
+     GtkWidget *preset_view;
      GtkLabel *set_button_label;
      GtkButton *set_button_button;
 } other_dialog;
@@ -52,6 +52,7 @@ static gboolean record_dialog_stopflag = FALSE;
 static RecordDialog *current_dialog;
 
 static ListObject *preset_list = NULL;
+static GtkListStore *preset_liststore = NULL;
 
 static void build_preset_list(void)
 {
@@ -59,8 +60,11 @@ static void build_preset_list(void)
      GList *l2 = NULL;
      int i;
      RecordFormat *rf;
+     GtkTreeIter iter;
 
      if (preset_list != NULL) return;
+     if (preset_liststore != NULL) return;
+     preset_liststore = gtk_list_store_new(3,G_TYPE_STRING,G_TYPE_INT,G_TYPE_POINTER);
 
      /* Build format list */
      /* Support reading both old and new style formats */
@@ -86,6 +90,8 @@ static void build_preset_list(void)
 		    continue;
 	       }
 	       g_free(s3);
+	       gtk_list_store_append(preset_liststore,&iter);
+	       gtk_list_store_set(preset_liststore,&iter,0,s2,1,i,2,(gpointer)&rf->fmt,-1);
 	       rf->num = i;
 	       rf->name = g_strdup(s2);
 	       l2 = g_list_append(l2,rf);
@@ -123,6 +129,8 @@ static void build_preset_list(void)
 		    continue;
 	       }    
 	       rf->name = g_strdup(s6);
+	       gtk_list_store_append(preset_liststore,&iter);
+	       gtk_list_store_set(preset_liststore,&iter,0,s6,1,i,2,(gpointer)&rf->fmt,-1);
 	       l2 = g_list_append(l2,rf);
 	  }
      }
@@ -136,7 +144,12 @@ static void set_preset(gchar *name, Dataformat *fmt)
      RecordFormat *rf;
      int i;
      gchar *c,*d;
-     GList *l;
+     gchar *cmp_name;
+     gint num;
+     Dataformat *cmp_fmt;
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     gboolean valid;
 
      g_assert(name != NULL);
 
@@ -144,48 +157,48 @@ static void set_preset(gchar *name, Dataformat *fmt)
       * Otherwise, set the number to one higher than the
       * currently highest used number. */
      i = 0;
-     l = preset_list->list;
-     while (l != NULL) {
-	  rf = (RecordFormat *)(l->data);
-	  if (!strcmp(rf->name,name)) {
-	       if (dataformat_equal(&(rf->fmt),fmt)) return;
-	       memcpy(&(rf->fmt),fmt,sizeof(Dataformat));
-	       break;;
-	  }
-	  if (rf->num > i) i = rf->num;
-	  l = l->next;
-     } 	  
+     rf = g_malloc(sizeof(*rf));
+     rf->fmt = *fmt;
+     model = GTK_TREE_MODEL(preset_liststore);
+     valid = gtk_tree_model_get_iter_first(model,&iter);
+     while (valid) {
+          gtk_tree_model_get (model, &iter, 0, &cmp_name, 1, &num, 2, &cmp_fmt, -1);
+          if (!strcmp(cmp_name,name)) {
+               if (dataformat_equal(cmp_fmt,fmt)) return;
+               gtk_list_store_set(preset_liststore,&iter,2,(gpointer)&rf->fmt,-1);
+          }
+          if (num > i) i = num;
+          valid = gtk_tree_model_iter_next (model, &iter);
+     }
 
-     if (l == NULL) {
-	  rf = g_malloc(sizeof(*rf));
-	  rf->name = g_strdup(name);
-	  rf->fmt = *fmt;
-	  rf->num = i+1;
-	  list_object_add(preset_list, rf);
+     if (!valid) {
+          gtk_list_store_append(preset_liststore,&iter);
+          gtk_list_store_set(preset_liststore,&iter,0,name,1,i+1,2,(gpointer)&rf->fmt,-1);
      }
 	  
-     c = g_strdup_printf("recordFormat%d",rf->num);
+     c = g_strdup_printf("recordFormat%d",i+1);
      d = g_strdup_printf("%s_Name",c);
-     inifile_set(d,rf->name);
+     inifile_set(d,name);
      dataformat_save_to_inifile(c,fmt,TRUE);
      g_free(d);
      g_free(c);
-
-     if (l != NULL)
-	  list_object_notify(preset_list,rf);
 }
 
 static gboolean compare_preset(gchar *name, Dataformat *fmt)
 {
-     GList *l;
-     RecordFormat *rf;
-     l = preset_list->list;
-     while (l != NULL) {
-	  rf = (RecordFormat *)(l->data);
-	  if (!strcmp(rf->name,name))
-	       return dataformat_equal(&(rf->fmt),fmt);
-	  l = l->next;
-     } 	 
+     gchar *cmp_name;
+     Dataformat *cmp_fmt;
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     gboolean valid;
+     model = GTK_TREE_MODEL(preset_liststore);
+     valid = gtk_tree_model_get_iter_first(model,&iter);
+     while (valid) {
+          gtk_tree_model_get (model, &iter, 0, &cmp_name, 2, &cmp_fmt, -1);
+          if (!strcmp(cmp_name,name))
+               return dataformat_equal(cmp_fmt,fmt);
+          valid = gtk_tree_model_iter_next (model, &iter);
+     }
      return FALSE;
 }
 
@@ -443,68 +456,28 @@ static void other_dialog_name_changed(GtkEditable *editable,
      g_free(c);
 }
 
-static GtkWidget *other_dialog_build_preset_list(RecordDialog *rd)
-{
-     GtkWidget *a,*x=NULL;
-     GList *l;
-     RecordFormat *rf;
-     gchar *n;
-     n = record_format_combo_get_preset_name(rd->format_combo);
-     for (l=preset_list->list; l!=NULL; l=l->next) {
-	  rf = (RecordFormat *)(l->data);
-	  if (rf->name == NULL) continue;
-	  a = gtk_list_item_new_with_label(rf->name);
-	  gtk_container_add(GTK_CONTAINER(other_dialog.preset_list),a);
-	  gtk_object_set_data(GTK_OBJECT(a),"fmt",rf);
-	  if (n != NULL && rf->name != NULL && !strcmp(n,rf->name))
-	       x = a;
-     }
-     return x;
-}
-
-static void other_dialog_select_child(GtkList *list, GtkWidget *widget, 
+static void other_dialog_select_changed(GtkTreeSelection *sel,
 				      gpointer user_data)
 {
-     RecordFormat *rf;
-     rf = gtk_object_get_data(GTK_OBJECT(widget),"fmt");
-     format_selector_set(other_dialog.fs, &(rf->fmt));
-     gtk_entry_set_text(other_dialog.name_entry, rf->name);
-}
-
-static void other_dialog_preset_item_added(ListObject *lo, RecordFormat *rf,
-					   gpointer user_data)
-{
-     GtkWidget *a;
-     a = gtk_list_item_new_with_label(rf->name);
-     gtk_container_add(GTK_CONTAINER(other_dialog.preset_list),a);
-     gtk_object_set_data(GTK_OBJECT(a),"fmt",rf);
-     gtk_widget_show(a);
-}
-
-static void other_dialog_preset_item_removed(ListObject *lo, gpointer item,
-					     gpointer user_data)
-{
-     GList *l;
-     gpointer p;
-     l = gtk_container_get_children(GTK_CONTAINER(other_dialog.preset_list));
-     for (; l!=NULL; l=l->next) {
-	  p = gtk_object_get_data(GTK_OBJECT(l->data),"fmt");
-	  if (p == item) {
-	       gtk_container_remove(GTK_CONTAINER(other_dialog.preset_list),
-				    GTK_WIDGET(l->data));
-	       break;
-	  }
-     }
-     g_list_free(l);
-		    
+     GtkTreeModel *model;
+     GtkTreeIter iter;
+     gchar *name;
+     Dataformat *fmt;
+     if (!gtk_tree_selection_get_selected (sel, &model, &iter)) return;
+     gtk_tree_model_get (model, &iter, 0, &name, 2, &fmt, -1);
+     format_selector_set(other_dialog.fs, fmt);
+     gtk_entry_set_text(other_dialog.name_entry, name);
 }
 
 static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
 {
-     GtkWidget *a,*b,*c,*d,*e,*f,*item;
+     GtkWidget *a,*b,*c,*d,*e,*f;
      GtkAccelGroup* ag;
      GtkRequisition req;
      static GtkWindowGroup *wg = NULL;
+     GtkTreeSelection *sel;
+     GtkTreeViewColumn *col;
+     GtkCellRenderer *renderer;
     
      ag = gtk_accel_group_new();
 
@@ -518,16 +491,14 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
 
      other_dialog.name_entry = GTK_ENTRY(gtk_entry_new());
 
-     other_dialog.preset_list = GTK_LIST(gtk_list_new());
-     item = other_dialog_build_preset_list(rd);
-     gtk_signal_connect_while_alive
-	  (GTK_OBJECT(preset_list),"item_added",
-	   G_CALLBACK(other_dialog_preset_item_added),other_dialog.wnd,
-	   GTK_OBJECT(other_dialog.wnd));
-     gtk_signal_connect_while_alive
-	  (GTK_OBJECT(preset_list),"item_removed",
-	   G_CALLBACK(other_dialog_preset_item_removed),other_dialog.wnd,
-	   GTK_OBJECT(other_dialog.wnd));
+     other_dialog.preset_view = gtk_tree_view_new();
+     gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(other_dialog.preset_view),FALSE);
+     gtk_tree_view_set_model(GTK_TREE_VIEW(other_dialog.preset_view),GTK_TREE_MODEL(preset_liststore));
+     renderer = gtk_cell_renderer_text_new();
+     col = gtk_tree_view_column_new_with_attributes(NULL,renderer,"text",0,NULL);
+     gtk_tree_view_append_column(GTK_TREE_VIEW(other_dialog.preset_view),col);
+     sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(other_dialog.preset_view));
+     gtk_tree_selection_set_mode(sel,GTK_SELECTION_SINGLE);
 
      a = GTK_WIDGET(other_dialog.wnd);
      gtk_container_set_border_width(GTK_CONTAINER(a),10);
@@ -577,7 +548,7 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
 				    GTK_POLICY_AUTOMATIC);
      gtk_container_add(GTK_CONTAINER(d),e);
 
-     f = GTK_WIDGET(other_dialog.preset_list);
+     f = GTK_WIDGET(other_dialog.preset_view);
      gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(e),f);
 
      c = gtk_hseparator_new();
@@ -612,12 +583,10 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
 
      g_signal_connect(G_OBJECT(other_dialog.wnd),"delete_event",
 			G_CALLBACK(other_dialog_delete),NULL);
-     g_signal_connect(G_OBJECT(other_dialog.preset_list),"select_child",
-			G_CALLBACK(other_dialog_select_child),rd);
+     g_signal_connect(sel,"changed",
+                      G_CALLBACK(other_dialog_select_changed),NULL);
      g_signal_connect(G_OBJECT(other_dialog.name_entry),"changed",
 			G_CALLBACK(other_dialog_name_changed),rd);
-
-     if (item != NULL) gtk_list_select_child(other_dialog.preset_list,item);
 
      gtk_signal_connect_object_while_alive(GTK_OBJECT(rd),"destroy",
 					   G_CALLBACK(gtk_widget_destroy),
