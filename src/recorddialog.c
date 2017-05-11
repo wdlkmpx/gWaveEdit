@@ -588,9 +588,8 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
      g_signal_connect(G_OBJECT(other_dialog.name_entry),"changed",
 			G_CALLBACK(other_dialog_name_changed),rd);
 
-     gtk_signal_connect_object_while_alive(GTK_OBJECT(rd),"destroy",
-					   G_CALLBACK(gtk_widget_destroy),
-					   GTK_OBJECT(other_dialog.wnd));
+     g_signal_connect_object(rd, "destroy", G_CALLBACK(gtk_widget_destroy),
+			     other_dialog.wnd, G_CONNECT_SWAPPED);
 }
 
 static void update_limit(RecordDialog *rd)

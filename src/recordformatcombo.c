@@ -215,28 +215,22 @@ GtkWidget *record_format_combo_new(ListObject *named_presets,
      rfc->named_presets = named_presets;
      gtk_object_ref(GTK_OBJECT(named_presets));
      gtk_object_sink(GTK_OBJECT(named_presets));
-     gtk_signal_connect_while_alive(GTK_OBJECT(named_presets),"item_added",
-				    G_CALLBACK(presets_changed),rfc,
-				    GTK_OBJECT(rfc));
-     gtk_signal_connect_while_alive(GTK_OBJECT(named_presets),"item_removed",
-				    G_CALLBACK(presets_changed),rfc,
-				    GTK_OBJECT(rfc));
-     gtk_signal_connect_while_alive(GTK_OBJECT(named_presets),"item_notify",
-				    G_CALLBACK(presets_changed),rfc,
-				    GTK_OBJECT(rfc));
+     g_signal_connect_object(named_presets,"item_added",
+				    G_CALLBACK(presets_changed),rfc,0);
+     g_signal_connect_object(named_presets,"item_removed",
+				    G_CALLBACK(presets_changed),rfc,0);
+     g_signal_connect_object(named_presets,"item_notify",
+				    G_CALLBACK(presets_changed),rfc,0);
 
      rfc->nameless_presets = nameless_presets;
      gtk_object_ref(GTK_OBJECT(nameless_presets));
      gtk_object_sink(GTK_OBJECT(nameless_presets));
-     gtk_signal_connect_while_alive(GTK_OBJECT(nameless_presets),"item_added",
-				    G_CALLBACK(presets_changed),rfc,
-				    GTK_OBJECT(rfc));
-     gtk_signal_connect_while_alive(GTK_OBJECT(nameless_presets),"item_removed",
-				    G_CALLBACK(presets_changed),rfc,
-				    GTK_OBJECT(rfc));
-     gtk_signal_connect_while_alive(GTK_OBJECT(nameless_presets),"item_notify",
-				    G_CALLBACK(presets_changed),rfc,
-				    GTK_OBJECT(rfc));
+     g_signal_connect_object(nameless_presets,"item_added",
+				    G_CALLBACK(presets_changed),rfc,0);
+     g_signal_connect_object(nameless_presets,"item_removed",
+				    G_CALLBACK(presets_changed),rfc,0);
+     g_signal_connect_object(nameless_presets,"item_notify",
+				    G_CALLBACK(presets_changed),rfc,0);
      rfc->show_other = show_other;
      rfc->current_selection_type = 0;
      rebuild_strings(rfc);

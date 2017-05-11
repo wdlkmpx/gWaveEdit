@@ -93,9 +93,9 @@ void effect_dialog_setup(EffectDialog *ed, gchar *effect_name, gpointer eb)
      g_assert(ed->eb == NULL && eb != NULL);
      ed->eb = eb;
      ed->effect_name = effect_name;
-     gtk_signal_connect_while_alive
-	  (GTK_OBJECT(EFFECT_BROWSER(eb)->dl),"document_changed",
-	   G_CALLBACK(effect_dialog_eb_target_changed),ed,GTK_OBJECT(ed));
+     g_signal_connect_object
+	  (EFFECT_BROWSER(eb)->dl,"document_changed",
+	   G_CALLBACK(effect_dialog_eb_target_changed),ed,0);
      g_signal_emit(G_OBJECT(ed),
                      effect_dialog_signals[SETUP_SIGNAL],0);
 }
