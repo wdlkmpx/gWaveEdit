@@ -2823,12 +2823,7 @@ static void mainwindow_init(Mainwindow *obj)
      c = create_toolbar( obj );
      obj->toolbar = c;
 
-     c = gtk_event_box_new();
-     gtk_container_add(GTK_CONTAINER(c),GTK_WIDGET(obj->toolbar));
-     gtk_widget_size_request(c,&req);
-     gtk_widget_set_size_request(c,10,req.height);
-
-     gtk_table_attach(GTK_TABLE(b),c,0,1,0,1,GTK_SHRINK|GTK_FILL,GTK_FILL,0,0);
+     gtk_table_attach(GTK_TABLE(b),obj->toolbar,0,1,0,1,GTK_SHRINK|GTK_FILL,GTK_FILL,0,0);
 
      c = bitmap_new_from_data(vzoom_bits, vzoom_width, vzoom_height);
      bitmap_set_fg(BITMAP(c),0.8);     
@@ -2885,9 +2880,7 @@ static void mainwindow_init(Mainwindow *obj)
      c = GTK_WIDGET(obj->speed_label);
      gtk_table_attach(GTK_TABLE(b),c,1,4,3,4,GTK_FILL,0,2,0);
 
-     c = gtk_event_box_new();
-     gtk_container_add(GTK_CONTAINER(c),GTK_WIDGET (obj->statusbar));
-     gtk_table_attach(GTK_TABLE(b),c,0,1,3,4,GTK_FILL,0,0,0);
+     gtk_table_attach(GTK_TABLE(b),GTK_WIDGET(obj->statusbar),0,1,3,4,GTK_FILL,0,0,0);
 
      c = GTK_WIDGET(obj->vzoom_label);
      gtk_table_attach(GTK_TABLE(b),c,1,4,2,3,GTK_FILL,0,2,0);
