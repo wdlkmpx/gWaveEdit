@@ -334,6 +334,7 @@ static void colors_click(GtkButton *button, gpointer user_data)
      d = cs;
      gtk_box_pack_start(GTK_BOX(c),d,TRUE,TRUE,0);
      c = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_button_new_with_mnemonic(_("_Preview"));
      g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),store);
@@ -1064,6 +1065,7 @@ static void config_dialog_init(ConfigDialog *cd)
     
 
     b = gtk_hbutton_box_new();
+    gtk_button_box_set_layout(GTK_BUTTON_BOX(b),GTK_BUTTONBOX_END);
     gtk_box_pack_start(GTK_BOX(a),b,FALSE,TRUE,0);
 
 

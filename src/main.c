@@ -177,8 +177,6 @@ int main(int argc, char **argv)
      if (sample_convert_mode < 0 || sample_convert_mode > CONVERT_MODE_MAX)
 	  sample_convert_mode = CONVERT_MODE_NOOFFS;
 
-     gtk_hbutton_box_set_layout_default(GTK_BUTTONBOX_END);
-
      mainwindow_objects = list_object_new(FALSE);
      document_objects = list_object_new(FALSE);
 

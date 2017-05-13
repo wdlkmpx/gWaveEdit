@@ -834,6 +834,7 @@ static void effect_browser_init(EffectBrowser *eb)
 			       G_CALLBACK(effect_browser_close), eb);
 
      b25 = gtk_hbutton_box_new(); 
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(b25),GTK_BUTTONBOX_END);
      gtk_box_pack_start(GTK_BOX(b25),b251,FALSE,TRUE,3);
      gtk_box_pack_start(GTK_BOX(b25),b252,FALSE,TRUE,3);
 

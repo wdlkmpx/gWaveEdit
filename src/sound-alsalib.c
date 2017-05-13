@@ -93,6 +93,7 @@ static void alsa_show_preferences(void)
      gtk_table_attach(GTK_TABLE(b),c,0,2,2,3,GTK_EXPAND|GTK_FILL,0,5,5);
      gtk_object_set_data(GTK_OBJECT(a),"eventtb",c);     
      c = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_table_attach(GTK_TABLE(b),c,0,2,3,4,GTK_EXPAND|GTK_FILL,
 		      GTK_EXPAND|GTK_FILL,0,5);
      d = gtk_button_new_with_label(_("OK"));

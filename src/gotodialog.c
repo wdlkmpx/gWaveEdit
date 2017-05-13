@@ -144,6 +144,7 @@ static void goto_dialog_init(GotoDialog *gd)
      gtk_label_set_line_wrap(GTK_LABEL(b),TRUE);
      gtk_box_pack_start(GTK_BOX(a),b,FALSE,FALSE,0);
      b = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(b),GTK_BUTTONBOX_END);
      gtk_box_pack_end(GTK_BOX(a),b,FALSE,FALSE,0);
      c = gtk_button_new_with_label(_("OK"));
      g_signal_connect(G_OBJECT(c),"clicked",

@@ -281,6 +281,7 @@ static void esound_preferences(void)
      c = gtk_hseparator_new();
      gtk_container_add(GTK_CONTAINER(b),c);
      c = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_container_add(GTK_CONTAINER(b),c);
      d = gtk_button_new_with_label(_("OK"));
      g_signal_connect(G_OBJECT(d),"clicked",

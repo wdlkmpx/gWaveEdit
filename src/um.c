@@ -210,6 +210,7 @@ gchar *user_input(gchar *label, gchar *title, gchar *defvalue,
      c = gtk_hseparator_new();
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,3);
      c = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_button_new_with_label(_("OK"));
      g_signal_connect(G_OBJECT(d),"clicked",
@@ -329,6 +330,7 @@ gint user_choice(gchar **choices, guint def, gchar *windowtitle,
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      
      c = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      
      d = gtk_button_new_with_label(_("OK"));

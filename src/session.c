@@ -460,6 +460,7 @@ gboolean session_dialog(void)
      gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(c),d);
 
      c = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,TRUE,0);
 
      d = gtk_button_new_with_label(_("Resume selected"));

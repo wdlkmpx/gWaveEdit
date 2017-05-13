@@ -97,6 +97,7 @@ Dataformat *rawdialog_execute(gchar *filename, gint filesize, guint *offset)
      b = gtk_hseparator_new();
      gtk_container_add(GTK_CONTAINER(a),b);
      b = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(b),GTK_BUTTONBOX_END);
      gtk_container_add(GTK_CONTAINER(a),b);
      c = gtk_button_new_with_label(_("OK"));
      g_signal_connect(G_OBJECT(c),"clicked",G_CALLBACK(rawdialog_ok),

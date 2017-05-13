@@ -554,6 +554,7 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
      c = gtk_hseparator_new();
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      c = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_button_new_with_label(_("Set format"));
      gtk_widget_add_accelerator (d, "clicked", ag, GDK_KP_Enter, 0, 
@@ -923,6 +924,7 @@ void record_dialog_init(RecordDialog *obj)
      obj->overruns_title = attach_label("",b,2,2);
      obj->overruns_label = attach_label("",b,2,3);
      b = gtk_hbutton_box_new();
+     gtk_button_box_set_layout(GTK_BUTTON_BOX(b),GTK_BUTTONBOX_END);
      gtk_box_pack_start(GTK_BOX(a),b,FALSE,FALSE,0);
      c = gtk_button_new_with_label(_("Start recording"));
      gtk_widget_add_accelerator (c, "clicked", ag, GDK_KP_Enter, 0, 
