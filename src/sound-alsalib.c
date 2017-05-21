@@ -83,15 +83,15 @@ static void alsa_show_preferences(void)
      gtk_entry_set_text(GTK_ENTRY(c),inifile_get("ALSAPlayDevice","default"));
      gtk_table_attach(GTK_TABLE(b),c,1,2,0,1,GTK_EXPAND|GTK_FILL,0,5,5);
      attach_label(_("Recording device: "),b,1,0);
-     gtk_object_set_data(GTK_OBJECT(a),"playentry",c);
+     g_object_set_data(G_OBJECT(a),"playentry",c);
      c = gtk_entry_new();
      gtk_entry_set_text(GTK_ENTRY(c),inifile_get("ALSARecDevice","hw"));
      gtk_table_attach(GTK_TABLE(b),c,1,2,1,2,GTK_EXPAND|GTK_FILL,0,5,5);
-     gtk_object_set_data(GTK_OBJECT(a),"recentry",c);
+     g_object_set_data(G_OBJECT(a),"recentry",c);
      c = gtk_check_button_new_with_label(_("Event driven I/O"));
      gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(c),alsa_data.eventdriv);
      gtk_table_attach(GTK_TABLE(b),c,0,2,2,3,GTK_EXPAND|GTK_FILL,0,5,5);
-     gtk_object_set_data(GTK_OBJECT(a),"eventtb",c);     
+     g_object_set_data(G_OBJECT(a),"eventtb",c);
      c = gtk_hbutton_box_new();
      gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_table_attach(GTK_TABLE(b),c,0,2,3,4,GTK_EXPAND|GTK_FILL,
