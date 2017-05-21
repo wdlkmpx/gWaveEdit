@@ -227,7 +227,7 @@ static Chunk *sox_dialog_apply_proc_main(Chunk *chunk, StatusBar *bar,
 		     sd->fb1->val,sd->fb2->val,t1,t2);
 	  g_free(t1);
 	  g_free(t2);
-	  g_strdown(c);
+	  g_utf8_strdown(c,-1);
      } else if (!strcmp(ed->effect_name,"stretch")) {
 	  inifile_set_gfloat("sox_stretch_factor",sd->fb1->val);
 	  inifile_set_gfloat("sox_stretch_window",sd->fb2->val);
