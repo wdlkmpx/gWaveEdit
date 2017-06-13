@@ -168,6 +168,7 @@ static gboolean iosource_dispatch_main(GTimeVal *current_time)
 	  grp = (struct io_group *)l->data;
 	  if (grp->enabled) {
 	       j = 0;
+	       k = 0;
 	       for (i=0; i<grp->nfds; i++) {
 		    if (j == 0 && grp->pfds[i].revents != 0) {
 			 j++;
