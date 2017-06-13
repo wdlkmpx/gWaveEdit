@@ -252,7 +252,7 @@ LadspaEffect *ladspa_find_effect(gchar *id)
 {
      LadspaEffect *eff;
      gchar *c,*d,*e;
-     unsigned long unid;
+     unsigned long __attribute__((unused)) unid;
 
      if (effect_list == NULL) 
 	  effect_list = g_hash_table_new(g_str_hash,g_str_equal);
