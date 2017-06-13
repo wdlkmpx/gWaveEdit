@@ -198,7 +198,7 @@ static gboolean timesource_prepare(GSource *source, gint *timeout)
 {
      GTimeVal tv;
      int i;
-     g_source_get_current_time(source, &tv);
+     g_get_current_time(&tv);
      i = timesource_scan(&tv,FALSE);
      if (i <= 0)
 	  return (i == 0);
@@ -212,7 +212,7 @@ static gboolean timesource_check(GSource *source)
 {
      GTimeVal tv;
      int i;
-     g_source_get_current_time(source, &tv);
+     g_get_current_time(&tv);
      i = timesource_scan(&tv,FALSE);
      return (i == 0);
 }
@@ -221,7 +221,7 @@ static gboolean timesource_dispatch(GSource *source, GSourceFunc callback,
 				    gpointer user_data)
 {
      GTimeVal tv;
-     g_source_get_current_time(source,&tv);
+     g_get_current_time(&tv);
      timesource_scan(&tv,TRUE);
      return TRUE;
 }
@@ -260,7 +260,7 @@ static gboolean iosource_dispatch(GSource *source, GSourceFunc callback,
 				  gpointer user_data)
 {
      GTimeVal tv;
-     g_source_get_current_time(source, &tv);
+     g_get_current_time(&tv);
      iosource_dispatch_main(&tv);
      return TRUE;
 }
