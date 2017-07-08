@@ -365,7 +365,7 @@ static gchar *get_filename_main(gchar *current_name, gchar *title_text,
      if (d!=NULL && !savemode && inifile_get_gboolean("useGeometry",FALSE) &&
 	 !parse_geom(d,&all)) {
 	  gtk_window_set_default_size(GTK_WINDOW(w),all.width,all.height);
-	  gtk_widget_set_uposition(GTK_WIDGET(w),all.x,all.y);
+	  gtk_window_move(GTK_WINDOW(w),all.x,all.y);
      } else
 	  gtk_window_set_position(GTK_WINDOW(w),GTK_WIN_POS_CENTER);
      gtk_window_set_modal(GTK_WINDOW(w),TRUE);

@@ -1102,7 +1102,7 @@ gboolean geometry_stack_pop(GSList **stackp, gchar **extra, GtkWindow *wnd)
 	  return geometry_stack_pop(stackp,extra,wnd);
      }
      gtk_window_set_default_size(GTK_WINDOW(wnd),ap->width,ap->height);
-     gtk_widget_set_uposition(GTK_WIDGET(wnd),ap->x,ap->y);
+     gtk_window_move(wnd,ap->x,ap->y);
      if (extra) *extra = ap->extra;
      g_free(ap);
 
