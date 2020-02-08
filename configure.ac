@@ -14,11 +14,24 @@ AM_SILENT_RULES([yes])
 
 dnl Check for libintl
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.18.3])
+
 AM_PROG_AR
 LT_INIT
 
-dnl Various options
+# Init intltool
+IT_PROG_INTLTOOL
+
+# Set gettext package name
+GETTEXT_PACKAGE=mhwaveedit
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
+
+# Add the languages which your application supports here.
+ALL_LINGUAS="ru sv fr es de zh_CN it pl"
+AC_SUBST(ALL_LINGUAS)
+AM_GLIB_GNU_GETTEXT
+
+# Various options
 
 AC_ARG_WITH(double-samples,
 [  --with-double-samples   Use double precision floating point numbers for sound

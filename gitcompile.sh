@@ -13,7 +13,7 @@ aclocal --force -I m4
 autoheader --force
 touch config.rpath
 automake --add-missing --copy
+intltoolize -c --automake --force || exit 1
 autoconf --force
 ./configure $*
-make -C po mhwaveedit.pot-update
 make

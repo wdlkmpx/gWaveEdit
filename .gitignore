@@ -38,3 +38,7 @@ stamp-h1
 ar-lib
 ltmain.sh
 libtool
+
+po/mhwaveedit.pot
+po/Makefile.in.in
+stamp-it
