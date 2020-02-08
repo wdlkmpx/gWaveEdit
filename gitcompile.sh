@@ -8,7 +8,6 @@
 #  The standard ./configure followed by make flow can be used there instead.
 #
 
-cd docgen; bash gendocs.sh; cd ..
 libtoolize --copy --force || exit 1
 aclocal --force -I m4
 autoheader --force

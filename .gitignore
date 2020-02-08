@@ -24,10 +24,8 @@ install-sh
 m4/
 missing
 mkinstalldirs
-README
 stamp-h1
 
-/src/help.c
 /src/mhwaveedit
 
 /po/en@boldquot.header
