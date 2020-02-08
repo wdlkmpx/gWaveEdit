@@ -11,6 +11,8 @@ aclocal.m4
 autom4te.cache
 compile
 config.guess
+config.rpath
+config.sub
 config.h
 config.h.in
 config.log
@@ -35,3 +37,6 @@ stamp-h1
 /po/POTFILES
 /po/Rules-quot
 /po/stamp-po
+ar-lib
+ltmain.sh
+libtool

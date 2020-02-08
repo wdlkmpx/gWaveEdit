@@ -2,13 +2,12 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([mhWaveEdit],[1.4.25pre],[https://github.com/magnush/mhwaveedit])
+AC_INIT([mhWaveEdit],[1.4.25pre],[https://github.com/wdlkmpx/gwaveedit])
 
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
-AM_INIT_AUTOMAKE([-Wall -Werror foreign -Wno-portability])
-AC_CONFIG_SRCDIR([src/chunk.c])
+AM_INIT_AUTOMAKE([1.11 -Wall foreign])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AM_SILENT_RULES([yes])
@@ -16,8 +15,8 @@ AM_SILENT_RULES([yes])
 dnl Check for libintl
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.18.3])
-
-PKG_PROG_PKG_CONFIG
+AM_PROG_AR
+LT_INIT
 
 dnl Various options
 
@@ -31,7 +30,7 @@ MHW_DOUBLE="yes")
 
 AC_DEFUN([AC_WITHOUT_CHECK_CASTS],[
 	if test "x$withval" = "xno" ; then 
-	AC_DEFINE(GTK_NO_CHECK_CASTS,[],[If defined, disables GTK+ type checking])
+	AC_DEFINE(GTK_NO_CHECK_CASTS,1,[If defined, disables GTK+ type checking])
 	fi
 ])
 
@@ -97,7 +96,7 @@ AC_PROG_LN_S
 AC_PROG_MAKE_SET
 
 dnl Checks for libraries.
-dnl Replace `main' with a function in -libs:
+dnl Replace main with a function in -libs:
 AC_CHECK_LIB(ibs, main)
 AC_CHECK_LIB(m, round)
 
@@ -129,7 +128,7 @@ if test "x$HAVE_SNDFILE" = "xyes" -a "x$SKIP_SNDFILE_CHECK" = "xno"; then
 fi
 
 if test "x$HAVE_SNDFILE" = "xyes" ; then
-	AC_DEFINE(HAVE_LIBSNDFILE,[],[Use libsndfile library])
+	AC_DEFINE(HAVE_LIBSNDFILE,1,[Use libsndfile library])
 fi
 
 AC_SUBST(SNDFILE_LIBS)
@@ -160,7 +159,7 @@ if test "x$HAVE_LIBSAMPLERATE" = "xyes" -a "x$SKIP_LIBSAMPLERATE_CHECK" = "xno";
 fi
 
 if test "x$HAVE_LIBSAMPLERATE" = "xyes" ; then
-	AC_DEFINE(HAVE_LIBSAMPLERATE,[],[Use libsamplerate library])
+	AC_DEFINE(HAVE_LIBSAMPLERATE,1,[Use libsamplerate library])
 fi
 
 AC_SUBST(LIBSAMPLERATE_LIBS)
@@ -191,7 +190,7 @@ AC_CHECK_TYPE(PaTimestamp,,MHW_HAVE_PORTAUDIO=no,[[#include <portaudio.h>]])
 fi
 
 if test "x$MHW_HAVE_PORTAUDIO" = "xyes"; then
-	AC_DEFINE(HAVE_PORTAUDIO,[],[Enable PortAudio sound driver])
+	AC_DEFINE(HAVE_PORTAUDIO,1,[Enable PortAudio sound driver])
 	PORTAUDIO_LIBS="-lportaudio $PORTAUDIO_LIBS"
 fi
 
@@ -199,23 +198,28 @@ AC_SUBST(PORTAUDIO_LIBS)
 
 dnl Check for SDL
 
+HAVE_SDL=no
 SKIP_SDL_TEST=no
-MHW_HAVE_SDL=no
 
-AC_DEFUN([AC_WITHOUT_SDL],[
-	if test "x$withval" = "xno" ; then
-		SKIP_SDL_TEST=yes
-	fi
-])
-
-AC_ARG_WITH(sdl,[  --without-sdl           Don't use SDL library],AC_WITHOUT_SDL)
+AC_ARG_WITH(sdl,[  --without-sdl           Don't use SDL library],
+if test "x$withval" = "xno" ; then
+ SKIP_SDL_TEST=yes
+fi
+)
 
 if test "x$SKIP_SDL_TEST" = "xno"; then
-	AM_PATH_SDL(1.2.3,
-	 AC_DEFINE(HAVE_SDL,[],[Enable SDL sound driver]) 
-	 MHW_HAVE_SDL=yes)
+	AC_CHECK_HEADER(SDL/SDL.h, [HAVE_SDL=yes], , )
 fi
 
+if test "x$HAVE_SDL" = "xyes"; then
+	AC_DEFINE(HAVE_SDL,1,[Enable SDL sound driver]) 
+	SDL_CFLAGS=`sdl-config --cflags`
+	SDL_LIBS=`sdl-config --libs`
+fi
+
+AC_SUBST(SDL_CFLAGS)
+AC_SUBST(SDL_LIBS)
+ 
 dnl Check for AlsaLib
 
 ALSALIB_LIBS=""
@@ -237,7 +241,7 @@ fi
 
 if test "x$HAVE_ALSALIB" = "xyes"; then
 	ALSALIB_LIBS="-lasound"
-	AC_DEFINE(HAVE_ALSALIB,[],[Enable ALSA sound driver])
+	AC_DEFINE(HAVE_ALSALIB,1,[Enable ALSA sound driver])
 fi
 
 AC_SUBST(ALSALIB_LIBS)
@@ -264,7 +268,7 @@ if test "x$mhw_found_one" = "xno"; then
 fi
 
 if test "x$HAVE_OSS" = "xyes"; then
-	AC_DEFINE(HAVE_OSS,[],[Enable OSS sound driver])
+	AC_DEFINE(HAVE_OSS,1,[Enable OSS sound driver])
 fi
 
 dnl Check for JACK
@@ -286,7 +290,7 @@ then
 fi
 
 if test "x$MHW_HAVE_JACK" = "xyes" ; then
-	AC_DEFINE(HAVE_JACK,[],[Enable JACK sound driver])
+	AC_DEFINE(HAVE_JACK,1,[Enable JACK sound driver])
 fi
 
 dnl Check for PulseAudio
@@ -308,7 +312,7 @@ then
 fi
 
 if test "x$MHW_HAVE_PULSE" = "xyes" ; then
-	AC_DEFINE(HAVE_PULSEAUDIO,[],[Enable PulseAudio sound driver])
+	AC_DEFINE(HAVE_PULSEAUDIO,1,[Enable PulseAudio sound driver])
 fi
 
 dnl Check for Esound
@@ -325,7 +329,7 @@ then
 fi
 
 if test "x$MHW_HAVE_ESOUND" = "xyes"; then
-	AC_DEFINE(HAVE_ESOUND,[],[Enable EsounD sound driver])
+	AC_DEFINE(HAVE_ESOUND,1,[Enable EsounD sound driver])
 fi
 
 dnl Check for Sun audio
@@ -346,7 +350,7 @@ if test "x$mhw_found_one" = "xno"; then
 fi
 
 if test "x$MHW_HAVE_SUNAUDIO" = "xyes"; then
-	AC_DEFINE(HAVE_SUN,[],[Enable Sun audio sound driver])
+	AC_DEFINE(HAVE_SUN,1,[Enable Sun audio sound driver])
 fi
 
 dnl Check for aRts C interface
@@ -373,7 +377,7 @@ if test "x$ARTSC_CONFIG" = "xno"; then
 else
 	ARTSC_CFLAGS=`$ARTSC_CONFIG --cflags`
 	ARTSC_LIBS=`$ARTSC_CONFIG --libs`
-	AC_DEFINE(HAVE_ARTSC,[],[Enable aRts driver])
+	AC_DEFINE(HAVE_ARTSC,1,[Enable aRts driver])
 fi
 
 AC_SUBST(ARTSC_CFLAGS)
@@ -387,7 +391,7 @@ PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.18])
 
 dnl Check for large file support
 AC_SYS_LARGEFILE
-AC_DEFINE(_LARGEFILE_SOURCE,[],[Defined to get fseeko/ftello prototypes])
+AC_DEFINE(_LARGEFILE_SOURCE,1,[Defined to get fseeko/ftello prototypes])
 AC_CHECK_SIZEOF(off_t)
 
 dnl Checks for header files.
@@ -408,10 +412,10 @@ if test "x$HAVE_LADSPA" = "xyes"; then
 	AC_CHECK_LIB(dl,dlopen,LIBS="-ldl $LIBS",HAVE_LADSPA=no)
 fi
 if test "x$HAVE_LADSPA" = "xyes"; then
-	AC_DEFINE(HAVE_LADSPA,[],[Enable LADSPA support])
+	AC_DEFINE(HAVE_LADSPA,1,[Enable LADSPA support])
 fi
 if test "x$HAVE_LADSPA_GLOBAL" = "xyes"; then
-        AC_DEFINE(HAVE_SYS_LADSPA_H,[],[Use system LADSPA header])
+        AC_DEFINE(HAVE_SYS_LADSPA_H,1,[Use system LADSPA header])
 fi
 
 dnl Checks for typedefs, structures, and compiler characteristics.
@@ -433,7 +437,7 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([
 ],[int i; i = unsetenv("dummy"); return 0;])],HAVE_INT_UNSETENV=yes)
 if test "x$HAVE_INT_UNSETENV" = "xyes";
 then
-    AC_DEFINE(UNSETENV_RETVAL,[],[Defined if unsetenv returns an integer])    
+    AC_DEFINE(UNSETENV_RETVAL,1,[Defined if unsetenv returns an integer])    
 fi
 AC_MSG_RESULT([$HAVE_INT_UNSETENV])
 
@@ -447,7 +451,7 @@ AC_FUNC_STAT
 AC_FUNC_STRTOD
 
 dnl Write output
-AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in m4/Makefile share/Makefile ])
+AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in share/Makefile ])
 AC_OUTPUT
 
 dnl Display configuration
@@ -475,7 +479,7 @@ CHECKDRV([$HAVE_ALSALIB],[ALSA])
 CHECKDRV([$MHW_HAVE_JACK],[JACK])
 CHECKDRV([$MHW_HAVE_SUNAUDIO],[Sun])
 CHECKDRV([$MHW_HAVE_PORTAUDIO],[PortAudio])
-CHECKDRV([$MHW_HAVE_SDL],[SDL])
+CHECKDRV([$HAVE_SDL],[SDL])
 CHECKDRV([$MHW_HAVE_ESOUND],[EsounD])
 CHECKDRV([$MHW_HAVE_ARTSC],[aRts])
 CHECKDRV([$MHW_HAVE_PULSE],[PulseAudio])
