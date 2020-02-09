@@ -47,12 +47,6 @@
 #include "gettext.h"
 #include "bitmap.h"
 
-#include "button_open.xpm"
-#include "button_save.xpm"
-#include "button_undo.xpm"
-#include "button_redo.xpm"
-#include "button_cut.xpm"
-#include "button_copy.xpm"
 #include "button_paste.xpm"
 #include "button_pasteover.xpm"
 #include "button_delete.xpm"
@@ -63,7 +57,6 @@
 #include "button_stop.xpm"
 #include "button_loop.xpm"
 #include "button_follow.xpm"
-#include "button_record.xpm"
 #include "button_mixer.xpm"
 #include "button_bounce.xpm"
 #include "icon.xpm"
@@ -2341,18 +2334,16 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      GdkPixbuf *pb;
 
      t = gtk_toolbar_new();
-     gtk_container_set_border_width(GTK_CONTAINER(t), 2);
      gtk_toolbar_set_style (GTK_TOOLBAR(t), GTK_TOOLBAR_ICONS);
+     gtk_toolbar_set_icon_size (GTK_TOOLBAR(t), GTK_ICON_SIZE_LARGE_TOOLBAR);
 
-     pb = gdk_pixbuf_new_from_xpm_data (button_open_xpm);
-     b = gtk_image_new_from_pixbuf(pb);
+     b = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_LARGE_TOOLBAR);
      i = gtk_tool_button_new(b,NULL);
      gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Load a file from disk"));
      g_signal_connect(i,"clicked",G_CALLBACK(file_open),w);
      gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
 
-     pb = gdk_pixbuf_new_from_xpm_data (button_save_xpm);
-     b = gtk_image_new_from_pixbuf(pb);
+     b = gtk_image_new_from_stock(GTK_STOCK_SAVE, GTK_ICON_SIZE_LARGE_TOOLBAR);
      i = gtk_tool_button_new(b,NULL);
      gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Save the current file to disk"));
      g_signal_connect(i,"clicked",G_CALLBACK(file_save),w);
@@ -2362,16 +2353,14 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      i = gtk_separator_tool_item_new();
      gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
 
-     pb = gdk_pixbuf_new_from_xpm_data (button_undo_xpm);
-     b = gtk_image_new_from_pixbuf(pb);
+     b = gtk_image_new_from_stock(GTK_STOCK_UNDO, GTK_ICON_SIZE_LARGE_TOOLBAR);
      i = gtk_tool_button_new(b,NULL);
      gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Undo the last change"));
      g_signal_connect(i,"clicked",G_CALLBACK(edit_undo),w);
      gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
      w->need_undo_items = g_list_append(w->need_undo_items, GTK_WIDGET(i));
 
-     pb = gdk_pixbuf_new_from_xpm_data (button_redo_xpm);
-     b = gtk_image_new_from_pixbuf(pb);
+     b = gtk_image_new_from_stock(GTK_STOCK_REDO, GTK_ICON_SIZE_LARGE_TOOLBAR);
      i = gtk_tool_button_new(b,NULL);
      gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Redo the last undo operation"));
      g_signal_connect(i,"clicked",G_CALLBACK(edit_redo),w);
@@ -2381,16 +2370,14 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      i = gtk_separator_tool_item_new();
      gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
 
-     pb = gdk_pixbuf_new_from_xpm_data (button_cut_xpm);
-     b = gtk_image_new_from_pixbuf(pb);
+     b = gtk_image_new_from_stock(GTK_STOCK_CUT, GTK_ICON_SIZE_LARGE_TOOLBAR);
      i = gtk_tool_button_new(b,NULL);
      gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Cut out the current selection"));
      g_signal_connect(i,"clicked",G_CALLBACK(edit_cut),w);
      gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
      w->need_selection_items = g_list_append(w->need_selection_items, GTK_WIDGET(i));
 
-     pb = gdk_pixbuf_new_from_xpm_data (button_copy_xpm);
-     b = gtk_image_new_from_pixbuf(pb);
+     b = gtk_image_new_from_stock(GTK_STOCK_COPY, GTK_ICON_SIZE_LARGE_TOOLBAR);
      i = gtk_tool_button_new(b,NULL);
      gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Copy the current selection"));
      g_signal_connect(i,"clicked",G_CALLBACK(edit_copy),w);
@@ -2509,8 +2496,7 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      i = gtk_separator_tool_item_new();
      gtk_toolbar_insert(GTK_TOOLBAR(t),i,-1);
 
-     pb = gdk_pixbuf_new_from_xpm_data (button_record_xpm);
-     b = gtk_image_new_from_pixbuf(pb);
+     b = gtk_image_new_from_stock(GTK_STOCK_MEDIA_RECORD, GTK_ICON_SIZE_LARGE_TOOLBAR);
      i = gtk_tool_button_new(b,NULL);
      gtk_widget_set_tooltip_text(GTK_WIDGET(i),_("Record"));
      g_signal_connect(i,"clicked",G_CALLBACK(edit_record),w);
