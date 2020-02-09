@@ -1441,67 +1441,37 @@ static void help_readme(GtkMenuItem *menuitem, gpointer user_data)
 
 static void help_about(void)
 {
-     GtkAccelGroup* ag;
-     gchar *p;
-     GtkWidget *a,*b,*c;
-     ag = gtk_accel_group_new();
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
-gtk_window_set_modal(GTK_WINDOW(a),TRUE);
-     gtk_window_set_title(GTK_WINDOW(a),_("About gWaveEdit"));
-     gtk_container_set_border_width(GTK_CONTAINER(a),5);
-     gtk_window_set_position (GTK_WINDOW (a), GTK_WIN_POS_CENTER);	// Centre the window
-     b = gtk_vbox_new(FALSE,10);
-     gtk_container_add(GTK_CONTAINER(a),b);
-     gtk_widget_show(b);
-     c = gtk_label_new(PROGRAM_VERSION_STRING);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-     c = gtk_hseparator_new();
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-     c = gtk_label_new(_("Created by Magnus Hjorth (magnus.hjorth@home.se)\n"
-	  "Copyright 2002-2018, Magnus Hjorth"));
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-     c = gtk_hseparator_new();
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);     
-     p = g_strdup_printf(_("Current sound driver: %s"),sound_driver_name());
-     c = gtk_label_new(p);
-     g_free(p);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-     c = gtk_hseparator_new();
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-     p = g_strdup_printf(_("Compiled %s %s"), BUILD_DATE, BUILD_TIME);
-     c = gtk_label_new(p);
-     g_free(p);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-#ifdef USE_DOUBLE_SAMPLES
-     c = gtk_label_new(_("Uses double-precision math"));
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-#endif
-     c = gtk_hseparator_new();
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-     c = gtk_label_new(_("Distributed under GNU General Public License.\n"
-		       "For information, see the file COPYING"));
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-     c = gtk_button_new_with_label(_("OK"));
-     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KP_Enter, 0, (GtkAccelFlags) 0);
-     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, (GtkAccelFlags) 0);
-     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, (GtkAccelFlags) 0);
-     g_signal_connect_swapped(G_OBJECT(c),"clicked",
-			       G_CALLBACK(gtk_widget_destroy), a);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show(c);
-     
-     gtk_widget_show(a);
-     gtk_window_add_accel_group(GTK_WINDOW (a), ag);
+    GtkWidget * about_dlg;
+    gchar *p;
+    const gchar *authors[] =
+    {
+        "Magnus Hjorth (magnus.hjorth@home.se)",
+        NULL
+    };
+    /* TRANSLATORS: Replace mw string with your names, one name per line. */
+    gchar *translators = _( "translator-credits" );
+
+    about_dlg = gtk_about_dialog_new ();
+
+    gtk_container_set_border_width ( ( GtkContainer*)about_dlg , 2 );
+    gtk_about_dialog_set_version ( (GtkAboutDialog*)about_dlg, VERSION );
+    gtk_about_dialog_set_program_name ( (GtkAboutDialog*)about_dlg, PACKAGE_NAME );
+    //gtk_about_dialog_set_logo_icon_name( (GtkAboutDialog*)about_dlg, "audio" );
+    gtk_about_dialog_set_copyright ( (GtkAboutDialog*)about_dlg, "Copyright (C) 2002-2020" );
+    p = g_strdup_printf(_("GTK Sound file editor\nCurrent sound driver: %s\nCompiled %s %s"),
+                         sound_driver_name(),
+                         BUILD_DATE, BUILD_TIME);
+    gtk_about_dialog_set_comments ( (GtkAboutDialog*)about_dlg, p);
+    g_free(p);
+    gtk_about_dialog_set_license ( (GtkAboutDialog*)about_dlg, "This program is free software; you can redistribute it and/or\nmodify it under the terms of the GNU General Public License\nas published by the Free Software Foundation; either version 2\nof the License, or (at your option) any later version.\n\nmw program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with mw program; if not, write to the Free Software\nFoundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA." );
+    gtk_about_dialog_set_website ( (GtkAboutDialog*)about_dlg, "https://github.com/wdlkmpx/gwaveedit" );
+    gtk_about_dialog_set_authors ( (GtkAboutDialog*)about_dlg, authors );
+    gtk_about_dialog_set_translator_credits ( (GtkAboutDialog*)about_dlg, translators );
+
+    //gtk_window_set_transient_for( (GtkWindow*)about_dlg, (GtkWindow*)parent );
+    gtk_window_set_position (GTK_WINDOW (about_dlg), GTK_WIN_POS_CENTER);	// Centre the window
+    gtk_dialog_run( ( GtkDialog*)about_dlg );
+    gtk_widget_destroy( about_dlg );
 }
 
 static void edit_play(GtkMenuItem *menuitem, gpointer user_data)
