@@ -2339,7 +2339,11 @@ static GtkWidget *create_toolbar(Mainwindow *w)
      GtkWidget *t,*b;
      GtkToolItem *i;
      GdkPixbuf *pb;
+
      t = gtk_toolbar_new();
+     gtk_container_set_border_width(GTK_CONTAINER(t), 2);
+     gtk_toolbar_set_style (GTK_TOOLBAR(t), GTK_TOOLBAR_ICONS);
+
      pb = gdk_pixbuf_new_from_xpm_data (button_open_xpm);
      b = gtk_image_new_from_pixbuf(pb);
      i = gtk_tool_button_new(b,NULL);
