@@ -1,6 +1,7 @@
+Main Author
+ Magnus Hjorth <magnus.i.hjorth@gmail.com>
 
 Contributors (alphabetical order):
- Magnus Hjorth <magnus.i.hjorth@gmail.com> (Main author)
  Adam Pribyl <covex@bbs.cvut.cz> (1.3.0, Improved toolbar icons)
  Andrés Delfino <adelfino@gmail.com> (1.4.9, Portability fixes)
  Dan Church <amphetamachine@gmail.com> (1.4.22, Improvements)
@@ -31,7 +32,7 @@ Translators:
  Swedish (sv): Magnus Hjorth <magnus.hjorth@home.se>
 
 GitHub notes:
- See also: https://github.com/magnush/mhwaveedit/graphs/contributors
+ See also: https://github.com/wdlkmpx/gwaveedit/graphs/contributors
 
  New contributors are welcome to add themselves to the lists above as part of
  a commit series or GitHub pull request.

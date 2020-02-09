@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2006 2009, Magnus Hjorth
  *
- * This file is part of mhWaveEdit.
+ * This file is part of gWaveEdit.
  *
- * mhWaveEdit is free software; you can redistribute it and/or modify
+ * gWaveEdit is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by        
  * the Free Software Foundation; either version 2 of the License, or  
  * (at your option) any later version.
  *
- * mhWaveEdit is distributed in the hope that it will be useful,   
+ * gWaveEdit is distributed in the hope that it will be useful,   
  * but WITHOUT ANY WARRANTY; without even the implied warranty of  
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with mhWaveEdit; if not, write to the Free Software
+ * along with gWaveEdit; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
@@ -81,7 +81,7 @@ void session_init(int *argc, char **argv)
      GList *list,*list2;
      gboolean b;
      /* Check for session files on the system */
-     session_dir = g_strjoin(NULL,get_home_directory(),"/.mhwaveedit",NULL);
+     session_dir = g_strjoin(NULL,get_home_directory(),"/.gwaveedit",NULL);
      d = opendir(session_dir);
      if (d == NULL) {
 	  user_perror(_("Error opening session directory"));
@@ -90,7 +90,7 @@ void session_init(int *argc, char **argv)
      while (1) {
 	  de = readdir(d);
 	  if (de == NULL) break;
-	  i = sscanf(de->d_name,"mhwaveedit-session-%d-%d-%c",&j,&k,&r);
+	  i = sscanf(de->d_name,"gwaveedit-session-%d-%d-%c",&j,&k,&r);
 	  if (i < 3) continue;
 	  /* Stat the session file once to check mod. date and size */
 	  p = g_strdup_printf("%s/%s",session_dir,de->d_name);
@@ -150,7 +150,7 @@ void session_init(int *argc, char **argv)
 	  while (1) {
 	       de = readdir(d);
 	       if (de == NULL) break;
-	       j = sscanf(de->d_name,"mhwaveedit-temp-%d-%d-%d",&k,&l,&m);
+	       j = sscanf(de->d_name,"gwaveedit-temp-%d-%d-%d",&k,&l,&m);
 	       if (j < 2)
 		    continue;
 	       /* Try to stat the file */
@@ -227,7 +227,7 @@ void session_init(int *argc, char **argv)
 	  }
 	  } */
 
-     current_filename = g_strdup_printf("%s/mhwaveedit-session-%d-%d-r",
+     current_filename = g_strdup_printf("%s/gwaveedit-session-%d-%d-r",
 					session_dir,(int)getpid(),current_id);
 
      b = report_write_errors;

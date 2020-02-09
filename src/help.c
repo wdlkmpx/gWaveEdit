@@ -23,10 +23,10 @@ const char *help_page_titles[] = {
 
 static const char * O00_contents[] = {
      "\n",
-     N_("mhWaveEdit is a graphical program for editing sound files. It is completely free (GPL).\n"),
+     N_("gWaveEdit is a graphical program for editing sound files. It is completely free (GPL).\n"),
      "\n",
-     N_("You can find the latest release of mhWaveEdit at:\n"),
-     N_("http://gna.org/projects/mhwaveedit/\n"),
+     N_("You can find the latest release of gWaveEdit at:\n"),
+     N_("http://gna.org/projects/gwaveedit/\n"),
      NULL };
 
 static const char * D01_contents[] = {
@@ -80,7 +80,7 @@ static const char * D04_contents[] = {
 
 static const char * D05_contents[] = {
      "\n",
-     N_("mhWaveEdit has a few simple effects, which are available from the 'Effects' menu. \n"),
+     N_("gWaveEdit has a few simple effects, which are available from the 'Effects' menu. \n"),
      "\n",
      N_(" * Fade in/out\n"),
      "\n",
@@ -135,7 +135,7 @@ static const char * D05_contents[] = {
      N_(" \n"),
      N_("   This effect is for advanced users wanting to pipe raw audio data through an external program. The output of the program is read back and replaces the processed part. \n"),
      "\n",
-     N_("mhWaveEdit supports LADSPA effects and can also make use of most of the SoX utility's effects. To find the LADSPA plugins the environment variable LADSPA_PATH must be properly set up. \n"),
+     N_("gWaveEdit supports LADSPA effects and can also make use of most of the SoX utility's effects. To find the LADSPA plugins the environment variable LADSPA_PATH must be properly set up. \n"),
      "\n",
      N_("All supported effects can be found by choosing the 'Effects...' menu item. The effects are listed with names beginning with [B] for builtin effects, [L] for LADSPA effects, and [S] for SoX effects.\n"),
      "\n",
@@ -153,33 +153,33 @@ static const char * D06_contents[] = {
      "\n",
      N_("Sound data is normally stored as integer values. Therefore, whenever you normalize, adjust volume, decrease sample size or filter a sound, the result must be rounded. If you use 24 or 32 bit sample sizes, this is not really a problem, but if you use 8 or 16 bits sample size, this rounding causes a decrease in quality. \n"),
      "\n",
-     N_("The quality decrease that the rounding causes can be masked by adding a small amount of noise before rounding. This is called \"dithering\". mhWaveEdit supports basic dithering and it's enabled by default.\n"),
+     N_("The quality decrease that the rounding causes can be masked by adding a small amount of noise before rounding. This is called \"dithering\". gWaveEdit supports basic dithering and it's enabled by default.\n"),
      "\n",
-     N_("By default, mhWaveEdit uses floating-point temporary files for storing processed results to avoid rounding until the file is saved.\n"),
+     N_("By default, gWaveEdit uses floating-point temporary files for storing processed results to avoid rounding until the file is saved.\n"),
      NULL };
 
 static const char * D07_contents[] = {
      "\n",
-     N_("Even if mhWaveEdit was originally built for editing wav files, it's also possible to load and save in a few other formats. mhWaveEdit always supports wav and raw files, but if it's compiled with the libsndfile library, mhWaveEdit supports a couple of other formats as well. \n"),
+     N_("Even if gWaveEdit was originally built for editing wav files, it's also possible to load and save in a few other formats. gWaveEdit always supports wav and raw files, but if it's compiled with the libsndfile library, gWaveEdit supports a couple of other formats as well. \n"),
      "\n",
      N_("To save a file with a different file format, use \"Save as...\" and choose a format in the file type selection box. \n"),
      "\n",
-     N_("mhWaveEdit has basic support for mp3 and ogg formats. For this to work you need to have LAME installed for mp3 support, and OggDec/OggEnc for Ogg support. If you have these programs, you can open and save mp3/ogg files just like any other file format.\n"),
+     N_("gWaveEdit has basic support for mp3 and ogg formats. For this to work you need to have LAME installed for mp3 support, and OggDec/OggEnc for Ogg support. If you have these programs, you can open and save mp3/ogg files just like any other file format.\n"),
      "\n",
-     N_("If mplayer is installed, mhwaveedit can open all formats that it supports, for example the soundtrack of a video file. Since mplayer is only a player, these files can not be saved back after editing, you have to save the file into a supported format.\n"),
+     N_("If mplayer is installed, gwaveedit can open all formats that it supports, for example the soundtrack of a video file. Since mplayer is only a player, these files can not be saved back after editing, you have to save the file into a supported format.\n"),
      NULL };
 
 static const char * D08_contents[] = {
      "\n",
-     N_("mhWaveEdit creates a directory ~/.mhwaveedit where it stores configuration information. \n"),
+     N_("gWaveEdit creates a directory ~/.gwaveedit where it stores configuration information. \n"),
      "\n",
      N_("The configuration file is called config. It can be hand edited, but the easiest way is through 'Preferences' on the Edit menu.\n"),
      "\n",
-     N_("Each mhwaveedit process creates a session file in the .mhwaveedit directory called mhwaveedit-session-<pid>-<session>-<state>, where <session> is the session ID number and <state> is a character code showing the state of the session ('r' for running sessions). \n"),
+     N_("Each gwaveedit process creates a session file in the .gwaveedit directory called gwaveedit-session-<pid>-<session>-<state>, where <session> is the session ID number and <state> is a character code showing the state of the session ('r' for running sessions). \n"),
      "\n",
-     N_("Temporary files are by default also stored in the ~/.mhwaveedit directory. Which directories to use can be set through the preferences dialog. To get the best performance, you should have one temporary directory for each local filesystem. The temporary files have names of the form \"mhwaveedit-temp-<pid>-nnnn-<session>\". Do NOT open or remove temporary files with the same pid number as a currently running mhWaveEdit.\n"),
+     N_("Temporary files are by default also stored in the ~/.gwaveedit directory. Which directories to use can be set through the preferences dialog. To get the best performance, you should have one temporary directory for each local filesystem. The temporary files have names of the form \"gwaveedit-temp-<pid>-nnnn-<session>\". Do NOT open or remove temporary files with the same pid number as a currently running gWaveEdit.\n"),
      "\n",
-     N_("mhWaveEdit checks on startup for leftover temporary files and lets the user open them. After opening a crashed session, the files can be saved or thrown away.\n"),
+     N_("gWaveEdit checks on startup for leftover temporary files and lets the user open them. After opening a crashed session, the files can be saved or thrown away.\n"),
      NULL };
 
 static const char * D09_contents[] = {
@@ -247,10 +247,10 @@ static const char * D10_contents[] = {
      "\n",
      N_("How to create a backtrace:\n"),
      N_("1. Enable core dumps: ulimit -c unlimited\n"),
-     N_("2. Run the program:   mhwaveedit\n"),
+     N_("2. Run the program:   gwaveedit\n"),
      N_("3. Make the program crash. You should now get a file named core or core.1234 in the directory you're in.\n"),
      N_("4. Run gdb with the program and core file: \n"),
-     N_("   gdb /usr/local/bin/mhwaveedit core | tee backtrace.txt\n"),
+     N_("   gdb /usr/local/bin/gwaveedit core | tee backtrace.txt\n"),
      N_("5. After gdb has loaded, use the command: bt\n"),
      N_("6. Quit gdb with the command: quit\n"),
      N_("7. Now you should have a back trace in the file backtrace.txt\n"),
@@ -258,13 +258,13 @@ static const char * D10_contents[] = {
 
 static const char * D11_contents[] = {
      "\n",
-     N_("There are plenty of things you can do if you want to help the development of mhWaveEdit. \n"),
+     N_("There are plenty of things you can do if you want to help the development of gWaveEdit. \n"),
      "\n",
      N_("First of all, look for bugs and report all bugs you find into the bug tracker or through e-mail. Sometimes a bug can get overlooked for a long time because nobody reports it, so don't be afraid to report bugs that have been there for a few releases. You don't have to provide fixes or very detailed information, although it helps of course.\n"),
      "\n",
      N_("Feature requests are also welcome, report them to the mailing list or to the bug tracker.\n"),
      "\n",
-     N_("If you speak a language other than English and mhWaveEdit isn't translated to your language, you can contribute a translation. To do that, copy the template mhwaveedit.pot in the po directory into a new file ll.po, where ll is your language code (see http://www.gnu.org/software/gettext/manual/html_node/gettext_221.html for a list of language codes). \n"),
+     N_("If you speak a language other than English and gWaveEdit isn't translated to your language, you can contribute a translation. To do that, copy the template gwaveedit.pot in the po directory into a new file ll.po, where ll is your language code (see http://www.gnu.org/software/gettext/manual/html_node/gettext_221.html for a list of language codes). \n"),
      "\n",
      N_("It's possible to edit po-files by hand, but I recommend a program such as poEdit (http://www.poedit.org) for editing translations. \n"),
      "\n",

@@ -7,7 +7,7 @@ Oct 28, 2006: First version
 
 -- General info --
 
-mhWaveEdit is written completely in C, and tries to be as portable as 
+gWaveEdit is written completely in C, and tries to be as portable as 
 possible. There's no point in being more portable than GTK+ though, 
 since we depend on it. 
 
@@ -16,7 +16,7 @@ dependencies should be autodetected by the configure script or at
 runtime. In general I prefer calling separate programs, such as 
 Lame and SoX, rather than using libraries, because programs can be 
 portably detected at runtime so the user can install these programs 
-after installing mhWaveEdit. 
+after installing gWaveEdit. 
 
 The philosophy is to never remove a feature. If a behavior is changed, 
 there should be an option to get the old back (unless it's a bug of 
@@ -39,7 +39,7 @@ harder to debug. Most problems that are solved by threads can be
 solved by other means, for example forking, non-blocking IO, select 
 calls, and/or clever coding. Some sound drivers use threads though.
 
-mhWaveEdit doesn't use the GTK+ main loop, instead I have coded my own 
+gWaveEdit doesn't use the GTK+ main loop, instead I have coded my own 
 (mainloop in main.h), allowing me to control the priority of the 
 different activities.
 

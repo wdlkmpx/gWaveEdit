@@ -1077,18 +1077,18 @@ msgstr "Contatti"
 
 #: src/help.c:47
 #, no-c-format
-msgid "mhWaveEdit is a graphical program for editing sound files. It is completely free (GPL).\n"
-msgstr "mhWaveEdit è un programma grafico per modificare i file sonori. E' totalmente libero (GPL).\n"
+msgid "gWaveEdit is a graphical program for editing sound files. It is completely free (GPL).\n"
+msgstr "gWaveEdit è un programma grafico per modificare i file sonori. E' totalmente libero (GPL).\n"
 
 #: src/help.c:49
 #, no-c-format
-msgid "You can find the latest release of mhWaveEdit at:\n"
-msgstr "L'ultima versione di mhWaveEdit si trova a:\n"
+msgid "You can find the latest release of gWaveEdit at:\n"
+msgstr "L'ultima versione di gWaveEdit si trova a:\n"
 
 #: src/help.c:50
 #, no-c-format
-msgid "http://gna.org/projects/mhwaveedit/\n"
-msgstr "http://gna.org/projects/mhwaveedit/\n"
+msgid "http://gna.org/projects/gwaveedit/\n"
+msgstr "http://gna.org/projects/gwaveedit/\n"
 
 #: src/help.c:55
 #, no-c-format
@@ -1182,8 +1182,8 @@ msgstr "Tutte le funzioni di modifica lavorano in modo non distruttivo, cioè le
 
 #: src/help.c:104
 #, no-c-format
-msgid "mhWaveEdit has a few simple effects, which are available from the 'Effects' menu. \n"
-msgstr "mhWaveEdit ha pochi effetti semplici, che si trovano sotto il menu 'Effetti'.\n"
+msgid "gWaveEdit has a few simple effects, which are available from the 'Effects' menu. \n"
+msgstr "gWaveEdit ha pochi effetti semplici, che si trovano sotto il menu 'Effetti'.\n"
 
 #: src/help.c:106
 #, no-c-format
@@ -1334,8 +1334,8 @@ msgstr "   Questo effetto è per utenti esperti che vogliono inviare dati grezzi
 
 #: src/help.c:159
 #, no-c-format
-msgid "mhWaveEdit supports LADSPA effects and can also make use of most of the SoX utility's effects. To find the LADSPA plugins the environment variable LADSPA_PATH must be properly set up. \n"
-msgstr "mhWaveEdit supporta gli effetti LADSPA e può anche fare uso della maggior parte degli effetti di SoX. Per trovare gli effetti LADSPA, la variabile d'ambiente LADSPA_PATH deve essere impostata correttamente.\n"
+msgid "gWaveEdit supports LADSPA effects and can also make use of most of the SoX utility's effects. To find the LADSPA plugins the environment variable LADSPA_PATH must be properly set up. \n"
+msgstr "gWaveEdit supporta gli effetti LADSPA e può anche fare uso della maggior parte degli effetti di SoX. Per trovare gli effetti LADSPA, la variabile d'ambiente LADSPA_PATH deve essere impostata correttamente.\n"
 
 #: src/help.c:161
 #, no-c-format
@@ -1369,18 +1369,18 @@ msgstr "I dati sonori sono normalmente memorizzati come numeri interi. Le operaz
 
 #: src/help.c:177
 #, no-c-format
-msgid "The quality decrease that the rounding causes can be masked by adding a small amount of noise before rounding. This is called \"dithering\". mhWaveEdit supports basic dithering and it's enabled by default.\n"
-msgstr "La diminuzione di qualità dovuta all'arrotondamento può essere mascherata aggiungendo una piccola quantità di rumore prima che esso avvenga. Questo è chiamato 'dithering'. mhWaveEdit può applicare il dithering semplice ed è di solito attivo.\n"
+msgid "The quality decrease that the rounding causes can be masked by adding a small amount of noise before rounding. This is called \"dithering\". gWaveEdit supports basic dithering and it's enabled by default.\n"
+msgstr "La diminuzione di qualità dovuta all'arrotondamento può essere mascherata aggiungendo una piccola quantità di rumore prima che esso avvenga. Questo è chiamato 'dithering'. gWaveEdit può applicare il dithering semplice ed è di solito attivo.\n"
 
 #: src/help.c:179
 #, no-c-format
-msgid "By default, mhWaveEdit uses floating-point temporary files for storing processed results to avoid rounding until the file is saved.\n"
-msgstr "Di solito mhWaveEdit usa file temporanei con virgola per memorizzare i risultati, evitando di arrotondare fino al momento di salvare il file.\n"
+msgid "By default, gWaveEdit uses floating-point temporary files for storing processed results to avoid rounding until the file is saved.\n"
+msgstr "Di solito gWaveEdit usa file temporanei con virgola per memorizzare i risultati, evitando di arrotondare fino al momento di salvare il file.\n"
 
 #: src/help.c:184
 #, no-c-format
-msgid "Even if mhWaveEdit was originally built for editing wav files, it's also possible to load and save in a few other formats. mhWaveEdit always supports wav and raw files, but if it's compiled with the libsndfile library, mhWaveEdit supports a couple of other formats as well. \n"
-msgstr "Anche se mhWaveEdit è stato creato per modificare file WAV, è anche possibile caricare e salvare in alcuni altri formati. mhWaveEdit legge i file WAV e RAW, ma se viene compilato con libsndfile può lavorare anche con qualche altro formato.\n"
+msgid "Even if gWaveEdit was originally built for editing wav files, it's also possible to load and save in a few other formats. gWaveEdit always supports wav and raw files, but if it's compiled with the libsndfile library, gWaveEdit supports a couple of other formats as well. \n"
+msgstr "Anche se gWaveEdit è stato creato per modificare file WAV, è anche possibile caricare e salvare in alcuni altri formati. gWaveEdit legge i file WAV e RAW, ma se viene compilato con libsndfile può lavorare anche con qualche altro formato.\n"
 
 #: src/help.c:186
 #, no-c-format
@@ -1389,18 +1389,18 @@ msgstr "Per salvare un file in altro formato, usare \"Salva come...\" e sceglier
 
 #: src/help.c:188
 #, no-c-format
-msgid "mhWaveEdit has basic support for mp3 and ogg formats. For this to work you need to have LAME installed for mp3 support, and OggDec/OggEnc for Ogg support. If you have these programs, you can open and save mp3/ogg files just like any other file format.\n"
-msgstr "mhWaveEdit ha un supporto di base per i formati MP3 e OGG. Questo funziona se LAME è installato (per gli MP3) e OggDec/OggEnc (per i file OGG). Se ci sono questi programmi, l'apertura di questi file funziona come quella degli altri.\n"
+msgid "gWaveEdit has basic support for mp3 and ogg formats. For this to work you need to have LAME installed for mp3 support, and OggDec/OggEnc for Ogg support. If you have these programs, you can open and save mp3/ogg files just like any other file format.\n"
+msgstr "gWaveEdit ha un supporto di base per i formati MP3 e OGG. Questo funziona se LAME è installato (per gli MP3) e OggDec/OggEnc (per i file OGG). Se ci sono questi programmi, l'apertura di questi file funziona come quella degli altri.\n"
 
 #: src/help.c:190
 #, no-c-format
-msgid "If mplayer is installed, mhwaveedit can open all formats that it supports, for example the soundtrack of a video file. Since mplayer is only a player, these files can not be saved back after editing, you have to save the file into a supported format.\n"
-msgstr "Se viene installato Mplayer, mhWaveEdit apre tutti i formati supportati da esso, ad esempio la colonna sonora di un file video. Siccome Mplayer è solo un lettore, però, questi file non possono essere risalvati dopo la modifica. Si possono solo salvare in uno dei formati di mhWaveEdit.\n"
+msgid "If mplayer is installed, gwaveedit can open all formats that it supports, for example the soundtrack of a video file. Since mplayer is only a player, these files can not be saved back after editing, you have to save the file into a supported format.\n"
+msgstr "Se viene installato Mplayer, gWaveEdit apre tutti i formati supportati da esso, ad esempio la colonna sonora di un file video. Siccome Mplayer è solo un lettore, però, questi file non possono essere risalvati dopo la modifica. Si possono solo salvare in uno dei formati di gWaveEdit.\n"
 
 #: src/help.c:195
 #, no-c-format
-msgid "mhWaveEdit creates a directory ~/.mhwaveedit where it stores configuration information. \n"
-msgstr "mhWaveEdit crea una cartella, ~/.mhwaveedit dove salva le informazioni di configurazione.\n"
+msgid "gWaveEdit creates a directory ~/.gwaveedit where it stores configuration information. \n"
+msgstr "gWaveEdit crea una cartella, ~/.gwaveedit dove salva le informazioni di configurazione.\n"
 
 #: src/help.c:197
 #, no-c-format
@@ -1409,18 +1409,18 @@ msgstr "Il file di configurazione si chiama config. Può essere modificato a man
 
 #: src/help.c:199
 #, no-c-format
-msgid "Each mhwaveedit process creates a session file in the .mhwaveedit directory called mhwaveedit-session-<pid>-<session>-<state>, where <session> is the session ID number and <state> is a character code showing the state of the session ('r' for running sessions). \n"
-msgstr "Ogni processo mhWaveEdit crea un file sessione nella cartella .mhwaveedit, chiamato mhwaveedit-session-<pid>-<session>-<stato>, dove <session> è il numero ID della sessione e <stato> è un carattere che mostra lo stato della sessione ('r' per le sessioni in corso).\n"
+msgid "Each gwaveedit process creates a session file in the .gwaveedit directory called gwaveedit-session-<pid>-<session>-<state>, where <session> is the session ID number and <state> is a character code showing the state of the session ('r' for running sessions). \n"
+msgstr "Ogni processo gWaveEdit crea un file sessione nella cartella .gwaveedit, chiamato gwaveedit-session-<pid>-<session>-<stato>, dove <session> è il numero ID della sessione e <stato> è un carattere che mostra lo stato della sessione ('r' per le sessioni in corso).\n"
 
 #: src/help.c:201
 #, no-c-format
-msgid "Temporary files are by default also stored in the ~/.mhwaveedit directory. Which directories to use can be set through the preferences dialog. To get the best performance, you should have one temporary directory for each local filesystem. The temporary files have names of the form \"mhwaveedit-temp-<pid>-nnnn-<session>\". Do NOT open or remove temporary files with the same pid number as a currently running mhWaveEdit.\n"
-msgstr "Anche i file temporanei sono salvati nella cartella ~/.mhwaveedit. La cartella da usare può essere indicata nel pannello delle preferenze. Per ottenere le migliori prestazioni, ci deve essere una sola cartella temporanea per ogni filesystem locale. I file temporanei hanno nomi nel formato \"mhwaveedit-temp-<pid>-nnnn-<session>\". NON aprire o cancellare questi file se hanno lo stesso numero PID di una finestra mhWaveEdit aperta.\n"
+msgid "Temporary files are by default also stored in the ~/.gwaveedit directory. Which directories to use can be set through the preferences dialog. To get the best performance, you should have one temporary directory for each local filesystem. The temporary files have names of the form \"gwaveedit-temp-<pid>-nnnn-<session>\". Do NOT open or remove temporary files with the same pid number as a currently running gWaveEdit.\n"
+msgstr "Anche i file temporanei sono salvati nella cartella ~/.gwaveedit. La cartella da usare può essere indicata nel pannello delle preferenze. Per ottenere le migliori prestazioni, ci deve essere una sola cartella temporanea per ogni filesystem locale. I file temporanei hanno nomi nel formato \"gwaveedit-temp-<pid>-nnnn-<session>\". NON aprire o cancellare questi file se hanno lo stesso numero PID di una finestra gWaveEdit aperta.\n"
 
 #: src/help.c:203
 #, no-c-format
-msgid "mhWaveEdit checks on startup for leftover temporary files and lets the user open them. After opening a crashed session, the files can be saved or thrown away.\n"
-msgstr "mhWaveEdit controlla ad ogni avvio se ci sono file temporanei rimasti, e propone all'utente di aprirli. Dopo aver aperto una sessione bloccata, i file possono essere salvati o buttati.\n"
+msgid "gWaveEdit checks on startup for leftover temporary files and lets the user open them. After opening a crashed session, the files can be saved or thrown away.\n"
+msgstr "gWaveEdit controlla ad ogni avvio se ci sono file temporanei rimasti, e propone all'utente di aprirli. Dopo aver aperto una sessione bloccata, i file possono essere salvati o buttati.\n"
 
 #: src/help.c:208
 #, no-c-format
@@ -1664,8 +1664,8 @@ msgstr "1) abilitare i core dumps: ulimit -c unlimited\n"
 
 #: src/help.c:271
 #, no-c-format
-msgid "2. Run the program:   mhwaveedit\n"
-msgstr "2) avviare il programma: mhwaveedit\n"
+msgid "2. Run the program:   gwaveedit\n"
+msgstr "2) avviare il programma: gwaveedit\n"
 
 #: src/help.c:272
 #, no-c-format
@@ -1679,8 +1679,8 @@ msgstr "4) eseguire gdb con il programma e il file core:\n"
 
 #: src/help.c:274
 #, no-c-format
-msgid "   gdb /usr/local/bin/mhwaveedit core | tee backtrace.txt\n"
-msgstr "gdb /usr/local/bin/mhwaveedit core | tee backtrace.txt\n"
+msgid "   gdb /usr/local/bin/gwaveedit core | tee backtrace.txt\n"
+msgstr "gdb /usr/local/bin/gwaveedit core | tee backtrace.txt\n"
 
 #: src/help.c:275
 #, no-c-format
@@ -1699,8 +1699,8 @@ msgstr "7) ora il backtrace è stato scritto nel file backtrace.txt\n"
 
 #: src/help.c:282
 #, no-c-format
-msgid "There are plenty of things you can do if you want to help the development of mhWaveEdit. \n"
-msgstr "Chi vuole aiutare lo sviluppo di mhWaveEdit può fare tante cose.\n"
+msgid "There are plenty of things you can do if you want to help the development of gWaveEdit. \n"
+msgstr "Chi vuole aiutare lo sviluppo di gWaveEdit può fare tante cose.\n"
 
 #: src/help.c:284
 #, no-c-format
@@ -1714,8 +1714,8 @@ msgstr "Anche le richieste di nuove funzioni sono gradite, inviatele alla mailin
 
 #: src/help.c:288
 #, no-c-format
-msgid "If you speak a language other than English and mhWaveEdit isn't translated to your language, you can contribute a translation. To do that, copy the template mhwaveedit.pot in the po directory into a new file ll.po, where ll is your language code (see http://www.gnu.org/software/gettext/manual/html_node/gettext_221.html for a list of language codes). \n"
-msgstr "Se parlate una lingua diversa dall'inglese e mhWaveEdit non è tradotto nella vostra lingua, potete contribuire con una traduzione. Per farlo, copiate il modello <mhwaveedit.pot> nella cartella po con il nome ll.po, dove ll è il codice della vostra lingua (vedi http://www.gnu.org/software/gettext/manual/html_node/gettext_221.html per una lista dei codici).\n"
+msgid "If you speak a language other than English and gWaveEdit isn't translated to your language, you can contribute a translation. To do that, copy the template gwaveedit.pot in the po directory into a new file ll.po, where ll is your language code (see http://www.gnu.org/software/gettext/manual/html_node/gettext_221.html for a list of language codes). \n"
+msgstr "Se parlate una lingua diversa dall'inglese e gWaveEdit non è tradotto nella vostra lingua, potete contribuire con una traduzione. Per farlo, copiate il modello <gwaveedit.pot> nella cartella po con il nome ll.po, dove ll è il codice della vostra lingua (vedi http://www.gnu.org/software/gettext/manual/html_node/gettext_221.html per una lista dei codici).\n"
 
 #: src/help.c:290
 #, no-c-format
@@ -1754,8 +1754,8 @@ msgstr "Pagina del progetto con bug tracker, mailing list e iscrizione:\n"
 
 #: src/help.c:306
 #, no-c-format
-msgid "http://gna.org/projects/mhwaveedit\n"
-msgstr "http://gna.org/projects/mhwaveedit\n"
+msgid "http://gna.org/projects/gwaveedit\n"
+msgstr "http://gna.org/projects/gwaveedit\n"
 
 #: src/help.c:308
 #, no-c-format
@@ -1764,8 +1764,8 @@ msgstr "Mailing list (bisogna iscriversi prima di inviare messaggi):\n"
 
 #: src/help.c:309
 #, no-c-format
-msgid "mhwaveedit-discuss@gna.org\n"
-msgstr "mhwaveedit-discuss@gna.org\n"
+msgid "gwaveedit-discuss@gna.org\n"
+msgstr "gwaveedit-discuss@gna.org\n"
 
 #: src/inifile.c:84
 #: src/inifile.c:91
@@ -1957,8 +1957,8 @@ msgstr "Ignoro vecchissime impostazioni di posizione/dimensione finestra\n"
 
 #: src/mainwindow.c:205
 #, c-format
-msgid "mhWaveEdit: %s (%s): %d Hz, %s"
-msgstr "mhWaveEdit: %s (%s): %d Hz, %s"
+msgid "gWaveEdit: %s (%s): %d Hz, %s"
+msgstr "gWaveEdit: %s (%s): %d Hz, %s"
 
 #: src/mainwindow.c:288
 msgid "Use default settings"
@@ -2021,12 +2021,12 @@ msgid "There already is only one channel!"
 msgstr "C'è già rimasto solo un canale!"
 
 #: src/mainwindow.c:1354
-msgid "mhWaveEdit Help"
-msgstr "Aiuto di mhWaveEdit"
+msgid "gWaveEdit Help"
+msgstr "Aiuto di gWaveEdit"
 
 #: src/mainwindow.c:1453
-msgid "About mhWaveEdit"
-msgstr "Informazioni su mhWaveEdit"
+msgid "About gWaveEdit"
+msgstr "Informazioni su gWaveEdit"
 
 #: src/mainwindow.c:1465
 msgid ""
@@ -3514,13 +3514,13 @@ msgid "%s... (Press ESC to cancel)"
 msgstr "%s... (Premi ESC per annullare)"
 
 #: src/um.c:51
-msgid "mhWaveEdit: "
-msgstr "mhWaveEdit: "
+msgid "gWaveEdit: "
+msgstr "gWaveEdit: "
 
 #: src/um.c:64
 #, c-format
-msgid "mhWaveEdit: %s: %s\n"
-msgstr "mhWaveEdit: %s: %s\n"
+msgid "gWaveEdit: %s: %s\n"
+msgstr "gWaveEdit: %s: %s\n"
 
 #: src/um.c:97
 msgid "Message"
@@ -3679,8 +3679,8 @@ msgstr "Allineamento"
 #~ msgid "float"
 #~ msgstr "virgola"
 
-#~ msgid "mhWaveEdit: %s (%s): %d Hz, %d bit"
-#~ msgstr "mhWaveEdit: %s (%s): %d Hz, %d bit"
+#~ msgid "gWaveEdit: %s (%s): %d Hz, %d bit"
+#~ msgstr "gWaveEdit: %s (%s): %d Hz, %d bit"
 
 #~ msgid "Follow cursor while playing"
 #~ msgstr "Segui cursore mentre suona"

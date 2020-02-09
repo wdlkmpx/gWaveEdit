@@ -399,7 +399,7 @@ New features in version 1.1:
   * PortAudio library support (input+output).
   * All audio drivers can be compiled in at the same time.
   * "Line mode" display.
-  * Configuration file ~/.mhwaveedit/config
+  * Configuration file ~/.gwaveedit/config
   * New effect 'Combine channels'
   * "Mix paste" function (like paste over but mixing instead of overwriting).
   * Compilation using configure script instead of home-made Makefile.

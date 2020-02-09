@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([mhWaveEdit],[1.4.25pre],[https://github.com/wdlkmpx/gwaveedit])
+AC_INIT([gWaveEdit],[1.4.25pre],[https://github.com/wdlkmpx/gwaveedit])
 
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
@@ -22,7 +22,7 @@ LT_INIT
 IT_PROG_INTLTOOL
 
 # Set gettext package name
-GETTEXT_PACKAGE=mhwaveedit
+GETTEXT_PACKAGE=gwaveedit
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 
@@ -472,7 +472,7 @@ dnl Display configuration
 echo
 echo
 echo "------------------------"
-echo "mhWaveEdit configuration"
+echo "gWaveEdit configuration"
 echo "------------------------"
 echo
 echo "Version: $VERSION"
@@ -533,4 +533,4 @@ echo    $CFLAGS
 echo    "  Build date string:      ${FIXED_DATE_STR}"
 echo    "  Build time string:      ${FIXED_TIME_STR}"
 echo
-echo    "Type make (or gmake) to compile mhWaveEdit!"
+echo    "Type make (or gmake) to compile gWaveEdit!"

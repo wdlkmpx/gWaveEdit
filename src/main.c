@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2002 2003 2004 2005 2007 2008 2010 2011 2012, Magnus Hjorth
  *
- * This file is part of mhWaveEdit.
+ * This file is part of gWaveEdit.
  *
- * mhWaveEdit is free software; you can redistribute it and/or modify
+ * gWaveEdit is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by        
  * the Free Software Foundation; either version 2 of the License, or  
  * (at your option) any later version.
  *
- * mhWaveEdit is distributed in the hope that it will be useful,   
+ * gWaveEdit is distributed in the hope that it will be useful,   
  * but WITHOUT ANY WARRANTY; without even the implied warranty of  
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with mhWaveEdit; if not, write to the Free Software
+ * along with gWaveEdit; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
@@ -101,9 +101,9 @@ int main(int argc, char **argv)
 
 #ifdef ENABLE_NLS
      /* Setup message domain */
-     bindtextdomain("mhwaveedit", LOCALEDIR);
-     textdomain("mhwaveedit");
-     bind_textdomain_codeset("mhwaveedit", "UTF-8");
+     bindtextdomain("gwaveedit", LOCALEDIR);
+     textdomain("gwaveedit");
+     bind_textdomain_codeset("gwaveedit", "UTF-8");
 #endif
 
      floating_point_check();
@@ -456,7 +456,7 @@ void launch_mixer(void)
      if (p != 0) return;
      close_all_files();
      if (execl("/bin/sh","sh","-c",m,NULL) == -1) {
-	  fprintf(stderr,"mhwaveedit: execl: %s: %s\n",m,strerror(errno));
+	  fprintf(stderr,"gwaveedit: execl: %s: %s\n",m,strerror(errno));
 	  _exit(1);
      }
 }

@@ -27,7 +27,7 @@ Editing:
 * Make the insert silence function click-free (keeping the same amplitude
   as the surrounding sound)
 * Shaped dithering
-* Copy/paste between mhwaveedit instances
+* Copy/paste between gwaveedit instances
   * Copy/paste to and from other audio applications
 * Create and edit curves and use them for effect parameters.
 * Remove DC component and center waveform functions.

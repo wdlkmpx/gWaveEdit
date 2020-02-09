@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2002 2003 2004 2005 2006, Magnus Hjorth
  *
- * This file is part of mhWaveEdit.
+ * This file is part of gWaveEdit.
  *
- * mhWaveEdit is free software; you can redistribute it and/or modify
+ * gWaveEdit is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by        
  * the Free Software Foundation; either version 2 of the License, or  
  * (at your option) any later version.
  *
- * mhWaveEdit is distributed in the hope that it will be useful,   
+ * gWaveEdit is distributed in the hope that it will be useful,   
  * but WITHOUT ANY WARRANTY; without even the implied warranty of  
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with mhWaveEdit; if not, write to the Free Software
+ * along with gWaveEdit; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
@@ -188,7 +188,7 @@ static gchar *try_tempdir(gchar *dir)
      gchar *c;
      FILE *f;
      if (!dir || dir[0]==0) return 0;
-     c = g_strjoin("/",dir,".mhwaveedit_temp_test",NULL);
+     c = g_strjoin("/",dir,".gwaveedit_temp_test",NULL);
      f = fopen(c,"w");
      if (f) {
 	  fclose(f);
@@ -238,7 +238,7 @@ gchar *get_temp_directory(guint num)
 	       if (c==NULL) c=getenv("TMP");
 	       if (try_tempdir(c)) 
 		    tempdirs = g_list_append(tempdirs,g_strdup(c));
-	       c = g_strjoin("/",get_home_directory(),".mhwaveedit",NULL);
+	       c = g_strjoin("/",get_home_directory(),".gwaveedit",NULL);
 	       mkdir(c,CONFDIR_PERMISSION);
 	       if (try_tempdir(c))
 		    tempdirs = g_list_append(tempdirs,g_strdup(c));
@@ -264,7 +264,7 @@ gchar *get_temp_filename_d(gchar *dir)
      /* printf("%s\n",d); */
      G_LOCK(tempfile);
      if (dir != NULL)
-	  c =  g_strdup_printf("%s/mhwaveedit-temp-%d-%04d-%d",dir,
+	  c =  g_strdup_printf("%s/gwaveedit-temp-%d-%04d-%d",dir,
 			       (int)getpid(),++tempfile_count,
 			       session_get_id());
      else c = NULL;

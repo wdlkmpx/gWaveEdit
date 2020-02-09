@@ -1,4 +1,4 @@
-Known bugs in mhWaveEdit:
+Known bugs in gWaveEdit:
 
 * When stopping, the cursor doesn't stop exactly where the playback stopped.
  

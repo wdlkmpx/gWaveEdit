@@ -1,11 +1,11 @@
 [Desktop Entry]
 Type=Application
-Name=mhWaveEdit
+Name=gWaveEdit
 GenericName=Sound file editor
 GenericName[fr]=Éditeur de fichier-son
 Comment=Record, play, edit and convert sound files
 Comment[fr]=Enregistre, joue, édite et convertit des fichiers-son
-Icon=mhwaveedit
-Exec=mhwaveedit
+Icon=gwaveedit
+Exec=gwaveedit
 Terminal=false
 Categories=AudioVideo;Audio;AudioVideoEditing;Recorder;

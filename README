@@ -1,19 +1,19 @@
 ----------------------
-mhWaveEdit README file
+gWaveEdit README file
 ----------------------
 
-mhWaveEdit is a graphical program for editing sound files. It is completely 
+gWaveEdit is a graphical program for editing sound files. It is completely 
 free (GPL).
 
-The contents of this file is also available inside mhWaveEdit from the help 
+The contents of this file is also available inside gWaveEdit from the help 
 menu. 
 
 ------------
 Installation
 ------------
 
- * Unpack the source:                 tar xjf mhwaveedit-1.4.25.tar.gz
- * Go into the source directory:      cd mhwaveedit-1.4.25
+ * Unpack the source:                 tar xjf gwaveedit-1.4.25.tar.gz
+ * Go into the source directory:      cd gwaveedit-1.4.25
  * Run the configure script:          ./configure
  * Compile the sources:               make
  * Install the program:               su -c "make install"
@@ -62,8 +62,8 @@ but here are some options that the configure-script supports:
 Starting
 --------
 
-To start the program, simply type mhwaveedit. If you want to, you can specify 
-files to open on the command line, for example 'mhwaveedit file.wav'.
+To start the program, simply type gwaveedit. If you want to, you can specify 
+files to open on the command line, for example 'gwaveedit file.wav'.
 
 -----------
 Sample view
@@ -154,7 +154,7 @@ isn't actually changed until you save it (the effects also work this way).
 Effects
 -------
 
-mhWaveEdit has a few simple effects, which are available from the 'Effects' 
+gWaveEdit has a few simple effects, which are available from the 'Effects' 
 menu. 
 
  * Fade in/out
@@ -231,7 +231,7 @@ of the old Channel 1 and 0% of the old Channel 2
 external program. The output of the program is read back and replaces the 
 processed part. 
 
-mhWaveEdit supports LADSPA effects and can also make use of most of the SoX 
+gWaveEdit supports LADSPA effects and can also make use of most of the SoX 
 utility's effects. To find the LADSPA plugins the environment variable 
 LADSPA_PATH must be properly set up. 
 
@@ -265,30 +265,30 @@ problem, but if you use 8 or 16 bits sample size, this rounding causes a
 decrease in quality. 
 
 The quality decrease that the rounding causes can be masked by adding a small 
-amount of noise before rounding. This is called "dithering". mhWaveEdit 
+amount of noise before rounding. This is called "dithering". gWaveEdit 
 supports basic dithering and it's enabled by default.
 
-By default, mhWaveEdit uses floating-point temporary files for storing 
+By default, gWaveEdit uses floating-point temporary files for storing 
 processed results to avoid rounding until the file is saved.
 
 ------------
 File formats
 ------------
 
-Even if mhWaveEdit was originally built for editing wav files, it's also 
-possible to load and save in a few other formats. mhWaveEdit always supports 
-wav and raw files, but if it's compiled with the libsndfile library, mhWaveEdit 
+Even if gWaveEdit was originally built for editing wav files, it's also 
+possible to load and save in a few other formats. gWaveEdit always supports 
+wav and raw files, but if it's compiled with the libsndfile library, gWaveEdit 
 supports a couple of other formats as well. 
 
 To save a file with a different file format, use "Save as..." and choose a 
 format in the file type selection box. 
 
-mhWaveEdit has basic support for mp3 and ogg formats. For this to work you need 
+gWaveEdit has basic support for mp3 and ogg formats. For this to work you need 
 to have LAME installed for mp3 support, and OggDec/OggEnc for Ogg support. If 
 you have these programs, you can open and save mp3/ogg files just like any 
 other file format.
 
-If mplayer is installed, mhwaveedit can open all formats that it supports, for 
+If mplayer is installed, gwaveedit can open all formats that it supports, for 
 example the soundtrack of a video file. Since mplayer is only a player, these 
 files can not be saved back after editing, you have to save the file into a 
 supported format.
@@ -297,25 +297,25 @@ supported format.
 Files
 -----
 
-mhWaveEdit creates a directory ~/.mhwaveedit where it stores configuration 
+gWaveEdit creates a directory ~/.gwaveedit where it stores configuration 
 information. 
 
 The configuration file is called config. It can be hand edited, but the easiest 
 way is through 'Preferences' on the Edit menu.
 
-Each mhwaveedit process creates a session file in the .mhwaveedit directory 
-called mhwaveedit-session-<pid>-<session>-<state>, where <session> is the 
+Each gwaveedit process creates a session file in the .gwaveedit directory 
+called gwaveedit-session-<pid>-<session>-<state>, where <session> is the 
 session ID number and <state> is a character code showing the state of the 
 session ('r' for running sessions). 
 
-Temporary files are by default also stored in the ~/.mhwaveedit directory. 
+Temporary files are by default also stored in the ~/.gwaveedit directory. 
 Which directories to use can be set through the preferences dialog. To get the 
 best performance, you should have one temporary directory for each local 
 filesystem. The temporary files have names of the form 
-"mhwaveedit-temp-<pid>-nnnn-<session>". Do NOT open or remove temporary files 
-with the same pid number as a currently running mhWaveEdit.
+"gwaveedit-temp-<pid>-nnnn-<session>". Do NOT open or remove temporary files 
+with the same pid number as a currently running gWaveEdit.
 
-mhWaveEdit checks on startup for leftover temporary files and lets the user 
+gWaveEdit checks on startup for leftover temporary files and lets the user 
 open them. After opening a crashed session, the files can be saved or thrown 
 away.
 
@@ -391,11 +391,11 @@ exactly where the program crashed.
 
 How to create a backtrace:
 1. Enable core dumps: ulimit -c unlimited
-2. Run the program:   mhwaveedit
+2. Run the program:   gwaveedit
 3. Make the program crash. You should now get a file named core or core.1234 in 
 the directory you're in.
 4. Run gdb with the program and core file: 
-   gdb /usr/local/bin/mhwaveedit core | tee backtrace.txt
+   gdb /usr/local/bin/gwaveedit core | tee backtrace.txt
 5. After gdb has loaded, use the command: bt
 6. Quit gdb with the command: quit
 7. Now you should have a back trace in the file backtrace.txt
@@ -405,7 +405,7 @@ Helping out
 -----------
 
 There are plenty of things you can do if you want to help the development of 
-mhWaveEdit. 
+gWaveEdit. 
 
 First of all, look for bugs and report all bugs you find into the bug tracker 
 or through e-mail. Sometimes a bug can get overlooked for a long time because 
@@ -416,9 +416,9 @@ although it helps of course.
 Feature requests are also welcome, report them to the mailing list or to the 
 bug tracker.
 
-If you speak a language other than English and mhWaveEdit isn't translated to 
+If you speak a language other than English and gWaveEdit isn't translated to 
 your language, you can contribute a translation. To do that, copy the template 
-mhwaveedit.pot in the po directory into a new file ll.po, where ll is your 
+gwaveedit.pot in the po directory into a new file ll.po, where ll is your 
 language code (see 
 http://www.gnu.org/software/gettext/manual/html_node/gettext_221.html for a 
 list of language codes). 

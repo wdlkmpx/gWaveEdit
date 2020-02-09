@@ -331,7 +331,7 @@ More recent history can be found in ChangeLog.git
 	* src/sound-jack.c (mhjack_connect): If connection fails, append
 	the PID to the client name and try again.
 
-	* src/session.c (session_init): Use ~/.mhwaveedit directory for 
+	* src/session.c (session_init): Use ~/.gwaveedit directory for 
 	  sessions.
 	  (session_init): Fix segfault.
 
@@ -1043,7 +1043,7 @@ More recent history can be found in ChangeLog.git
 	gtk_window_set_default_size instead of gtk_widget_set_usize.
 
 	* src/inifile.c (inifile_init): Changed default permission for
-	.mhwaveedit directory to 0755
+	.gwaveedit directory to 0755
 
 	* src/mainwindow.c: Double click selects area between the nearest marks
 

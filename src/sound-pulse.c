@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2008 2009 2011 2012, Magnus Hjorth
  *
- * This file is part of mhWaveEdit.
+ * This file is part of gWaveEdit.
  *
- * mhWaveEdit is free software; you can redistribute it and/or modify
+ * gWaveEdit is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by        
  * the Free Software Foundation; either version 2 of the License, or  
  * (at your option) any later version.
  *
- * mhWaveEdit is distributed in the hope that it will be useful,   
+ * gWaveEdit is distributed in the hope that it will be useful,   
  * but WITHOUT ANY WARRANTY; without even the implied warranty of  
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with mhWaveEdit; if not, write to the Free Software
+ * along with gWaveEdit; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
@@ -424,7 +424,7 @@ static gboolean pulse_connect(gboolean autospawn, gboolean silent)
      gchar *c;
      int i;
      if (pulse_data.ctx != NULL) return TRUE;
-     pulse_data.ctx = pa_context_new(pulse_api(),"mhwaveedit");
+     pulse_data.ctx = pa_context_new(pulse_api(),"gwaveedit");
      g_assert(pulse_data.ctx != NULL);
      pulse_data.ctx_state = PA_CONTEXT_UNCONNECTED;
      pa_context_set_state_callback(pulse_data.ctx,pulse_context_state_cb,
@@ -1001,7 +1001,7 @@ static void pulse_input_store(Ringbuf *buf)
 			     (const void **)&pulse_data.record_data,
 			     &pulse_data.record_bytes);
 	  if (i != 0) {
-	       fprintf(stderr,"mhWaveEdit: pa_stream_peek: %s\n",
+	       fprintf(stderr,"gWaveEdit: pa_stream_peek: %s\n",
 		       pa_strerror(pa_context_errno(pulse_data.ctx)));
 	       return;
 	  }

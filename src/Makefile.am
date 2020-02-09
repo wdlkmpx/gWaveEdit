@@ -1,6 +1,6 @@
-bin_PROGRAMS = mhwaveedit
+bin_PROGRAMS = gwaveedit
 
-mhwaveedit_SOURCES = chunk.c int_box.c sound.c speeddialog.c              \
+gwaveedit_SOURCES = chunk.c int_box.c sound.c speeddialog.c              \
                      chunkview.c main.c um.c                              \
                      effectdialog.c mainwindow.c ringbuf.c                \
                      volumedialog.c float_box.c player.c                  \

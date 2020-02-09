@@ -26,7 +26,7 @@ missing
 mkinstalldirs
 stamp-h1
 
-/src/mhwaveedit
+/src/gwaveedit
 
 /po/en@boldquot.header
 /po/en@quot.header
@@ -39,6 +39,6 @@ ar-lib
 ltmain.sh
 libtool
 
-po/mhwaveedit.pot
+po/gwaveedit.pot
 po/Makefile.in.in
 stamp-it
