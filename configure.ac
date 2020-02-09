@@ -76,11 +76,11 @@ AC_ARG_WITH(default-ladspa-path,
 DEFAULT_LADSPA_PATH=$withval)
 AC_DEFINE_UNQUOTED(DEFAULT_LADSPA_PATH,"${DEFAULT_LADSPA_PATH}",[Default path for LADSPA plugins])
 
-DEFAULT_MIXERAPP=xmixer
+DEFAULT_MIXERAPP="xterm -e alsamixer"
 AC_ARG_WITH(default-mixerapp,
 [  --with-default-mixerapp=appname
                            Default command for "launch mixer" button
-                           (default: "xmixer")],
+                           (default: xterm -e alsamixer)],
 DEFAULT_MIXERAPP=$withval)
 AC_DEFINE_UNQUOTED(DEFAULT_MIXERAPP,"${DEFAULT_MIXERAPP}",[Default mixer application])
 
