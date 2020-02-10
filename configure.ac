@@ -41,15 +41,6 @@ AC_DEFINE([USE_DOUBLE_SAMPLES],[],
   [Use gdouble instead of gfloat as sample data type]) 
 MHW_DOUBLE="yes")
 
-AC_DEFUN([AC_WITHOUT_CHECK_CASTS],[
-	if test "x$withval" = "xno" ; then 
-	AC_DEFINE(GTK_NO_CHECK_CASTS,1,[If defined, disables GTK+ type checking])
-	fi
-])
-
-AC_ARG_WITH(check-casts,
-[  --without-check-casts   Do not type-check GTK casts.],AC_WITHOUT_CHECK_CASTS)
-
 AC_DEFUN([AC_ENABLE_WERROR],[
 	if test "x$enableval" = "xyes" ; then
 	AM_CFLAGS="$AM_CFLAGS -Werror"
