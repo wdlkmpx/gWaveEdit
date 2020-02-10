@@ -104,9 +104,6 @@ fi
 
 dnl Checks for programs.
 AC_PROG_CC
-AC_PROG_GCC_TRADITIONAL
-AC_PROG_LN_S
-AC_PROG_MAKE_SET
 
 dnl Checks for libraries.
 dnl Replace main with a function in -libs:
@@ -408,8 +405,7 @@ AC_DEFINE(_LARGEFILE_SOURCE,1,[Defined to get fseeko/ftello prototypes])
 AC_CHECK_SIZEOF(off_t)
 
 dnl Checks for header files.
-AC_HEADER_STDC
-AC_CHECK_HEADERS([sys/time.h time.h sys/ioctl.h sys/types.h unistd.h fcntl.h sched.h libintl.h locale.h])
+AC_CHECK_HEADERS([sys/time.h sys/ioctl.h sys/types.h fcntl.h sched.h libintl.h locale.h])
 
 dnl Ladspa
 HAVE_LADSPA=yes
@@ -432,36 +428,12 @@ if test "x$HAVE_LADSPA_GLOBAL" = "xyes"; then
 fi
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_TYPE_SIZE_T
 AC_TYPE_OFF_T
 AC_TYPE_PID_T
-AC_TYPE_SIGNAL
-AC_HEADER_TIME
-AC_HEADER_DIRENT
-AC_HEADER_SYS_WAIT
-AC_C_CONST
-AC_C_VOLATILE
-
-dnl Check return type of unsetenv
-AC_MSG_CHECKING([whether unsetenv returns a value])
-HAVE_INT_UNSETENV=no
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([
-#include <stdlib.h>
-],[int i; i = unsetenv("dummy"); return 0;])],HAVE_INT_UNSETENV=yes)
-if test "x$HAVE_INT_UNSETENV" = "xyes";
-then
-    AC_DEFINE(UNSETENV_RETVAL,1,[Defined if unsetenv returns an integer])    
-fi
-AC_MSG_RESULT([$HAVE_INT_UNSETENV])
 
 dnl Checks for library functions.
-AC_FUNC_MEMCMP
-AC_CHECK_FUNCS([gettimeofday mkdir strerror strtod strtol sched_yield ceill setlocale fseeko ftello lrint lrintf dup2 memchr memmove memset pow putenv select sqrt strchr strrchr strstr strtoul]) 
-AC_FUNC_CLOSEDIR_VOID
+AC_CHECK_FUNCS([gettimeofday sched_yield ceill setlocale fseeko ftello lrint lrintf dup2 memchr memmove pow putenv select sqrt strtoul]) 
 AC_FUNC_FORK
-AC_FUNC_SELECT_ARGTYPES
-AC_FUNC_STAT
-AC_FUNC_STRTOD
 
 dnl Write output
 AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in share/Makefile ])

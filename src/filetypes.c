@@ -108,14 +108,10 @@ static gboolean xputenv(char *string)
 
 static gboolean xunsetenv(char *varname)
 {
-#ifdef UNSETENV_RETVAL
      if (unsetenv(varname) != 0) {
 	  console_message(_("unsetenv failed!"));
 	  return TRUE;
      }
-#else
-     unsetenv(varname);
-#endif
      return FALSE;
 }
 
