@@ -1084,7 +1084,7 @@ static void pulse_preferences(void)
      GtkWidget *a,*b,*c,*d;
      struct pulse_prefs_ui *up;
      up = g_malloc(sizeof(*up));
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      up->wnd = a;
      gtk_window_set_title(GTK_WINDOW(a),_("PulseAudio Preferences"));
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);

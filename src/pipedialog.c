@@ -131,7 +131,7 @@ static GtkWidget *create_error_window(gchar *command)
      GtkAccelGroup* ag;
 
      ag = gtk_accel_group_new();
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      gtk_window_set_title(GTK_WINDOW(a),_("Process output"));
      gtk_window_set_position (GTK_WINDOW (a), GTK_WIN_POS_CENTER);
      gtk_window_set_default_size(GTK_WINDOW(a),470,200);

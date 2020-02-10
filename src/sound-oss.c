@@ -435,7 +435,7 @@ static void oss_preferences(void)
      struct oss_prefdlg *pd;
      gchar *q;
      pd = g_malloc(sizeof(struct oss_prefdlg));
-     a = gtk_window_new(GTK_WINDOW_DIALOG);     
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);     
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_title(GTK_WINDOW(a),_("OSS preferences"));
      gtk_window_set_position(GTK_WINDOW(a),GTK_WIN_POS_CENTER);

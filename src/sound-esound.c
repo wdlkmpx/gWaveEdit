@@ -250,7 +250,7 @@ static void esound_preferences(void)
      struct esound_prefdlg *pd;
      esound_prefs_init();
      pd = g_malloc(sizeof(*pd));
-     a = gtk_window_new(GTK_WINDOW_DIALOG);     
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);     
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_title(GTK_WINDOW(a),_("ESD preferences"));
      gtk_window_set_position(GTK_WINDOW(a),GTK_WIN_POS_CENTER);

@@ -69,7 +69,7 @@ static void alsa_show_preferences(void)
 {
      GtkWidget *a,*b,*c,*d;
      alsa_init(TRUE); /* Read config */
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      gtk_window_set_title(GTK_WINDOW(a),_("ALSA Preferences"));
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_position(GTK_WINDOW(a),GTK_WIN_POS_MOUSE);

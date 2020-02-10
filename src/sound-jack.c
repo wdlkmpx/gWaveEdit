@@ -191,7 +191,7 @@ static void mhjack_preferences(void)
      gchar buf[16];
      mhjack_read_config();
      dlg = g_malloc(sizeof(*dlg));     
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      dlg->wnd = GTK_WINDOW(a);
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_title(GTK_WINDOW(a),_("Jack Preferences"));

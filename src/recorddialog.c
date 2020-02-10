@@ -481,7 +481,7 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
     
      ag = gtk_accel_group_new();
 
-     other_dialog.wnd = GTK_WINDOW(gtk_window_new(GTK_WINDOW_DIALOG));
+     other_dialog.wnd = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
      gtk_window_set_title(other_dialog.wnd,_("Custom format"));
      if (wg == NULL) wg = gtk_window_group_new();
      gtk_window_group_add_window(wg,other_dialog.wnd);

@@ -184,7 +184,7 @@ gchar *user_input(gchar *label, gchar *title, gchar *defvalue,
 {
      GtkWidget *a,*b,*c,*d,*ent;
      struct user_input_data uid;
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      if (below != NULL) {
 	  gtk_window_set_transient_for(GTK_WINDOW(a),below);
 	  gtk_window_set_position(GTK_WINDOW(a),GTK_WIN_POS_CENTER_ON_PARENT);
@@ -282,7 +282,7 @@ gint user_choice(gchar **choices, guint def, gchar *windowtitle,
      GtkTreeViewColumn *col;
      GtkCellRenderer *renderer;
      gint result;
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_title(GTK_WINDOW(a), windowtitle?windowtitle:_("Choice"));
      gtk_container_set_border_width(GTK_CONTAINER(a),5);

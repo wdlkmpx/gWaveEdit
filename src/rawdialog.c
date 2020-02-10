@@ -69,7 +69,7 @@ Dataformat *rawdialog_execute(gchar *filename, gint filesize, guint *offset)
      dataformat_get_from_inifile("rawDialog",TRUE,&fmt);    
      maxhdrsize = filesize;
      
-     w = GTK_WINDOW(gtk_window_new(GTK_WINDOW_DIALOG));
+     w = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
      gtk_window_set_title(w,_("Unknown file format"));
      gtk_window_set_modal(w,TRUE);
      gtk_container_set_border_width(GTK_CONTAINER(w),5);

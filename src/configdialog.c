@@ -288,7 +288,7 @@ static void colors_click(GtkButton *button, gpointer user_data)
 						  FALSE);
      gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION(cs), TRUE);
 
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_transient_for(GTK_WINDOW(a),GTK_WINDOW(cd));
      gtk_window_set_title(GTK_WINDOW(a),_("Colors"));

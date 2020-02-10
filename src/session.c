@@ -427,7 +427,7 @@ gboolean session_dialog(void)
 	  return FALSE;
      }
 
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      gtk_window_set_title(GTK_WINDOW(a),_("Sessions"));
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_default_size(GTK_WINDOW(a),400,200);

@@ -1201,7 +1201,7 @@ static gpointer mp3_get_settings(void)
 
      /* Create the window */
 
-     a = gtk_window_new(GTK_WINDOW_DIALOG);
+     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      gtk_window_set_title(GTK_WINDOW(a),_("MP3 Preferences"));
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      g_signal_connect_swapped(G_OBJECT(a),"destroy",
