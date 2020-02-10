@@ -30,12 +30,12 @@
 #define HISTORY_BOX_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  HISTORY_BOX_TYPE, HistoryBoxClass))
 
 typedef struct {
-     GtkCombo combo;
+     GtkComboBoxText combo;
      gpointer history;
 } HistoryBox;
 
 typedef struct {
-     GtkComboClass comboclass;
+     GtkComboBoxTextClass comboclass;
 } HistoryBoxClass;
 
 GType history_box_get_type(void);

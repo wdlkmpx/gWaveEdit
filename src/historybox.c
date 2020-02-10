@@ -27,7 +27,7 @@
 
 #define HISTORY_BOX_MAXENTRIES 20
 
-G_DEFINE_TYPE(HistoryBox,history_box,GTK_TYPE_COMBO)
+G_DEFINE_TYPE(HistoryBox,history_box,GTK_TYPE_COMBO_BOX_TEXT)
 
 typedef struct {
      gchar *name;
@@ -72,7 +72,7 @@ static void save_history(HistoryBoxHistory *hist)
 
 GtkWidget *history_box_new(gchar *historyname, gchar *value)
 {
-     HistoryBox *hb = g_object_new(HISTORY_BOX_TYPE, NULL);
+     HistoryBox *hb = g_object_new(HISTORY_BOX_TYPE, "has-entry", TRUE, NULL);
      history_box_set_history(hb, historyname);
      history_box_set_value(hb, value);
      return GTK_WIDGET(hb);
@@ -80,12 +80,13 @@ GtkWidget *history_box_new(gchar *historyname, gchar *value)
 
 gchar *history_box_get_value(HistoryBox *box)
 {
-     return (gchar *)gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(box)->entry));
+     return gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(box));
 }
 
 void history_box_set_history(HistoryBox *box, gchar *historyname)
 {
      HistoryBoxHistory *hist;
+     GList *glist;
      if (!history_hash) history_hash=g_hash_table_new(g_str_hash,g_str_equal);
      hist = g_hash_table_lookup(history_hash, historyname);
      if (!hist) {
@@ -95,23 +96,31 @@ void history_box_set_history(HistoryBox *box, gchar *historyname)
 	  load_history(hist);
 	  g_hash_table_insert(history_hash,hist->name,hist);
      }
-     if (hist->entries != NULL)
-	  gtk_combo_set_popdown_strings(GTK_COMBO(box),hist->entries);
-     else 
-	  gtk_list_clear_items(GTK_LIST(GTK_COMBO(box)->list),0,-1);     
+
+     glist = hist->entries;
+     gtk_list_store_clear( GTK_LIST_STORE(gtk_combo_box_get_model( GTK_COMBO_BOX(box) )) );
+     while (glist) {
+       if (glist->data) {
+          gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(box), glist->data);
+       }
+       glist = glist->next;
+     }
+
      box->history = hist;
 }
 
 void history_box_set_value(HistoryBox *box, gchar *value)
 {
-     gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(box)->entry),value);
+     GtkWidget *combo_entry;
+     combo_entry = GTK_WIDGET(gtk_bin_get_child(GTK_BIN(box)));
+     gtk_entry_set_text (GTK_ENTRY (combo_entry), value);
 }
 
 void history_box_rotate_history(HistoryBox *box)
 {
      gchar *v;
      HistoryBoxHistory *hist=box->history;
-     GList *l,*n;
+     GList *l, *n, *glist;
      v = g_strdup(history_box_get_value(box));
      for (l=hist->entries; l!=NULL; l=n) {
 	  n = l->next;
@@ -129,6 +138,15 @@ void history_box_rotate_history(HistoryBox *box)
 	  g_list_free_1(l->next);
 	  l->next = NULL;
      }
-     gtk_combo_set_popdown_strings(GTK_COMBO(box),hist->entries);
+
+     glist = hist->entries;
+     gtk_list_store_clear( GTK_LIST_STORE(gtk_combo_box_get_model( GTK_COMBO_BOX(box) )) );
+     while (glist) {
+       if (glist->data) {
+          gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(box), glist->data);
+       }
+       glist = glist->next;
+     }
+
      save_history(hist);
 }
