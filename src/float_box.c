@@ -88,9 +88,6 @@ static void floatbox_class_init(FloatboxClass *klass)
 		       NULL, NULL,
 		       g_cclosure_marshal_VOID__FLOAT,G_TYPE_NONE,1,
 		       G_TYPE_FLOAT);
-
-     gtk_object_class_add_signals(oc,floatbox_signals,
-				  LAST_SIGNAL);
 }
 
 static void floatbox_init(Floatbox *fbox)

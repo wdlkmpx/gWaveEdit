@@ -119,7 +119,6 @@ static void status_bar_class_init(StatusBarClass *klass)
 		       G_STRUCT_OFFSET(StatusBarClass,progress_end),
 		       NULL, NULL,
 		       g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
-     gtk_object_class_add_signals(oc,status_bar_signals,LAST_SIGNAL);
 }
 
 GtkWidget *status_bar_new(void)

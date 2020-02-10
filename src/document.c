@@ -182,9 +182,6 @@ static void document_class_init(DocumentClass *klass)
 		       G_STRUCT_OFFSET(DocumentClass,state_changed),
 		       NULL, NULL,
 		       g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
-
-     gtk_object_class_add_signals(oc,document_signals,LAST_SIGNAL);
-
 }
 
 Document *document_new_with_file(gchar *filename, StatusBar *bar)

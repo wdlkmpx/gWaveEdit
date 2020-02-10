@@ -55,8 +55,6 @@ static void effect_dialog_class_init(EffectDialogClass *klass)
 		       G_STRUCT_OFFSET(EffectDialogClass,target_changed),
 		       NULL, NULL,
 		       g_cclosure_marshal_VOID__VOID,G_TYPE_NONE,0);
-
-     gtk_object_class_add_signals(oc,effect_dialog_signals,LAST_SIGNAL);
 }
 
 gboolean effect_dialog_apply(EffectDialog *ed)

@@ -39,7 +39,6 @@
 
 /* GTK compatibility stuff */
 #define GTK_WINDOW_DIALOG GTK_WINDOW_TOPLEVEL
-#define gtk_object_class_add_signals(x,y,z)
 
 /* Global stuff */
 #define PROGRAM_VERSION_STRING PACKAGE_NAME " " VERSION

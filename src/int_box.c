@@ -84,9 +84,6 @@ static void intbox_class_init(IntboxClass *klass)
 		       NULL, NULL,
 		       g_cclosure_marshal_VOID__LONG,G_TYPE_NONE,1,
 		       G_TYPE_LONG);
-
-     gtk_object_class_add_signals(oc,intbox_signals,
-				  LAST_SIGNAL);
 }
 
 static void intbox_init(Intbox *fbox)

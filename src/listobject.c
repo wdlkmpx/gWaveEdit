@@ -62,7 +62,6 @@ static void list_object_class_init(ListObjectClass *klass)
 		       NULL, NULL,
 		       g_cclosure_marshal_VOID__POINTER, G_TYPE_NONE,
 		       1, G_TYPE_POINTER);
-     gtk_object_class_add_signals(oc,list_object_signals,LAST_SIGNAL);
 }
 
 static void list_object_init(ListObject *lo)

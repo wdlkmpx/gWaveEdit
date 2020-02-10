@@ -110,7 +110,6 @@ static void document_list_class_init(DocumentListClass *klass)
 		       G_STRUCT_OFFSET(DocumentListClass,document_changed),
 		       NULL, NULL,
 		       g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
-     gtk_object_class_add_signals(oc,document_list_signals,LAST_SIGNAL);
 }
 
 GtkWidget *document_list_new(Document *chosen)

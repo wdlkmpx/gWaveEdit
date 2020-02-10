@@ -71,7 +71,6 @@ static void combo_class_init(ComboClass *klass)
 		       G_STRUCT_OFFSET(ComboClass,selection_changed),
 		       NULL, NULL,
 		       g_cclosure_marshal_VOID__VOID,G_TYPE_NONE,0);
-     gtk_object_class_add_signals(oc,combo_signals,LAST_SIGNAL);
 }
 
 

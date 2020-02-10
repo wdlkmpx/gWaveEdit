@@ -192,9 +192,6 @@ static void record_format_combo_class_init(RecordFormatComboClass *klass)
 					   format_dialog_request),
 		       NULL, NULL,
 		       g_cclosure_marshal_VOID__VOID,G_TYPE_NONE,0);
-     
-     gtk_object_class_add_signals(oc,
-				  record_format_combo_signals,LAST_SIGNAL);
 }
 
 static void record_format_combo_init(RecordFormatCombo *obj)
