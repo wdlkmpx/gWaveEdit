@@ -292,7 +292,7 @@ static void colors_click(GtkButton *button, gpointer user_data)
      gtk_window_set_modal(GTK_WINDOW(a),TRUE);
      gtk_window_set_transient_for(GTK_WINDOW(a),GTK_WINDOW(cd));
      gtk_window_set_title(GTK_WINDOW(a),_("Colors"));
-     gtk_window_set_policy(GTK_WINDOW(a),FALSE,FALSE,TRUE);
+     gtk_window_set_resizable(GTK_WINDOW(a),FALSE);
      b = gtk_vbox_new(FALSE,5);
      gtk_container_set_border_width(GTK_CONTAINER(b),5);
      gtk_container_add(GTK_CONTAINER(a),b);

@@ -2872,7 +2872,7 @@ static void mainwindow_init(Mainwindow *obj)
 	  gtk_widget_hide(GTK_WIDGET(obj->speed_label));
      }
 
-     gtk_window_set_policy(GTK_WINDOW(obj),FALSE,TRUE,FALSE);
+     gtk_window_set_resizable(GTK_WINDOW(obj),TRUE);
      
      set_sensitive(obj->need_chunk_items, FALSE);
      set_sensitive(obj->need_selection_items, FALSE);

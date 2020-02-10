@@ -851,7 +851,7 @@ static void effect_browser_init(EffectBrowser *eb)
 
      gtk_window_set_title(GTK_WINDOW(eb),_("Effects"));
      gtk_window_add_accel_group(GTK_WINDOW (eb), ag);
-     gtk_window_set_policy(GTK_WINDOW(eb),FALSE,TRUE,FALSE);
+     gtk_window_set_resizable(GTK_WINDOW(eb),TRUE);
 
      if (!geometry_stack_inited) {
 	  if (inifile_get_gboolean("useGeometry",FALSE))
