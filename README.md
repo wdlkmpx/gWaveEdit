@@ -6,8 +6,16 @@ Run:
 - make
 - make install
 
-# Abandoned GTK+ 3.0 port
+# Requirements:
+- gtk >= 2.24
+- glib >= 2.32
+- lame 3.93+
 
-This was an effort to port gwaveedit to GTK+ 3.0, abandoned in the middle of nowhere. A lot of work done, learned a few lessons about the history of GTK+ but it's still a long way to go ...
+# Known bugs in gWaveEdit:
 
-Basically I tried to remove deprecated functions in GTK+ 2.0. It compiles, but not with `-Wall -DGTK_DISABLE_DEPRECATED` yet. `-DGDK_DISABLE_DEPRECATED` is also waiting.
+* When stopping, the cursor doesn't stop exactly where the playback stopped.
+
+* Not highly tested on big-endian systems. Feedback on this is welcome. 
+
+* The ALSA driver sometimes underrun shortly after playback started or 
+  cursor jump, causing a click in the playback. 

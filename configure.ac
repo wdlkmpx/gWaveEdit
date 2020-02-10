@@ -387,8 +387,8 @@ AC_SUBST(ARTSC_LIBS)
 
 dnl Check for GTK+ without gthread
 
-PKG_CHECK_MODULES([GLIB], [glib-2.0 >= 2.28])
-PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.18])
+PKG_CHECK_MODULES([GLIB], [glib-2.0 >= 2.32.0])
+PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.24.0])
 
 dnl Check for large file support
 AC_SYS_LARGEFILE
