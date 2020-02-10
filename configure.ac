@@ -122,7 +122,7 @@ AC_DEFUN([AC_WITH_LIBSNDFILE],[
 ])
 
 AC_ARG_WITH(libsndfile,[  --with-libsndfile=prefix Prefix where libsndfile is installed (optional)
-  --without-libsndfile    Don't use libsndfile library],AC_WITH_LIBSNDFILE)
+  --without-libsndfile    Do not use libsndfile library],AC_WITH_LIBSNDFILE)
 
 if test "x$HAVE_SNDFILE" = "xyes" -a "x$SKIP_SNDFILE_CHECK" = "xno"; then
 	PKG_CHECK_MODULES(SNDFILE, sndfile, , HAVE_SNDFILE=no)
@@ -153,7 +153,7 @@ AC_DEFUN([AC_WITH_LIBSAMPLERATE],[
 ])
 
 AC_ARG_WITH(libsamplerate,[  --with-libsamplerate=prefix Prefix where libsamplerate is installed (optional)
-  --without-libsamplerate Don't use libsamplerate library],AC_WITH_LIBSAMPLERATE)
+  --without-libsamplerate Do not use libsamplerate library],AC_WITH_LIBSAMPLERATE)
 
 if test "x$HAVE_LIBSAMPLERATE" = "xyes" -a "x$SKIP_LIBSAMPLERATE_CHECK" = "xno"; then
 	PKG_CHECK_MODULES(LIBSAMPLERATE, samplerate, , HAVE_LIBSAMPLERATE=no)
@@ -171,7 +171,7 @@ dnl Check for PortAudio
 PORTAUDIO_LIBS=""
 MHW_HAVE_PORTAUDIO=yes
 
-AC_ARG_WITH(portaudio,[  --without-portaudio     Don't use portaudio library],
+AC_ARG_WITH(portaudio,[  --without-portaudio     Do not use portaudio library],
 if test "x$withval" = "xno"; then
 MHW_HAVE_PORTAUDIO=no
 fi
@@ -202,7 +202,7 @@ dnl Check for SDL
 HAVE_SDL=no
 SKIP_SDL_TEST=no
 
-AC_ARG_WITH(sdl,[  --without-sdl           Don't use SDL library],
+AC_ARG_WITH(sdl,[  --without-sdl           Do not use SDL library],
 if test "x$withval" = "xno" ; then
  SKIP_SDL_TEST=yes
 fi
@@ -233,7 +233,7 @@ AC_DEFUN([AC_WITHOUT_ALSALIB],[
 	fi
 ])
 
-AC_ARG_WITH(alsalib,[  --without-alsalib       Don't compile ALSA-lib driver],AC_WITHOUT_ALSALIB)
+AC_ARG_WITH(alsalib,[  --without-alsalib       Do not compile ALSA-lib driver],AC_WITHOUT_ALSALIB)
 
 AC_CHECK_HEADER(alsa/asoundlib.h,mhw_found_header=yes,mhw_found_header=no)
 if test "x$mhw_found_header" = "xno"; then
@@ -257,7 +257,7 @@ AC_DEFUN([AC_WITHOUT_OSS],[
 	fi
 ])
 
-AC_ARG_WITH(oss,[  --without-oss           Don't compile OSS driver],AC_WITHOUT_OSS)
+AC_ARG_WITH(oss,[  --without-oss           Do not compile OSS driver],AC_WITHOUT_OSS)
 
 dnl Check for libossaudio, needed for OSS on OpenBSD
 AC_CHECK_LIB(ossaudio,_oss_ioctl)
@@ -283,7 +283,7 @@ AC_DEFUN([AC_WITHOUT_JACK],[
 	fi
 ])
 
-AC_ARG_WITH(jack,[  --without-jack          Don't compile JACK driver],AC_WITHOUT_JACK)
+AC_ARG_WITH(jack,[  --without-jack          Do not compile JACK driver],AC_WITHOUT_JACK)
 
 if test "x$MHW_SKIP_JACKTEST" = "xno"
 then
@@ -305,7 +305,7 @@ AC_DEFUN([AC_WITHOUT_PULSE],[
 	fi
 ])
 
-AC_ARG_WITH(pulse,[  --without-pulse          Don't compile PulseAudio driver],AC_WITHOUT_PULSE)
+AC_ARG_WITH(pulse,[  --without-pulse          Do not compile PulseAudio driver],AC_WITHOUT_PULSE)
 
 if test "x$MHW_SKIP_PULSETEST" = "xno"
 then
@@ -319,7 +319,7 @@ fi
 dnl Check for Esound
 
 MHW_HAVE_ESOUND=yes
-AC_ARG_WITH(esound,[  --without-esound        Don't compile EsounD driver],
+AC_ARG_WITH(esound,[  --without-esound        Do not compile EsounD driver],
 	if test "x$withval" = "xno"; then
 	   MHW_HAVE_ESOUND=no
 	fi
@@ -343,7 +343,7 @@ AC_DEFUN([AC_WITHOUT_SUNAUDIO],[
 	fi
 ])
 
-AC_ARG_WITH(sun,[  --without-sun           Don't compile Sun audio driver],AC_WITHOUT_SUNAUDIO)
+AC_ARG_WITH(sun,[  --without-sun           Do not compile Sun audio driver],AC_WITHOUT_SUNAUDIO)
 
 AC_CHECK_HEADER(sys/audio.h,mhw_found_one=yes,mhw_found_one=no)
 if test "x$mhw_found_one" = "xno"; then
@@ -366,7 +366,7 @@ AC_DEFUN([AC_WITHOUT_ARTSC],[
 	fi
 ])
 
-AC_ARG_WITH(arts, [  --without-arts          Don't compile aRts driver],AC_WITHOUT_ARTSC)
+AC_ARG_WITH(arts, [  --without-arts          Do not compile aRts driver],AC_WITHOUT_ARTSC)
 
 ARTSC_CONFIG=no
 if test "x$MHW_HAVE_ARTSC" = "xyes"; then
@@ -403,7 +403,7 @@ HAVE_LADSPA=yes
 HAVE_LADSPA_GLOBAL=yes
 AC_CHECK_HEADER(ladspa.h,,HAVE_LADSPA_GLOBAL=no)
 AC_ARG_ENABLE(ladspa,
-  [  --disable-ladspa        Don't include any Ladspa support],
+  [  --disable-ladspa        Do not include any Ladspa support],
   [if test "x$enableval" = "xno"; then HAVE_LADSPA=no; fi])
 if test "x$HAVE_LADSPA" = "xyes"; then
 	AC_CHECK_HEADER(dlfcn.h,,HAVE_LADSPA=no)
