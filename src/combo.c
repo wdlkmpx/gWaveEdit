@@ -23,7 +23,7 @@
 
 #include "combo.h"
 
-G_DEFINE_TYPE(Combo,combo,GTK_TYPE_COMBO_BOX)
+G_DEFINE_TYPE(Combo,combo,GTK_TYPE_COMBO_BOX_TEXT)
 
 enum { CHANGED_SIGNAL, LAST_SIGNAL };
 static guint combo_signals[LAST_SIGNAL] = { 0 };
@@ -76,22 +76,6 @@ static void combo_class_init(ComboClass *klass)
 
 static void combo_init(Combo *obj)
 {
-     /* Most of this was taken from the code for gtk_combo_box_new_text in 
-      * GTK+ 2.4.13 */
-  GtkWidget *combo_box = GTK_WIDGET(obj);
-  GtkCellRenderer *cell;
-  GtkListStore *store;
-    
-  store = gtk_list_store_new (1, G_TYPE_STRING);
-  gtk_combo_box_set_model (GTK_COMBO_BOX(combo_box),GTK_TREE_MODEL (store));
-  g_object_unref (store);
-
-  cell = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), cell, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), cell,
-                                  "text", 0,
-                                  NULL);
-
   obj->strings = NULL;
   obj->max_request_width = -1;
 }
@@ -104,13 +88,13 @@ void combo_set_items(Combo *combo, GList *item_strings, int default_index)
      updating_flag = TRUE;
      for (l=combo->strings; l!=NULL; l=l->next) {
 	  g_free(l->data);
-	  gtk_combo_box_remove_text(GTK_COMBO_BOX(combo),0);
+	  gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(combo),0);
      }
      g_list_free(combo->strings);
      combo->strings = NULL;
      for (l=item_strings,len=0; l!=NULL; l=l->next,len++) {
 	  c = (gchar *)l->data;
-	  gtk_combo_box_append_text(GTK_COMBO_BOX(combo),c);
+	  gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo),c);
 	  combo->strings = g_list_append(combo->strings,g_strdup(c));
      }
      if (default_index >= len || default_index < 0) default_index = 0;
@@ -147,7 +131,7 @@ void combo_remove_item(Combo *combo, int item_index)
      gchar *c;
      i = combo_selected_index(combo);
      g_assert(i != item_index);
-     gtk_combo_box_remove_text(GTK_COMBO_BOX(combo),item_index);
+     gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(combo),item_index);
      c = (gchar *)g_list_nth_data(combo->strings,item_index);
      /* printf("Removing:  selected_index %d, string %s\n",i,c); */
      combo->strings = g_list_remove(combo->strings,c);
