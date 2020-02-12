@@ -45,7 +45,6 @@
 #include "help.h"
 #include "ladspadialog.h"
 #include "gettext.h"
-#include "bitmap.h"
 
 #include "button_paste.xpm"
 #include "button_pasteover.xpm"
@@ -60,9 +59,6 @@
 #include "button_mixer.xpm"
 #include "button_bounce.xpm"
 #include "icon.xpm"
-#include "vzoom.xbm"
-#include "hzoom.xbm"
-#include "speed.xbm"
 
 /* #define SHOW_DEBUG_MENU */
 
@@ -2696,11 +2692,36 @@ static gint speed_scale_press(GtkWidget *widget, GdkEventButton *event, gpointer
      return FALSE;
 }
 
+char *get_image_path (char *filename) {
+	char *path1 = NULL, *path2 = NULL, *found = NULL;
+#ifdef DATADIR
+	path1 = g_strconcat (DATADIR, "/gwaveedit/", filename, NULL);
+	if (access (path1, F_OK) == 0) {
+		found = path1;
+	}
+#endif
+	if (!found) {
+		path2 = g_strconcat ("/usr/share/gwaveedit/", filename, NULL);
+		if (access (path2, F_OK) == 0) {
+			found = path2;
+		}
+	}
+	if (!found) {
+		if (path1) fprintf(stderr, "* %s: %s not found\n", PACKAGE_NAME, path1);
+		if (path2 && strcmp(path1,path2) != 0)
+		           fprintf(stderr, "* %s: %s not found\n", PACKAGE_NAME, path2);
+	}
+	if (path1 && path1 != found) g_free (path1);
+	if (path2 && path2 != found) g_free (path2);
+	return found;
+}
+
 static void mainwindow_init(Mainwindow *obj)
 {
      GtkWidget *a,*b,*c;
      GtkRequisition req;
      GtkTargetEntry gte;
+     char *imgpath;
 
      if (!window_geometry_stack_inited) {
 	  if (inifile_get_gboolean("useGeometry",FALSE))
@@ -2785,18 +2806,30 @@ static void mainwindow_init(Mainwindow *obj)
 
      gtk_table_attach(GTK_TABLE(b),obj->toolbar,0,1,0,1,GTK_SHRINK|GTK_FILL,GTK_FILL,0,0);
 
-     c = bitmap_new_from_data(vzoom_bits, vzoom_width, vzoom_height);
-     bitmap_set_fg(BITMAP(c),0.8);     
+     imgpath = get_image_path("vzoom.png");
+     c = gtk_image_new_from_file(imgpath ? imgpath : "");
+     if (imgpath) {
+        g_free(imgpath);
+        imgpath = NULL;
+     }
      gtk_table_attach(GTK_TABLE(b),c,1,2,0,1,GTK_FILL,0,0,0);
      obj->vzoom_icon = c;
 
-     c = bitmap_new_from_data(hzoom_bits, hzoom_width, hzoom_height);
-     bitmap_set_fg(BITMAP(c),0.8);
+     imgpath = get_image_path("hzoom.png");
+     c = gtk_image_new_from_file(imgpath ? imgpath : "");
+     if (imgpath) {
+        g_free(imgpath);
+        imgpath = NULL;
+     }
      gtk_table_attach(GTK_TABLE(b),c,2,3,0,1,GTK_FILL,0,0,0);
      obj->hzoom_icon = c;
 
-     c = bitmap_new_from_data(speed_bits, speed_width, speed_height);
-     bitmap_set_fg(BITMAP(c),0.8);
+     imgpath = get_image_path("speed.png");
+     c = gtk_image_new_from_file(imgpath ? imgpath : "");
+     if (imgpath) {
+        g_free(imgpath);
+        imgpath = NULL;
+     }
      gtk_table_attach(GTK_TABLE(b),c,3,4,0,1,GTK_FILL,0,0,0);
      obj->speed_icon = c;
 
