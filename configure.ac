@@ -209,13 +209,9 @@ fi
 )
 
 if test "x$SKIP_SDL_TEST" = "xno"; then
-	AC_CHECK_HEADER(SDL/SDL.h, [HAVE_SDL=yes], , )
-fi
-
-if test "x$HAVE_SDL" = "xyes"; then
-	AC_DEFINE(HAVE_SDL,1,[Enable SDL sound driver]) 
-	SDL_CFLAGS=`sdl-config --cflags`
-	SDL_LIBS=`sdl-config --libs`
+PKG_CHECK_MODULES(
+  [SDL], [sdl >= 1.2.13], [HAVE_SDL=yes], AC_MSG_ERROR(SDL >= 1.2.13 is required)
+  )
 fi
 
 AC_SUBST(SDL_CFLAGS)
@@ -387,8 +383,13 @@ AC_SUBST(ARTSC_LIBS)
 
 dnl Check for GTK+ without gthread
 
-PKG_CHECK_MODULES([GLIB], [glib-2.0 >= 2.32.0])
-PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.24.0])
+PKG_CHECK_MODULES(
+  [GLIB], [glib-2.0 >= 2.32.0], found_glib=yes, AC_MSG_ERROR(Glib >= 2.32.0 is required)
+  )
+
+PKG_CHECK_MODULES(
+  [GTK], [gtk+-2.0 >= 2.24.0], found_gtk=yes, AC_MSG_ERROR(GTK >= 2.24.0 is required)
+  )
 
 dnl Check for large file support
 AC_SYS_LARGEFILE
