@@ -4,6 +4,8 @@ nobase_data_DATA = applications/gwaveedit.desktop \
 	icons/hicolor/64x64/apps/gwaveedit.png \
 	gwaveedit/hzoom.png \
 	gwaveedit/speed.png \
-	gwaveedit/vzoom.png
+	gwaveedit/vzoom.png \
+	gwaveedit/logo.png \
+	gwaveedit/icon32.png
 
 

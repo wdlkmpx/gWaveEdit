@@ -58,7 +58,6 @@
 #include "button_follow.xpm"
 #include "button_mixer.xpm"
 #include "button_bounce.xpm"
-#include "icon.xpm"
 
 /* #define SHOW_DEBUG_MENU */
 
@@ -429,11 +428,20 @@ static gint mainwindow_delete_event(GtkWidget *widget, GdkEventAny *event)
 
 static void mainwindow_realize(GtkWidget *widget)
 {
-     if (GTK_WIDGET_CLASS(mainwindow_parent_class)->realize) 
-	  GTK_WIDGET_CLASS(mainwindow_parent_class)->realize(widget);
-     if (!icon) icon = gdk_pixbuf_new_from_xpm_data (icon_xpm);
-     gtk_window_set_icon(GTK_WINDOW(widget),icon);
-
+	if (GTK_WIDGET_CLASS(mainwindow_parent_class)->realize) {
+		GTK_WIDGET_CLASS(mainwindow_parent_class)->realize(widget);
+	}
+	if (!icon) {
+		char *img_path;
+		img_path = get_image_path ("icon32.png");
+		if (img_path) {
+			icon = gdk_pixbuf_new_from_file(img_path, NULL);
+			g_free (img_path);
+		}
+	}
+	if (icon) {
+		gtk_window_set_icon(GTK_WINDOW(widget),icon);
+	}
 }
 
 static void mainwindow_toggle_mark(Mainwindow *w, gchar *label)
@@ -1445,7 +1453,18 @@ static void help_about(void)
     gtk_container_set_border_width ( ( GtkContainer*)about_dlg , 2 );
     gtk_about_dialog_set_version ( (GtkAboutDialog*)about_dlg, VERSION );
     gtk_about_dialog_set_program_name ( (GtkAboutDialog*)about_dlg, PACKAGE_NAME );
-    //gtk_about_dialog_set_logo_icon_name( (GtkAboutDialog*)about_dlg, "audio" );
+
+    char *logo_path = get_image_path ("logo.png");
+    GdkPixbuf *logo = NULL;
+    if (logo_path) {
+       logo = gdk_pixbuf_new_from_file(logo_path, NULL);
+       g_free (logo_path);
+    }
+    if (logo) {
+       gtk_about_dialog_set_logo( (GtkAboutDialog*)about_dlg, logo );
+       g_object_unref(logo);
+    }
+
     gtk_about_dialog_set_copyright ( (GtkAboutDialog*)about_dlg, "Copyright (C) 2002-2020" );
     p = g_strdup_printf(_("GTK Sound file editor\nCurrent sound driver: %s\nCompiled %s %s"),
                          sound_driver_name(),
@@ -2690,30 +2709,6 @@ static gint speed_scale_press(GtkWidget *widget, GdkEventButton *event, gpointer
 	  return TRUE;
      }
      return FALSE;
-}
-
-char *get_image_path (char *filename) {
-	char *path1 = NULL, *path2 = NULL, *found = NULL;
-#ifdef DATADIR
-	path1 = g_strconcat (DATADIR, "/gwaveedit/", filename, NULL);
-	if (access (path1, F_OK) == 0) {
-		found = path1;
-	}
-#endif
-	if (!found) {
-		path2 = g_strconcat ("/usr/share/gwaveedit/", filename, NULL);
-		if (access (path2, F_OK) == 0) {
-			found = path2;
-		}
-	}
-	if (!found) {
-		if (path1) fprintf(stderr, "* %s: %s not found\n", PACKAGE_NAME, path1);
-		if (path2 && strcmp(path1,path2) != 0)
-		           fprintf(stderr, "* %s: %s not found\n", PACKAGE_NAME, path2);
-	}
-	if (path1 && path1 != found) g_free (path1);
-	if (path2 && path2 != found) g_free (path2);
-	return found;
 }
 
 static void mainwindow_init(Mainwindow *obj)
