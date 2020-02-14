@@ -1020,7 +1020,7 @@ gboolean parse_geom(gchar *str, GtkAllocation *result)
 static gchar *get_geom_x(GtkWindow *window, gchar *extra)
 {
      gint x,y,width,height;
-     gdk_window_get_size(GTK_WIDGET(window)->window,&width,&height);
+     gdk_drawable_get_size(GTK_WIDGET(window)->window,&width,&height);
      gdk_window_get_root_origin(GTK_WIDGET(window)->window,&x,&y);
      if (extra == NULL)
 	  return g_strdup_printf("%d_%d_%d_%d",x,y,width,height);
@@ -1114,7 +1114,7 @@ void geometry_stack_push(GtkWindow *w, gchar *extra, GSList **stackp)
      struct geometry_stack_item *all;
      gint x,y,width,height;
      all = g_malloc(sizeof(*all));
-     gdk_window_get_size(GTK_WIDGET(w)->window,&width,&height);
+     gdk_drawable_get_size(GTK_WIDGET(w)->window,&width,&height);
      gdk_window_get_root_origin(GTK_WIDGET(w)->window,&x,&y);
      all->x = x;
      all->y = y;
