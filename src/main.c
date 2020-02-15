@@ -338,14 +338,10 @@ gchar *color_inifile_entry[] = { NULL, NULL, "colorBG",
 GdkColor *get_color(enum Color c)
 {
      if (!color_alloced[c]) {
-	  if (c == BLACK) 
-	       gdk_color_black(gdk_colormap_get_system(),&color_table[c]);
-	  else if (c == WHITE)
-	       gdk_color_white(gdk_colormap_get_system(),&color_table[c]);
-	  else {
-	       gdk_colormap_alloc_color(gdk_colormap_get_system(),
-					&color_table[c],FALSE,TRUE);	       
-	  }
+         gdk_colormap_alloc_color(gdk_colormap_get_system(),
+                                  &color_table[c],
+                                  FALSE,
+                                  TRUE);
      }
      color_alloced[c] = TRUE;
      return &color_table[c];
