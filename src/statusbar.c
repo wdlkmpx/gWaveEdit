@@ -42,16 +42,20 @@ static void status_bar_expose(GtkWidget *widget, GdkEventExpose *event,
 			    gpointer user_data)
 {
      StatusBar *bar = STATUSBAR(user_data);
-     GdkGC *gc;
-     
-     if (bar->mode == 1) {
-	  gc = get_gc(PROGRESS,widget);
-	  gdk_gc_set_clip_rectangle(gc,&(event->area));
-	  gdk_draw_rectangle(widget->window, gc, TRUE, 
-			     widget->allocation.x,event->area.y,
-			     bar->bar_width,event->area.height);
+     cairo_t *cr;
+     GdkColor *color;
 
-	  gdk_gc_set_clip_mask(gc,NULL);
+     if (bar->mode == 1) {
+        color = get_color (PROGRESS);
+        cr = gdk_cairo_create (gtk_widget_get_window(widget));
+        gdk_cairo_set_source_color (cr, color);
+        cairo_rectangle (cr,
+                         widget->allocation.x,
+                         event->area.y,
+                         bar->bar_width,
+                         event->area.height);
+        cairo_fill (cr);
+        cairo_destroy (cr);
      }
 }
 
