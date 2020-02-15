@@ -3,8 +3,8 @@
 #include "gettext.h"
 #include "help.h"
 
-int help_page_count = 13
-;
+int help_page_count = 12;
+
 const char *help_page_titles[] = {
      N_("General"),
      N_("Sample view"),
@@ -18,15 +18,14 @@ const char *help_page_titles[] = {
      N_("Keyboard shortcuts"),
      N_("Bug reporting"),
      N_("Helping out"),
-     N_("Contact"),
      NULL };
 
 static const char * O00_contents[] = {
      "\n",
      N_("gWaveEdit is a graphical program for editing sound files. It is completely free (GPL).\n"),
      "\n",
-     N_("You can find the latest release of gWaveEdit at:\n"),
-     N_("http://gna.org/projects/gwaveedit/\n"),
+     N_("For releases, bug reports, translation updates and patches:\n"),
+     N_("https://github.com/wdlkmpx/gwaveedit\n"),
      NULL };
 
 static const char * D01_contents[] = {
@@ -241,9 +240,9 @@ static const char * D09_contents[] = {
 
 static const char * D10_contents[] = {
      "\n",
-     N_("If you find a bug or flaw in the program that's not mentioned in the BUGS file, report the bug in the bug tracker (see contact info) or mail a bug report describing the bug to: magnus.hjorth@home.se\n"),
+     N_("If you find a bug or flaw in the program, report the bug in the bug tracker.\n"),
      "\n",
-     N_("In case of a crash, please do not send me any core dumps. They are huge and completely useless to me. Instead, create a backtrace. Backtraces tell you exactly where the program crashed.\n"),
+     N_("In case of a crash, please please create a backtrace. Backtraces tell you exactly where the program crashed.\n"),
      "\n",
      N_("How to create a backtrace:\n"),
      N_("1. Enable core dumps: ulimit -c unlimited\n"),
@@ -276,14 +275,6 @@ static const char * D11_contents[] = {
      "\n",
      NULL };
 
-static const char * D12_contents[] = {
-     "\n",
-     N_("For bug reports, translation updates and patches:\n"),
-     N_("https://github.com/wdlkmpx/gwaveedit\n"),
-     "\n",
-     "\n",
-     NULL };
-
 const char ** help_page_contents[] = {
      O00_contents ,
      D01_contents ,
@@ -297,5 +288,4 @@ const char ** help_page_contents[] = {
      D09_contents ,
      D10_contents ,
      D11_contents ,
-     D12_contents ,
      NULL };
