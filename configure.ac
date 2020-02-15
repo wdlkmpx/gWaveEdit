@@ -427,6 +427,12 @@ dnl Checks for library functions.
 AC_CHECK_FUNCS([gettimeofday sched_yield ceill setlocale fseeko ftello lrint lrintf dup2 memchr memmove pow putenv select sqrt strtoul]) 
 AC_FUNC_FORK
 
+# Turn on all/most gcc warnings
+case "$CC" in
+  gcc*) CPPFLAGS="$CPPFLAGS -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers" ;;
+  *) ;;
+esac
+
 dnl Write output
 AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in share/Makefile ])
 AC_OUTPUT
