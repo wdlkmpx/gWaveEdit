@@ -475,7 +475,7 @@ static gpointer repeat_new(struct driver_data *driver, gboolean realtime,
 {
      struct convdata_repeat *data;
      data = g_malloc(sizeof(*data));
-     data->databuf = ringbuf_new(realtime ? 1024*format->samplebytes : 
+     data->databuf = ringbuf_new(realtime ? (guint)1024 * format->samplebytes : 
 				 format->samplerate * format->samplebytes);
      data->fracpos = 1.0;
      data->ratio = (format->samplerate) / ((gfloat)outrate);
@@ -719,7 +719,7 @@ gint rateconv_write(rateconv *conv, void *data, guint bufsize)
 {
      struct convdata_base *convdata = (struct convdata_base *)conv;
      guint i = 0;
-     gint j;
+     guint j;
      if (convdata->passthru_buffer != NULL && 
 	 convdata->inrate == convdata->outrate) {
 	  i = ringbuf_freespace(convdata->passthru_buffer);

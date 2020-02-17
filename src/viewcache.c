@@ -167,7 +167,7 @@ gboolean view_cache_update(ViewCache *cache, Chunk *chunk, off_t start_samp,
 	  new_offsets[0] = start_samp;
 	  new_offsets[xres] = end_samp;
 	  d = (double)start_samp + real_spp;
-	  for (i=1; i<xres; i++,d+=real_spp) new_offsets[i] = (off_t)d;
+	  for (i=1; i< (guint)xres; i++,d+=real_spp) new_offsets[i] = (off_t)d;
 
 	  /* Check again to see if lowq_spp or highq_spp needs changing */
 	  lowq_spp = inifile_get_guint32(INI_SETTING_VIEW_QUALITY,
@@ -205,7 +205,7 @@ gboolean view_cache_update(ViewCache *cache, Chunk *chunk, off_t start_samp,
 		      cache->values+(2*j*channels),
 		      k*channels*2*sizeof(sample_t));
 	       o = cache->offsets[j] - new_offsets[i];
-	       for (l=0; l<=xres; l++) new_offsets[l] += o;
+	       for (l=0; l<=(guint)xres; l++) new_offsets[l] += o;
 	       /* When real_spp < 1.0, we may get errors due to offset rounding
 		* therefore, set the cache status to DIRTY */
 
@@ -226,14 +226,14 @@ gboolean view_cache_update(ViewCache *cache, Chunk *chunk, off_t start_samp,
 	       
 	       while (1) {
 		    
-		    while (i<cache->xres &&
+		    while (i < (guint) cache->xres &&
 			   (!cache->calced[i] || 
 			    cache->offsets[i+1]<new_offsets[j]))
 			 i++;
-		    if (i == cache->xres) break;
+		    if (i == (guint) cache->xres) break;
 
-		    while (cache->offsets[i]>new_offsets[j] && j<xres) j++;
-		    if (j == xres) break;
+		    while (cache->offsets[i]>new_offsets[j] && j< (guint)xres) j++;
+		    if (j == (guint) xres) break;
 
 		    /* printf("Copying %d -> %d\n",(int)i,(int)j); */
 		    new_calced[j] = dirty_code;
@@ -259,19 +259,19 @@ gboolean view_cache_update(ViewCache *cache, Chunk *chunk, off_t start_samp,
 
 		    /* Set i to the next calculated value large enough 
 		       in old cache */
-		    while (i<cache->xres &&
+		    while (i < (guint) cache->xres &&
 			   (!cache->calced[i] || 
 			    cache->offsets[i+1]<new_offsets[j]))
 			 i++;
-		    if (i == cache->xres) break;
+		    if (i == (guint) cache->xres) break;
 		    
 		    /* Setup j */
-		    while (new_offsets[j] < cache->offsets[i] && j<xres) j++;
-		    if (j == xres) break;
+		    while (new_offsets[j] < cache->offsets[i] && j < (guint) xres) j++;
+		    if (j == (guint) xres) break;
 
 		    /* Setup k */
 		    k = j;
-		    while (new_offsets[k+1] < cache->offsets[i+1] && k+1<xres) 
+		    while (new_offsets[k+1] < cache->offsets[i+1] && k+1 < (guint) xres) 
 			 k++;
 
 		    /* Perform copy */
@@ -336,7 +336,7 @@ gboolean view_cache_update(ViewCache *cache, Chunk *chunk, off_t start_samp,
 				  DITHER_NONE, NULL);
 	  readflag = FALSE;
 
-	  for (n=0; n<xres; n++) {
+	  for (n=0; n < (guint) xres; n++) {
 	       for (l=0; l<channels; l++) {
 		    cache->values[(n*channels+l)*2] = cache->values[(n*channels+l)*2+1] = 
 			 sbuf[(cache->offsets[n] - cache->offsets[0])*channels + l];
@@ -376,7 +376,7 @@ gboolean view_cache_update(ViewCache *cache, Chunk *chunk, off_t start_samp,
      /* Scan for end of uncalculated data */
      j = i+1;
      if (impr == 0) 
-	  while (j<i+PIXELS_PER_UPDATE && j<xres && cache->calced[j]<CALC_LOWQ)
+	  while (j<i+PIXELS_PER_UPDATE && j < (guint) xres && cache->calced[j]<CALC_LOWQ)
 	       j++;
     
      /* Fill in as calculated */
@@ -562,7 +562,7 @@ void view_cache_draw_part(ViewCache *cache, GdkDrawable *d, gint xs, gint xe,
      else
 	  seg2 = NULL;
 
-     for (j=0; j<channels; j++) {
+     for (j=0; (guint) j < channels; j++) {
 
 	  if ((j&1) == 0) { seg = seg1; segcp = &segc1;
 	  } else { seg = seg2; segcp = &segc2; }

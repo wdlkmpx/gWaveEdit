@@ -799,7 +799,8 @@ static int C_FLOAT_PCM24UNEPM(FTYPE *in, guint32 *out, int count)
      for (; count>0; count--,in++,out++) {
 	  f = *in;
 	  l = RINT(UNNORM24U(f));
-	  if (l > 0xFFFFFF || f > 2.0) { l = 0xFFFFFF; cc++; } else if (l < 0 || f < -2.0) { l = 0; cc++; }
+	  if (l > 0xFFFFFF || f > 2.0) { l = 0xFFFFFF; cc++; }
+	  else if (f < -2.0)  { l = 0; cc++; }
 	  *out = l << 8;
      }
      return cc;
@@ -844,7 +845,8 @@ static int C_FLOAT_PCM24UNEPL(FTYPE *in, guint32 *out, int count)
      for (; count>0; count--,in++,out++) {
 	  f = *in;
 	  l = RINT(UNNORM24U(f));
-	  if (l > 0xFFFFFF || f > 2.0) { l = 0xFFFFFF; cc++; } else if (l < 0 || f < -2.0) { l = 0; cc++; }
+	  if (l > 0xFFFFFF || f > 2.0) { l = 0xFFFFFF; cc++; }
+	  else if (f < -2.0) { l = 0; cc++; }
 	  *out = l;
      }
      return cc;

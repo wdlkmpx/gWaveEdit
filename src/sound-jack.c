@@ -79,10 +79,10 @@ static void mhjack_read_config(void)
      /* Read config from inifile */
      mhjack.client_name = g_strdup(inifile_get("jackClientName","mhwe"));
      mhjack.maxoutports = (guint)inifile_get_guint32("jackMaxportsOut",2);
-     if (mhjack.maxoutports < 0 || mhjack.maxoutports > 8) 
+     if (mhjack.maxoutports > 8) 
 	  mhjack.maxoutports = 2;
      mhjack.maxinports = (guint)inifile_get_guint32("jackMaxportsIn",2);
-     if (mhjack.maxinports < 0 || mhjack.maxinports > 8)
+     if (mhjack.maxinports > 8)
 	  mhjack.maxinports = 2;
      for (i=0; i<8; i++) {
 	  c = g_strdup_printf("jackOutport%d",i+1);
@@ -356,12 +356,12 @@ static int mhjack_process_callback(jack_nframes_t nframes, void *arg)
      pctrl = mhjack.procctrl;
      if ((pctrl & MHJACK_PLAY) != 0) {
 	  i = MHJACK_SKIPREQ(pctrl);
-	  if (i != mhjack.cb_skipcount) {
+	  if (i != (guint) mhjack.cb_skipcount) {
 	       mhjack.cb_skipcount = i;
 	       do_skip = TRUE;
 	       skippos = MHJACK_SKIPPOS(pctrl);
 	  }
-	  for (i=0; i<mhjack.current_format.channels; i++) {
+	  for (i=0; i < (guint) mhjack.current_format.channels; i++) {
 	       if (mhjack.outports[i] == NULL) continue;
 	       if (do_skip) {
 		    mhjack_jrb_skipto(mhjack.buffers[i],skippos);
@@ -389,7 +389,7 @@ static int mhjack_process_callback(jack_nframes_t nframes, void *arg)
      }
 
      if ((pctrl & MHJACK_REC) != 0) {
-	  for (i=0; i<mhjack.current_format.channels; i++) {
+	  for (i=0; i < (guint) mhjack.current_format.channels; i++) {
 	       if (mhjack.inports[i] == NULL) continue;
 	       p = jack_port_get_buffer(mhjack.inports[i],nframes);
 	       sz2 = jack_ringbuffer_write(mhjack.buffers[i],p,sz);
@@ -419,11 +419,11 @@ static void mhjack_autoconnect(jack_port_t **ports, int typeflag,
      for (i=0; i<8; i++) {
 	  if (c[i] == NULL) break;
 	  if (typeflag == JackPortIsInput) { 
-	       if (i >= mhjack.maxoutports) break;
+	       if ((guint) i >= mhjack.maxoutports) break;
 	       p1=jack_port_name(ports[i]); 
 	       p2=c[i]; 
 	  } else { 
-	       if (i >= mhjack.maxinports) break;
+	       if ((guint) i >= mhjack.maxinports) break;
 	       p1=c[i]; 
 	       p2=jack_port_name(ports[i]); 
 	  }
@@ -508,7 +508,7 @@ static guint mhjack_ringbuffer_space(gboolean input, gboolean readspace)
      guint i,j;
      guint w = 1024*1024; /* Just a very high number */
 
-     for (i=0; i<mhjack.current_format.channels; i++)
+     for (i=0; i < (guint) mhjack.current_format.channels; i++)
 	  if ((!input && mhjack.outports[i] != NULL) || 
 	      (input && mhjack.inports[i] != NULL)) {
 	       if (readspace)
@@ -606,7 +606,7 @@ static gboolean mhjack_output_suggest_format(Dataformat *format,
 
 static guint mhjack_writable(void)
 {
-     int writable,i,s;
+     guint writable,i,s;
      writable = s = mhjack_ringbuffer_space(FALSE,FALSE) / sizeof(float);
      i = (mhjack.buffer_size / 2) / sizeof(float);
      if (mhjack.refill) {
@@ -663,7 +663,7 @@ static guint mhjack_output_play(gchar *buffer, guint bufsize)
 	       jack_ringbuffer_write(mhjack.buffers[0],(char *)fbuf,
 				     frames*sizeof(float));
      } else {
-	  for (i=0; i<mhjack.current_format.channels; i++) {
+	  for (i=0; i < (guint) mhjack.current_format.channels; i++) {
 	       if (mhjack.outports[i] == NULL) continue;
 	       /* De-interleave */
 	       for (j=0; j<frames; j++)
@@ -753,7 +753,7 @@ static void mhjack_input_store(Ringbuf *buffer)
 	  } else
 	       memset(fbuf2,0,frames*sizeof(float));
      } else {
-	  for (i=0; i<mhjack.current_format.channels; i++) {
+	  for (i=0; i < (guint) mhjack.current_format.channels; i++) {
 	       if (mhjack.inports[i] == NULL)
 		    memset(fbuf,0,frames*sizeof(float));
 	       else {
@@ -796,7 +796,7 @@ static GList *mhjack_input_supported_formats(gboolean *complete)
      }
      
      r = jack_get_sample_rate(mhjack.myself);
-     for (i=1; i<=mhjack.maxinports; i++) {
+     for (i=1; (guint) i <= mhjack.maxinports; i++) {
 	  fmt = g_malloc(sizeof(*fmt));
 	  fmt->type = DATAFORMAT_FLOAT;
 	  fmt->samplesize = sizeof(float);

@@ -173,7 +173,7 @@ gboolean e_fread(void *data, size_t size, EFILE *stream)
      gint i;
      gchar *c;
      i = e_fread_upto(data,size,stream);
-     if (i < size) {
+     if ((guint) i < size) {
 	  if (i >= 0) {
 	       c = g_strdup_printf(_("Unexpected end of file reading from %s"),
 				   stream->filename);

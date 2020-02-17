@@ -675,7 +675,7 @@ static int dither_convert_float(float *indata, char *outdata, int count,
      else
 	  amp_factor = dither_amp_scaled_float[outdata_ssize-1];
      while (count > 0) {
-	  i = MIN(count,ARRAY_LENGTH(databuf));
+	  i = MIN((guint) count, ARRAY_LENGTH(databuf));
 	  memcpy(databuf,indata,i*sizeof(float));
 	  for (j=0; j<i; j++)
 	       databuf[j] += frand() * amp_factor;
@@ -711,7 +711,7 @@ static int dither_convert_double(double *indata, char *outdata, int count,
      else
 	  amp_factor = dither_amp_scaled_double[outdata_ssize-1];
      while (count > 0) {
-	  i = MIN(count,ARRAY_LENGTH(databuf));
+	  i = MIN((guint)count, ARRAY_LENGTH(databuf));
 	  memcpy(databuf,indata,i*sizeof(double));
 	  for (j=0; j<i; j++)
 	       databuf[j] += drand() * amp_factor;
@@ -793,7 +793,7 @@ void convert_array(void *indata, Dataformat *indata_format,
 		    (outdata_format->samplesize/sizeof(double));
 	       if (indata_format->samplesize == 4) i += 8*indata_format->packing;
 	       /* printf("convert_array: i=%d\n",i); */
-	       g_assert(i<ARRAY_LENGTH(pcm_fp_functions));
+	       g_assert((guint)i < ARRAY_LENGTH(pcm_fp_functions));
 	       pcm_fp_functions[i](indata,outdata,count);
 	       if (XOR(outdata_format->bigendian, dataformat_sample_t.bigendian))
 		    byteswap(outdata,outdata_format->samplesize,
@@ -811,7 +811,7 @@ void convert_array(void *indata, Dataformat *indata_format,
 	       (outdata_format->bigendian?2:0) +
 	       (indata_format->samplesize/sizeof(double));
 	  if (outdata_format->samplesize == 4) i += 8*outdata_format->packing;
-	  g_assert(i < ARRAY_LENGTH(fp_pcm_functions));
+	  g_assert((guint)i < ARRAY_LENGTH(fp_pcm_functions));
 	  if (indata_format->samplesize == sizeof(float) && outdata_format->samplesize > 2) 
 	       dither_mode = DITHER_NONE;
 	  g_assert(dither_mode != DITHER_UNSPEC);

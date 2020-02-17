@@ -36,7 +36,7 @@ static Chunk *map_channels_dialog_apply_proc(Chunk *chunk, StatusBar *bar,
 					     gpointer user_data)
 {
      MapChannelsDialog *mcd = MAP_CHANNELS_DIALOG(user_data);
-     g_assert(mcd->channels_in == chunk->format.channels);
+     g_assert(mcd->channels_in == (guint) chunk->format.channels);
      return chunk_remap_channels(chunk,mcd->channels_out,map_matrix,
 				 dither_editing,bar);
 }
@@ -49,7 +49,7 @@ static gboolean map_channels_dialog_apply(EffectDialog *ed)
      Document *d = EFFECT_BROWSER(ed->eb)->dl->selected;
      MapChannelsDialog *mcd = MAP_CHANNELS_DIALOG(ed);
 
-     g_assert(mcd->channels_in == d->chunk->format.channels);
+     g_assert(mcd->channels_in == (guint) d->chunk->format.channels);
 
      if (intbox_check(mcd->outchannels)) return TRUE;
 
@@ -71,7 +71,7 @@ static gboolean map_channels_dialog_apply(EffectDialog *ed)
 static void map_channels_dialog_target_changed(EffectDialog *ed) 
 {
      MapChannelsDialog *ccd = MAP_CHANNELS_DIALOG(ed);
-     if (ccd->channels_in != EFFECT_BROWSER(ed->eb)->dl->format.channels)
+     if (ccd->channels_in != (guint) EFFECT_BROWSER(ed->eb)->dl->format.channels)
 	  effect_browser_invalidate_effect(EFFECT_BROWSER(ed->eb),
 					   "mapchannels",'B');
 }
@@ -90,7 +90,7 @@ static void numchannels_changed(Intbox *box, long int val, gpointer user_data)
 	  else
 	       gtk_widget_hide(mcd->outnames[i]);
 
-	  for (j=0; j<mcd->channels_in; j++) {
+	  for (j=0; (guint) j < mcd->channels_in; j++) {
 	       if (i < val)
 		    gtk_widget_show(GTK_WIDGET(mcd->channel_map[j*8+i]));
 	       else
@@ -151,7 +151,7 @@ static void map_channels_setup(EffectDialog *ed)
 	 l = attach_label(channel_name(i,8),c,0,i);
 	 mcd->outnames[i] = GTK_WIDGET(l);
     }
-    for (i=0; i<channels_in; i++) {
+    for (i=0; (guint) i < channels_in; i++) {
 	 attach_label(channel_name(i,channels_in),b,2+i,1);
 	 for (j=0; j<8; j++) {
 	      d = gtk_check_button_new();

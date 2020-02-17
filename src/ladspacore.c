@@ -304,7 +304,7 @@ static gboolean ladspa_filter_proc(void *in, guint sample_size,
      for (i=0; i<frames; i+=j) {
 	  j = MIN(frames-i, 1024);
 	  /* Set input */
-	  for (k=0; k < processing_effect->numports[2]; k++) {
+	  for (k=0; k < (guint) processing_effect->numports[2]; k++) {
 	       l = processing_effect->ports[2][k].map;
 	       if (l < 0) continue;
 	       b = processing_effect->ports[2][k].buffer;
@@ -326,7 +326,7 @@ static gboolean ladspa_filter_proc(void *in, guint sample_size,
 	       memcpy(processing_outbuf,&s[i],j*chans*sizeof(sample_t));
 	  else
 	       memset(processing_outbuf,0,j*chans*sizeof(sample_t));
-	  for (k=0; k < processing_effect->numports[3]; k++) {
+	  for (k=0; k < (guint) processing_effect->numports[3]; k++) {
 	       l = processing_effect->ports[3][k].map;
 	       if (l < 0) continue;
 	       b = processing_effect->ports[3][k].buffer;

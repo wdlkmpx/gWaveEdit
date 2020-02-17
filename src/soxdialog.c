@@ -133,7 +133,7 @@ static Chunk *sox_dialog_apply_proc_main(Chunk *chunk, StatusBar *bar,
 	       f = 1.0;
 	  g_snprintf(c,sizeof(cmd_buf)-(c-cmd_buf),"%s %f %f",ed->effect_name,
 		     sd->fb1->val,f);
-	  for (i=0; i<sd->i1; i++) {
+	  for (i=0; i < (guint) sd->i1; i++) {
 	       if (sd->fba[0][i]->val > 0.0) {
 		    for (j=0; j<4; j++) 
 			 if (sd->fba[j] != NULL) {
@@ -297,7 +297,7 @@ static gboolean sox_dialog_apply(EffectDialog *ed)
 	  return TRUE;
      for (i=0; i<ARRAY_LENGTH(sd->fba); i++)
 	  if (sd->fba[i] != NULL)	       
-	       for (j=0; j<sd->i1; j++)
+	       for (j=0; j < (guint) sd->i1; j++)
 		    if (floatbox_check(sd->fba[i][j])) return TRUE;
      return document_apply_cb(d,sox_dialog_apply_proc,TRUE,ed);
 }
@@ -352,7 +352,7 @@ static void setup_echo_column(SoxDialog *sd, GtkTable *t, guint col,
      guint i;
      GtkWidget *w;
      sd->fba[col] = g_malloc(lines*sizeof(EffectDialog *));
-     for (i=0; i<lines; i++) {
+     for (i=0; i < (guint) lines; i++) {
 	  w = floatbox_new(0.0);
 	  sd->fba[col][i] = FLOATBOX(w);
 	  gtk_table_attach(t,w,col,col+1,i+1,i+2,GTK_FILL,0,0,0);	  
@@ -410,7 +410,7 @@ static void setup_echos(EffectDialog *ed, gchar *gain_name, gint lines,
      if (show_mtype) {
 	  attach_label(_("Modulation  "),b,0,4);
 	  sd->ca = g_malloc(lines*sizeof(GtkComboBoxText *));
-	  for (i=0; i<lines; i++) {
+	  for (i=0; i < (guint) lines; i++) {
 	       c = gtk_combo_box_text_new();
 	       gtk_widget_size_request(c,&req);
 	       sd->ca[i] = GTK_COMBO_BOX_TEXT(c);
@@ -732,7 +732,7 @@ gboolean sox_dialog_register_main(gchar source_tag)
 	  fd[1] = fd2[0];
 	  /* Read input */
 	  j = 0;
-	  while (lb_pos < sizeof(linebuf)-1 && j<2) {
+	  while ((guint) lb_pos < sizeof(linebuf)-1 && j<2) {
 	       i = read(fd[j],linebuf+lb_pos,sizeof(linebuf)-lb_pos-1);
 	       if (i == 0) j++; /* Read from other descriptor */
 	       if (i < 0) {

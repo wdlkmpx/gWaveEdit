@@ -347,7 +347,7 @@ static gboolean tempfile_write_main(struct temp *t, gchar *data, guint length)
 	  i = MIN(length, t->format.samplebytes - t->sample_buf_pos);
 	  memcpy(t->sample_buf + t->sample_buf_pos, data, i);
 	  t->sample_buf_pos += i;
-	  if (t->sample_buf_pos < t->format.samplebytes)
+	  if (t->sample_buf_pos < (guint) t->format.samplebytes)
 	       return FALSE;
 	  t->sample_buf_pos = 0;
 	  if (tempfile_write_main(t,t->sample_buf,t->format.samplebytes))

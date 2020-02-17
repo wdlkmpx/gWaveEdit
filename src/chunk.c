@@ -578,7 +578,7 @@ gboolean chunk_parse(Chunk *chunk, chunk_parse_proc proc,
 	       x = 0;
 	  }
 
-	  while((x >= 0) && (x < u)) {
+	  while((x >= 0) && ((guint) x < u)) {
 	       if (proc(d+x,proc_size,chunk)) {
 		    chunk_close(ch);
 		    g_free(c);
@@ -1626,11 +1626,11 @@ static gboolean volume_ramp_proc(void *in, guint sample_size,
 {
      sample_t *sp = (sample_t *)in;
      sample_t factor;
-     int i,j;
+     guint i,j;
      for (j=0; j<sample_size; j+=format->channels*sizeof(sample_t)) {
 	  factor = ramp_start + (ramp_diff * ((sample_t)samples_done / 
 					      (sample_t)samples_total));
-	  for (i=0; i<format->channels; i++) {
+	  for (i=0; i < (guint) format->channels; i++) {
 	       *sp *= factor;
 	       sp++;
 	  }
@@ -1780,8 +1780,8 @@ Chunk *chunk_byteswap(Chunk *chunk)
 Chunk *chunk_convert_channels(Chunk *chunk, guint new_channels)
 {
      int *map;
-     int i;
-     g_assert(chunk->format.channels != new_channels);
+     guint i;
+     g_assert((guint) chunk->format.channels != new_channels);
      map = g_malloc(new_channels * sizeof(int));
      for (i=0; i<new_channels; i++) map[i] = i;
      /* When converting mono files, put mono channel in both left and right. 

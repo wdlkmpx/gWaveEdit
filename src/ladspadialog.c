@@ -57,7 +57,7 @@ gboolean ladspa_dialog_apply(EffectDialog *ed)
      Chunk *chunk = doc->chunk;
      LADSPA_PortRangeHintDescriptor prhd;
 
-     for (i=0; i<ld->effect->numports[0]; i++) {
+     for (i=0; i < (guint) ld->effect->numports[0]; i++) {
 	  is_tb = FALSE;
 	  if (IS_INTBOX(ld->settings[0][i])) {
 	       ib = INTBOX(ld->settings[0][i]);
@@ -105,7 +105,7 @@ gboolean ladspa_dialog_apply(EffectDialog *ed)
      }
 
      for (j=2; j<4; j++)
-	  for (i=0; i<ld->effect->numports[j]; i++) {
+	  for (i=0; i < (guint) ld->effect->numports[j]; i++) {
 
 	       k = combo_selected_index(COMBO(ld->settings[j][i]));
 
@@ -118,7 +118,7 @@ gboolean ladspa_dialog_apply(EffectDialog *ed)
 		    g_free(d);
 		    continue;
 	       }
-	       g_assert(ld->channels == chunk->format.channels);
+	       g_assert(ld->channels == (guint) chunk->format.channels);
 	       g_assert(k < ld->channels);
 	       if (j==3){
 		    if (output_mapped[k]) {
@@ -148,7 +148,7 @@ gboolean ladspa_dialog_apply(EffectDialog *ed)
 			     TRUE,ld->effect);
      if (res) return TRUE;
 
-     for (i=0; i<ld->effect->numports[1]; i++) {
+     for (i=0; i < (guint) ld->effect->numports[1]; i++) {
 	  c = g_strdup_printf("%f",ld->effect->ports[1][i].value);
 	  gtk_label_set_text(GTK_LABEL(ld->settings[1][i]), c);
 	  g_free(c);
@@ -162,7 +162,7 @@ static void ladspa_dialog_target_changed(EffectDialog *ed)
      LadspaDialog *ld = LADSPA_DIALOG(ed);
      EffectBrowser *eb = EFFECT_BROWSER(ed->eb);
      /* puts("ladspa_dialog_target_changed");      */
-     if (ld->channels != eb->dl->format.channels)
+     if (ld->channels != (guint) eb->dl->format.channels)
 	  effect_browser_invalidate_effect(eb,ld->effect->id,'L');     
 }
 
@@ -205,7 +205,7 @@ void ladspa_dialog_setup(EffectDialog *ed)
 	  c = gtk_vbox_new(FALSE,3);
 	  gtk_container_add(GTK_CONTAINER(b),c);
 	  gtk_container_set_border_width(GTK_CONTAINER(c),4);
-	  for (i=0; i<eff->numports[0]; i++) {
+	  for (i=0; i < (guint) eff->numports[0]; i++) {
 	       prhd = eff->ports[0][i].prh.HintDescriptor;	       
 	       ch = g_strdup_printf("ladspa_%s_defaultControl%d",eff->id,i);
 	       if (LADSPA_IS_HINT_TOGGLED(prhd)) {
@@ -294,7 +294,7 @@ void ladspa_dialog_setup(EffectDialog *ed)
 	  c = gtk_vbox_new(FALSE,3);
 	  gtk_container_add(GTK_CONTAINER(b),c);
 	  gtk_container_set_border_width(GTK_CONTAINER(c),4);
-	  for (i=0; i<eff->numports[1]; i++) {
+	  for (i=0; i < (guint) eff->numports[1]; i++) {
 	       d = gtk_hbox_new(FALSE,3);
 	       gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
 	       e = gtk_label_new(eff->ports[1][i].name);
@@ -306,7 +306,7 @@ void ladspa_dialog_setup(EffectDialog *ed)
      } else ld->settings[1] = NULL;
 
      li = NULL;
-     for (j=0; j<k; j++)
+     for (j=0; (guint) j < k; j++)
 	  li = g_list_append(li,g_strdup(channel_name(j,k)));
      li = g_list_append(li,g_strdup(_("None")));
 
@@ -321,7 +321,7 @@ void ladspa_dialog_setup(EffectDialog *ed)
 	  c = gtk_vbox_new(FALSE,3);
 	  gtk_container_add(GTK_CONTAINER(b),c);
 	  gtk_container_set_border_width(GTK_CONTAINER(c),4);
-	  for (i=0; i<eff->numports[n+2]; i++) {
+	  for (i=0; i < (guint) eff->numports[n+2]; i++) {
 	       d = gtk_hbox_new(FALSE,3);
 	       gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
 	       e = gtk_label_new(eff->ports[n+2][i].name);
@@ -337,7 +337,7 @@ void ladspa_dialog_setup(EffectDialog *ed)
 	       g_free(ch);
 	       if (j <= -1) 
 		    j = k;
-	       else if (j >= k) {
+	       else if ((guint) j >= k) {
 		    j = q;
 	       }
 	       combo_set_items(COMBO(e),li,j);

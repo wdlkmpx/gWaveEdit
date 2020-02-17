@@ -119,7 +119,7 @@ static void builtin_rebuild_func(gchar source_tag, gpointer user_data)
 static EffectDialog *builtin_get_func(gchar *name, gchar source_tag,
 				      gpointer user_data)
 {
-     GType type = -1;
+     GType type = 0;
      if (!strcmp(name,"volume")) type = volume_dialog_get_type();
      else if (!strcmp(name,"srate")) type = samplerate_dialog_get_type();
      else if (!strcmp(name,"ssize")) type = samplesize_dialog_get_type();
@@ -130,7 +130,7 @@ static EffectDialog *builtin_get_func(gchar *name, gchar source_tag,
      else if (!strcmp(name,"speed")) type = speed_dialog_get_type();
      else if (!strcmp(name,"pipe")) type = pipe_dialog_get_type();
      else if (!strcmp(name,"sandwich")) type = sandwich_dialog_get_type();
-     if (type >= 0) 
+     if (type != 0) 
 	  return EFFECT_DIALOG(g_object_new(type, NULL));
      else
 	  return NULL;

@@ -250,7 +250,7 @@ int sound_driver_index(void)
 GList *sound_driver_valid_names(void)
 {
     GList *l = NULL;
-    int i;
+    guint i;
     for (i=0; i<ARRAY_LENGTH(drivers); i++)
         l = g_list_append(l, _(drivers[i].name));
     return l;
@@ -258,7 +258,7 @@ GList *sound_driver_valid_names(void)
 
 gchar *sound_driver_id_from_name(gchar *name)
 {
-    int i;
+    guint i;
     for (i=0; i<ARRAY_LENGTH(drivers); i++)
         if (!strcmp(_(drivers[i].name),name))
             return drivers[i].id;
@@ -272,7 +272,7 @@ gchar *sound_driver_id_from_index(int index)
 
 gchar *sound_driver_name_from_id(gchar *id)
 {
-    int i;
+    guint i;
     for (i=0; i<ARRAY_LENGTH(drivers); i++)
         if (!strcmp(drivers[i].id,id))
             return _(drivers[i].name);
@@ -281,7 +281,7 @@ gchar *sound_driver_name_from_id(gchar *id)
 
 gboolean sound_driver_has_preferences(gchar *id)
 {
-     int i;
+     guint i;
 
      if (!id) return (drivers[current_driver].preferences != NULL);
 
@@ -294,7 +294,7 @@ gboolean sound_driver_has_preferences(gchar *id)
 
 void sound_driver_show_preferences(gchar *id)
 {
-     int i;
+     guint i;
 
      if ((!id) && sound_driver_has_preferences(id)) 
 	  drivers[current_driver].preferences();
@@ -307,7 +307,7 @@ void sound_driver_show_preferences(gchar *id)
 static void sound_init_driver(char *name)
 {
      gchar *d,**p;
-     int i;
+     guint i;
 
      /* Handle auto-detection */
      if (!strcmp(name,"auto")) {

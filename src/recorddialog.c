@@ -348,7 +348,7 @@ static gboolean process_input(RecordDialog *rd)
 	  i = input_overrun_count();
 	  if (i>=0) {
 	       i -= rd->overruns_before_start;
-	       while (i > rd->overruns) {
+	       while ((guint) i > rd->overruns) {
 		    if (rd->overruns < 10)
 			 rd->overrun_locs[rd->overruns] = rd->written_bytes;
 		    rd->overruns++;

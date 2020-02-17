@@ -662,7 +662,7 @@ gboolean datasource_read(Datasource *source, off_t sampleno, gpointer buffer,
 {
      return (datasource_read_array(source,sampleno,source->format.samplebytes,
 				   buffer,dither_mode,NULL) 
-	     != source->format.samplebytes);
+	     != (guint) source->format.samplebytes);
 }
 
 

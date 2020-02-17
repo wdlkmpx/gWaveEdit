@@ -208,7 +208,7 @@ static void esound_input_store(Ringbuf *buffer)
      if (esound_record_fd < 0) return;
      while (1) {
 	  sz = ringbuf_freespace(buffer);
-	  if (sz > sizeof(buf)) sz = sizeof(buf);
+	  if ((guint) sz > sizeof(buf)) sz = sizeof(buf);
 	  if (sz == 0) return;
 	  FD_ZERO(&set);
 	  FD_SET(esound_record_fd, &set);

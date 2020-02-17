@@ -366,13 +366,14 @@ int hexval(gchar chr)
 
 static void parse_color(gchar *str, GdkColor *color)
 {
-     unsigned int i,j,k,rgb[3];
+     int i,j,k;
+     guint rgb[3] = { 0, 0, 0 };
      for (i=0; i<3; i++,str+=2) {
 	  j = hexval(str[0]);
 	  if (j == -1) return;
 	  k = hexval(str[1]);
 	  if (k == -1) return;
-	  rgb[i] = j*16+k;
+	  rgb[i] = (guint) (j * 16 + k);
      }
      color->red = rgb[0] * 256;
      color->green = rgb[1] * 256;
@@ -768,7 +769,7 @@ guint find_timescale_points(guint32 samplerate, off_t start_samp,
 	  }	  
 	  for (s=q; s<=r+1; s++) {
 	       points[pctr++] = s * p;
-	       g_assert(pctr <= max_points);
+	       g_assert(pctr <= (guint) max_points);
 	  }	  
 
 	  p = 1;
@@ -781,7 +782,7 @@ guint find_timescale_points(guint32 samplerate, off_t start_samp,
 	  }	  
 	  for (s=q; s<=r+1; s++) {
 	       minor_points[mpctr++] = s * p;
-	       g_assert(mpctr <= max_minorpoints);
+	       g_assert(mpctr <= (guint) max_minorpoints);
 	  }	  
 	  *npoints = pctr;
 	  *nminorpoints = mpctr;
@@ -790,7 +791,7 @@ guint find_timescale_points(guint32 samplerate, off_t start_samp,
 
      /* Handle major points (common between timecode and real time) */
      i = 0;
-     while (i < (ARRAY_LENGTH(bigsizes)-1) &&
+     while ((guint) i < (ARRAY_LENGTH(bigsizes)-1) &&
 	    ( (end_samp-start_samp)/(bigsizes[i]*samplerate) > 
 	      (off_t)(max_points-2) ) )
 	  i++;
@@ -800,7 +801,7 @@ guint find_timescale_points(guint32 samplerate, off_t start_samp,
      while (1) {
 	  points[pctr++] = (q++) * bigsizes[i] * samplerate;
 	  /* printf("q = %d, pctr = %d, max_points = %d\n",(int)q,(int)pctr,(int)max_points); */
-	  g_assert(pctr <= max_points);
+	  g_assert(pctr <= (guint) max_points);
 	  if (q > r) break;
      }
      *npoints = pctr;
@@ -823,7 +824,7 @@ guint find_timescale_points(guint32 samplerate, off_t start_samp,
 	  r = end_samp / (bigsizes[i] * samplerate);
 	  for (s=q; s<=r+1; s++) {
 	       minor_points[mpctr++] = s * bigsizes[i] * samplerate;
-	       g_assert(mpctr <= max_minorpoints);
+	       g_assert(mpctr <= (guint) max_minorpoints);
 	  }	  
 	  *nminorpoints = mpctr;
 	  return 0;

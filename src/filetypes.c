@@ -816,7 +816,7 @@ static gboolean find_nearest_sndfile_format(Dataformat *fmt, int format,
 	  i = 5;
      else
 	  i = 6;
-     for (; i<ARRAY_LENGTH(suggestions); i++) {
+     for (; (guint) i < ARRAY_LENGTH(suggestions); i++) {
 	  info->format = format | suggestions[i];
 	  if (sf_format_check(info)) return FALSE;
      }
@@ -825,10 +825,10 @@ static gboolean find_nearest_sndfile_format(Dataformat *fmt, int format,
      for (j=0; j<i; j++) {
 	  sfi.format = j;
 	  sf_command(NULL, SFC_GET_FORMAT_SUBTYPE, &sfi, sizeof(sfi));
-	  for (k=0; k<ARRAY_LENGTH(suggestions); k++)
+	  for (k=0; (guint) k < ARRAY_LENGTH(suggestions); k++)
 	       if ((sfi.format & SF_FORMAT_SUBMASK) == suggestions[k])
 		    break;
-	  if (k<ARRAY_LENGTH(suggestions)) continue;
+	  if ((guint) k < ARRAY_LENGTH(suggestions)) continue;
 	  info->format = (sfi.format&SF_FORMAT_SUBMASK) | format;
 	  if (sf_format_check(info)) return FALSE;
      }
@@ -863,7 +863,7 @@ static gboolean sndfile_save_main(Chunk *chunk, gchar *filename,
      off_t clipcount = 0;
      Dataformat fmt;
      Chunk *convchunk;
-     sf_count_t wc;
+     sf_count_t wc = 0;
 
      if (find_nearest_sndfile_format(&(chunk->format),format,&info,filename)) 
 	  return -1;
@@ -1162,7 +1162,7 @@ static gpointer mp3_get_settings(void)
      GtkWidget *a,*b,*c,*d;
 
      gchar *p;
-     int i,j;
+     guint i,j;
 
      /* Setup lists */
      for (l=NULL, i=0; i<ARRAY_LENGTH(vbr_preset_names); i++)

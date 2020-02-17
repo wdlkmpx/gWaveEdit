@@ -39,8 +39,8 @@ static struct {
      gint state;
      int lasttime;
      Dataformat format;
-     gint input_bytes_available;
-     gint output_bytes_buffered;
+     guint input_bytes_available;
+     guint output_bytes_buffered;
 } dummy_data = {1};
 
 
@@ -81,7 +81,7 @@ static void dummy_output_checkbuf(void)
      if (t != dummy_data.lasttime) {
 	  dummy_data.output_bytes_buffered -= 
 	       dummy_data.format.samplerate*dummy_data.format.samplebytes;	  
-	  if (dummy_data.output_bytes_buffered < 0 || t > dummy_data.lasttime+1)
+	  if (t > dummy_data.lasttime+1)
 	       dummy_data.output_bytes_buffered = 0;
 	  dummy_data.lasttime = t;
      }
@@ -97,7 +97,7 @@ static gboolean dummy_output_want_data(void)
 
 static guint dummy_output_play(gchar *buffer, guint bufsize)
 {
-     gint i;
+     guint i;
      g_assert(dummy_data.state == 3);
      dummy_output_checkbuf();
      i = 2*dummy_data.format.samplerate*dummy_data.format.samplebytes;

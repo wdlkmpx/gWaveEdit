@@ -35,7 +35,10 @@ gboolean um_use_gtk = FALSE;
 
 int user_message_flag=0;
 static int modal_result;
-static const int mr_yes=MR_YES,mr_no=MR_NO,mr_cancel=MR_CANCEL,mr_ok=MR_OK;
+//static const int mr_yes    = MR_YES;
+//static const int mr_no     = MR_NO;
+static const int mr_cancel = MR_CANCEL;
+static const int mr_ok     = MR_OK;
 
 static void modal_callback(GtkWidget *widget, gpointer data)
 {

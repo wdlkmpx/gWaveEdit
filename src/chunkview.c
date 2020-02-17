@@ -171,7 +171,7 @@ static gint calc_x_noclamp(ChunkView *cv, off_t sample, off_t width)
 static void chunk_view_update_image_main(ChunkView *cv, GdkDrawable *image,
 					 guint xs, guint xe)
 {
-     int i,j,y;
+     guint i,j,y;
      gint w,h;
      GtkWidget *wid = GTK_WIDGET(cv);
      Document *d = cv->doc;
@@ -208,7 +208,7 @@ static void chunk_view_update_image_main(ChunkView *cv, GdkDrawable *image,
      }
      /* Rita gråa streck */
      j = h/d->chunk->format.channels;
-     for (i=0; i<d->chunk->format.channels; i++) {
+     for (i=0; i < (guint) d->chunk->format.channels; i++) {
 	  y = j/2 + i*j;	  
 	  gdk_draw_line(image,get_gc(BARS,wid),xs,y,xe,y);
      }
@@ -239,7 +239,7 @@ static void draw_mark(gchar *label, off_t position, gpointer user_data)
 
      if ( position >= d->viewstart && position <= d->viewend ) {
 	  i = calc_x( cv, position, widget->allocation.width );
-	  if (event->area.x <= i+10 && event->area.x+event->area.width > i) {
+	  if ((guint) event->area.x <= i+10 && (guint) event->area.x+event->area.width > i) {
 	       gdk_draw_line( widget->window, get_gc(MARK,widget), i, 
 			      event->area.y, i, 
 			      event->area.y+event->area.height-1);
@@ -315,7 +315,7 @@ static void draw_timescale(ChunkView *view, GdkEventExpose *event, gboolean text
      off_t *points,*midpoints,*minorpoints;
      int npoints,nmidpoints,nminorpoints;
 
-     guint midtext,minortext;
+     int midtext,minortext;
 
      if (text) gdk_window_clear_area(widget->window, event->area.x, 
 				     view->image_height,event->area.width,
@@ -359,7 +359,7 @@ static void draw_timescale(ChunkView *view, GdkEventExpose *event, gboolean text
      midtext = minortext;
 
      if (nminorpoints > 0 && 
-	 (widget->allocation.width / nminorpoints) < font_width) 
+	 (guint) (widget->allocation.width / nminorpoints) < font_width) 
 	  minortext = -1;
      else
 	  midtext = -1;
@@ -396,9 +396,9 @@ static gint chunk_view_expose(GtkWidget *widget, GdkEventExpose *event)
      /* Determine if the time scale or text/bars at the bottom needs
       * redrawing */
      if (cv->timescale) 
-	  if (event->area.y+event->area.height > cv->image_height-7) {
+	  if ((guint) event->area.y+event->area.height > cv->image_height-7) {
 	       expose_timescale=TRUE;
-	       if (event->area.y+event->area.height > cv->image_height) {
+	       if ((guint) event->area.y+event->area.height > cv->image_height) {
 		    expose_text = TRUE;
 		    event->area.height = cv->image_height-event->area.y;
 	       }
@@ -408,7 +408,7 @@ static gint chunk_view_expose(GtkWidget *widget, GdkEventExpose *event)
      if ( (cv->show_bufpos) &&
 	  d->playbufpos >= d->viewstart && d->playbufpos <= d->viewend ) {
 	  i = calc_x( cv, d->playbufpos, widget->allocation.width );
-	  if (event->area.x <= i && event->area.x+event->area.width > i) {
+	  if ((guint) event->area.x <= i && (guint) event->area.x+event->area.width > i) {
 	       gdk_draw_line( widget->window, get_gc(BUFPOS,widget), i,
 			      event->area.y, i,
 			      event->area.y+event->area.height-1 );
@@ -422,7 +422,7 @@ static gint chunk_view_expose(GtkWidget *widget, GdkEventExpose *event)
      if ( d->cursorpos >= d->viewstart && 
 	  d->cursorpos <= d->viewend ) {
 	  i = calc_x( cv, d->cursorpos, widget->allocation.width );
-	  if (event->area.x <= i && event->area.x+event->area.width > i) {
+	  if ((guint) event->area.x <= i && (guint) event->area.x+event->area.width > i) {
 	       gdk_draw_line( widget->window, get_gc(CURSOR,widget), i, 
 			      event->area.y, i, 
 			      event->area.y+event->area.height-1 );

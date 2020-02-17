@@ -63,7 +63,7 @@ static int oss_format;
 static int oss_samplesize;
 static int oss_samplerate;
 static int oss_channels;
-static int oss_samplebytes_in,oss_samplebytes_out;
+static guint oss_samplebytes_in,oss_samplebytes_out;
 static gboolean oss_noselect = FALSE;
 static gpointer play_source;
 
@@ -273,9 +273,9 @@ static int oss_output_flush(gpointer ts, GTimeVal *tv, gpointer ud)
 #endif
      /* Calculate the number of bytes to write (into u) */
      u = ringbuf_available(oss_output_buffer);
-     if (u > info.fragsize)
+     if (u > (guint) info.fragsize)
 	  u -= u % info.fragsize;
-     u = MIN(u, info.fragments*info.fragsize);
+     u = MIN(u, (guint) (info.fragments*info.fragsize));
      if (u == 0) return 50;
      /* Write it out! */
      c = g_malloc(u);
@@ -299,7 +299,7 @@ static guint oss_output_play(gchar *buffer, guint bufsize)
      /* 24-bit samples need padding */
      if (oss_samplesize == 3) {
 	  while (bufsize >= 3 && ringbuf_freespace(oss_output_buffer)>=oss_samplebytes_out) {
-	       for (u=0; u<oss_channels; u++) {
+	       for (u=0; u < (guint) oss_channels; u++) {
 #if G_BYTE_ORDER == G_LITTLE_ENDIAN
 		    ringbuf_enqueue(oss_output_buffer,"",1);
 		    ringbuf_enqueue(oss_output_buffer,buffer,3);
@@ -397,10 +397,10 @@ static void oss_input_store(Ringbuf *buffer)
      /* Now do an ioctl call to check the number of readable bytes */
      /* Note: It seems as ALSA 0.9's OSS emulation returns 0 for this call... */
      i = oss_errdlg_ioctl(oss_fd, SNDCTL_DSP_GETISPACE, &info, TRUE);
-     if (i > 0 && i < u) u=i;
-     else u = MIN(u,oss_samplesize*oss_channels*oss_samplerate/50);
+     if (i > 0 && (guint) i < u) u=i;
+     else u = MIN(u, (guint) (oss_samplesize*oss_channels*oss_samplerate/50));
 #else
-     u = MIN(u,oss_samplesize*oss_channels*oss_samplerate/50);
+     u = MIN(u, (guint) (oss_samplesize*oss_channels*oss_samplerate/50));
 #endif
      if (u == 0) return;
      /* Read it! */
