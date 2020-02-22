@@ -64,10 +64,6 @@ static gboolean output_want_data_cached;
   #include "sound-sdl.c"
 #endif
 
-#ifdef HAVE_ESOUND
-#include "sound-esound.c"
-#endif
-
 #ifdef HAVE_PULSEAUDIO
 #include "sound-pulse.c"
 #endif
@@ -167,17 +163,6 @@ static struct sound_driver drivers[] = {
        NULL, NULL, NULL, NULL, NULL },
 #endif
 
-#ifdef HAVE_ESOUND
-
-     { "ESound", "esound", esound_preferences, esound_init, esound_quit,
-       esound_output_select_format, 
-       esound_output_want_data, esound_output_play, esound_output_stop,
-       esound_output_clear_buffers, NULL, NULL,
-       input_supported_true,  
-       esound_input_select_format, esound_input_store, esound_input_stop },
-
-#endif
-
 #ifdef HAVE_PULSEAUDIO
 
      { "PulseAudio", "pulse", pulse_preferences, pulse_init, pulse_quit,
@@ -206,7 +191,7 @@ static guint current_driver = 0;
 
 static gchar *autodetect_order[] = { 
      /* Sound servers. These must auto-detect properly */
-     "jack", "pulse", "esound",
+     "jack", "pulse",
      /* "Direct" API:s that don't auto-detect properly. 
       * If compiled in they probably work. */
      "alsa", "sun", 

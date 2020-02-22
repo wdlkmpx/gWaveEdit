@@ -55,7 +55,7 @@ DEFAULT_DRIVER=auto
 AC_ARG_WITH(default-driver,
 [  --with-default-driver=driver 
                            Choose default sound driver (one of oss,alsa,pulse,
-                           jack,sun,pa,sdl,esound,auto; default: auto)],
+                           jack,sun,pa,sdl,auto; default: auto)],
   DEFAULT_DRIVER=$withval)
 AC_DEFINE_UNQUOTED(DEFAULT_DRIVER,"${DEFAULT_DRIVER}",[Default sound driver])
 
@@ -312,23 +312,6 @@ if test "x$MHW_HAVE_PULSE" = "xyes" ; then
 	AC_DEFINE(HAVE_PULSEAUDIO,1,[Enable PulseAudio sound driver])
 fi
 
-dnl Check for Esound
-
-MHW_HAVE_ESOUND=yes
-AC_ARG_WITH(esound,[  --without-esound        Do not compile EsounD driver],
-	if test "x$withval" = "xno"; then
-	   MHW_HAVE_ESOUND=no
-	fi
-)
-if test "x$MHW_HAVE_ESOUND" = "xyes"
-then
-	PKG_CHECK_MODULES(ESOUND,esound >= 0.2.0,MHW_HAVE_ESOUND=yes,MHW_HAVE_ESOUND=no)
-fi
-
-if test "x$MHW_HAVE_ESOUND" = "xyes"; then
-	AC_DEFINE(HAVE_ESOUND,1,[Enable EsounD sound driver])
-fi
-
 dnl Check for Sun audio
 
 MHW_HAVE_SUNAUDIO=yes
@@ -432,7 +415,6 @@ CHECKDRV([$MHW_HAVE_JACK],[JACK])
 CHECKDRV([$MHW_HAVE_SUNAUDIO],[Sun])
 CHECKDRV([$MHW_HAVE_PORTAUDIO],[PortAudio])
 CHECKDRV([$HAVE_SDL],[SDL])
-CHECKDRV([$MHW_HAVE_ESOUND],[EsounD])
 CHECKDRV([$MHW_HAVE_PULSE],[PulseAudio])
 echo    "  Included drivers:      $INCLUDED_DRIVERS"
 echo    "  Drivers not included:  $EXCLUDED_DRIVERS"
