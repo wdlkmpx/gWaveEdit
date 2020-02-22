@@ -200,18 +200,22 @@ AC_SUBST(PORTAUDIO_LIBS)
 dnl Check for SDL
 
 HAVE_SDL=no
-SKIP_SDL_TEST=no
+SDL_TEST=yes
 
-AC_ARG_WITH(sdl,[  --without-sdl           Do not use SDL library],
-if test "x$withval" = "xno" ; then
- SKIP_SDL_TEST=yes
-fi
+AC_ARG_WITH([sdl], [  --without-sdl           Do not use SDL library],
+	[
+	if test "x$withval" = "xno" ; then
+		SDL_TEST=no
+	fi
+	]
 )
 
-if test "x$SKIP_SDL_TEST" = "xno"; then
-PKG_CHECK_MODULES(
-  [SDL], [sdl >= 1.2.13], [HAVE_SDL=yes], AC_MSG_ERROR(SDL >= 1.2.13 is required)
-  )
+if test "x$SDL_TEST" = "xyes"; then
+	PKG_CHECK_MODULES([SDL], [sdl >= 1.2.13], [HAVE_SDL=yes], [])
+fi
+
+if test "x$HAVE_SDL" = "xyes" ; then
+	AC_DEFINE(HAVE_SDL,1,[Use SDL])
 fi
 
 AC_SUBST(SDL_CFLAGS)
