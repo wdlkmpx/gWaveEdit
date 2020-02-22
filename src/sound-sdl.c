@@ -19,10 +19,20 @@
  */
 
 
+// How to record audio:
+//     https://lazyfoo.net/tutorials/SDL/34_audio_recording/index.php
+//     https://stackoverflow.com/questions/42990071/recording-microphone-with-sdl2-gets-delayed-by-2-seconds
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
-#include "SDL.h"
+
+#ifdef HAVE_SDL2
+#include "SDL2/SDL.h"
+#else
+#include "SDL/SDL.h"
+#endif
+
 #include "sound.h" 
 #include "ringbuf.h"
 #include "gettext.h"
@@ -66,6 +76,11 @@ static gint sdl_output_select_format(Dataformat *format, gboolean silent,
 {
 	gchar *c;
 	SDL_AudioSpec desired;
+
+#ifdef HAVE_SDL2
+	SDL_memset(&desired, 0, sizeof(desired)); /* or SDL_zero(desired) */
+#endif
+
 	if (format->type == DATAFORMAT_FLOAT || format->samplesize > 2 || format->channels > 2) {
 		return -1;
 	}

@@ -156,7 +156,11 @@ static struct sound_driver drivers[] = {
 #endif
 
 #if defined (HAVE_SDL)
+#ifdef HAVE_SDL2
+     { N_("SDL2 (output only)"), "sdl", NULL, sdl_init, sdl_quit, 
+#else
      { N_("SDL (output only)"), "sdl", NULL, sdl_init, sdl_quit, 
+#endif
        sdl_output_select_format, 
        sdl_output_want_data, sdl_output_play, sdl_output_stop, 
        sdl_output_clear_buffers, NULL, NULL,

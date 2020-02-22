@@ -197,9 +197,10 @@ fi
 
 AC_SUBST(PORTAUDIO_LIBS)
 
-dnl Check for SDL
+# Check for SDL
 
 HAVE_SDL=no
+HAVE_SDL2=no
 SDL_TEST=yes
 
 AC_ARG_WITH([sdl], [  --without-sdl           Do not use SDL library],
@@ -211,16 +212,26 @@ AC_ARG_WITH([sdl], [  --without-sdl           Do not use SDL library],
 )
 
 if test "x$SDL_TEST" = "xyes"; then
-	PKG_CHECK_MODULES([SDL], [sdl >= 1.2.13], [HAVE_SDL=yes], [])
+	PKG_CHECK_MODULES([SDL], [sdl >= 1.2.13], [HAVE_SDL=yes], [HAVE_SDL=no])
+fi
+
+if test "x$HAVE_SDL" = "xno"; then
+	PKG_CHECK_MODULES([SDL], [sdl2 >= 2.0], [HAVE_SDL2=yes],[HAVE_SDL2=no])
+fi
+
+if test "x$HAVE_SDL2" = "xyes" ; then
+	AC_DEFINE(HAVE_SDL2,1,[Use SDL2])
+	HAVE_SDL=yes
 fi
 
 if test "x$HAVE_SDL" = "xyes" ; then
-	AC_DEFINE(HAVE_SDL,1,[Use SDL])
+	AC_DEFINE(HAVE_SDL,1,[Enable SDL])
 fi
 
 AC_SUBST(SDL_CFLAGS)
 AC_SUBST(SDL_LIBS)
- 
+
+
 dnl Check for AlsaLib
 
 ALSALIB_LIBS=""
