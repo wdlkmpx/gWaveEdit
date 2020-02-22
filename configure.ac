@@ -141,9 +141,6 @@ dnl Replace main with a function in -libs:
 AC_CHECK_LIB(ibs, main)
 AC_CHECK_LIB(m, round)
 
-dnl This is needed for PortAudio under GNU/Linux...
-AC_CHECK_LIB(pthread,pthread_create)
-
 dnl Check for libsndfile
 
 HAVE_SNDFILE=yes
@@ -206,36 +203,27 @@ fi
 AC_SUBST(LIBSAMPLERATE_LIBS)
 AC_SUBST(LIBSAMPLERATE_CFLAGS)
 
-dnl Check for PortAudio
+# Check for PortAudio
 
-PORTAUDIO_LIBS=""
-MHW_HAVE_PORTAUDIO=yes
+HAVE_PORTAUDIO=no
+PORTAUDIO_TEST=yes
 
 AC_ARG_WITH(portaudio,[  --without-portaudio     Do not use portaudio library],
-if test "x$withval" = "xno"; then
-MHW_HAVE_PORTAUDIO=no
-fi
+	if test "x$withval" = "xno" ; then
+		PORTAUDIO_TEST=no
+	fi
 )
 
-AC_CHECK_HEADER(portaudio.h,mhw_found_header=yes,mhw_found_header=no)
-if test "x$mhw_found_header" = "xno"; then
-MHW_HAVE_PORTAUDIO=no
+if test "x$PORTAUDIO_TEST" = "xyes"; then
+	PKG_CHECK_MODULES([portaudio], [portaudio-2.0 >= 19], [HAVE_PORTAUDIO=yes], [HAVE_PORTAUDIO=no])
 fi
 
-if test "x$MHW_HAVE_PORTAUDIO" = "xyes"; then
-AC_CHECK_LIB(portaudio,Pa_Initialize,MHW_HAVE_PORTAUDIO=yes,MHW_HAVE_PORTAUDIO=no)
-fi
-
-if test "x$MHW_HAVE_PORTAUDIO" = "xyes"; then
-AC_CHECK_TYPE(PaTimestamp,,MHW_HAVE_PORTAUDIO=no,[[#include <portaudio.h>]])
-fi
-
-if test "x$MHW_HAVE_PORTAUDIO" = "xyes"; then
+if test "x$HAVE_PORTAUDIO" = "xyes" ; then
 	AC_DEFINE(HAVE_PORTAUDIO,1,[Enable PortAudio sound driver])
-	PORTAUDIO_LIBS="-lportaudio $PORTAUDIO_LIBS"
 fi
 
 AC_SUBST(PORTAUDIO_LIBS)
+AC_SUBST(PORTAUDIO_CFLAGS)
 
 # Check for SDL
 
@@ -468,7 +456,7 @@ CHECKDRV([$HAVE_OSS],[OSS])
 CHECKDRV([$HAVE_ALSALIB],[ALSA])
 CHECKDRV([$MHW_HAVE_JACK],[JACK])
 CHECKDRV([$MHW_HAVE_SUNAUDIO],[Sun])
-CHECKDRV([$MHW_HAVE_PORTAUDIO],[PortAudio])
+CHECKDRV([$HAVE_PORTAUDIO],[PortAudio])
 CHECKDRV([$HAVE_SDL],[SDL])
 CHECKDRV([$MHW_HAVE_PULSE],[PulseAudio])
 echo    "  Included drivers:      $INCLUDED_DRIVERS"
