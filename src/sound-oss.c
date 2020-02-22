@@ -331,7 +331,10 @@ static guint oss_output_play(gchar *buffer, guint bufsize)
 	  mainloop_time_source_restart(play_source,&t);
      }
      g_assert(bufsize == 0 || bufsize >= oss_samplebytes_in);
-     printf("oss_output_play, bs0: %d, u: %d\n",bs0,u);
+
+     // debug
+     //printf("oss_output_play, bs0: %d, u: %d\n",bs0,u);
+
      /* oss_output_flush(); */
      return bs0 ? u : ringbuf_available(oss_output_buffer);
 }
