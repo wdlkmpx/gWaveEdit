@@ -16,10 +16,10 @@ gwaveedit_SOURCES = chunk.c int_box.c sound.c speeddialog.c              \
 		     recordformatcombo.c sandwichdialog.c
 
 AM_CPPFLAGS = @GTK_CFLAGS@ @SDL_CFLAGS@ @SNDFILE_CFLAGS@ @JACK_CFLAGS@ \
-	   @ESOUND_CFLAGS@ @LIBSAMPLERATE_CFLAGS@ @ARTSC_CFLAGS@    \
+	   @ESOUND_CFLAGS@ @LIBSAMPLERATE_CFLAGS@ \
            @PULSE_CFLAGS@ -DDATADIR='"$(datadir)"'
 LDADD = @GTK_LIBS@ @SDL_LIBS@ @PORTAUDIO_LIBS@ @SNDFILE_LIBS@ @ALSALIB_LIBS@ \
-        @JACK_LIBS@ @ESOUND_LIBS@ @LIBSAMPLERATE_LIBS@ @ARTSC_LIBS@ \
+        @JACK_LIBS@ @ESOUND_LIBS@ @LIBSAMPLERATE_LIBS@ \
         @PULSE_LIBS@
 
 localedir = $(datadir)/locale

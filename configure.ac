@@ -55,7 +55,7 @@ DEFAULT_DRIVER=auto
 AC_ARG_WITH(default-driver,
 [  --with-default-driver=driver 
                            Choose default sound driver (one of oss,alsa,pulse,
-                           jack,sun,pa,sdl,esound,arts,auto; default: auto)],
+                           jack,sun,pa,sdl,esound,auto; default: auto)],
   DEFAULT_DRIVER=$withval)
 AC_DEFINE_UNQUOTED(DEFAULT_DRIVER,"${DEFAULT_DRIVER}",[Default sound driver])
 
@@ -350,37 +350,6 @@ if test "x$MHW_HAVE_SUNAUDIO" = "xyes"; then
 	AC_DEFINE(HAVE_SUN,1,[Enable Sun audio sound driver])
 fi
 
-dnl Check for aRts C interface
-
-MHW_HAVE_ARTSC=yes
-ARTSC_LIBS=""
-ARTSC_CFLAGS=""
-
-AC_DEFUN([AC_WITHOUT_ARTSC],[
-	if test "x$withval" = "xno"; then
-	        MHW_HAVE_ARTSC=no
-	fi
-])
-
-AC_ARG_WITH(arts, [  --without-arts          Do not compile aRts driver],AC_WITHOUT_ARTSC)
-
-ARTSC_CONFIG=no
-if test "x$MHW_HAVE_ARTSC" = "xyes"; then
-        AC_PATH_PROG(ARTSC_CONFIG, artsc-config, no)
-fi
-
-if test "x$ARTSC_CONFIG" = "xno"; then
-    MHW_HAVE_ARTSC=no
-else
-	ARTSC_CFLAGS=`$ARTSC_CONFIG --cflags`
-	ARTSC_LIBS=`$ARTSC_CONFIG --libs`
-	AC_DEFINE(HAVE_ARTSC,1,[Enable aRts driver])
-fi
-
-AC_SUBST(ARTSC_CFLAGS)
-AC_SUBST(ARTSC_LIBS)
-
-
 dnl Check for GTK+ without gthread
 
 PKG_CHECK_MODULES(
@@ -464,7 +433,6 @@ CHECKDRV([$MHW_HAVE_SUNAUDIO],[Sun])
 CHECKDRV([$MHW_HAVE_PORTAUDIO],[PortAudio])
 CHECKDRV([$HAVE_SDL],[SDL])
 CHECKDRV([$MHW_HAVE_ESOUND],[EsounD])
-CHECKDRV([$MHW_HAVE_ARTSC],[aRts])
 CHECKDRV([$MHW_HAVE_PULSE],[PulseAudio])
 echo    "  Included drivers:      $INCLUDED_DRIVERS"
 echo    "  Drivers not included:  $EXCLUDED_DRIVERS"

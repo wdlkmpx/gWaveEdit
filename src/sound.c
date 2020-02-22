@@ -68,10 +68,6 @@ static gboolean output_want_data_cached;
 #include "sound-esound.c"
 #endif
 
-#ifdef HAVE_ARTSC
-#include "sound-artsc.c"
-#endif
-
 #ifdef HAVE_PULSEAUDIO
 #include "sound-pulse.c"
 #endif
@@ -182,17 +178,6 @@ static struct sound_driver drivers[] = {
 
 #endif
 
-#ifdef HAVE_ARTSC
-
-     { "aRts", "arts", NULL, mharts_init, mharts_quit,
-       mharts_output_select_format, 
-       mharts_output_want_data, mharts_output_play, mharts_output_stop,
-       mharts_output_clear_buffers, mharts_output_suggest_format, NULL,
-       input_supported_true,  
-       mharts_input_select_format, mharts_input_store, mharts_input_stop },
-
-#endif
-
 #ifdef HAVE_PULSEAUDIO
 
      { "PulseAudio", "pulse", pulse_preferences, pulse_init, pulse_quit,
@@ -221,7 +206,7 @@ static guint current_driver = 0;
 
 static gchar *autodetect_order[] = { 
      /* Sound servers. These must auto-detect properly */
-     "jack", "pulse", "esound", "arts", 
+     "jack", "pulse", "esound",
      /* "Direct" API:s that don't auto-detect properly. 
       * If compiled in they probably work. */
      "alsa", "sun", 
