@@ -18,6 +18,12 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
+// portAudio v19
+// http://www.portaudio.com/docs/proposals/011-RenameExistingSymbolsForConsistency.html
+// http://portaudio.com/docs/v19-doxydocs/portaudio_8h.html#a443ad16338191af364e3be988014cbbe
+// http://www.ee.columbia.edu/~mim/meap/paMat/portaudio_v18_1/docs/portaudio_h.txt
+// http://portaudio.com/docs/v19-doxydocs/paex__saw_8c_source.html
+
 #include <stdio.h>
 #include <sys/time.h>
 
@@ -43,8 +49,8 @@ static struct {
 	Ringbuf *output_buffer, *input_buffer;
 	int input_overrun_count;
      
-	PaDeviceID out, in;
-	PortAudioStream *outstream, *instream;
+	PaDeviceIndex out, in;
+	PaStream *outstream, *instream;
 } portaudio_data = { 0 };
 
 // Anropas innan några andra output_-anrop och före gtk_init. 
@@ -55,8 +61,8 @@ static gboolean portaudio_init(gboolean silent)
 							inifile_get_guint32(INI_SETTING_SOUNDBUFSIZE,
 							INI_SETTING_SOUNDBUFSIZE_DEFAULT) );
 	portaudio_data.input_buffer = ringbuf_new(65536);
-	portaudio_data.out = Pa_GetDefaultOutputDeviceID();
-	portaudio_data.in = Pa_GetDefaultInputDeviceID();
+	portaudio_data.out = Pa_GetDefaultOutputDevice();
+	portaudio_data.in = Pa_GetDefaultInputDevice();
 	if (portaudio_data.out == paNoDevice) {
 		g_warning ( _("sound-portaudio: No output devices available!") );
 	}
@@ -77,6 +83,7 @@ static void portaudio_quit(void)
 static gboolean portaudio_samplerate_supported(const PaDeviceInfo *i, 
 					       guint32 samplerate)
 {
+#if 0
 	int x;
 	if (i->numSampleRates == -1) {
 		return (samplerate >= i->sampleRates[0] && samplerate <= i->sampleRates[1]);
@@ -88,6 +95,8 @@ static gboolean portaudio_samplerate_supported(const PaDeviceInfo *i,
 		}
 		return FALSE;
 	}
+#endif
+	return TRUE; //delete this
 }
 
 static PaSampleFormat portaudio_fmtparse(Dataformat *format)
@@ -108,8 +117,6 @@ static PaSampleFormat portaudio_fmtparse(Dataformat *format)
 			return format->sign ? paInt8 : paUInt8;
 		case 2:
 			return format->sign ? paInt16 : 0;
-		case 3:
-			return format->sign ? paPackedInt24 : 0;
 		case 4:
 			if (format->packing == 0) {
 				return format->sign ? paInt32 : 0;
@@ -153,7 +160,7 @@ static gboolean portaudio_output_stop(gboolean must_flush)
 	if (must_flush) {
 		/* Note: We must check the ringbuffer after checking if the
 		* stream is inactive to avoid races */
-		if (Pa_StreamActive(portaudio_data.outstream)==0 &&
+		if (Pa_IsStreamActive(portaudio_data.outstream)==0 &&
 						!ringbuf_isempty(portaudio_data.output_buffer))
 		{
 			Pa_StartStream(portaudio_data.outstream);
@@ -203,7 +210,8 @@ static gint portaudio_output_select_format(Dataformat *format, gboolean silent)
 		return -1;
 	}
 	portaudio_data.played_bytes = 0;
-	err = Pa_OpenStream(&portaudio_data.outstream, 
+	err = Pa_OpenStream(
+			&portaudio_data.outstream, 
 			paNoDevice,
 			0,
 			0,
@@ -241,7 +249,7 @@ static guint portaudio_output_play(gchar *buffer, guint bufsize)
 	i = ringbuf_enqueue(portaudio_data.output_buffer,buffer,bufsize);
 	/* To avoid buffer underruns, wait until there is some data in the output
 	* buffer... */
-	if (Pa_StreamActive(portaudio_data.outstream)==0 && 
+	if (Pa_IsStreamActive(portaudio_data.outstream)==0 && 
 		ringbuf_available(portaudio_data.output_buffer)>4096)
 	{
 		Pa_StartStream(portaudio_data.outstream);
@@ -317,7 +325,8 @@ static gint portaudio_input_select_format(Dataformat *format, gboolean silent)
 			(double)format->samplerate,
 			64,
 			0, 
-			paClipOff, portaudio_input_callback,
+			paClipOff,
+			portaudio_input_callback,
 			NULL);
 
 	if (err != 0) {
