@@ -18,7 +18,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
-
 // How to record audio:
 //     https://lazyfoo.net/tutorials/SDL/34_audio_recording/index.php
 //     https://stackoverflow.com/questions/42990071/recording-microphone-with-sdl2-gets-delayed-by-2-seconds
@@ -37,12 +36,27 @@
 #include "ringbuf.h"
 #include "gettext.h"
 
+// ==============================================================
+
+#if !defined(HAVE_SDL2)
+#define SDL_AudioDeviceID            int
+#define SDL_CloseAudioDevice(id)     SDL_CloseAudio()
+#define SDL_GetAudioDeviceStatus(id) SDL_GetAudioStatus()
+#define SDL_PauseAudioDevice(id, x)  SDL_PauseAudio(x)
+#define SDL_LockAudioDevice(id)      SDL_LockAudio()
+#define SDL_UnlockAudioDevice(id)    SDL_UnlockAudio()
+#endif
+
 static struct {
 	Ringbuf *output_buffer;
+	SDL_AudioDeviceID devId;
 } sdl_data;
+
+// ==============================================================
 
 static gboolean sdl_init(gboolean silent)
 {
+	//printf("sdl_init\n");
 	gchar *c;
 	if (SDL_Init(SDL_INIT_AUDIO) == -1) {
 		c = g_strdup_printf(_("Could not initialize SDL: %s"), 
@@ -57,13 +71,17 @@ static gboolean sdl_init(gboolean silent)
      return TRUE;
 }
 
+
 static void sdl_quit(void)
 {
+	//printf("sdl_quit\n");
 	SDL_Quit();
 }
 
+
 static void sdl_output_callback(void *userdata, Uint8 *stream, int len)
 {
+	//printf("sdl_output_callback\n");
 	guint32 ui;
 	ui = ringbuf_dequeue ( sdl_data.output_buffer, stream, len );
 	if (ui < (guint32) len) {
@@ -71,13 +89,16 @@ static void sdl_output_callback(void *userdata, Uint8 *stream, int len)
 	}
 }
 
+
 static gint sdl_output_select_format(Dataformat *format, gboolean silent,
 				     GVoidFunc ready_func)
 {
+	//printf("sdl_output_select_format\n");
 	gchar *c;
 	SDL_AudioSpec desired;
 
 #ifdef HAVE_SDL2
+	SDL_AudioSpec obtained;
 	SDL_memset(&desired, 0, sizeof(desired)); /* or SDL_zero(desired) */
 #endif
 
@@ -97,43 +118,63 @@ static gint sdl_output_select_format(Dataformat *format, gboolean silent,
 	desired.channels = format->channels;
 	desired.samples = 512;
 	desired.callback = sdl_output_callback;
+
+#ifdef HAVE_SDL2
+	sdl_data.devId = SDL_OpenAudioDevice(NULL, 0, &desired, &obtained, 0);
+	if (!sdl_data.devId) {
+#else
 	if (SDL_OpenAudio(&desired,NULL) < 0) {
+#endif
 		c = g_strdup_printf(_("SDL: Couldn't open audio: %s"), SDL_GetError());
 		console_message(c);
 		g_free(c);
 		return -1;
 	}
+
+#ifdef HAVE_SDL2
+   if (desired.format != obtained.format) {
+        printf("SDL2: Not really using the desired.format\n");
+    }
+#endif
+
 	return 0;
 }
 
+
 static gboolean sdl_output_stop(gboolean must_flush)
 {
+	//printf("sdl_output_stop\n");
 	if (must_flush) {
 		while (ringbuf_available(sdl_data.output_buffer) > 0) {
 			do_yield(TRUE);
 		}
 	}
-	if (SDL_GetAudioStatus() != SDL_AUDIO_STOPPED) {
-		SDL_CloseAudio();
+
+	if (SDL_GetAudioDeviceStatus (sdl_data.devId) != SDL_AUDIO_STOPPED) {
+		SDL_CloseAudioDevice (sdl_data.devId);
 	}
+
 	ringbuf_drain(sdl_data.output_buffer);
 	return must_flush;
 }
 
+
 static void sdl_output_clear_buffers(void)
 {
-	SDL_PauseAudio(1);
+	//printf("sdl_output_clear_buffers\n");
+	SDL_PauseAudioDevice (sdl_data.devId, 1); // stop playing
 	ringbuf_drain(sdl_data.output_buffer);
 }
 
 static guint sdl_output_play(gchar *buffer, guint bufsize)
 {
+	//printf("sdl_output_play\n");
 	guint i;
 	if (!bufsize) {
 		return ringbuf_available(sdl_data.output_buffer);
 	}
 
-	SDL_LockAudio();
+	SDL_LockAudioDevice (sdl_data.devId);
 
 	/* printf("output_play: before: %d,%d\n",ringbuf_available(
 	sdl_data.output_buffer),ringbuf_freespace(sdl_data.output_buffer)); */
@@ -142,17 +183,19 @@ static guint sdl_output_play(gchar *buffer, guint bufsize)
 	ringbuf_available(sdl_data.output_buffer),
 	ringbuf_freespace(sdl_data.output_buffer)); */
 
-	SDL_UnlockAudio();
+	SDL_UnlockAudioDevice (sdl_data.devId);
 
-	if (SDL_GetAudioStatus() == SDL_AUDIO_PAUSED) {
-		SDL_PauseAudio(0);
+	if (SDL_GetAudioDeviceStatus (sdl_data.devId) == SDL_AUDIO_PAUSED) {
+		SDL_PauseAudioDevice (sdl_data.devId, 0); // start playing
 	}
 
 	return i;
 }
 
+
 static gboolean sdl_output_want_data(void)
 {
+	//printf("sdl_output_want_data\n");
 	return !ringbuf_isfull(sdl_data.output_buffer);
 }
 
