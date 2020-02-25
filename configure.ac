@@ -93,6 +93,36 @@ FIXED_TIME_STR=${withval}
 fi
 )
 
+# Check for GTK
+
+AC_ARG_ENABLE(
+	gtk3,
+	AS_HELP_STRING([--enable-gtk3],[enable to use gtk-3.0 instead of gtk-2.0]),
+	[case "${enableval}" in
+		yes)  enable_gtk3=yes ;;
+		no)   enable_gtk3=no ;;
+		*) AC_MSG_ERROR([bad value "${enableval}" for --enable-gtk3, use "yes" (default) or "no".]) ;;
+	esac],
+	[]
+)
+
+if test "x$enable_gtk3" = "xyes" ; then
+	gtk_modules="gtk+-3.0 >= 3.0.0"
+else
+	gtk_modules="gtk+-2.0 >= 2.24.0"
+fi
+
+PKG_CHECK_MODULES(GTK, [$gtk_modules])
+
+AC_SUBST(GTK_CFLAGS)
+AC_SUBST(GTK_LIBS)
+
+PKG_CHECK_MODULES(
+	[GLIB], [glib-2.0 >= 2.32.0], found_glib=yes, AC_MSG_ERROR(Glib >= 2.32.0 is required)
+)
+
+# Disable gtk deprecations?
+
 AC_ARG_ENABLE(
 	gtk_warnings,
 	[AS_HELP_STRING([--enable-gtk-warnings],[So you can see what is deprecated in GTK2...])],
@@ -103,7 +133,7 @@ AC_ARG_ENABLE(
 	[enable_gtk_warnings=no]
 )
 
-dnl Checks for programs.
+# Checks for programs.
 AC_PROG_CC
 
 dnl Checks for libraries.
@@ -358,17 +388,8 @@ if test "x$MHW_HAVE_SUNAUDIO" = "xyes"; then
 	AC_DEFINE(HAVE_SUN,1,[Enable Sun audio sound driver])
 fi
 
-dnl Check for GTK+ without gthread
+# Check for large file support
 
-PKG_CHECK_MODULES(
-  [GLIB], [glib-2.0 >= 2.32.0], found_glib=yes, AC_MSG_ERROR(Glib >= 2.32.0 is required)
-  )
-
-PKG_CHECK_MODULES(
-  [GTK], [gtk+-2.0 >= 2.24.0], found_gtk=yes, AC_MSG_ERROR(GTK >= 2.24.0 is required)
-  )
-
-dnl Check for large file support
 AC_SYS_LARGEFILE
 AC_DEFINE(_LARGEFILE_SOURCE,1,[Defined to get fseeko/ftello prototypes])
 AC_CHECK_SIZEOF(off_t)
@@ -431,7 +452,11 @@ echo "Version: $VERSION"
 echo 
 echo "Libraries: "
 echo -n "  GTK+ version:           "
-echo `$PKG_CONFIG --modversion gtk+-2.0`
+if test "x$enable_gtk3" = "xyes" ; then
+	echo `$PKG_CONFIG --modversion gtk+-3.0`
+else
+	echo `$PKG_CONFIG --modversion gtk+-2.0`
+fi
 echo    "  Libsndfile:             $HAVE_SNDFILE"
 echo    "  Libsamplerate:          $HAVE_LIBSAMPLERATE"
 echo
