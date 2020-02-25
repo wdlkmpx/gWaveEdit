@@ -68,6 +68,10 @@ static gboolean output_want_data_cached;
 #include "sound-pulse.c"
 #endif
 
+#ifdef HAVE_SNDIO
+#include "sound-sndio.c"
+#endif
+
 #include "sound-dummy.c"
 
 static GList *input_supported_true(gboolean *complete)
@@ -260,6 +264,26 @@ static struct sound_driver drivers[] = {
        
 #endif
 
+#ifdef HAVE_SNDIO
+	{
+		"SNDIO", "sndio",
+		NULL,
+		sndio_init,
+		sndio_quit,
+		sndio_output_select_format, 
+		sndio_output_want_data,
+		sndio_output_play,
+		sndio_output_stop,
+		sndio_output_clear_buffers,
+		NULL,
+		NULL,
+		sndio_input_supported_formats,
+		sndio_input_select_format,
+		sndio_input_store,
+		sndio_input_stop
+	},
+#endif
+
 	{
 		N_("Dummy (no sound)"), "dummy",
 		NULL,
@@ -286,7 +310,7 @@ static guint current_driver = 0;
 
 static gchar *autodetect_order[] = { 
 	/* Sound servers. These must auto-detect properly */
-	"jack", "pulse",
+	"jack", "pulse", "sndio"
 	/* "Direct" API:s that don't auto-detect properly. 
 	* If compiled in they probably work. */
 	"alsa", "sun", 

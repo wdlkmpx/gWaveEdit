@@ -388,6 +388,31 @@ if test "x$MHW_HAVE_SUNAUDIO" = "xyes"; then
 	AC_DEFINE(HAVE_SUN,1,[Enable Sun audio sound driver])
 fi
 
+# Check for libsndio
+
+HAVE_SNDIO=no
+SNDIO_TEST=yes
+
+AC_ARG_WITH(sndio,
+	[  --without-sndio           Do not compile SNDIO audio driver]
+	[if test "x$SNDIO_TEST" = "xno"; then
+		SNDIO_TEST=no
+	fi],[]
+)
+
+if test "x$SNDIO_TEST" = "xyes"; then
+	AC_CHECK_HEADERS(sndio.h, HAVE_SNDIO=yes)
+fi
+
+if test "x$HAVE_SNDIO" = "xyes"; then
+	AC_DEFINE(HAVE_SNDIO,1,[Enable SNDIO audio sound driver])
+	SNDIO_LIBS='-lsndio'
+	SNDIO_CFLAGS=""
+fi
+
+AC_SUBST(SNDIO_CFLAGS)
+AC_SUBST(SNDIO_LIBS)
+
 # Check for large file support
 
 AC_SYS_LARGEFILE
@@ -471,6 +496,7 @@ CHECKDRV([$MHW_HAVE_SUNAUDIO],[Sun])
 CHECKDRV([$MHW_HAVE_PORTAUDIO],[PortAudio])
 CHECKDRV([$HAVE_SDL],[SDL])
 CHECKDRV([$MHW_HAVE_PULSE],[PulseAudio])
+CHECKDRV([$HAVE_SNDIO],[SNDIO])
 echo    "  Included drivers:      $INCLUDED_DRIVERS"
 echo    "  Drivers not included:  $EXCLUDED_DRIVERS"
 echo -n "  Default sound driver:   $DEFAULT_DRIVER "
