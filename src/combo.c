@@ -38,15 +38,16 @@ static void combo_size_request(GtkWidget *widget, GtkRequisition *req)
 	  req->width = obj->max_request_width;
 }
 
-static void combo_destroy(GtkObject *obj)
+static void combo_destroy(GObject *obj)
 {
+     //fprintf(stderr, "combo_destroy: %p\n", obj);
      Combo *combo = COMBO(obj);
      if (combo->strings) {
 	  g_list_foreach(combo->strings, (GFunc)g_free, NULL);
 	  g_list_free(combo->strings);
 	  combo->strings = NULL;
      }
-     GTK_OBJECT_CLASS(combo_parent_class)->destroy(obj);
+     G_OBJECT_CLASS(combo_parent_class)->dispose(obj);
 }
 
 static void combo_changed(GtkComboBox *combo)
@@ -59,9 +60,9 @@ static void combo_changed(GtkComboBox *combo)
 
 static void combo_class_init(ComboClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     oc->destroy = combo_destroy;
+     oc->dispose = combo_destroy;
      GTK_COMBO_BOX_CLASS(klass)->changed = combo_changed;
      klass->selection_changed = NULL;
      wc->size_request = combo_size_request;
