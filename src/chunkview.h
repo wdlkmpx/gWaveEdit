@@ -67,9 +67,7 @@ typedef struct _ChunkViewClass {
      /* SIGNALS */
 
      /* Emitted when the user double-clicked somewhere in the view */
-     /* The off_t pointer is because off_t values aren't directly supported by
-      * the GTK (1.2) type system */
-     void (*double_click)(ChunkView *view, off_t *sample);
+     void (*double_click)(ChunkView *view, off_t sample);
 
 } ChunkViewClass;
 
