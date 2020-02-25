@@ -38,7 +38,6 @@ enum { VIEW_CHANGED_SIGNAL, SELECTION_CHANGED_SIGNAL, CURSOR_CHANGED_SIGNAL,
        CHUNK_CHANGED_SIGNAL, DOUBLE_CLICK_SIGNAL, LAST_SIGNAL };
 static guint chunk_view_signals[LAST_SIGNAL] = { 0 };
 
-static void chunk_view_update_image(ChunkView *view, guint xs, guint xe);
 static void chunk_view_redraw_samples(ChunkView *cv, off_t start, off_t end);
 static gint calc_x(ChunkView *cv, off_t sample, off_t width);
 static int chunk_view_autoscroll(gpointer timesource, GTimeVal *current_time,
@@ -47,8 +46,6 @@ static int chunk_view_autoscroll(gpointer timesource, GTimeVal *current_time,
 static void chunk_view_changed(Document *d, gpointer user_data)
 {
      ChunkView *cv = CHUNKVIEW(user_data);
-     if (cv->image != NULL) 
-	  chunk_view_update_image(cv,0,cv->image_width-1);
      gtk_widget_queue_draw(GTK_WIDGET(cv));
 }
 
@@ -127,10 +124,6 @@ static void chunk_view_cursor_changed(Document *d, gboolean rolling,
 static void chunk_view_destroy (GtkObject *object)
 {
      ChunkView *cv = CHUNKVIEW(object);
-     if (cv->image) {
-	  gdk_pixmap_unref(cv->image);
-	  cv->image = NULL;
-     }
      if (cv->doc != NULL) {
 	  g_signal_handlers_disconnect_matched(cv->doc, G_SIGNAL_MATCH_DATA,
 	                                       0, 0, NULL, NULL, cv);
@@ -217,10 +210,6 @@ static void chunk_view_update_image_main(ChunkView *cv, GdkDrawable *image,
      view_cache_draw_part(cv->cache, image, (xs==0)?0:xs-1, xe, h, 
 			  GTK_WIDGET(cv),
 			  cv->scale_factor);
-}
-
-static void chunk_view_update_image(ChunkView *cv, guint xs, guint xe)
-{
 }
 
 struct draw_mark_data {
@@ -446,10 +435,10 @@ static void chunk_view_size_allocate(GtkWidget *widget, GtkAllocation *all)
      ChunkView *cv = CHUNKVIEW(widget);
      Document *d = cv->doc;
      GTK_WIDGET_CLASS(chunk_view_parent_class)->size_allocate(widget,all);
-     if (cv->image == NULL) { 	  /* Hack */
-	  cv->image_width = all->width;
-	  cv->image_height = all->height;
-	  if (cv->timescale) cv->image_height -= font_height;
+     cv->image_width = all->width;
+     cv->image_height = all->height;
+     if (cv->timescale) {
+        cv->image_height -= font_height;
      }
      if (d == NULL) return;
      /* Call view_cache_update to make sure the view cache knows the new 
@@ -736,7 +725,6 @@ static void chunk_view_class_init(ChunkViewClass *klass)
 static void chunk_view_init(ChunkView *cv)
 {
      cv->doc = NULL;
-     cv->image = NULL;
      cv->timescale = TRUE;
      cv->scale_factor = 1.0;
      cv->cache = view_cache_new();
@@ -788,9 +776,6 @@ static void chunk_view_redraw_samples(ChunkView *cv, off_t start, off_t end)
      startpix = calc_x(cv,start,GTK_WIDGET(cv)->allocation.width);
      endpix = calc_x(cv,end,GTK_WIDGET(cv)->allocation.width);
 
-     if (cv->image)
-	  chunk_view_update_image(cv,startpix,endpix);
-
      /* printf("Calling queue_draw on: (%d,%d)+(%d,%d)\n",startpix,0,
 	    1+endpix-startpix,GTK_WIDGET(cv)->allocation.height-
 	    (cv->timescale?font_height:0)); */
@@ -831,7 +816,7 @@ gboolean chunk_view_update_cache(ChunkView *view)
 	       if (i < view->need_redraw_left) view->need_redraw_left=i;
 	       if (j > view->need_redraw_right) view->need_redraw_right=j;
 	  }
-	  chunk_view_update_image(view,i,j);
+
 	  /* Repaint after 20 pixels have been updated or once per second 
 	   * or we're just finished. */
 	  if (view->need_redraw_right-view->need_redraw_left > 20 || 

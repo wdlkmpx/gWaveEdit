@@ -42,12 +42,10 @@ typedef struct _ChunkView {
 
      GtkDrawingArea parent;
 
-     /* Image used for double-buffering the sample view. Only used under GTK2,
-      * however the image_width/image_height variables are used at various
+     /* Variables to determine when to redraw...?
+      * the image_width/image_height variables are used at various
       * places so they are kept updated (ugly solution) */
-     GdkPixmap *image;
      guint image_width,image_height;     
-
 
      ViewCache *cache;
      int last_redraw_time,need_redraw_left,need_redraw_right;
@@ -94,8 +92,6 @@ void chunk_view_set_timescale(ChunkView *cv, gboolean scale_visible);
 gboolean chunk_view_update_cache(ChunkView *cv);
 
 void chunk_view_force_repaint(ChunkView *cv);
-
-void chunk_view_use_backing_pixmap(ChunkView *cv, gboolean use_pixmap);
 
 void chunk_view_set_scale(ChunkView *cv, gfloat scale);
 
