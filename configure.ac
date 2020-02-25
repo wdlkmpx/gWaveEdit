@@ -93,6 +93,16 @@ FIXED_TIME_STR=${withval}
 fi
 )
 
+AC_ARG_ENABLE(
+	gtk_warnings,
+	[AS_HELP_STRING([--enable-gtk-warnings],[So you can see what is deprecated in GTK2...])],
+	[case "${enableval}" in
+		yes)  enable_gtk_warnings=yes ;;
+		no)   enable_gtk_warnings=no ;;
+	esac],
+	[enable_gtk_warnings=no]
+)
+
 dnl Checks for programs.
 AC_PROG_CC
 
@@ -399,6 +409,11 @@ case "$CC" in
   gcc*) CPPFLAGS="$CPPFLAGS -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers" ;;
   *) ;;
 esac
+
+if test x"$enable_gtk_warnings" = x"yes"; then
+	CPPFLAGS="$CPPFLAGS -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_SINGLE_INCLUDES -DGTK_DISABLE_DEPRECATED -DGTK_DISABLE_SINGLE_INCLUDES"
+fi
+
 
 dnl Write output
 AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in share/Makefile ])
