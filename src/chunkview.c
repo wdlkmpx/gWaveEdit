@@ -168,15 +168,29 @@ static void chunk_view_update_image_main(ChunkView *cv, GdkDrawable *image,
      gint w,h;
      GtkWidget *wid = GTK_WIDGET(cv);
      Document *d = cv->doc;
+
+     cairo_t *cr;
+     GdkColor *color;
+
      w = wid->allocation.width;
      h = wid->allocation.height;
      if (cv->timescale) h-=font_height;
      if (xe < xs) return;
      /* Svart bakgrund */
-     gdk_draw_rectangle( image, get_gc(BACKGROUND,wid), TRUE, xs, 0, 
-			 1+xe-xs,h);
+
+     cr = gdk_cairo_create (gtk_widget_get_window(wid));
+
+     color = get_color (BACKGROUND);
+     gdk_cairo_set_source_color (cr, color); // see also cairo_set_source_rgb()
+     //gdk_draw_rectangle( image, get_gc(BACKGROUND,wid), TRUE, xs, 0, 1+xe-xs,h);
+     cairo_rectangle (cr, xs, 0, 1+xe-xs, h);                 // x  y     w    h
+     cairo_fill (cr);
+
      /* Om det inte finns någon sampling laddad, stanna här. */
-     if (d == NULL || d->chunk->length == 0) return;
+     if (d == NULL || d->chunk->length == 0) {
+         cairo_destroy (cr);
+         return;
+     }
      /* Rita ut markeringen med speciell färg */
      if (d->selstart != d->selend && d->selstart < d->viewend &&
 	 d->selend > d->viewstart) {
@@ -192,24 +206,36 @@ static void chunk_view_update_image_main(ChunkView *cv, GdkDrawable *image,
 		    j = xe;
 	       if (j > xe) j = xe;
 	       if (j >= xs) {
-		    gdk_draw_rectangle( image, get_gc(SELECTION,wid),TRUE, 
-					i, 0, 1+j-i, h );
+               color = get_color (SELECTION);
+               gdk_cairo_set_source_color (cr, color);
+               //gdk_draw_rectangle( image, get_gc(SELECTION,wid),TRUE, i, 0, 1+j-i, h );
+               cairo_rectangle (cr,  i, 0, 1+j-i, h);                // x  y    w    h
+               cairo_fill (cr);
 	       }
 	  }
 	  
 	  // printf("i = %d, j = %d\n",i,j);
      }
+
      /* Rita gråa streck */
      j = h/d->chunk->format.channels;
      for (i=0; i < (guint) d->chunk->format.channels; i++) {
 	  y = j/2 + i*j;	  
-	  gdk_draw_line(image,get_gc(BARS,wid),xs,y,xe,y);
+        color = get_color (BARS);
+        gdk_cairo_set_source_color (cr, color);
+        // gdk_draw_line(image,get_gc(BARS,wid),   xs,y,xe,y); -> x1,y1,x2,y2
+        cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
+        cairo_move_to (cr, (double) xs, (double) y); // x1 y1
+        cairo_line_to (cr, (double) xe, (double) y); // x2 y2
+        cairo_stroke (cr);
      }
      /* Drawing one pixel to the left of xs is a workaround. Some part of the
       * code seems to draw one pixel wrong to the left. */
      view_cache_draw_part(cv->cache, image, (xs==0)?0:xs-1, xe, h, 
 			  GTK_WIDGET(cv),
 			  cv->scale_factor);
+
+     cairo_destroy (cr);
 }
 
 struct draw_mark_data {
