@@ -47,7 +47,7 @@ struct HistoryEntry {
 
 typedef struct {
 
-     GtkObject object;
+     GObject object;
 
 
      /* The filename associated with the document (or NULL if none). */ 
@@ -93,7 +93,7 @@ typedef struct {
 
 typedef struct {
 
-     GtkObjectClass parent_class;
+     GObjectClass parent_class;
 
      /* Emitted when the view start/end is changed. */
      void (*view_changed)(Document *doc); 

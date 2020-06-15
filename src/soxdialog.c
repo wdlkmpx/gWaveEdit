@@ -248,7 +248,7 @@ static Chunk *sox_dialog_apply_proc_main(Chunk *chunk, StatusBar *bar,
      r = pipe_dialog_pipe_chunk(chunk,cmd_buf,FALSE,dither_editing,bar,
 				&clipcount);
      if (r != NULL && clipwarn(clipcount,TRUE)) {
-	  gtk_object_sink(GTK_OBJECT(r));
+	  g_object_ref_sink(G_OBJECT(r));
 	  return NULL;
      }
      return r;
@@ -264,9 +264,9 @@ static Chunk *sox_dialog_apply_proc(Chunk *chunk, StatusBar *bar,
 	  (chunk->format.samplesize == 3 || chunk->format.packing!=0))) {
 	  c = chunk_convert_sampletype(chunk,&stype);
 	  d = sox_dialog_apply_proc_main(c,bar,user_data);
-	  gtk_object_sink(GTK_OBJECT(c));
+	  g_object_ref_sink(G_OBJECT(c));
 	  r = chunk_convert_sampletype(d,&(chunk->format));
-	  gtk_object_sink(GTK_OBJECT(d));
+	  g_object_ref_sink(G_OBJECT(d));
 	  return r;
      } else
 	  return sox_dialog_apply_proc_main(chunk,bar,user_data);
@@ -650,7 +650,7 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
      }
 }
 
-static void sox_dialog_destroy(GtkObject *obj)
+static void sox_dialog_destroy(GObject *obj)
 {
      SoxDialog *sd = SOX_DIALOG(obj);
      g_free(sd->fba[0]);
@@ -659,16 +659,16 @@ static void sox_dialog_destroy(GtkObject *obj)
      g_free(sd->fba[3]);
      memset(sd->fba,0,sizeof(sd->fba));
      g_free(sd->ca);
-     GTK_OBJECT_CLASS(sox_dialog_parent_class)->destroy(obj);
+     G_OBJECT_CLASS(sox_dialog_parent_class)->dispose(obj);
 }
 
 static void sox_dialog_class_init(SoxDialogClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
      EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
      edc->apply = sox_dialog_apply;
      edc->setup = sox_dialog_browser_setup;
-     oc->destroy = sox_dialog_destroy;
+     oc->dispose = sox_dialog_destroy;
 }
 
 static void sox_dialog_init(SoxDialog *sd)

@@ -47,7 +47,7 @@ static void rawdialog_ok(GtkButton *button, gpointer user_data)
      ok_flag = TRUE;
 }
 
-static void rawdialog_destroy(GtkObject *object, gpointer user_data)
+static void rawdialog_destroy(GObject *object, gpointer user_data)
 {
      destroy_flag = TRUE;
 }

@@ -53,7 +53,7 @@
 #define CHUNK_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  CHUNK_TYPE, ChunkClass))
 
 typedef struct _Chunk {
-     GtkObject object;
+     GObject object;
 
      Dataformat format;
 
@@ -69,7 +69,7 @@ typedef struct _Chunk {
 } Chunk;
 
 typedef struct _ChunkClass {
-	GtkObjectClass parent;
+	GObjectClass parent;
 } ChunkClass;
 
 

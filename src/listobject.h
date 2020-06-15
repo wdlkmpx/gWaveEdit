@@ -19,8 +19,8 @@
  */
 
 
-/* This is a GtkObject wrapper around GList with notification signals 
- * and optional automatic refcounting for GtkObjects. 
+/* This is a GObject wrapper around GList with notification signals 
+ * and optional automatic refcounting for GObjects. 
  */
 
 #ifndef LISTOBJECT_H_INCLUDED
@@ -32,14 +32,14 @@
 #define LIST_OBJECT_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  LIST_OBJECT_TYPE, ListObjectClass))
 
 typedef struct {
-     GtkObject obj;
+     GObject obj;
      /* <private> */
      GList *list;
      gboolean do_ref;
 } ListObject;
 
 typedef struct {
-     GtkObjectClass obj_class;
+     GObjectClass obj_class;
      /* Signal sent directly after one item has been removed
       * The signal is sent before dereferencing the object (if do_ref)  */
      void (*item_removed)(ListObject *,gpointer);
@@ -54,7 +54,7 @@ GType list_object_get_type(void);
 
 /* Creates a new ListObject 
  * do_ref: Enable automatic referencing/derefencing - should only be used
- *         if the list just contains GtkObjects  */
+ *         if the list just contains GObjects  */
 ListObject *list_object_new(gboolean do_ref);
 
 /* Creates a new ListObject from an existing list. The list is "taken over"

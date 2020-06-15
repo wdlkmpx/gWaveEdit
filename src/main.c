@@ -222,7 +222,7 @@ int main(int argc, char **argv)
      /* Cleanup */
      player_stop();
      if (playing_document != NULL) {
-	  gtk_object_unref(GTK_OBJECT(playing_document));
+	  g_object_unref(G_OBJECT(playing_document));
 	  playing_document = NULL;
      }
      sound_quit();

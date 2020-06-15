@@ -27,7 +27,7 @@
 #include "player.h"
 #include "gettext.h"
 
-G_DEFINE_TYPE(Document,document,GTK_TYPE_OBJECT)
+G_DEFINE_TYPE(Document,document,G_TYPE_OBJECT)
 
 ListObject *document_objects = NULL;
 
@@ -112,7 +112,7 @@ static void clear_history(struct HistoryEntry *h)
 	  while (h->next != NULL) h=h->next;
 	  while (h != NULL) {
 	       if (h->chunk != NULL) {
-		    gtk_object_unref(GTK_OBJECT(h->chunk));
+		    g_object_unref(G_OBJECT(h->chunk));
 		    h->chunk = NULL;
 	       }
 	       clear_marklist(&(h->marks));
@@ -124,7 +124,7 @@ static void clear_history(struct HistoryEntry *h)
      }     
 }
 
-static void document_destroy(GtkObject *object)
+static void document_destroy(GObject *object)
 {
      Document *d = DOCUMENT(object);     
      if (d->filename != NULL) {
@@ -136,13 +136,13 @@ static void document_destroy(GtkObject *object)
 	  d->titlename = NULL;
      }
      if (d->chunk != NULL) {
-	  gtk_object_unref(GTK_OBJECT(d->chunk));
+	  g_object_unref(G_OBJECT(d->chunk));
 	  d->chunk = NULL;
      }
      clear_history(d->history_pos);
      d->history_pos = NULL;
      list_object_remove(document_objects,object);
-     GTK_OBJECT_CLASS(document_parent_class)->destroy(object);
+     G_OBJECT_CLASS(document_parent_class)->dispose(object);
 }
 
 static void document_state_changed(Document *d)
@@ -152,9 +152,9 @@ static void document_state_changed(Document *d)
 
 static void document_class_init(DocumentClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
      
-     oc->destroy = document_destroy;
+     oc->dispose = document_destroy;
      klass->view_changed = NULL;
      klass->selection_changed = NULL;
      klass->cursor_changed = NULL;
@@ -245,8 +245,7 @@ Document *document_new_with_chunk(Chunk *chunk, gchar *sourcename,
       * haven't added the document yet. */
      document_set_filename(d,sourcename,FALSE);
      d->chunk = chunk;
-     gtk_object_ref(GTK_OBJECT(chunk));
-     gtk_object_sink(GTK_OBJECT(chunk));
+     g_object_ref_sink(G_OBJECT(chunk));
      d->viewstart = 0;
      d->viewend = chunk->length;
      d->bar = bar;
@@ -285,7 +284,7 @@ static void cursor_cb(off_t pos, off_t bufpos, gboolean is_running)
      if (playing_document != NULL) {
 	  if (!is_running) playing_document=NULL; 
 	  document_set_cursor_main(d,pos,TRUE,is_running,bufpos);
-	  if (!is_running) gtk_object_unref(GTK_OBJECT(d));
+	  if (!is_running) g_object_unref(G_OBJECT(d));
      }     
 }
 
@@ -318,10 +317,10 @@ void document_play(Document *d, off_t start, off_t end, gboolean loop,
 	   * since for very short files the cursor_cb might be called
 	   * immediately with is_running==FALSE */
 	  playing_document = d;
-	  gtk_object_ref(GTK_OBJECT(d));
+	  g_object_ref(G_OBJECT(d));
 	  if (player_play(d->chunk,start,end,loop,cursor_cb)) {
 	       playing_document = NULL;
-	       gtk_object_unref(GTK_OBJECT(d));
+	       g_object_unref(G_OBJECT(d));
 	  }
      }
 
@@ -369,7 +368,7 @@ static void fix_history(Document *d)
 	  /* Create a new history entry and add it to the history */ 
 	  h = g_malloc0(sizeof(*h));
 	  h->chunk = d->chunk;
-	  gtk_object_ref(GTK_OBJECT(d->chunk));
+	  g_object_ref(G_OBJECT(d->chunk));
 	  h->selstart = d->selstart;
 	  h->selend = d->selend;
 	  h->viewstart = d->viewstart;
@@ -415,10 +414,9 @@ void document_update(Document *d, Chunk *new_chunk,
 	  player_stop();
 
      /* Set the new chunk */
-     gtk_object_unref(GTK_OBJECT(d->chunk));
+     g_object_unref(G_OBJECT(d->chunk));
      d->chunk = new_chunk;
-     gtk_object_ref(GTK_OBJECT(new_chunk));
-     gtk_object_sink(GTK_OBJECT(new_chunk));
+     g_object_ref_sink(G_OBJECT(new_chunk));
 
      /* Update the view. We have three cases: */
      if ((d->viewend - d->viewstart) >= new_chunk->length) {
@@ -510,11 +508,11 @@ gboolean document_apply(Document *d, chunk_filter_proc proc,
 	  r = chunk_filter( p, proc, eof_proc, amount,
 			    convert, dither_editing, d->bar, title);
 	  /* procend(w); */
-	  gtk_object_sink(GTK_OBJECT(p));
+	  g_object_ref_sink(G_OBJECT(p));
 	  if (r) {
 	       rlen = r->length;
 	       c = chunk_replace_part(d->chunk,u,plen,r);
-	       gtk_object_sink(GTK_OBJECT(r));
+	       g_object_ref_sink(G_OBJECT(r));
 	       /* If the result is longer, report the difference as an 
 		* insertion at the old selection's right endpoint
 		* If the result is shorter, report the difference as a 
@@ -548,7 +546,7 @@ void document_parse(Document *d, chunk_parse_proc proc,
 	  chunk_parse(c,proc,allchannels,convert,dither_editing,
 		      d->bar,title,0,FALSE);
 	  /* procend(w); */
-	  gtk_object_sink(GTK_OBJECT(c));
+	  g_object_ref_sink(G_OBJECT(c));
      }
 }
 
@@ -573,11 +571,11 @@ gboolean document_apply_cb(Document *d, document_apply_proc proc,
 	  p = chunk_get_part(d->chunk, u, d->selend - u);
 	  plen = p->length;
 	  r = proc( p, d->bar, user_data );
-	  gtk_object_sink(GTK_OBJECT(p));
+	  g_object_ref_sink(G_OBJECT(p));
 	  if (r) {
 	       rlen = r->length;
 	       c = chunk_replace_part(d->chunk,u,plen,r);
-	       gtk_object_sink(GTK_OBJECT(r));
+	       g_object_ref_sink(G_OBJECT(r));
 	       /* If the result is longer, report the difference as an 
 		* insertion at the old selection's right endpoint
 		* If the result is shorter, report the difference as a 
@@ -841,9 +839,9 @@ static void get_state_from_history(Document *d)
      d->viewend = d->history_pos->viewend;
      d->selstart = d->history_pos->selstart;
      d->selend = d->history_pos->selend;
-     gtk_object_unref(GTK_OBJECT(d->chunk));
+     g_object_unref(G_OBJECT(d->chunk));
      d->chunk = d->history_pos->chunk;
-     gtk_object_ref(GTK_OBJECT(d->chunk));
+     g_object_ref(G_OBJECT(d->chunk));
      copy_marklist(&(d->marks),&(d->history_pos->marks));
      g_signal_emit(G_OBJECT(d),document_signals[STATE_CHANGED_SIGNAL],0);
 }

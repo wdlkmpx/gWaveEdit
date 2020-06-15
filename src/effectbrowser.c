@@ -196,19 +196,19 @@ static void effect_browser_remove_effect(EffectBrowser *eb)
      eb->current_dialog = -1;
 }
 
-static void effect_browser_destroy(GtkObject *obj)
+static void effect_browser_destroy(GObject *obj)
 {
      EffectBrowser *eb = EFFECT_BROWSER(obj);
      guint i;
      effect_browser_remove_effect(eb);
      for (i=0; i<EFFECT_BROWSER_CACHE_SIZE; i++) {
 	  if (eb->dialogs[i] != NULL) {
-	       gtk_widget_unref(GTK_WIDGET(eb->dialogs[i]));
+	       g_object_unref(GTK_WIDGET(eb->dialogs[i]));
 	       eb->dialogs[i] = NULL;
 	  }
      }
-     if (GTK_OBJECT_CLASS(effect_browser_parent_class)->destroy)
-          GTK_OBJECT_CLASS(effect_browser_parent_class)->destroy(obj);
+     if (G_OBJECT_CLASS(effect_browser_parent_class)->dispose)
+          G_OBJECT_CLASS(effect_browser_parent_class)->dispose(obj);
 }
 
 static void geom_push(EffectBrowser *eb)
@@ -233,9 +233,9 @@ static gint effect_browser_delete_event(GtkWidget *widget, GdkEventAny *event)
 
 static void effect_browser_class_init(EffectBrowserClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     oc->destroy = effect_browser_destroy;
+     oc->dispose = effect_browser_destroy;
      wc->delete_event = effect_browser_delete_event;
 }
 
@@ -305,7 +305,7 @@ static void effect_browser_set_effect_main(EffectBrowser *eb, struct effect *e)
 	  if (i >= EFFECT_BROWSER_CACHE_SIZE) {
 	       /* No room in cache, throw out last element */
 	       i = EFFECT_BROWSER_CACHE_SIZE-1;
-	       gtk_object_unref(GTK_OBJECT(eb->dialogs[i]));
+	       g_object_unref(G_OBJECT(eb->dialogs[i]));
 	       eb->dialogs[i] = NULL;
 	       eb->dialog_effects[i] = NULL;
 	  }
@@ -332,8 +332,7 @@ static void effect_browser_set_effect_main(EffectBrowser *eb, struct effect *e)
 
 	  g_assert(i == 0);
 	  eb->dialogs[i] = ed;
-	  gtk_object_ref(GTK_OBJECT(ed));
-	  gtk_object_sink(GTK_OBJECT(ed));
+	  g_object_ref_sink(G_OBJECT(ed));
 	  eb->dialog_effects[i] = e;
      }
 
@@ -367,7 +366,7 @@ void effect_browser_invalidate_effect(EffectBrowser *eb, gchar *effect_name,
      
      displayed = (i == eb->current_dialog);
      if (displayed) effect_browser_remove_effect(eb);
-     gtk_object_unref(GTK_OBJECT(eb->dialogs[i]));
+     g_object_unref(G_OBJECT(eb->dialogs[i]));
      eb->dialogs[i] = NULL;
      eb->dialog_effects[i] = NULL;
      if (displayed) effect_browser_set_effect_main(eb,e);

@@ -359,7 +359,7 @@ void ladspa_dialog_setup(EffectDialog *ed)
      gtk_widget_show_all(a);
 }
 
-static void ladspa_dialog_destroy(GtkObject *obj)
+static void ladspa_dialog_destroy(GObject *obj)
 {
      LadspaDialog *ld = LADSPA_DIALOG(obj);
      /* puts("ladspa_dialog_destroy"); */
@@ -368,17 +368,17 @@ static void ladspa_dialog_destroy(GtkObject *obj)
 	  g_free(ld->settings[i]);
 	  ld->settings[i] = NULL;
      }
-     GTK_OBJECT_CLASS(ladspa_dialog_parent_class)->destroy(obj);
+     G_OBJECT_CLASS(ladspa_dialog_parent_class)->dispose(obj);
 }
 
 void ladspa_dialog_class_init(LadspaDialogClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
      EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
      edc->apply = ladspa_dialog_apply;
      edc->setup = ladspa_dialog_setup;
      edc->target_changed = ladspa_dialog_target_changed;
-     oc->destroy = ladspa_dialog_destroy;
+     oc->dispose = ladspa_dialog_destroy;
 }
 
 void ladspa_dialog_init(LadspaDialog *obj)

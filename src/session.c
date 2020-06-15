@@ -320,7 +320,7 @@ struct session_dialog_data {
      gint resume_index;
 };
 
-static void session_dialog_destroy(GtkObject *obj, gpointer user_data)
+static void session_dialog_destroy(GObject *obj, gpointer user_data)
 {
      struct session_dialog_data *ddata = 
 	  (struct session_dialog_data *)user_data;

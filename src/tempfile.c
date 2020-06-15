@@ -505,8 +505,8 @@ Chunk *tempfile_finished(TempFile handle)
 	  else {
 	       d = r;
 	       r = chunk_append(d,c);
-	       gtk_object_sink(GTK_OBJECT(d));
-	       gtk_object_sink(GTK_OBJECT(c));
+	       g_object_ref_sink(G_OBJECT(d));
+	       g_object_ref_sink(G_OBJECT(c));
 	  }	  
      }
 

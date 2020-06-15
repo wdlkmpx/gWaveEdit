@@ -303,8 +303,8 @@ static gchar *get_save_filename(gchar *old_filename, gchar *title_text,
      b2 = GTK_BOX(gtk_vbox_new(FALSE,8));
      gtk_box_pack_start(b2,GTK_WIDGET(b1),FALSE,FALSE,0);
 
-     gtk_object_ref(GTK_OBJECT(usedef));
-     gtk_object_ref(GTK_OBJECT(typesel));
+     g_object_ref(G_OBJECT(usedef));
+     g_object_ref(G_OBJECT(typesel));
 
      gtk_widget_show_all(GTK_WIDGET(b2));
 
@@ -328,8 +328,8 @@ static gchar *get_save_filename(gchar *old_filename, gchar *title_text,
      *type_id = combo_selected_index(COMBO(typesel)) - 1;
 
      g_free(lsd);
-     gtk_object_unref(GTK_OBJECT(typesel));
-     gtk_object_unref(GTK_OBJECT(usedef));
+     g_object_unref(G_OBJECT(typesel));
+     g_object_unref(G_OBJECT(usedef));
      return filename;
      
 }
@@ -391,7 +391,7 @@ static gboolean change_check ( Mainwindow *w )
      return TRUE;
 }
 
-static void mainwindow_destroy(GtkObject *obj)
+static void mainwindow_destroy(GObject *obj)
 {
      Mainwindow *w = MAINWINDOW(obj);
 
@@ -400,19 +400,19 @@ static void mainwindow_destroy(GtkObject *obj)
      if ( w->doc != NULL ) {
 	  g_signal_handlers_disconnect_matched(w->doc, G_SIGNAL_MATCH_DATA,
 	                                       0, 0, NULL, NULL, obj);
-	  gtk_object_unref(GTK_OBJECT(w->doc));
+	  g_object_unref(G_OBJECT(w->doc));
 	  w->doc = NULL;
      }
 
      if (list_object_get_size(mainwindow_objects) == 0) {
-	  if (clipboard) gtk_object_unref ( GTK_OBJECT(clipboard) );
+	  if (clipboard) g_object_unref ( G_OBJECT(clipboard) );
 	  clipboard = NULL;
 	  quitflag = TRUE;
 	  geometry_stack_save_to_inifile("windowGeometry",
 					 window_geometry_stack);
      }
 
-     GTK_OBJECT_CLASS(mainwindow_parent_class)->destroy(obj);
+     G_OBJECT_CLASS(mainwindow_parent_class)->dispose(obj);
 }
 
 static gint mainwindow_delete_event(GtkWidget *widget, GdkEventAny *event)
@@ -716,9 +716,9 @@ static void mainwindow_drag_data_received(GtkWidget *widget,
 
 static void mainwindow_class_init(MainwindowClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     oc->destroy = mainwindow_destroy;
+     oc->dispose = mainwindow_destroy;
      wc->delete_event = mainwindow_delete_event;
      wc->realize = mainwindow_realize;
      wc->key_press_event = mainwindow_keypress;
@@ -734,8 +734,7 @@ static Mainwindow *mainwindow_set_document(Mainwindow *w, Document *d,
      }
      w->doc = d;
      document_set_followmode(d,w->followmode);
-     gtk_object_ref(GTK_OBJECT(w->doc));
-     gtk_object_sink(GTK_OBJECT(w->doc));
+     g_object_ref_sink(G_OBJECT(w->doc));
      g_signal_connect(G_OBJECT(d),"view_changed",
 			G_CALLBACK(mainwindow_view_changed),w);
      g_signal_connect(G_OBJECT(d),"selection_changed",
@@ -814,7 +813,7 @@ static void file_saveselection(GtkMenuItem *menuitem, gpointer user_data)
 			w->doc->selend-w->doc->selstart);
      if (!chunk_save(c,fn,type_id,use_defs,dither_editing,w->statusbar))
 	  inifile_set("lastSaveFile",fn);
-     gtk_object_sink(GTK_OBJECT(c));     
+     g_object_ref_sink(G_OBJECT(c));     
      g_free(fn);
 }
 
@@ -829,7 +828,7 @@ static void file_close(GtkMenuItem *menuitem, gpointer user_data)
 	  chunk_view_set_document(w->view, NULL);
 	  g_signal_handlers_disconnect_matched(w->doc, G_SIGNAL_MATCH_DATA,
 	                                       0, 0, NULL, NULL, w);
-	  gtk_object_unref(GTK_OBJECT(w->doc));
+	  g_object_unref(G_OBJECT(w->doc));
 	  w->doc = NULL;
 	  fix_title(w);
 	  set_sensitive(w->need_chunk_items,FALSE);
@@ -890,14 +889,13 @@ static void edit_cut(GtkMenuItem *menuitem, gpointer user_data)
      Chunk *chunk, *part;
      Mainwindow *w = MAINWINDOW(user_data);
      g_assert (w->doc->selend != w->doc->selstart);
-     if (clipboard) gtk_object_unref(GTK_OBJECT(clipboard));
+     if (clipboard) g_object_unref(G_OBJECT(clipboard));
      part = chunk_get_part( w->doc->chunk, w->doc->selstart,
 			    w->doc->selend - w->doc->selstart);
      chunk = chunk_remove_part( w->doc->chunk, w->doc->selstart,
 				w->doc->selend - w->doc->selstart);
      clipboard = part;
-     gtk_object_ref(GTK_OBJECT(clipboard));
-     gtk_object_sink(GTK_OBJECT(clipboard));
+     g_object_ref_sink(G_OBJECT(clipboard));
 
      document_update(w->doc, chunk, w->doc->selstart, -(clipboard->length));
      list_object_foreach(mainwindow_objects, (GFunc)update_clipboard_items, 
@@ -917,11 +915,10 @@ static void edit_copy(GtkMenuItem *menu_item, gpointer user_data)
 {
      Mainwindow *w = MAINWINDOW(user_data);
      g_assert (w->doc->selend != w->doc->selstart);
-     if (clipboard) gtk_object_unref(GTK_OBJECT(clipboard));
+     if (clipboard) g_object_unref(G_OBJECT(clipboard));
      clipboard = chunk_get_part(w->doc->chunk, w->doc->selstart, 
 				w->doc->selend - w->doc->selstart);
-     gtk_object_ref(GTK_OBJECT(clipboard));
-     gtk_object_sink(GTK_OBJECT(clipboard));
+     g_object_ref_sink(G_OBJECT(clipboard));
 
      list_object_foreach(mainwindow_objects, (GFunc)update_clipboard_items, 
 			 (gpointer)w);
@@ -944,7 +941,7 @@ static void edit_paste(GtkMenuItem *menu_item, gpointer user_data)
      }
      cl = c->length;
      nc = chunk_insert(w->doc->chunk,c,w->doc->cursorpos);     
-     gtk_object_sink(GTK_OBJECT(c));
+     g_object_ref_sink(G_OBJECT(c));
 
      cp = w->doc->cursorpos;
      document_update(w->doc, nc, cp, cl);
@@ -971,7 +968,7 @@ static void edit_pasteover(GtkMenuItem *menuitem, gpointer user_data)
      orig_len = MIN(w->doc->chunk->length-w->doc->cursorpos, dl);
      c = chunk_replace_part(w->doc->chunk, w->doc->cursorpos, 
 			    orig_len, d);
-     gtk_object_sink(GTK_OBJECT(d));
+     g_object_ref_sink(G_OBJECT(d));
 
      document_update(w->doc, c, 0, 0);
      document_set_selection( w->doc, w->doc->cursorpos,
@@ -997,14 +994,14 @@ static void edit_mixpaste(GtkMenuItem *menuitem, gpointer user_data)
      p = chunk_get_part(w->doc->chunk,w->doc->cursorpos,d->length);
      partlen = p->length;
      y = chunk_mix(p,d,dither_editing,w->statusbar);
-     gtk_object_sink(GTK_OBJECT(p));
+     g_object_ref_sink(G_OBJECT(p));
      if (!y) return;
      c = chunk_replace_part(w->doc->chunk,w->doc->cursorpos,partlen,y);
-     gtk_object_sink(GTK_OBJECT(y));
+     g_object_ref_sink(G_OBJECT(y));
      document_update(w->doc, c, 0, 0);
      document_set_selection( w->doc, w->doc->cursorpos,
 			     w->doc->cursorpos + d->length );
-     gtk_object_sink(GTK_OBJECT(d));
+     g_object_ref_sink(G_OBJECT(d));
 }
 
 static void edit_pastetonew(GtkMenuItem *menuitem, gpointer user_data)
@@ -1638,12 +1635,12 @@ static void edit_insertsilence(GtkMenuItem *menuitem, gpointer user_data)
      cp = w->doc->cursorpos;
      document_update(w->doc,nc,cp,c->length);
      document_set_selection( w->doc, cp, cp + c->length );
-     gtk_object_sink(GTK_OBJECT(c));
+     g_object_ref_sink(G_OBJECT(c));
 }
 
 static void edit_clearclipboard(GtkMenuItem *menuitem, gpointer user_data)
 {
-     gtk_object_unref(GTK_OBJECT(clipboard));
+     g_object_unref(G_OBJECT(clipboard));
      clipboard = NULL;
      list_object_foreach(mainwindow_objects, 
 			 (GFunc)update_clipboard_items, NULL);

@@ -61,7 +61,7 @@ static void status_bar_expose(GtkWidget *widget, GdkEventExpose *event,
 
 static void status_bar_init(StatusBar *sb)
 {
-     GtkObject *gtkobj = GTK_OBJECT(sb);
+     GObject *gtkobj = G_OBJECT(sb);
      GtkContainer *cont = GTK_CONTAINER(sb);
      GtkFixed *fix = GTK_FIXED(sb);
      GtkWidget *da;

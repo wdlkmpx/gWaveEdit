@@ -40,7 +40,7 @@
 #include "rateconv.h"
 #include "gettext.h"
 
-G_DEFINE_TYPE(Chunk,chunk,GTK_TYPE_OBJECT)
+G_DEFINE_TYPE(Chunk,chunk,G_TYPE_OBJECT)
 
 gboolean chunk_filter_use_floating_tempfiles;
 
@@ -51,7 +51,7 @@ guint chunk_alive_count(void)
      return g_list_length ( chunks );
 }
 
-static void chunk_destroy(GtkObject *object)
+static void chunk_destroy(GObject *object)
 {
      Chunk *c;
      GList *l;
@@ -62,20 +62,20 @@ static void chunk_destroy(GtkObject *object)
      if (c->parts) {
 	  for (l=c->parts; l!=NULL; l=l->next) {
 	       dp = (DataPart *)l->data;
-	       gtk_object_unref(GTK_OBJECT(dp->ds));
+	       g_object_unref(G_OBJECT(dp->ds));
 	       g_free(dp);
 	  }
 	  g_list_free(c->parts);
      }
      c->parts = NULL;
-     GTK_OBJECT_CLASS(chunk_parent_class)->destroy(object);
+     G_OBJECT_CLASS(chunk_parent_class)->dispose(object);
      chunks = g_list_remove ( chunks, object );
 }
 
 static void chunk_class_init(ChunkClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     oc->destroy = chunk_destroy;
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
+     oc->dispose = chunk_destroy;
 }
 
 static void chunk_init(Chunk *object)
@@ -230,12 +230,12 @@ Chunk *chunk_convert_sampletype(Chunk *chunk, Dataformat *newtype)
 	  g_assert(ds != NULL);
 	  c2 = chunk_new_from_datasource(ds);
 	  c = chunk_get_part(c2,dp->position,dp->length);
-	  gtk_object_sink(GTK_OBJECT(c2));
+	  g_object_ref_sink(G_OBJECT(c2));
 	  if (r != NULL) {
 	       c2 = r;
 	       r = chunk_append(c2,c);
-	       gtk_object_sink(GTK_OBJECT(c2));
-	       gtk_object_sink(GTK_OBJECT(c));
+	       g_object_ref_sink(G_OBJECT(c2));
+	       g_object_ref_sink(G_OBJECT(c));
 	  } else
 	       r = c;
      }
@@ -255,13 +255,13 @@ static Chunk *chunk_ds_remap(Chunk *chunk, int new_channels, int *map)
 	  new_ds = datasource_channel_map(dp->ds,new_channels,map);
 	  new_chunk = chunk_new_from_datasource(new_ds);
 	  new_chunk_part = chunk_get_part(new_chunk,dp->position,dp->length);
-	  gtk_object_sink(GTK_OBJECT(new_chunk));
+	  g_object_ref_sink(G_OBJECT(new_chunk));
 	  if (res == NULL) {
 	       res = new_chunk_part;
 	  } else {
 	       c = chunk_append(res,new_chunk_part);
-	       gtk_object_sink(GTK_OBJECT(res));
-	       gtk_object_sink(GTK_OBJECT(new_chunk_part));
+	       g_object_ref_sink(G_OBJECT(res));
+	       g_object_ref_sink(G_OBJECT(new_chunk_part));
 	       res = c;
 	  }
      }
@@ -486,7 +486,7 @@ Chunk *chunk_filter_tofmt(Chunk *chunk, chunk_filter_tofmt_proc proc,
      if (cbp != NULL) g_free(cbp);
 
      if (clipwarn(clipcount,TRUE)) {
-	  gtk_object_sink(GTK_OBJECT(ds));
+	  g_object_ref_sink(G_OBJECT(ds));
 	  return NULL;
      }
 
@@ -496,7 +496,7 @@ Chunk *chunk_filter_tofmt(Chunk *chunk, chunk_filter_tofmt_proc proc,
 	 !dataformat_samples_equal(&(ds->format),tofmt)) {
 
 	  r = chunk_convert_sampletype(ds,tofmt);
-	  gtk_object_sink(GTK_OBJECT(ds));
+	  g_object_ref_sink(G_OBJECT(ds));
 	  return r;
      } else 
 	  return ds;
@@ -731,7 +731,7 @@ Chunk *chunk_mix(Chunk *c1, Chunk *c2, int dither_mode, StatusBar *bar)
      if (!dataformat_equal(&(c1->format),&(m->format))) {
 	  c = chunk_convert_sampletype(m,&(c1->format));
 	  g_assert(c != NULL);
-	  gtk_object_sink(GTK_OBJECT(m));
+	  g_object_ref_sink(G_OBJECT(m));
 	  m = c;
      }
 
@@ -751,8 +751,8 @@ Chunk *chunk_mix(Chunk *c1, Chunk *c2, int dither_mode, StatusBar *bar)
      else 
 	  c = chunk_get_part(c2,mixlen,c2->length-mixlen);
      d = chunk_append(m,c);
-     gtk_object_sink(GTK_OBJECT(m));
-     gtk_object_sink(GTK_OBJECT(c));
+     g_object_ref_sink(G_OBJECT(m));
+     g_object_ref_sink(G_OBJECT(c));
 
      return d;
 #undef BUFLEN
@@ -934,17 +934,17 @@ Chunk *chunk_sandwich(Chunk *c1, Chunk *c2,
      }
 
      /* Floating refs: c1_remap,c2_remap,before,after,mainpart_c1,mainpart_c2 */
-     gtk_object_sink(GTK_OBJECT(c1_remap));
-     gtk_object_sink(GTK_OBJECT(c2_remap));
+     g_object_ref_sink(G_OBJECT(c1_remap));
+     g_object_ref_sink(G_OBJECT(c2_remap));
 
      if (mp_len > 0) {
 	  mainpart_sw = chunk_sandwich_main(mainpart_c1, mainpart_c2, 
 					    dither_mode, bar);
-	  gtk_object_sink(GTK_OBJECT(mainpart_c1));
-	  gtk_object_sink(GTK_OBJECT(mainpart_c2));
+	  g_object_ref_sink(G_OBJECT(mainpart_c1));
+	  g_object_ref_sink(G_OBJECT(mainpart_c2));
 	  if (mainpart_sw == NULL) {
-	       if (before != NULL) gtk_object_sink(GTK_OBJECT(before));
-	       if (after != NULL) gtk_object_sink(GTK_OBJECT(after));
+	       if (before != NULL) g_object_ref_sink(G_OBJECT(before));
+	       if (after != NULL) g_object_ref_sink(G_OBJECT(after));
 	       return NULL;
 	  }
      } else 
@@ -956,8 +956,8 @@ Chunk *chunk_sandwich(Chunk *c1, Chunk *c2,
      if (mainpart_sw != NULL) {
 	  if (c != NULL) {
 	       d = chunk_append(c,mainpart_sw);
-	       gtk_object_sink(GTK_OBJECT(c));
-	       gtk_object_sink(GTK_OBJECT(mainpart_sw));
+	       g_object_ref_sink(G_OBJECT(c));
+	       g_object_ref_sink(G_OBJECT(mainpart_sw));
 	       c = d;
 	  } else
 	       c = mainpart_sw;	  
@@ -965,8 +965,8 @@ Chunk *chunk_sandwich(Chunk *c1, Chunk *c2,
      if (after != NULL) {
 	  if (c != NULL) {
 	       d = chunk_append(c,after);
-	       gtk_object_sink(GTK_OBJECT(c));
-	       gtk_object_sink(GTK_OBJECT(after));
+	       g_object_ref_sink(G_OBJECT(c));
+	       g_object_ref_sink(G_OBJECT(after));
 	       c = d;
 	  } else
 	       c = after;
@@ -1088,8 +1088,7 @@ Chunk *chunk_new_from_datasource(Datasource *ds)
      dp->ds = ds;
      dp->position = 0;
      dp->length = ds->length;
-     gtk_object_ref(GTK_OBJECT(ds));
-     gtk_object_sink(GTK_OBJECT(ds));
+     g_object_ref_sink(G_OBJECT(ds));
      c = chunk_new();
      memcpy(&(c->format),&(ds->format),sizeof(Dataformat));
      c->length = ds->length;
@@ -1241,7 +1240,7 @@ static DataPart *datapart_list_copy(GList *src, GList **dest)
      new->ds = old->ds;
      new->position = old->position;
      new->length = old->length;
-     gtk_object_ref(GTK_OBJECT(old->ds));
+     g_object_ref(G_OBJECT(old->ds));
      (*dest) = g_list_append((*dest),new);
      return new;
 }
@@ -1417,8 +1416,7 @@ Chunk *chunk_clone_df(Chunk *chunk, Dataformat *format)
 	  ndp->ds = dp->ds;
 	  if (!dataformat_equal(format,&(chunk->format))) 
 	       ndp->ds = datasource_clone_df(ndp->ds, format);
-	  gtk_object_ref(GTK_OBJECT(ndp->ds));
-	  gtk_object_sink(GTK_OBJECT(ndp->ds));
+	  g_object_ref_sink(G_OBJECT(ndp->ds));
 	  ndp->position = dp->position;
 	  ndp->length = (dp->length * dp->ds->format.samplebytes) /
 	       ndp->ds->format.samplebytes;
@@ -1704,7 +1702,7 @@ Chunk *chunk_new_with_ramp(Dataformat *format, off_t length,
      status_bar_end_progress(bar);
      if (r!=NULL && !dataformat_equal(&(r->format),format)) {
        q = chunk_convert_sampletype(r,format);
-       gtk_object_sink(GTK_OBJECT(r));
+       g_object_ref_sink(G_OBJECT(r));
        return q;
      } else 
        return r;
@@ -1747,7 +1745,7 @@ Chunk *chunk_interpolate_endpoints(Chunk *chunk, gboolean falldown_mode,
 	  end = chunk_new_with_ramp(&(chunk->format),i,zeroval,endval,
 				    dither_mode,bar);
 	  if (end == NULL) {
-	       gtk_object_sink(GTK_OBJECT(start));
+	       g_object_ref_sink(G_OBJECT(start));
 	       return NULL;
 	  }
 	  mid = chunk_new_empty(&(chunk->format),chunk->length-2*i);
@@ -1756,10 +1754,10 @@ Chunk *chunk_interpolate_endpoints(Chunk *chunk, gboolean falldown_mode,
 	  c = chunk_append(start,mid);
 	  d = chunk_append(c,end);
 
-	  gtk_object_sink(GTK_OBJECT(start));
-	  gtk_object_sink(GTK_OBJECT(mid));
-	  gtk_object_sink(GTK_OBJECT(end));
-	  gtk_object_sink(GTK_OBJECT(c));
+	  g_object_ref_sink(G_OBJECT(start));
+	  g_object_ref_sink(G_OBJECT(mid));
+	  g_object_ref_sink(G_OBJECT(end));
+	  g_object_ref_sink(G_OBJECT(c));
 	  return d;
 	  
      }
@@ -1773,7 +1771,7 @@ Chunk *chunk_byteswap(Chunk *chunk)
      fmt.bigendian = !fmt.bigendian;
      c = chunk_clone_df(chunk,&fmt);
      d = chunk_convert(c,&(chunk->format),DITHER_UNSPEC,NULL);
-     gtk_object_sink(GTK_OBJECT(c)); 
+     g_object_ref_sink(G_OBJECT(c)); 
      return d;
 }
 
@@ -1807,7 +1805,7 @@ Chunk *chunk_convert(Chunk *chunk, Dataformat *new_format,
 	       if (d == NULL) return NULL;
 	       c = chunk_convert_samplerate(d,new_format->samplerate,
 					    conv_driver,dither_mode,bar);
-	       gtk_object_sink(GTK_OBJECT(d));
+	       g_object_ref_sink(G_OBJECT(d));
 	       if (c == NULL) return NULL;
 
 	  } else if (new_format->channels > chunk->format.channels) {
@@ -1816,7 +1814,7 @@ Chunk *chunk_convert(Chunk *chunk, Dataformat *new_format,
 					    conv_driver,dither_mode,bar);
 	       if (d == NULL) return NULL;
 	       c = chunk_convert_channels(d,new_format->channels);
-	       gtk_object_sink(GTK_OBJECT(d));
+	       g_object_ref_sink(G_OBJECT(d));
 	       if (c == NULL) return NULL;
 
 	  } else {
@@ -1836,7 +1834,7 @@ Chunk *chunk_convert(Chunk *chunk, Dataformat *new_format,
      else d = c;
      if (dataformat_equal(&(d->format),new_format)) return d;
      d = chunk_convert_sampletype(d,new_format);
-     if (c != NULL) gtk_object_sink(GTK_OBJECT(c));
+     if (c != NULL) g_object_ref_sink(G_OBJECT(c));
      return d;
 }
 

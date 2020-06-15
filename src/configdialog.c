@@ -38,15 +38,15 @@
 
 G_DEFINE_TYPE(ConfigDialog,config_dialog,GTK_TYPE_WINDOW)
 
-static void config_dialog_destroy(GtkObject *obj)
+static void config_dialog_destroy(GObject *obj)
 {
-     GTK_OBJECT_CLASS(config_dialog_parent_class)->destroy(obj);
+     G_OBJECT_CLASS(config_dialog_parent_class)->dispose(obj);
 }
 
 static void config_dialog_class_init(ConfigDialogClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     oc->destroy = config_dialog_destroy;
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
+     oc->dispose = config_dialog_destroy;
 }
 
 static void config_dialog_ok(GtkButton *button, gpointer user_data)

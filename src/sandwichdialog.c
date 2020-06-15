@@ -82,7 +82,7 @@ static gboolean sandwich_dialog_apply(EffectDialog *ed)
      
      r = chunk_sandwich(c1,c2,c1ap,c2ap,&apo,dither_editing,d1->bar);
      
-     if (t != NULL) gtk_object_sink(GTK_OBJECT(t));
+     if (t != NULL) g_object_ref_sink(G_OBJECT(t));
      if (r == NULL) return TRUE;
      
      document_update(d1, r, 0, apo-c1ap);

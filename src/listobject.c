@@ -24,13 +24,13 @@
 #include "main.h"
 #include "listobject.h"
 
-G_DEFINE_TYPE(ListObject,list_object,GTK_TYPE_OBJECT)
+G_DEFINE_TYPE(ListObject,list_object,G_TYPE_OBJECT)
 
 enum { ITEM_ADDED_SIGNAL, ITEM_REMOVED_SIGNAL, ITEM_NOTIFY_SIGNAL, 
        LAST_SIGNAL };
 static guint list_object_signals[LAST_SIGNAL] = { 0 };
 
-static void list_object_destroy(GtkObject *obj)
+static void list_object_destroy(GObject *obj)
 {
      ListObject *lo = LIST_OBJECT(obj);
      list_object_clear(lo,FALSE);
@@ -38,9 +38,9 @@ static void list_object_destroy(GtkObject *obj)
 
 static void list_object_class_init(ListObjectClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
 
-     oc->destroy = list_object_destroy;
+     oc->dispose = list_object_destroy;
      klass->item_removed = NULL;
      klass->item_added = NULL;
 
@@ -83,8 +83,7 @@ ListObject *list_object_new_from_list(GList *list, gboolean do_ref)
      lo->do_ref = do_ref;
      lo->list = list;
      if (do_ref) {
-	  g_list_foreach(list,(GFunc)gtk_object_ref,NULL);
-	  g_list_foreach(list,(GFunc)gtk_object_sink,NULL);
+	  g_list_foreach(list,(GFunc)g_object_ref_sink,NULL);
      }
      return lo;
 }
@@ -93,8 +92,7 @@ void list_object_add(ListObject *lo, gpointer ptr)
 {
      lo->list = g_list_append(lo->list, ptr);
      if (lo->do_ref) {
-	  gtk_object_ref(GTK_OBJECT(ptr));
-	  gtk_object_sink(GTK_OBJECT(ptr));
+	  g_object_ref_sink(G_OBJECT(ptr));
      }
      g_signal_emit(G_OBJECT(lo),list_object_signals[ITEM_ADDED_SIGNAL],0,
 		     ptr);
@@ -108,7 +106,7 @@ gboolean list_object_remove(ListObject *lo, gpointer ptr)
      lo->list = g_list_remove_link( lo->list, l );
      g_signal_emit(G_OBJECT(lo),list_object_signals[ITEM_REMOVED_SIGNAL],0,
 		     ptr);
-     if (lo->do_ref) gtk_object_unref(GTK_OBJECT(ptr));
+     if (lo->do_ref) g_object_unref(G_OBJECT(ptr));
      g_list_free_1(l);
      return TRUE;
 }
@@ -127,7 +125,7 @@ void list_object_clear(ListObject *lo, gboolean do_signal)
      else {
 	  l = lo->list;
 	  lo->list = NULL;
-	  if (lo->do_ref) g_list_foreach(l,(GFunc)gtk_object_unref,NULL);
+	  if (lo->do_ref) g_list_foreach(l,(GFunc)g_object_unref,NULL);
 	  g_list_free(l);
      }
 }

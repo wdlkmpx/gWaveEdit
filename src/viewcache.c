@@ -56,7 +56,7 @@ static void view_cache_clear(ViewCache *vc)
      if (vc->chunk) {
 	  if (vc->handle) chunk_close(vc->handle);
 	  vc->handle = NULL;
-	  gtk_object_unref(GTK_OBJECT(vc->chunk));
+	  g_object_unref(G_OBJECT(vc->chunk));
      }
      g_free(vc->values);
      vc->values = NULL;
@@ -144,7 +144,7 @@ gboolean view_cache_update(ViewCache *cache, Chunk *chunk, off_t start_samp,
 	  view_cache_clear(cache);
 	  cache->chunk = chunk;
 	  if (chunk != NULL) 
-	       gtk_object_ref(GTK_OBJECT(chunk));
+	       g_object_ref(G_OBJECT(chunk));
 	  cache->chunk_error = FALSE;
      }
 

@@ -167,7 +167,7 @@ static gboolean player_work(void)
 	       /* puts("Calling output_stop"); */
 	       output_stop(TRUE);
 	       chunk_close(ch);
-	       gtk_object_unref(GTK_OBJECT(ch));
+	       g_object_unref(G_OBJECT(ch));
 	       ch=NULL;
 	       if (notify_func != NULL) notify_func(loopstart,curpos,FALSE);
 	       return FALSE;
@@ -255,13 +255,13 @@ static gboolean player_play_main(Chunk *chk, off_t spos, off_t epos,
 	       if (b) {
 		    chk = chunk_convert_sampletype(chk,&fmt);
 		    b = player_play_main(chk,spos,epos,lp,1);
-		    gtk_object_sink(GTK_OBJECT(chk));
+		    g_object_ref_sink(G_OBJECT(chk));
 		    return b;
 
 	       } else if (chk->format.channels != fmt.channels) {
 		    chk = chunk_convert_channels(chk,fmt.channels);
 		    b = player_play_main(chk,spos,epos,lp,1);
-		    gtk_object_sink(GTK_OBJECT(chk));
+		    g_object_ref_sink(G_OBJECT(chk));
 		    return b;
 
 	       } else if (chk->format.samplerate != fmt.samplerate) {
@@ -307,7 +307,7 @@ static gboolean player_play_main(Chunk *chk, off_t spos, off_t epos,
      }
 
      ch = chunk_open(chk);
-     gtk_object_ref(GTK_OBJECT(chk));
+     g_object_ref(G_OBJECT(chk));
      rateest_init(fmt.samplerate);
 
      restart_converter();
@@ -438,13 +438,13 @@ void player_switch(Chunk *chunk, off_t movestart, off_t movedist)
      if (!dataformat_samples_equal(&(chunk->format),&(ch->format))) {
 	  x = chunk_convert_sampletype(chunk, &(ch->format));
 	  player_switch(x,movestart,movedist);
-	  gtk_object_sink(GTK_OBJECT(x));
+	  g_object_ref_sink(G_OBJECT(x));
 	  return;
      } 
      if (chunk->format.channels != ch->format.channels) {
 	  x = chunk_convert_channels(chunk, ch->format.channels);
 	  player_switch(x,movestart,movedist);
-	  gtk_object_sink(GTK_OBJECT(x));
+	  g_object_ref_sink(G_OBJECT(x));
 	  return;
      }
 
@@ -479,9 +479,9 @@ void player_switch(Chunk *chunk, off_t movestart, off_t movedist)
      c = chunk_open(chunk);
      if (c == NULL) return;
      chunk_close(ch);
-     gtk_object_unref(GTK_OBJECT(ch));
+     g_object_unref(G_OBJECT(ch));
      ch = c;
-     gtk_object_ref(GTK_OBJECT(ch));
+     g_object_ref(G_OBJECT(ch));
 
      loopstart = newstart;
      loopend = newend;
@@ -508,7 +508,7 @@ static void player_stop_main(gboolean read_stoppos)
 	  realpos_atstop = get_realpos_main(b ? rateest_frames_written() : 
 					    rateest_frames_played());
      if (notify_func) notify_func(realpos_atstop,curpos,FALSE);
-     gtk_object_unref(GTK_OBJECT(ch));
+     g_object_unref(G_OBJECT(ch));
      ch = NULL;
 }
 

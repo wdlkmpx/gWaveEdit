@@ -33,19 +33,19 @@ static char *choose_format_string = N_("Choose a sample format");
 
 static gboolean nosignal_flag = FALSE;
 
-static void record_format_combo_destroy(GtkObject *obj)
+static void record_format_combo_destroy(GObject *obj)
 {
      RecordFormatCombo *rfc = RECORD_FORMAT_COMBO(obj);
      
      if (rfc->named_presets) {
-	  gtk_object_unref(GTK_OBJECT(rfc->named_presets));
+	  g_object_unref(G_OBJECT(rfc->named_presets));
 	  rfc->named_presets = NULL;
      }
      if (rfc->nameless_presets) {
-	  gtk_object_unref(GTK_OBJECT(rfc->nameless_presets));
+	  g_object_unref(G_OBJECT(rfc->nameless_presets));
 	  rfc->nameless_presets = NULL;
      }
-     GTK_OBJECT_CLASS(record_format_combo_parent_class)->destroy(obj);
+     G_OBJECT_CLASS(record_format_combo_parent_class)->dispose(obj);
 }
 
 static gchar *rf_string(Dataformat *fmt, gchar *name)
@@ -173,8 +173,8 @@ static void record_format_combo_selection_changed(Combo *obj)
 
 static void record_format_combo_class_init(RecordFormatComboClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     oc->destroy = record_format_combo_destroy;
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
+     oc->dispose = record_format_combo_destroy;
      COMBO_CLASS(klass)->selection_changed = 
 	  record_format_combo_selection_changed;
      klass->format_changed = NULL;
@@ -210,8 +210,7 @@ GtkWidget *record_format_combo_new(ListObject *named_presets,
 {
      RecordFormatCombo *rfc = g_object_new(RECORD_FORMAT_COMBO_TYPE, NULL);
      rfc->named_presets = named_presets;
-     gtk_object_ref(GTK_OBJECT(named_presets));
-     gtk_object_sink(GTK_OBJECT(named_presets));
+     g_object_ref_sink(G_OBJECT(named_presets));
      g_signal_connect_object(named_presets,"item_added",
 				    G_CALLBACK(presets_changed),rfc,0);
      g_signal_connect_object(named_presets,"item_removed",
@@ -220,8 +219,7 @@ GtkWidget *record_format_combo_new(ListObject *named_presets,
 				    G_CALLBACK(presets_changed),rfc,0);
 
      rfc->nameless_presets = nameless_presets;
-     gtk_object_ref(GTK_OBJECT(nameless_presets));
-     gtk_object_sink(GTK_OBJECT(nameless_presets));
+     g_object_ref_sink(G_OBJECT(nameless_presets));
      g_signal_connect_object(nameless_presets,"item_added",
 				    G_CALLBACK(presets_changed),rfc,0);
      g_signal_connect_object(nameless_presets,"item_removed",

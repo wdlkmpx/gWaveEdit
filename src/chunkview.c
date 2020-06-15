@@ -121,16 +121,16 @@ static void chunk_view_cursor_changed(Document *d, gboolean rolling,
      }
 }
 
-static void chunk_view_destroy (GtkObject *object)
+static void chunk_view_destroy (GObject *object)
 {
      ChunkView *cv = CHUNKVIEW(object);
      if (cv->doc != NULL) {
 	  g_signal_handlers_disconnect_matched(cv->doc, G_SIGNAL_MATCH_DATA,
 	                                       0, 0, NULL, NULL, cv);
-	  gtk_object_unref(GTK_OBJECT(cv->doc));
+	  g_object_unref(G_OBJECT(cv->doc));
      }
      cv->doc = NULL;
-     GTK_OBJECT_CLASS(chunk_view_parent_class)->destroy(object);
+     G_OBJECT_CLASS(chunk_view_parent_class)->dispose(object);
      if (cv->cache) view_cache_free(cv->cache);
      cv->cache = NULL;
 }
@@ -728,9 +728,9 @@ static gint chunk_view_button_release(GtkWidget *widget, GdkEventButton *event)
 static void chunk_view_class_init(ChunkViewClass *klass)
 {
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
 
-     oc->destroy = chunk_view_destroy;
+     oc->dispose = chunk_view_destroy;
      wc->expose_event = chunk_view_expose;
      wc->size_request = chunk_view_size_request;
      wc->size_allocate = chunk_view_size_allocate;
@@ -777,12 +777,11 @@ void chunk_view_set_document(ChunkView *cv, Document *doc)
      if (cv->doc != NULL) {
 	  g_signal_handlers_disconnect_matched(cv->doc, G_SIGNAL_MATCH_DATA,
 	                                       0, 0, NULL, NULL, cv);
-	  gtk_object_unref(GTK_OBJECT(cv->doc));
+	  g_object_unref(G_OBJECT(cv->doc));
      }
      cv->doc = doc;
      if (doc != NULL) { 
-	  gtk_object_ref(GTK_OBJECT(doc)); 
-	  gtk_object_sink(GTK_OBJECT(doc)); 
+	  g_object_ref_sink(G_OBJECT(doc)); 
 	  g_signal_connect(G_OBJECT(doc),"view_changed",
 			     G_CALLBACK(chunk_view_changed),cv);
 	  g_signal_connect(G_OBJECT(doc),"state_changed",

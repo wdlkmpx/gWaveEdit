@@ -110,22 +110,22 @@ static void combine_channels_setup(EffectDialog *ed)
     }
 }
 
-static void combine_channels_destroy(GtkObject *obj)
+static void combine_channels_destroy(GObject *obj)
 {
     CombineChannelsDialog *ccd = COMBINE_CHANNELS_DIALOG(obj);
     g_free(ccd->combination_matrix);
     ccd->combination_matrix = NULL;
-    GTK_OBJECT_CLASS(combine_channels_dialog_parent_class)->destroy(obj);
+    G_OBJECT_CLASS(combine_channels_dialog_parent_class)->dispose(obj);
 }
 
 static void combine_channels_dialog_class_init(CombineChannelsDialogClass *klass)
 {
-    GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+    GObjectClass *oc = G_OBJECT_CLASS(klass);
     EffectDialogClass *edc = EFFECT_DIALOG_CLASS(klass);
     edc->apply = combine_channels_dialog_apply;
     edc->setup = combine_channels_setup;
     edc->target_changed = combine_channels_dialog_target_changed;
-    oc->destroy = combine_channels_destroy;
+    oc->dispose = combine_channels_destroy;
 }
 
 static void combine_channels_dialog_init(CombineChannelsDialog *obj)

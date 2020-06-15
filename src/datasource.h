@@ -85,11 +85,9 @@ struct temparea {
      int size;
 };
 
-struct _Datasource;
-
 struct _Datasource {
 
-     GtkObject object;
+     GObject object;
 
      gint type;
 
@@ -144,7 +142,7 @@ struct _Datasource {
 typedef struct _Datasource Datasource;
 
 typedef struct {
-     GtkObjectClass klass;
+     GObjectClass klass;
 } DatasourceClass;
 
 

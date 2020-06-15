@@ -565,7 +565,7 @@ static gboolean wav_save(Chunk *chunk, char *filename, gpointer settings,
 	       }
 	       c = chunk_convert(chunk,&cfmt,DITHER_UNSPEC,bar);
 	       b = wav_save(c,filename,settings,type,dither_mode,bar,fatal);
-	       gtk_object_sink(GTK_OBJECT(c));
+	       g_object_ref_sink(G_OBJECT(c));
 	       return b;
 	  }
      } else if (ieee_le_compatible || ieee_be_compatible) {
@@ -574,7 +574,7 @@ static gboolean wav_save(Chunk *chunk, char *filename, gpointer settings,
 	       cfmt.bigendian = FALSE;
 	       c = chunk_convert(chunk,&cfmt,DITHER_UNSPEC,bar);
 	       b = wav_save(c,filename,settings,type,dither_mode,bar,fatal);
-	       gtk_object_sink(GTK_OBJECT(c));
+	       g_object_ref_sink(G_OBJECT(c));
 	       return b;
 	  }
      }
@@ -783,7 +783,7 @@ static Chunk *sndfile_load(gchar *filename, int dither_mode, StatusBar *bar)
 	  if (st == 0 || tempfile_write(tmp,rawbuf,st) || 
 	      status_bar_progress(bar, st/f.samplebytes)) {
 	       datasource_close(ds);
-	       gtk_object_sink(GTK_OBJECT(ds));
+	       g_object_ref_sink(G_OBJECT(ds));
 	       tempfile_abort(tmp);
 	       g_free(rawbuf);
 	       status_bar_end_progress(bar);
@@ -792,7 +792,7 @@ static Chunk *sndfile_load(gchar *filename, int dither_mode, StatusBar *bar)
      }
      g_free(rawbuf);
      datasource_close(ds);
-     gtk_object_sink(GTK_OBJECT(ds));
+     g_object_ref_sink(G_OBJECT(ds));
      status_bar_end_progress(bar);
      return tempfile_finished(tmp);
 }
@@ -891,16 +891,15 @@ static gboolean sndfile_save_main(Chunk *chunk, gchar *filename,
      }
      if (dataformat_samples_equal(&fmt,&(chunk->format))) {
 	  convchunk = chunk;
-	  gtk_object_ref(GTK_OBJECT(convchunk));
+	  g_object_ref(G_OBJECT(convchunk));
      } else {
 	  convchunk = chunk_convert_sampletype(chunk, &fmt);
-	  gtk_object_ref(GTK_OBJECT(convchunk));
-	  gtk_object_sink(GTK_OBJECT(convchunk));
+	  g_object_ref_sink(G_OBJECT(convchunk));
      }
 
      ch = chunk_open(convchunk);
      if (ch == NULL) {
-	  gtk_object_unref(GTK_OBJECT(convchunk));
+	  g_object_unref(G_OBJECT(convchunk));
 	  sf_close(s);
 	  return -1;
      }
@@ -913,7 +912,7 @@ static gboolean sndfile_save_main(Chunk *chunk, gchar *filename,
 	       chunk_close(ch);
 	       sf_close(s);
 	       g_free(samplebuf);
-	       gtk_object_unref(GTK_OBJECT(convchunk));
+	       g_object_unref(G_OBJECT(convchunk));
 	       *fatal = TRUE;
 	       return -1;
 	  }
@@ -942,7 +941,7 @@ static gboolean sndfile_save_main(Chunk *chunk, gchar *filename,
 	       chunk_close(ch);
 	       sf_close(s);
 	       g_free(samplebuf);
-	       gtk_object_unref(GTK_OBJECT(convchunk));
+	       g_object_unref(G_OBJECT(convchunk));
 	       *fatal = TRUE;
 	       return -1;  
 	  }
@@ -951,14 +950,14 @@ static gboolean sndfile_save_main(Chunk *chunk, gchar *filename,
 	       sf_close(s);
 	       g_free(samplebuf);
 	       xunlink(filename);
-	       gtk_object_unref(GTK_OBJECT(convchunk));
+	       g_object_unref(G_OBJECT(convchunk));
 	       return -1;
 	  }
      }
      chunk_close(ch);
      sf_close(s);
      g_free(samplebuf);
-     gtk_object_unref(GTK_OBJECT(convchunk));
+     g_object_unref(G_OBJECT(convchunk));
      return clipwarn(clipcount,TRUE);
 
 }
@@ -1100,7 +1099,7 @@ static gboolean ogg_save(Chunk *chunk, gchar *filename, gpointer settings,
 			 y->format.bigendian?1:0);
      b = pipe_dialog_send_chunk(y,c,FALSE,dither_mode,bar,&clipcount);
      g_free(c);     
-     if (x != NULL) gtk_object_sink(GTK_OBJECT(x));
+     if (x != NULL) g_object_ref_sink(G_OBJECT(x));
      if (!xunsetenv("OUTFILE")) g_free(d);
      if (b || !file_exists(filename)) {
 	  *fatal = TRUE;
@@ -1243,7 +1242,7 @@ static gpointer mp3_get_settings(void)
      gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_button_new_with_label(_("OK"));
-     g_signal_connect_swapped(GTK_OBJECT(d),"clicked",
+     g_signal_connect_swapped(G_OBJECT(d),"clicked",
 			       G_CALLBACK(set_flag),
 			       &(mp3_get_settings_data.ok_flag));
      g_signal_connect_swapped(G_OBJECT(d),"clicked",
@@ -1257,10 +1256,10 @@ static gpointer mp3_get_settings(void)
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
      gtk_widget_show_all(a);
      
-     gtk_object_ref(GTK_OBJECT(mp3_get_settings_data.type_combo));
-     gtk_object_ref(GTK_OBJECT(mp3_get_settings_data.subtype_combo));
-     gtk_object_ref(GTK_OBJECT(mp3_get_settings_data.arg_entry));
-     gtk_object_ref(GTK_OBJECT(mp3_get_settings_data.set_default));
+     g_object_ref(G_OBJECT(mp3_get_settings_data.type_combo));
+     g_object_ref(G_OBJECT(mp3_get_settings_data.subtype_combo));
+     g_object_ref(G_OBJECT(mp3_get_settings_data.arg_entry));
+     g_object_ref(G_OBJECT(mp3_get_settings_data.set_default));
 
      mp3_get_settings_data.destroyed_flag = FALSE;
      mp3_get_settings_data.ok_flag = FALSE;
@@ -1304,10 +1303,10 @@ static gpointer mp3_get_settings(void)
 	  }	  
      } else p = NULL;
 
-     gtk_object_unref(GTK_OBJECT(mp3_get_settings_data.type_combo));
-     gtk_object_unref(GTK_OBJECT(mp3_get_settings_data.subtype_combo));
-     gtk_object_unref(GTK_OBJECT(mp3_get_settings_data.arg_entry));
-     gtk_object_unref(GTK_OBJECT(mp3_get_settings_data.set_default));
+     g_object_unref(G_OBJECT(mp3_get_settings_data.type_combo));
+     g_object_unref(G_OBJECT(mp3_get_settings_data.subtype_combo));
+     g_object_unref(G_OBJECT(mp3_get_settings_data.arg_entry));
+     g_object_unref(G_OBJECT(mp3_get_settings_data.set_default));
      
      g_list_free(mp3_get_settings_data.preset_list);
      g_list_foreach(mp3_get_settings_data.bitrate_list,(GFunc)g_free,NULL);
@@ -1369,7 +1368,7 @@ static gint mp3_save(Chunk *chunk, gchar *filename, gpointer settings,
 					  "lame --silent --preset standard - "
 					  "\"$OUTFILE\"",TRUE,dither_mode,bar,
 					  &clipcount);
-	       gtk_object_sink(GTK_OBJECT(x));
+	       g_object_ref_sink(G_OBJECT(x));
 	  }
      }
      if (!xunsetenv("OUTFILE")) g_free(c);

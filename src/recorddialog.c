@@ -136,7 +136,7 @@ static void build_preset_list(void)
      }
      
      preset_list = list_object_new_from_list(l2,FALSE);
-     gtk_object_ref(GTK_OBJECT(preset_list));
+     g_object_ref(G_OBJECT(preset_list));
 }
 
 static void set_preset(gchar *name, Dataformat *fmt)
@@ -847,8 +847,7 @@ void record_dialog_init(RecordDialog *obj)
      build_preset_list();
      dp = input_supported_formats(&complete);
      obj->driver_presets = list_object_new_from_list(dp,FALSE);
-     gtk_object_ref(GTK_OBJECT(obj->driver_presets));
-     gtk_object_sink(GTK_OBJECT(obj->driver_presets));
+     g_object_ref_sink(G_OBJECT(obj->driver_presets));
 
      /* Add components */
      a = gtk_vbox_new(FALSE,10);
@@ -977,7 +976,7 @@ void record_dialog_init(RecordDialog *obj)
      }
 }
 
-static void record_dialog_destroy(GtkObject *obj)
+static void record_dialog_destroy(GObject *obj)
 {
      RecordDialog *rd = RECORD_DIALOG(obj);
      if (rd->databuf) ringbuf_free(rd->databuf);
@@ -986,19 +985,19 @@ static void record_dialog_destroy(GtkObject *obj)
      rd->analysis_buf = NULL;
      g_free(rd->analysis_sbuf);
      rd->analysis_sbuf = NULL;
-     GTK_OBJECT_CLASS(record_dialog_parent_class)->destroy(obj);
+     G_OBJECT_CLASS(record_dialog_parent_class)->dispose(obj);
      if (rd->driver_presets != NULL) {
 	  list_object_foreach(rd->driver_presets, (GFunc)g_free, NULL);
 	  list_object_clear(rd->driver_presets, FALSE);
-	  gtk_object_unref(GTK_OBJECT(rd->driver_presets));
+	  g_object_unref(G_OBJECT(rd->driver_presets));
 	  rd->driver_presets = NULL;
      }
 }
 
 static void record_dialog_class_init(RecordDialogClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     oc->destroy = record_dialog_destroy;
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
+     oc->dispose = record_dialog_destroy;
 }
 
 Chunk *record_dialog_execute(int *noverruns, off_t overrun_locs[10])

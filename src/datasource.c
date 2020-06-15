@@ -34,7 +34,7 @@
 #include "tempfile.h"
 #include "gettext.h"
 
-G_DEFINE_TYPE(Datasource,datasource,GTK_TYPE_OBJECT)
+G_DEFINE_TYPE(Datasource,datasource,G_TYPE_OBJECT)
 
 static GList *datasource_list = NULL;
 
@@ -110,13 +110,13 @@ static void datasource_clear(Datasource *ds)
      case DATASOURCE_BYTESWAP:
      case DATASOURCE_CONVERT:
 	  if (ds->data.clone) 
-	       gtk_object_unref(GTK_OBJECT(ds->data.clone));
+	       g_object_unref(G_OBJECT(ds->data.clone));
 	  ds->data.clone = NULL;
 	  break;
 
      case DATASOURCE_CHANMAP:
 	  if (ds->data.chanmap.clone)
-	       gtk_object_unref(GTK_OBJECT(ds->data.chanmap.clone));
+	       g_object_unref(G_OBJECT(ds->data.chanmap.clone));
 	  if (ds->data.chanmap.map)
 	       g_free(ds->data.chanmap.map);
 	  ds->data.chanmap.clone = NULL;
@@ -127,19 +127,19 @@ static void datasource_clear(Datasource *ds)
      ds->type = DATASOURCE_SILENCE;
 }
 
-static void datasource_destroy(GtkObject *obj)
+static void datasource_destroy(GObject *obj)
 {     
      Datasource *ds = DATASOURCE(obj);
      /* printf("datasource_destroy(%p)\n",obj); */
      datasource_clear(ds);
      datasource_list = g_list_remove(datasource_list, obj);
-     GTK_OBJECT_CLASS(datasource_parent_class)->destroy(obj);
+     G_OBJECT_CLASS(datasource_parent_class)->dispose(obj);
 }
 
 static void datasource_class_init(DatasourceClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
-     oc->destroy = datasource_destroy;
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
+     oc->dispose = datasource_destroy;
 }
 
 static char *datasource_get_temparea(struct temparea *ta, int size)
@@ -173,8 +173,7 @@ static Datasource *datasource_copy(Datasource *orig)
      case DATASOURCE_SNDFILE_TEMPORARY:
 	  ds->type = DATASOURCE_REF;	  
 	  ds->data.clone = orig;
-	  gtk_object_ref(GTK_OBJECT(orig));
-	  gtk_object_sink(GTK_OBJECT(orig));
+	  g_object_ref_sink(G_OBJECT(orig));
 	  break;
      case DATASOURCE_REAL:
 	  ds->data.real = g_malloc(orig->bytes);
@@ -185,13 +184,11 @@ static Datasource *datasource_copy(Datasource *orig)
      case DATASOURCE_REF:
      case DATASOURCE_CONVERT:
 	  ds->data.clone = orig->data.clone;
-	  gtk_object_ref(GTK_OBJECT(ds->data.clone));
-	  gtk_object_sink(GTK_OBJECT(ds->data.clone));
+	  g_object_ref_sink(G_OBJECT(ds->data.clone));
 	  break;
      case DATASOURCE_CHANMAP:
 	  ds->data.chanmap.clone = orig->data.chanmap.clone;
-	  gtk_object_ref(GTK_OBJECT(ds->data.chanmap.clone));
-	  gtk_object_sink(GTK_OBJECT(ds->data.chanmap.clone));
+	  g_object_ref_sink(G_OBJECT(ds->data.chanmap.clone));
 	  ds->data.chanmap.map = g_malloc(ds->format.channels * sizeof(int));
 	  memcpy(ds->data.chanmap.map, orig->data.chanmap.map, 
 		 ds->format.channels*sizeof(int));
@@ -220,7 +217,7 @@ Datasource *datasource_clone_df(Datasource *source, Dataformat *format)
      df->bytes = source->bytes;
      df->length = source->bytes / format->samplebytes;
      df->data.clone = source;
-     gtk_object_ref(GTK_OBJECT(source));
+     g_object_ref(G_OBJECT(source));
      return df;
 }
 
@@ -235,8 +232,7 @@ Datasource *datasource_byteswap(Datasource *source)
      ds->length = source->length;
      ds->bytes = source->bytes;
      ds->data.clone = source;
-     gtk_object_ref(GTK_OBJECT(source));
-     gtk_object_sink(GTK_OBJECT(source));
+     g_object_ref_sink(G_OBJECT(source));
      return ds;
 }
 
@@ -255,8 +251,7 @@ Datasource *datasource_channel_map(Datasource *source, int n_channels,
      ds->length = source->length;
      ds->bytes = ds->length * ds->format.samplebytes;
      ds->data.chanmap.clone = source;
-     gtk_object_ref(GTK_OBJECT(source));
-     gtk_object_sink(GTK_OBJECT(source));
+     g_object_ref_sink(G_OBJECT(source));
      ds->data.chanmap.map = g_malloc(n_channels * sizeof(int));
      memcpy(ds->data.chanmap.map, map, n_channels*sizeof(int));
 
@@ -841,8 +836,7 @@ Datasource *datasource_convert(Datasource *source, Dataformat *new_format)
      ds->length = source->length;
      ds->bytes = ds->length * new_format->samplebytes;
      ds->data.clone = source;
-     gtk_object_ref(GTK_OBJECT(source));
-     gtk_object_sink(GTK_OBJECT(source));
+     g_object_ref_sink(G_OBJECT(source));
      return ds;     
 }
 
