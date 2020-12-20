@@ -26,6 +26,7 @@
 
 #include <stdio.h>
 #include <gtk/gtk.h>
+#include "gtkcompat.h"
 #include <sys/time.h>
 #include <sys/types.h>
 #include <time.h>

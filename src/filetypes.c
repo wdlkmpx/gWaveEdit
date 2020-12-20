@@ -160,8 +160,10 @@ static void setup_types(void)
 	  }
 	  if ((info.format&SF_FORMAT_TYPEMASK) == SF_FORMAT_RAW ||
 	      (info.format&SF_FORMAT_TYPEMASK) == SF_FORMAT_WAV) continue;
+#ifdef SF_FORMAT_OGG
 	  if ((info.format&SF_FORMAT_TYPEMASK) == SF_FORMAT_OGG)
 	       sndfile_ogg_flag=TRUE;
+#endif
 	  snprintf(buf,sizeof(buf),".%s",info.extension);
 	  register_file_type((gchar *)info.name, buf, FALSE, sndfile_check, 
 			     sndfile_load, sndfile_save, 
@@ -706,9 +708,13 @@ static gboolean sndfile_check(gchar *filename)
      SNDFILE *s;
      s = sf_open(filename, SFM_READ, &info);
      if (s) sf_close(s);
+#ifdef SF_FORMAT_VORBIS
      return (s!=NULL && ((info.format&SF_FORMAT_SUBMASK) != SF_FORMAT_RAW)
-	     && ((info.format&SF_FORMAT_SUBMASK) != SF_FORMAT_VORBIS ||
-		 inifile_get_guint32("sndfileOggMode",1)!=2));
+	     && ((info.format&SF_FORMAT_SUBMASK) != SF_FORMAT_VORBIS
+              || inifile_get_guint32("sndfileOggMode",1)!=2));
+#else
+     return (s!=NULL && ((info.format&SF_FORMAT_SUBMASK) != SF_FORMAT_RAW));	
+#endif
 }
 
 static Chunk *sndfile_load(gchar *filename, int dither_mode, StatusBar *bar)
@@ -742,10 +748,12 @@ static Chunk *sndfile_load(gchar *filename, int dither_mode, StatusBar *bar)
      case SF_FORMAT_PCM_24: f.sign=TRUE; f.samplesize=4; f.packing=1; break;
      case SF_FORMAT_PCM_32: f.sign=TRUE; f.samplesize=4; break;
 
+#ifdef SF_FORMAT_VORBIS
      case SF_FORMAT_VORBIS:
 	  if (inifile_get_guint32("sndfileOggMode",1)!=0)
 	       info.seekable = 0;
 	  /* (Fall through on purpose) */
+#endif
 
 	  /* Default to floating point */	  
      default: memcpy(&f,&dataformat_sample_t,sizeof(f)); break;

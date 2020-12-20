@@ -23,6 +23,7 @@
 #define HISTORYBOX_H_INCLUDED
 
 #include <gtk/gtk.h>
+#include "gtkcompat.h"
 
 #define HISTORY_BOX_TYPE          (history_box_get_type ())
 #define HISTORY_BOX(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), HISTORY_BOX_TYPE, HistoryBox))

@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.68])
+AC_PREREQ([2.62])
 AC_INIT([gWaveEdit],[1.4.25pre],[https://github.com/wdlkmpx/gwaveedit])
 
 AC_CANONICAL_HOST
@@ -11,6 +11,7 @@ AM_INIT_AUTOMAKE([1.11 -Wall foreign])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AM_SILENT_RULES([yes])
+AM_MAINTAINER_MODE
 
 dnl Check for libintl
 AM_GNU_GETTEXT([external])
@@ -109,7 +110,7 @@ AC_ARG_ENABLE(
 if test "x$enable_gtk3" = "xyes" ; then
 	gtk_modules="gtk+-3.0 >= 3.0.0"
 else
-	gtk_modules="gtk+-2.0 >= 2.24.0"
+	gtk_modules="gtk+-2.0 >= 2.14.0"
 fi
 
 PKG_CHECK_MODULES(GTK, [$gtk_modules])
@@ -118,7 +119,7 @@ AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
 PKG_CHECK_MODULES(
-	[GLIB], [glib-2.0 >= 2.32.0], found_glib=yes, AC_MSG_ERROR(Glib >= 2.32.0 is required)
+	[GLIB], [glib-2.0 >= 2.18.0], found_glib=yes, AC_MSG_ERROR(Glib >= 2.18.0 is required)
 )
 
 # Disable gtk deprecations?
