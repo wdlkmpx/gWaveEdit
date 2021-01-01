@@ -42,4 +42,5 @@ static const char * hzoom_xpm[] = {
 "                                        ",
 "                                        ",
 "                                        ",
-"                                        ",};
+"                                        ",
+};
