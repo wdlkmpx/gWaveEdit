@@ -41,7 +41,7 @@
 #define GOTO_DIALOG_UNIT_SAMPLES 1
 
 typedef struct _GotoDialog {
-     GtkWindow parent;
+     GtkDialog parent;
      Mainwindow *mw;
      Floatbox *offset;
      GtkToggleButton *relbuttons[5];
@@ -49,7 +49,7 @@ typedef struct _GotoDialog {
 } GotoDialog;
 
 typedef struct _GotoDialogClass {
-     GtkWindowClass edc;
+     GtkDialogClass edc;
 } GotoDialogClass;
 
 GType goto_dialog_get_type(void);
