@@ -54,68 +54,57 @@ static void alsa_quit(void)
 // =============================================================
 // Preferences
 
-static void alsa_prefs_ok(GtkButton *button, gpointer user_data)
+static void alsa_prefs_response (GtkDialog * dlg, int response, gpointer user_data)
 {
-    GtkWidget *w = GTK_WIDGET(user_data);
+  if (response == GTK_RESPONSE_OK)
+  {
     GtkWidget *ep,*er;
     GtkToggleButton *tb;
-    ep = g_object_get_data(G_OBJECT(w),"playentry");
-    er = g_object_get_data(G_OBJECT(w),"recentry");
-    tb = g_object_get_data(G_OBJECT(w),"eventtb");
+    ep = g_object_get_data(G_OBJECT(dlg),"playentry");
+    er = g_object_get_data(G_OBJECT(dlg),"recentry");
+    tb = g_object_get_data(G_OBJECT(dlg),"eventtb");
     alsa_data.eventdriv = gtk_toggle_button_get_active(tb);
     inifile_set("ALSAPlayDevice",(gchar *)gtk_entry_get_text(GTK_ENTRY(ep)));
     inifile_set("ALSARecDevice",(gchar *)gtk_entry_get_text(GTK_ENTRY(er)));
     inifile_set_gboolean("ALSAEventDriven",alsa_data.eventdriv);
-    gtk_widget_destroy(w);
+  }
+  gtk_widget_destroy(GTK_WIDGET (dlg));
 }
 
 static void alsa_show_preferences(void)
 {
-    GtkWidget *a,*b,*c,*d;
+    GtkWidget *a,*b,*c, * dialog, * vbox;
     alsa_init(TRUE); /* Read config */
     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(a),_("ALSA Preferences"));
-    gtk_window_set_modal(GTK_WINDOW(a),TRUE);
-    gtk_window_set_position(GTK_WINDOW(a),GTK_WIN_POS_MOUSE);
-    gtk_container_set_border_width(GTK_CONTAINER(a),5);
-    g_signal_connect (
-            G_OBJECT(a),
-            "delete_event",
-            G_CALLBACK(gtk_false),NULL);
+    dialog = gtk_dialog_new ();
+    gtk_window_set_title (GTK_WINDOW (dialog),_("ALSA Preferences"));
+    gtk_window_set_modal (GTK_WINDOW (dialog),TRUE);
+    gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (a));
+    gtk_window_set_position (GTK_WINDOW (dialog),GTK_WIN_POS_MOUSE);
+    gtk_container_set_border_width (GTK_CONTAINER(dialog),5);
+
+    vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
     b = gtk_table_new(4,2,FALSE);
-    gtk_container_add(GTK_CONTAINER(a),b);
+    gtk_box_pack_start (GTK_BOX (vbox), b, TRUE, TRUE, 0);
     attach_label(_("Playback device: "),b,0,0);
     c = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(c),inifile_get("ALSAPlayDevice","default"));
     gtk_table_attach(GTK_TABLE(b),c,1,2,0,1,GTK_EXPAND|GTK_FILL,0,5,5);
     attach_label(_("Recording device: "),b,1,0);
-    g_object_set_data(G_OBJECT(a),"playentry",c);
+    g_object_set_data (G_OBJECT (dialog), "playentry",c);
     c = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(c),inifile_get("ALSARecDevice","hw"));
     gtk_table_attach(GTK_TABLE(b),c,1,2,1,2,GTK_EXPAND|GTK_FILL,0,5,5);
-    g_object_set_data(G_OBJECT(a),"recentry",c);
+    g_object_set_data (G_OBJECT (dialog), "recentry", c);
     c = gtk_check_button_new_with_label(_("Event driven I/O"));
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(c),alsa_data.eventdriv);
     gtk_table_attach(GTK_TABLE(b),c,0,2,2,3,GTK_EXPAND|GTK_FILL,0,5,5);
-    g_object_set_data(G_OBJECT(a),"eventtb",c);
-    c = gtk_hbutton_box_new();
-    gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
-    gtk_table_attach(GTK_TABLE(b),c,0,2,3,4,GTK_EXPAND|GTK_FILL,
-                GTK_EXPAND|GTK_FILL,0,5);
-    d = gtk_button_new_with_label(_("OK"));
-    g_signal_connect(
-            G_OBJECT(d),
-            "clicked",
-            G_CALLBACK(alsa_prefs_ok),
-            a);
-    gtk_container_add(GTK_CONTAINER(c),d);
-    d = gtk_button_new_with_label(_("Cancel"));
-    g_signal_connect_swapped(
-            G_OBJECT(d),"clicked",
-            G_CALLBACK(gtk_widget_destroy),
-            a);
-    gtk_container_add(GTK_CONTAINER(c),d);
-    gtk_widget_show_all(a);
+    g_object_set_data (G_OBJECT (dialog), "eventtb", c);
+
+    gtk_dialog_add_button (GTK_DIALOG (dialog), _("_OK"), GTK_RESPONSE_OK);
+    gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
+    g_signal_connect (dialog, "response", G_CALLBACK (alsa_prefs_response), NULL);
+    gtk_widget_show_all (dialog);
 }
 
 // =============================================================
