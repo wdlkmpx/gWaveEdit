@@ -56,7 +56,6 @@ static struct {
 } mhjack = { 0 };
 
 struct mhjack_prefdlg {
-     GtkWindow *wnd;
      GtkEntry *client_name;
      struct { 
 	  Intbox *maxports; 
@@ -104,9 +103,8 @@ static void mhjack_read_config(void)
 						      TRUE);
 }
 
-static void mhjack_preferences_ok(GtkButton *button, gpointer user_data)
+static void mhjack_preferences_ok (struct mhjack_prefdlg * dlg)
 {
-     struct mhjack_prefdlg *dlg = (struct mhjack_prefdlg *)user_data;
      const gchar *c;
      guint i;
      gchar buf[32];
@@ -175,13 +173,21 @@ static void mhjack_preferences_ok(GtkButton *button, gpointer user_data)
      inifile_set_gboolean("jackAutoconnectOutput",mhjack.autoconnect_output);
 
      if (mhjack.myself != NULL) mhjack_register_ports();
+}
 
-     gtk_widget_destroy(GTK_WIDGET(dlg->wnd));
+static void mhjack_prefs_response (GtkDialog * dlg, int response, gpointer user_data)
+{
+   struct mhjack_prefdlg *j = (struct mhjack_prefdlg *)user_data;
+   if (response == GTK_RESPONSE_OK) {
+      mhjack_preferences_ok (j);
+   }
+   g_free (j);
+   gtk_widget_destroy (GTK_WIDGET(dlg));
 }
 
 static void mhjack_preferences(void)
 {
-     GtkWidget *a,*b,*c,*d,*e,*f,*g;
+     GtkWidget *a,*c,*d,*e,*f,*g, * dialog, * vbox;
      struct mhjack_prefdlg *dlg;
      gchar *titles[2] = {
 	 N_(" Input ports "),
@@ -190,18 +196,20 @@ static void mhjack_preferences(void)
      guint i,j;
      gchar buf[16];
      mhjack_read_config();
-     dlg = g_malloc(sizeof(*dlg));     
+     dlg = g_malloc(sizeof(*dlg));
+
      a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-     dlg->wnd = GTK_WINDOW(a);
-     gtk_window_set_modal(GTK_WINDOW(a),TRUE);
-     gtk_window_set_title(GTK_WINDOW(a),_("Jack Preferences"));
-     gtk_window_set_position(GTK_WINDOW(a),GTK_WIN_POS_CENTER);
-     gtk_container_set_border_width(GTK_CONTAINER(a),8);
-     g_signal_connect_swapped(G_OBJECT(a),"destroy",G_CALLBACK(g_free), dlg);
-     b = gtk_vbox_new(FALSE,5);
-     gtk_container_add(GTK_CONTAINER(a),b);
+     dialog = gtk_dialog_new ();
+     gtk_window_set_modal (GTK_WINDOW (dialog),TRUE);
+     gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (a));
+     gtk_window_set_title (GTK_WINDOW (dialog), _("Jack Preferences"));
+     gtk_window_set_position (GTK_WINDOW(dialog), GTK_WIN_POS_MOUSE);
+     gtk_container_set_border_width (GTK_CONTAINER (dialog),4);
+
+     vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+     gtk_box_set_spacing (GTK_BOX (vbox), 4);
      c = gtk_hbox_new(FALSE,3);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
+     gtk_box_pack_start(GTK_BOX(vbox),c,FALSE,FALSE,0);
      d = gtk_label_new(_("Client name: "));
      gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
      d = gtk_entry_new();
@@ -210,7 +218,7 @@ static void mhjack_preferences(void)
      gtk_entry_set_max_length(dlg->client_name, jack_client_name_size());
      gtk_entry_set_text(dlg->client_name, mhjack.client_name);
      c = gtk_hbox_new(TRUE,12);
-     gtk_box_pack_start(GTK_BOX(b),c,TRUE,TRUE,0);
+     gtk_box_pack_start(GTK_BOX(vbox),c,TRUE,TRUE,0);
      for (i=0; i<2; i++) {
 	  d = gtk_frame_new(_(titles[i]));
 	  gtk_box_pack_start(GTK_BOX(c),d,TRUE,TRUE,0);
@@ -245,27 +253,19 @@ static void mhjack_preferences(void)
      dlg->ports[0].autoconnect = GTK_TOGGLE_BUTTON(c);
      gtk_toggle_button_set_active(dlg->ports[0].autoconnect,
 				  mhjack.autoconnect_input);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
+     gtk_box_pack_start(GTK_BOX(vbox),c,FALSE,FALSE,0);
      c = gtk_check_button_new_with_label(_("Automatically connect output "
 					   "ports on startup"));
      dlg->ports[1].autoconnect = GTK_TOGGLE_BUTTON(c);
      gtk_toggle_button_set_active(dlg->ports[1].autoconnect,
 				  mhjack.autoconnect_output);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-				  
+     gtk_box_pack_start(GTK_BOX(vbox),c,FALSE,FALSE,0);
+
+     gtk_dialog_add_button (GTK_DIALOG (dialog), _("_OK"), GTK_RESPONSE_OK);
+     gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
+     g_signal_connect (dialog, "response", G_CALLBACK (mhjack_prefs_response), dlg);
      
-     c = gtk_hbutton_box_new();
-     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
-     gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
-     d = gtk_button_new_with_label(_("OK"));
-     g_signal_connect(G_OBJECT(d),"clicked",
-			G_CALLBACK(mhjack_preferences_ok),dlg);
-     gtk_container_add(GTK_CONTAINER(c),d);
-     d = gtk_button_new_with_label(_("Close"));
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy), a);
-     gtk_container_add(GTK_CONTAINER(c),d);     
-     gtk_widget_show_all(a);
+     gtk_widget_show_all (dialog);
 }
 
 static void mhjack_register_ports(void)
