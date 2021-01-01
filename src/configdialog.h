@@ -32,7 +32,7 @@
 #define CONFIG_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  CONFIG_DIALOG_TYPE, ConfigDialogClass))
 
 typedef struct {
-     GtkWindow window;
+     GtkDialog dialog;
      Intbox *disk_threshold;
      Combo *sound_driver;
      GtkButton *sound_driver_prefs;
@@ -63,7 +63,7 @@ typedef struct {
 } ConfigDialog;
 
 typedef struct {
-     GtkWindowClass wc;
+     GtkDialogClass wc;
 } ConfigDialogClass;
 
 GType config_dialog_get_type(void);

@@ -36,7 +36,7 @@
 #include "gettext.h"
 #include "filetypes.h"
 
-G_DEFINE_TYPE(ConfigDialog,config_dialog,GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (ConfigDialog, config_dialog, GTK_TYPE_DIALOG)
 
 static void config_dialog_destroy(GtkObject *obj)
 {
@@ -444,18 +444,24 @@ static void driver_autodetect_toggled(GtkToggleButton *button,
      gtk_widget_set_sensitive(GTK_WIDGET(cd->sound_driver), !b);
 }
 
+
+static void config_dlg_response (GtkDialog * dlg, int response, gpointer user_data)
+{
+   if (response == GTK_RESPONSE_OK) {
+      config_dialog_ok (NULL, user_data);
+   }
+   gtk_widget_destroy (GTK_WIDGET (dlg));
+}
+
 static void config_dialog_init(ConfigDialog *cd)
 {
     GtkWidget *w,*a,*b,*c,*d,*e,*f,*g,*tempview;
     GList *l;
-    GtkAccelGroup *ag;
     guint i,j;
     gchar *ch;
     GtkTreeIter iter;
     GtkTreeViewColumn *col;
     GtkCellRenderer *renderer;
-
-    ag = gtk_accel_group_new();
 
     gtk_window_set_title(GTK_WINDOW(cd),_("Preferences"));
     gtk_window_set_modal(GTK_WINDOW(cd),TRUE);
@@ -745,9 +751,8 @@ static void config_dialog_init(ConfigDialog *cd)
     cd->convmode = COMBO(w);
 
     /* Layout the window */
-    
-    a = gtk_vbox_new(FALSE,5);
-    gtk_container_add(GTK_CONTAINER(cd),a);
+
+    a = gtk_dialog_get_content_area (GTK_DIALOG (cd));
     b = gtk_notebook_new();
     gtk_notebook_set_tab_pos(GTK_NOTEBOOK(b),GTK_POS_TOP);
     gtk_box_pack_start(GTK_BOX(a),b,TRUE,TRUE,0);
@@ -755,7 +760,7 @@ static void config_dialog_init(ConfigDialog *cd)
 
 
     c = gtk_vbox_new(FALSE,14);
-    gtk_container_set_border_width(GTK_CONTAINER(c),8);
+    gtk_container_set_border_width(GTK_CONTAINER(c),4);
     gtk_notebook_append_page(GTK_NOTEBOOK(b),c,gtk_label_new(_("Interface")));
     d = gtk_frame_new(_(" Main window "));
     gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
@@ -813,7 +818,7 @@ static void config_dialog_init(ConfigDialog *cd)
 
 
     c = gtk_vbox_new(FALSE,14);
-    gtk_container_set_border_width(GTK_CONTAINER(c),8);
+    gtk_container_set_border_width(GTK_CONTAINER(c),4);
     gtk_notebook_append_page(GTK_NOTEBOOK(b),c,gtk_label_new(_("Sound")));
     d = gtk_frame_new(_(" Driver options "));    
     gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
@@ -854,7 +859,7 @@ static void config_dialog_init(ConfigDialog *cd)
 
 
     c = gtk_vbox_new(FALSE,14);
-    gtk_container_set_border_width(GTK_CONTAINER(c),8);
+    gtk_container_set_border_width(GTK_CONTAINER(c),4);
     gtk_notebook_append_page(GTK_NOTEBOOK(b),c,gtk_label_new(_("Playback")));
 
     d = gtk_frame_new(_(" Playback settings "));    
@@ -883,7 +888,7 @@ static void config_dialog_init(ConfigDialog *cd)
     
 
     c = gtk_vbox_new(FALSE,14);
-    gtk_container_set_border_width(GTK_CONTAINER(c),8);
+    gtk_container_set_border_width(GTK_CONTAINER(c),4);
     gtk_notebook_append_page(GTK_NOTEBOOK(b),c,gtk_label_new(_("Files")));
 
     d = gtk_frame_new(_(" Temporary file directories "));
@@ -937,7 +942,7 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_box_pack_start(GTK_BOX(f),g,TRUE,TRUE,0);
 
     c = gtk_vbox_new(FALSE,14);
-    gtk_container_set_border_width(GTK_CONTAINER(c),8);
+    gtk_container_set_border_width(GTK_CONTAINER(c),4);
     gtk_notebook_append_page(GTK_NOTEBOOK(b),c,gtk_label_new(_("Quality")));
     
     d = gtk_frame_new(_(" Rate conversions "));
@@ -979,7 +984,7 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_box_pack_start(GTK_BOX(f),g,TRUE,TRUE,0);
 
     c = gtk_vbox_new(FALSE,14);
-    gtk_container_set_border_width(GTK_CONTAINER(c),8);
+    gtk_container_set_border_width(GTK_CONTAINER(c),4);
     gtk_notebook_append_page(GTK_NOTEBOOK(b),c,gtk_label_new(_("Other")));
 
     d = gtk_frame_new(_(" Time format "));
@@ -1024,7 +1029,7 @@ static void config_dialog_init(ConfigDialog *cd)
 
     
     c = gtk_vbox_new(FALSE,14);
-    gtk_container_set_border_width(GTK_CONTAINER(c),8);
+    gtk_container_set_border_width(GTK_CONTAINER(c),4);
     gtk_notebook_append_page(GTK_NOTEBOOK(b),c,gtk_label_new(_("Advanced")));
     d = gtk_frame_new(_(" Advanced settings "));
     gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
@@ -1063,38 +1068,11 @@ static void config_dialog_init(ConfigDialog *cd)
     g = gtk_label_new(_("bytes"));
     gtk_box_pack_start(GTK_BOX(f),g,FALSE,FALSE,0);
     
-    
-    
 
-    b = gtk_hbutton_box_new();
-    gtk_button_box_set_layout(GTK_BUTTON_BOX(b),GTK_BUTTONBOX_END);
-    gtk_box_pack_start(GTK_BOX(a),b,FALSE,TRUE,0);
-
-
-    c = gtk_button_new_with_mnemonic(_("_OK"));
-    gtk_widget_add_accelerator (c, "clicked", ag, GDK_KP_Enter, 0, 
-				(GtkAccelFlags) 0);
-    gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, 
-				(GtkAccelFlags) 0);
-    g_signal_connect(G_OBJECT(c),"clicked",
-		       G_CALLBACK(config_dialog_ok),cd);
-
-    gtk_container_add (GTK_CONTAINER (b), c);
-    gtk_widget_set_can_default (c, TRUE);
-
-    c = gtk_button_new_with_mnemonic(_("_Close"));
-    gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 
-				(GtkAccelFlags) 0);
-    g_signal_connect_swapped(G_OBJECT(c),"clicked",
-                              G_CALLBACK(gtk_widget_destroy),
-                              cd);
-    gtk_container_add (GTK_CONTAINER (b), c);
-    gtk_widget_set_can_default (c, TRUE);
+    gtk_dialog_add_button (GTK_DIALOG (cd), _("_OK"), GTK_RESPONSE_OK);
+    gtk_dialog_add_button (GTK_DIALOG (cd), _("_Close"), GTK_RESPONSE_OK);
+    g_signal_connect (cd, "response", G_CALLBACK (config_dlg_response), cd);
     gtk_widget_show_all(a);
-
-    gtk_window_add_accel_group(GTK_WINDOW (cd), ag);
-
-
 }
 
 GtkWidget *config_dialog_new(void)
