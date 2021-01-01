@@ -455,38 +455,47 @@ static void oss_input_store(Ringbuf *buffer)
 // Preferences dialog
 
 struct oss_prefdlg { 
-   GtkWindow *wnd; 
    GtkEntry *pcmdev_playback;
    GtkEntry *pcmdev_record;
    GtkToggleButton *noselect;
 };
 
-static void oss_preferences_ok(GtkButton *button, struct oss_prefdlg *pd)
+static void oss_prefs_response (GtkDialog * dlg, int response, gpointer user_data)
 {
-   inifile_set (OSS_PCMFILE_PLAYBACK,
-                (char *)gtk_entry_get_text (pd->pcmdev_playback));
-   inifile_set (OSS_PCMFILE_RECORD,
-                (char *)gtk_entry_get_text (pd->pcmdev_record));
-   oss_noselect = gtk_toggle_button_get_active (pd->noselect);
-   inifile_set_gboolean(OSS_NOSELECT,oss_noselect);
-   gtk_widget_destroy(GTK_WIDGET(pd->wnd));
+   struct oss_prefdlg *pd = (struct oss_prefdlg *) user_data;
+   if (response == GTK_RESPONSE_OK) {
+      inifile_set (OSS_PCMFILE_PLAYBACK,
+                   (char *)gtk_entry_get_text (pd->pcmdev_playback));
+      inifile_set (OSS_PCMFILE_RECORD,
+                   (char *)gtk_entry_get_text (pd->pcmdev_record));
+      oss_noselect = gtk_toggle_button_get_active (pd->noselect);
+      inifile_set_gboolean(OSS_NOSELECT,oss_noselect);
+   }
+   gtk_widget_destroy (GTK_WIDGET (dlg));
+   g_free (pd);
 }
 
 static void oss_preferences(void)
 {
-   GtkWidget *a,*b,*c,*d;
+   GtkWidget *a,*b,*c,*d, * dialog, * frame;
    struct oss_prefdlg *pd;
    gchar *q;
    pd = g_malloc(sizeof(struct oss_prefdlg));
-   a = gtk_window_new (GTK_WINDOW_TOPLEVEL);     
-   gtk_window_set_modal (GTK_WINDOW(a),TRUE);
-   gtk_window_set_title (GTK_WINDOW(a),_("OSS preferences"));
-   gtk_window_set_position (GTK_WINDOW(a),GTK_WIN_POS_CENTER);
-   gtk_container_set_border_width (GTK_CONTAINER(a),5);
-   g_signal_connect_swapped (G_OBJECT(a),"destroy",G_CALLBACK(g_free), pd);
-   pd->wnd = GTK_WINDOW (a);
-   b = gtk_vbox_new (FALSE,5);
-   gtk_container_add(GTK_CONTAINER(a),b);
+   a = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+   dialog = gtk_dialog_new ();
+   gtk_window_set_modal (GTK_WINDOW(dialog), TRUE);
+   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (a));
+   gtk_window_set_title (GTK_WINDOW(dialog), _("OSS preferences"));
+   gtk_window_set_position (GTK_WINDOW(dialog), GTK_WIN_POS_MOUSE);
+   gtk_container_set_border_width (GTK_CONTAINER(dialog), 5);
+
+   b = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+   frame = gtk_frame_new (NULL);
+   gtk_box_pack_start (GTK_BOX (b), frame, TRUE, TRUE, 0);
+   b = gtk_vbox_new (FALSE, 5);
+   gtk_container_add (GTK_CONTAINER (frame), b);
+   gtk_container_set_border_width (GTK_CONTAINER (b), 5);
+
    c = gtk_hbox_new (FALSE,3);
    gtk_container_add (GTK_CONTAINER(b),c);
    d = gtk_label_new (_("Playback device file:"));
@@ -510,18 +519,9 @@ static void oss_preferences(void)
    oss_noselect = inifile_get_gboolean(OSS_NOSELECT,OSS_NOSELECT_DEFAULT);
    pd->noselect = GTK_TOGGLE_BUTTON (c);
    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(c),oss_noselect);
-   c = gtk_hseparator_new ();
-   gtk_container_add (GTK_CONTAINER(b),c);
-   c = gtk_hbutton_box_new ();
-   gtk_button_box_set_layout (GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
-   gtk_container_add (GTK_CONTAINER(b),c);
-   d = gtk_button_new_with_label (_("OK"));
-   g_signal_connect (G_OBJECT(d),"clicked",
-                     G_CALLBACK(oss_preferences_ok),pd);
-   gtk_container_add (GTK_CONTAINER(c),d);
-   d = gtk_button_new_with_label (_("Close"));
-   g_signal_connect_swapped (G_OBJECT(d),"clicked",
-                             G_CALLBACK (gtk_widget_destroy), a);
-   gtk_container_add (GTK_CONTAINER(c),d);     
-   gtk_widget_show_all (a);
+
+   gtk_dialog_add_button (GTK_DIALOG (dialog), _("_OK"), GTK_RESPONSE_OK);
+   gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
+   g_signal_connect (dialog, "response", G_CALLBACK (oss_prefs_response), pd);
+   gtk_widget_show_all (dialog);
 }
