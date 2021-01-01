@@ -1,22 +1,22 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.62])
 AC_INIT([gWaveEdit],[1.4.25pre],[https://github.com/wdlkmpx/gwaveedit])
 
+AC_PREREQ([2.60])
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
-AM_INIT_AUTOMAKE([1.11 -Wall foreign])
+AM_INIT_AUTOMAKE([1.10 -Wall foreign])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
-AM_SILENT_RULES([yes])
-AM_MAINTAINER_MODE
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+m4_ifdef([AM_MAINTAINER_MODE], [AM_MAINTAINER_MODE])
 
 dnl Check for libintl
 AM_GNU_GETTEXT([external])
 
-AM_PROG_AR
+m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 LT_INIT
 
 # Init intltool
