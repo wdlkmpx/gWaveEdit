@@ -353,6 +353,9 @@ static void colors_click(GtkButton *button, gpointer user_data)
      d = cs;
      gtk_box_pack_start(GTK_BOX(c),d,TRUE,TRUE,0);
 
+     gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
+     gtk_tree_selection_select_iter (sel, &iter);
+
      d = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Preview"), GTK_RESPONSE_APPLY);
      d = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_OK"), GTK_RESPONSE_OK);
      d = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
