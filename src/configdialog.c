@@ -264,20 +264,38 @@ static void color_apply(GtkButton *button, gpointer user_data)
      g_free(ctable);
 }
 
+static void colors_dlg_response (GtkDialog * dlg, int response, gpointer user_data)
+{
+   switch (response)
+   {
+      case GTK_RESPONSE_OK:
+         color_apply (NULL, user_data);
+         save_colors ();
+         break;
+      case GTK_RESPONSE_APPLY: /* preview */
+         color_apply (NULL, user_data);
+         g_signal_stop_emission_by_name (dlg, "response");
+         return;
+         break;
+      default:
+         set_custom_colors (NULL);
+         break;
+   }
+   gtk_widget_destroy (GTK_WIDGET (dlg));
+}
+
 static void colors_click(GtkButton *button, gpointer user_data)
 {
-     GtkWidget *a,*b,*c,*d;
+     GtkWidget * dialog,*b,*c,*d;
      GtkWidget *cs;
      gint i;
      ConfigDialog *cd = CONFIG_DIALOG(user_data);
      GdkColor *ctable;
-     GtkAccelGroup* ag;
      GtkListStore *store;
      GtkTreeSelection *sel;
      GtkTreeIter iter;
      GtkTreeViewColumn *col1, *col2;
      GtkCellRenderer *rend1, *rend2;
-     ag = gtk_accel_group_new();
           
      ctable = g_malloc((LAST_COLOR-FIRST_CUSTOM_COLOR)*sizeof(GdkColor));
      for (i=FIRST_CUSTOM_COLOR; i<LAST_COLOR; i++)
@@ -288,14 +306,15 @@ static void colors_click(GtkButton *button, gpointer user_data)
 						  FALSE);
      gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION(cs), TRUE);
 
-     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-     gtk_window_set_modal(GTK_WINDOW(a),TRUE);
-     gtk_window_set_transient_for(GTK_WINDOW(a),GTK_WINDOW(cd));
-     gtk_window_set_title(GTK_WINDOW(a),_("Colors"));
-     gtk_window_set_resizable(GTK_WINDOW(a),FALSE);
-     b = gtk_vbox_new(FALSE,5);
+     dialog = gtk_dialog_new();
+     gtk_window_set_modal (GTK_WINDOW (dialog),TRUE);
+     gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (cd));
+     gtk_window_set_title (GTK_WINDOW (dialog),_("Colors"));
+     gtk_window_set_resizable (GTK_WINDOW (dialog),FALSE);
+
+     b = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+     gtk_box_set_spacing (GTK_BOX (b), 5);
      gtk_container_set_border_width(GTK_CONTAINER(b),5);
-     gtk_container_add(GTK_CONTAINER(a),b);
      c = gtk_hbox_new(FALSE,10);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_tree_view_new();
@@ -333,34 +352,14 @@ static void colors_click(GtkButton *button, gpointer user_data)
      g_free(ctable);
      d = cs;
      gtk_box_pack_start(GTK_BOX(c),d,TRUE,TRUE,0);
-     c = gtk_hbutton_box_new();
-     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     d = gtk_button_new_with_mnemonic(_("_Preview"));
-     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),store);
-     gtk_container_add(GTK_CONTAINER(c),d);
-     d = gtk_button_new_with_mnemonic(_("_OK"));
-     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(color_apply),store);
-     g_signal_connect(G_OBJECT(d),"clicked",G_CALLBACK(save_colors),
-			NULL);
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy),a);
-     gtk_container_add(GTK_CONTAINER(c),d);
-     gtk_widget_set_can_default(d,TRUE);
-     gtk_widget_grab_default(d);
 
-     d = gtk_button_new_with_mnemonic(_("_Cancel"));
-     gtk_widget_add_accelerator (d, "clicked", ag, GDK_Escape, 0,
-				 (GtkAccelFlags) 0);
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(set_custom_colors),
-			       NULL);
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy), a);
-     gtk_container_add(GTK_CONTAINER(c),d);
+     d = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Preview"), GTK_RESPONSE_APPLY);
+     d = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_OK"), GTK_RESPONSE_OK);
+     d = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
 
-     gtk_widget_show_all(a);
-     gtk_window_add_accel_group(GTK_WINDOW (a), ag);
+     g_signal_connect (dialog, "response",
+                       G_CALLBACK (colors_dlg_response), store);
+     gtk_widget_show_all(dialog);
 }
 
 static void tempdir_add_click(GtkButton *button, gpointer user_data)
