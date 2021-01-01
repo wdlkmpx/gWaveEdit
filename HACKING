@@ -11,16 +11,12 @@ gWaveEdit is written completely in C, and tries to be as portable as
 possible. There's no point in being more portable than GTK+ though, 
 since we depend on it. 
 
-The only hard dependency is GTK+, version 1.2 or newer. All other 
+The only hard dependency is GTK+. All other 
 dependencies should be autodetected by the configure script or at 
 runtime. In general I prefer calling separate programs, such as 
 Lame and SoX, rather than using libraries, because programs can be 
 portably detected at runtime so the user can install these programs 
 after installing gWaveEdit. 
-
-The philosophy is to never remove a feature. If a behavior is changed, 
-there should be an option to get the old back (unless it's a bug of 
-course).
 
 All settings should be configurable via the Preferences menu, there 
 should not be any hidden settings, except for "automatic" things like 
