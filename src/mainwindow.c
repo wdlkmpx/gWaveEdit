@@ -58,6 +58,9 @@
 #include "button_follow.xpm"
 #include "button_mixer.xpm"
 #include "button_bounce.xpm"
+#include "res/hzoom.xpm"
+#include "res/vzoom.xpm"
+#include "res/speed.xpm"
 
 /* #define SHOW_DEBUG_MENU */
 
@@ -2716,7 +2719,20 @@ static void mainwindow_init(Mainwindow *obj)
      GtkWidget *a,*b,*c;
      GtkRequisition req;
      GtkTargetEntry gte;
-     char *imgpath;
+     GdkPixbuf * pixbuf;
+     GdkPixbuf * hzoom_pix, * vzoom_pix, * speed_pix;
+
+     pixbuf = gdk_pixbuf_new_from_xpm_data (hzoom_xpm);
+     hzoom_pix = gdk_pixbuf_scale_simple (pixbuf, 20, 20, GDK_INTERP_BILINEAR);
+     g_object_unref (pixbuf);
+
+     pixbuf = gdk_pixbuf_new_from_xpm_data (vzoom_xpm);
+     vzoom_pix = gdk_pixbuf_scale_simple (pixbuf, 20, 20, GDK_INTERP_BILINEAR);
+     g_object_unref (pixbuf);
+
+     pixbuf = gdk_pixbuf_new_from_xpm_data (speed_xpm);
+     speed_pix = gdk_pixbuf_scale_simple (pixbuf, 20, 20, GDK_INTERP_BILINEAR);
+     g_object_unref (pixbuf);
 
      if (!window_geometry_stack_inited) {
 	  if (inifile_get_gboolean("useGeometry",FALSE))
@@ -2801,30 +2817,18 @@ static void mainwindow_init(Mainwindow *obj)
 
      gtk_table_attach(GTK_TABLE(b),obj->toolbar,0,1,0,1,GTK_SHRINK|GTK_FILL,GTK_FILL,0,0);
 
-     imgpath = get_image_path("vzoom.png");
-     c = gtk_image_new_from_file(imgpath ? imgpath : "");
-     if (imgpath) {
-        g_free(imgpath);
-        imgpath = NULL;
-     }
+     c = gtk_image_new_from_pixbuf (vzoom_pix);
+     g_object_unref (vzoom_pix);
      gtk_table_attach(GTK_TABLE(b),c,1,2,0,1,GTK_FILL,0,0,0);
      obj->vzoom_icon = c;
 
-     imgpath = get_image_path("hzoom.png");
-     c = gtk_image_new_from_file(imgpath ? imgpath : "");
-     if (imgpath) {
-        g_free(imgpath);
-        imgpath = NULL;
-     }
+     c = gtk_image_new_from_pixbuf (hzoom_pix);
+     g_object_unref (hzoom_pix);
      gtk_table_attach(GTK_TABLE(b),c,2,3,0,1,GTK_FILL,0,0,0);
      obj->hzoom_icon = c;
 
-     imgpath = get_image_path("speed.png");
-     c = gtk_image_new_from_file(imgpath ? imgpath : "");
-     if (imgpath) {
-        g_free(imgpath);
-        imgpath = NULL;
-     }
+     c = gtk_image_new_from_pixbuf (speed_pix);
+     g_object_unref (speed_pix);
      gtk_table_attach(GTK_TABLE(b),c,3,4,0,1,GTK_FILL,0,0,0);
      obj->speed_icon = c;
 
