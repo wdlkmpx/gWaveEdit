@@ -38,7 +38,5 @@ stamp-h1
 ar-lib
 ltmain.sh
 libtool
-
-po/gwaveedit.pot
 po/Makefile.in.in
 stamp-it
