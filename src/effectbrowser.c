@@ -196,8 +196,9 @@ static void effect_browser_remove_effect(EffectBrowser *eb)
      eb->current_dialog = -1;
 }
 
-static void effect_browser_destroy(GtkObject *obj)
+static void effect_browser_destroy (GObject *obj)
 {
+     // this is triggered by gtk_widget_destroy()
      EffectBrowser *eb = EFFECT_BROWSER(obj);
      guint i;
      effect_browser_remove_effect(eb);
@@ -207,8 +208,7 @@ static void effect_browser_destroy(GtkObject *obj)
 	       eb->dialogs[i] = NULL;
 	  }
      }
-     if (GTK_OBJECT_CLASS(effect_browser_parent_class)->destroy)
-          GTK_OBJECT_CLASS(effect_browser_parent_class)->destroy(obj);
+     G_OBJECT_CLASS(effect_browser_parent_class)->dispose(obj);
 }
 
 static void geom_push(EffectBrowser *eb)
@@ -233,9 +233,9 @@ static gint effect_browser_delete_event(GtkWidget *widget, GdkEventAny *event)
 
 static void effect_browser_class_init(EffectBrowserClass *klass)
 {
-     GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
+     GObjectClass *oc = G_OBJECT_CLASS(klass);
      GtkWidgetClass *wc = GTK_WIDGET_CLASS(klass);
-     oc->destroy = effect_browser_destroy;
+     oc->dispose = effect_browser_destroy;
      wc->delete_event = effect_browser_delete_event;
 }
 
