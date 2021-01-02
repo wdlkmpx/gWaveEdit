@@ -94,11 +94,6 @@ int main(int argc, char **argv)
      /* This must be the same for all locales */
      setlocale(LC_NUMERIC, "POSIX");
 
-    /* Disable gtk's ability to set the locale. */
-    /* If gtk is allowed to set the locale, then it will override the above */
-    /* setlocale for LC_NUMERIC. */
-     gtk_disable_setlocale();
-
 #ifdef ENABLE_NLS
      /* Setup message domain */
      bindtextdomain("gwaveedit", LOCALEDIR);
@@ -107,7 +102,6 @@ int main(int argc, char **argv)
 #endif
 
      floating_point_check();
-
 
      /* Check for "terminating" options that don't require starting GTK. */
      for (i=1; i<argc; i++) {
@@ -208,7 +202,7 @@ int main(int argc, char **argv)
      if (wavefile_count==0 && !session_dialog()) 
 	  gtk_widget_show(mainwindow_new());
 
-     /* gtk_idle_add(idle_work,NULL); */
+     /* g_idle_add(idle_work,NULL); */
 
      /* Add low priority idle function */
      mainloop_constant_source_add(idle_work,NULL,TRUE);
@@ -403,7 +397,7 @@ void set_custom_colors(GdkColor *c)
      memset(color_alloced,0,sizeof(color_alloced));
      for (i=FIRST_CUSTOM_COLOR; i<LAST_COLOR; i++) {
 	  if (gc_table[i] != NULL) {
-	       gdk_gc_unref(gc_table[i]);
+	       g_object_unref(gc_table[i]);
 	       gc_table[i] = NULL;
 	  }
      }

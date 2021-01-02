@@ -1251,7 +1251,7 @@ static gpointer mp3_get_settings(void)
      gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_button_new_with_label(_("OK"));
-     g_signal_connect_swapped(GTK_OBJECT(d),"clicked",
+     g_signal_connect_swapped (G_OBJECT(d),"clicked",
 			       G_CALLBACK(set_flag),
 			       &(mp3_get_settings_data.ok_flag));
      g_signal_connect_swapped(G_OBJECT(d),"clicked",

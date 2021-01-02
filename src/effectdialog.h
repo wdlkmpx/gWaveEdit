@@ -46,7 +46,7 @@
 
 typedef struct _EffectDialog {
 
-     GtkVBox vbox;
+     GtkBox vbox;
 
      /* Input area - subclasses can add their own widgets here. */
      GtkContainer *input_area;
@@ -63,7 +63,7 @@ typedef struct _EffectDialog {
 
 
 typedef struct _EffectDialogClass {
-     GtkVBoxClass vbox_class;
+     GtkBoxClass vbox_class;
 
      /* This signal is emitted when the OK or Apply button is pressed. Default
       * action: do nothing. Return TRUE if something failed. */

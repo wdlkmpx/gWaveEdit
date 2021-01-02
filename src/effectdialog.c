@@ -29,7 +29,7 @@
 #include "main.h"
 #include "um.h"
 
-G_DEFINE_TYPE(EffectDialog,effect_dialog,GTK_TYPE_VBOX)
+G_DEFINE_TYPE(EffectDialog,effect_dialog,GTK_TYPE_BOX)
 
 enum { APPLY_SIGNAL, SETUP_SIGNAL, TARGET_CHANGED_SIGNAL, LAST_SIGNAL };
 static guint effect_dialog_signals[LAST_SIGNAL] = { 0 };

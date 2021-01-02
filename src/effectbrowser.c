@@ -203,7 +203,7 @@ static void effect_browser_destroy(GtkObject *obj)
      effect_browser_remove_effect(eb);
      for (i=0; i<EFFECT_BROWSER_CACHE_SIZE; i++) {
 	  if (eb->dialogs[i] != NULL) {
-	       gtk_widget_unref(GTK_WIDGET(eb->dialogs[i]));
+	       g_object_unref(GTK_WIDGET(eb->dialogs[i]));
 	       eb->dialogs[i] = NULL;
 	  }
      }
