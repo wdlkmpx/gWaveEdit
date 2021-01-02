@@ -31,8 +31,8 @@
 #endif
 
 #include "rateconv.h"
-#include "soxdialog.h"
-#include "pipedialog.h"
+#include "effectdlg_sox.h"
+#include "effectdlg_pipe.h"
 #include "ringbuf.h"
 #include "um.h"
 #include "gettext.h"

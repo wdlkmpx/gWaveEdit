@@ -34,7 +34,7 @@
 #include <gtk/gtk.h>
 
 #include "main.h"
-#include "pipedialog.h"
+#include "effectdlg_pipe.h"
 #include "um.h"
 #include "inifile.h"
 #include "tempfile.h"

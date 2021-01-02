@@ -26,7 +26,7 @@
 #include "mainwindow.h"
 #include "effectdialog.h"
 #include "effectbrowser.h"
-#include "volumedialog.h"
+#include "effectdlg_volume.h"
 #include "float_box.h"
 #include "gettext.h"
 

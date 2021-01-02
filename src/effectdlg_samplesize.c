@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#include "samplesizedialog.h"
+#include "effectdlg_samplesize.h"
 #include "main.h"
 #include "effectbrowser.h"
 #include "gettext.h"

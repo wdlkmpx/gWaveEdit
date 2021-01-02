@@ -24,18 +24,18 @@
 
 #include <string.h>
 #include "effectbrowser.h"
-#include "volumedialog.h"
-#include "speeddialog.h"
-#include "sampleratedialog.h"
-#include "samplesizedialog.h"
-#include "combinechannelsdialog.h"
-#include "pipedialog.h"
+#include "effectdlg_volume.h"
+#include "effectdlg_speed.h"
+#include "effectdlg_samplerate.h"
+#include "effectdlg_samplesize.h"
+#include "effectdlg_combinechannels.h"
+#include "effectdlg_pipe.h"
 #include "inifile.h"
 #include "documentlist.h"
 #include "um.h"
 #include "gettext.h"
-#include "mapchannelsdialog.h"
-#include "sandwichdialog.h"
+#include "effectdlg_mapchannels.h"
+#include "effectdlg_sandwich.h"
 
 G_DEFINE_TYPE(EffectBrowser,effect_browser,GTK_TYPE_WINDOW)
 

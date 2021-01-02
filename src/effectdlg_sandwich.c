@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#include "sandwichdialog.h"
+#include "effectdlg_sandwich.h"
 #include "gettext.h"
 #include "effectbrowser.h"
 #include "um.h"

@@ -23,7 +23,7 @@
 
 #include <math.h>
 #include "inifile.h"
-#include "ladspadialog.h"
+#include "effectdlg_ladspa.h"
 #include "effectbrowser.h"
 #include "int_box.h"
 #include "float_box.h"

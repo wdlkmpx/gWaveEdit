@@ -29,8 +29,8 @@
 #include <gtk/gtk.h>
 
 #include "main.h"
-#include "soxdialog.h"
-#include "pipedialog.h"
+#include "effectdlg_sox.h"
+#include "effectdlg_pipe.h"
 #include "effectbrowser.h"
 #include "inifile.h"
 #include "um.h"

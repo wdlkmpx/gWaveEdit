@@ -24,11 +24,11 @@
 #include <math.h>
 #include <gtk/gtk.h>
 #include "mainwindow.h"
-#include "sampleratedialog.h"
+#include "effectdlg_samplerate.h"
 #include "chunk.h"
 #include "float_box.h"
-#include "soxdialog.h"
-#include "pipedialog.h"
+#include "effectdlg_sox.h"
+#include "effectdlg_pipe.h"
 #include "um.h"
 #include "inifile.h"
 #include "effectbrowser.h"

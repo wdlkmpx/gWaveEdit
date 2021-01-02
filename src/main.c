@@ -41,9 +41,9 @@
 #include "inifile.h"
 #include "um.h"
 #include "effectbrowser.h"
-#include "soxdialog.h"
+#include "effectdlg_sox.h"
 #include "statusbar.h"
-#include "ladspadialog.h"
+#include "effectdlg_ladspa.h"
 #include "gettext.h"
 #include "session.h"
 

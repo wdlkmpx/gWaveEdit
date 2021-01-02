@@ -26,7 +26,7 @@
 #include "mainwindow.h"
 #include "effectdialog.h"
 #include "effectbrowser.h"
-#include "speeddialog.h"
+#include "effectdlg_speed.h"
 #include "float_box.h"
 #include "gettext.h"
 

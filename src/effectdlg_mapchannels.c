@@ -24,7 +24,7 @@
 #include "gettext.h"
 
 #include "mainwindow.h"
-#include "mapchannelsdialog.h"
+#include "effectdlg_mapchannels.h"
 #include "effectbrowser.h"
 #include "main.h"
 

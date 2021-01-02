@@ -41,9 +41,9 @@
 #include "player.h"
 #include "sound.h"
 #include "effectbrowser.h"
-#include "soxdialog.h"
+#include "effectdlg_sox.h"
 #include "help.h"
-#include "ladspadialog.h"
+#include "effectdlg_ladspa.h"
 #include "gettext.h"
 
 #include "res/button_paste.xpm"

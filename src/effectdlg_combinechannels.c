@@ -22,7 +22,7 @@
 #include <config.h>
 
 #include "mainwindow.h"
-#include "combinechannelsdialog.h"
+#include "effectdlg_combinechannels.h"
 #include "effectbrowser.h"
 #include "main.h"
 
