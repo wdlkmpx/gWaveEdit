@@ -68,6 +68,7 @@ static Chunk *pipe_dialog_apply_proc(Chunk *chunk, StatusBar *bar,
 	  gtk_object_sink(GTK_OBJECT(r));
 	  r = NULL;
      }
+     g_free (cmd);
 
      return r;
 }

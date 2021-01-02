@@ -124,7 +124,7 @@ void history_box_rotate_history(HistoryBox *box)
      gchar *v;
      HistoryBoxHistory *hist=box->history;
      GList *l, *n, *glist;
-     v = g_strdup(history_box_get_value(box));
+     v = history_box_get_value(box);
      for (l=hist->entries; l!=NULL; l=n) {
 	  n = l->next;
 	  if (!strcmp(l->data,v)) {
