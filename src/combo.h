@@ -34,7 +34,6 @@
 
 typedef struct {
      GtkComboBoxText parent;
-     GList *strings;
      int max_request_width;
 } Combo;
 
