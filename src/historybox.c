@@ -63,7 +63,7 @@ static void save_history(HistoryBoxHistory *hist)
      GList *l;
      for (i=1,l=hist->entries; l!=NULL; i++,l=l->next) {
 	  g_snprintf(c,sizeof(c),"history_%s_%d",hist->name,i);
-	  inifile_set(c,l->data);
+	  inifile_set (c, (char *)l->data);
      }
      g_snprintf(c,sizeof(c),"history_%s_%d",hist->name,i);
      inifile_set(c,NULL);
@@ -121,34 +121,32 @@ void history_box_set_value(HistoryBox *box, gchar *value)
 
 void history_box_rotate_history(HistoryBox *box)
 {
-     gchar *v;
+     gchar * value;
      HistoryBoxHistory *hist=box->history;
-     GList *l, *n, *glist;
-     v = history_box_get_value(box);
-     for (l=hist->entries; l!=NULL; l=n) {
-	  n = l->next;
-	  if (!strcmp(l->data,v)) {
-	       g_free(l->data);
-	       hist->entries = g_list_remove_link(hist->entries,l);
-	       g_list_free(l);
-	  }
-     }
-     hist->entries = g_list_prepend(hist->entries, v);
-     l = g_list_nth(hist->entries, HISTORY_BOX_MAXENTRIES-1);
-     if (l && l->next) {
-	  g_assert(l->next->next == NULL);
-	  g_free(l->next->data);
-	  g_list_free_1(l->next);
-	  l->next = NULL;
+     GList *l;
+     value = history_box_get_value(box);
+
+     // entry might already exist
+     for (l = hist->entries; l; l = l->next)
+     {
+       if (strcmp (l->data, value) == 0) {
+           g_free (l->data);
+           hist->entries = g_list_delete_link (hist->entries,l);
+       }
      }
 
-     glist = hist->entries;
-     gtk_list_store_clear( GTK_LIST_STORE(gtk_combo_box_get_model( GTK_COMBO_BOX(box) )) );
-     while (glist) {
-       if (glist->data) {
-          gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(box), glist->data);
-       }
-       glist = glist->next;
+     // prepend to list and possibly remove last item
+     hist->entries = g_list_prepend (hist->entries, value);
+     if (g_list_length (hist->entries) >= HISTORY_BOX_MAXENTRIES) {
+        l = g_list_last (hist->entries);
+        g_free (l->data);
+        hist->entries = g_list_delete_link (hist->entries, l);
+     }
+
+     gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (box));
+     for (l = hist->entries; l; l = l->next)
+     {
+        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(box), (char*) l->data);
      }
 
      save_history(hist);
