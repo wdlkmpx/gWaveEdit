@@ -37,12 +37,10 @@
 G_DEFINE_TYPE(RecordDialog,record_dialog,GTK_TYPE_WINDOW)
 
 static struct {
-     GtkWindow *wnd;
      FormatSelector *fs;
      GtkEntry *name_entry;
      int old_choice;
      GtkWidget *preset_view;
-     GtkLabel *set_button_label;
      GtkButton *set_button_button;
 } other_dialog;
 
@@ -385,7 +383,7 @@ static gchar *other_dialog_get_name(void)
      return c;
 }
 
-static void other_dialog_ok(GtkButton *button, gpointer user_data)
+static void other_dialog_ok (gpointer user_data)
 {    
      RecordDialog *rd = RECORD_DIALOG(user_data);
      Dataformat df;
@@ -403,7 +401,7 @@ static void other_dialog_ok(GtkButton *button, gpointer user_data)
      g_free(c);
 }
 
-static void other_dialog_addpreset(GtkButton *button, gpointer user_data)
+static void other_dialog_addpreset (gpointer user_data)
 {
      gchar *name;
      Dataformat df;
@@ -420,12 +418,6 @@ static void other_dialog_addpreset(GtkButton *button, gpointer user_data)
      g_free(name);
 }
 
-static gboolean other_dialog_delete(GtkWidget *widget, GdkEvent *event,
-				    gpointer user_data)
-{
-     return FALSE;
-}
-
 static void other_dialog_name_changed(GtkEditable *editable, 
 				      gpointer user_data)
 {
@@ -440,15 +432,11 @@ static void other_dialog_name_changed(GtkEditable *editable,
 	       break;
      }
      if (l != NULL) {
-	  gtk_label_set_text(other_dialog.set_button_label,
-			     _("Update preset"));
-	  gtk_widget_set_sensitive(GTK_WIDGET(other_dialog.set_button_button),
-				   TRUE);
+      gtk_button_set_label (other_dialog.set_button_button, _("Update preset"));
+      gtk_widget_set_sensitive(GTK_WIDGET(other_dialog.set_button_button), TRUE);
      } else if (c != NULL) {
-	  gtk_label_set_text(other_dialog.set_button_label,
-			     _("Add preset"));
-	  gtk_widget_set_sensitive(GTK_WIDGET(other_dialog.set_button_button),
-				   TRUE);
+      gtk_button_set_label (other_dialog.set_button_button, _("Add preset"));
+      gtk_widget_set_sensitive(GTK_WIDGET(other_dialog.set_button_button), TRUE);
      } else {
 	  gtk_widget_set_sensitive(GTK_WIDGET(other_dialog.set_button_button),
 				   FALSE);
@@ -469,26 +457,38 @@ static void other_dialog_select_changed(GtkTreeSelection *sel,
      gtk_entry_set_text(other_dialog.name_entry, name);
 }
 
+static void
+other_format_dlg_response (GtkDialog * dlg, int response, gpointer user_data)
+{
+   switch (response)
+   {
+      case GTK_RESPONSE_OK: /* set format */
+         other_dialog_ok (user_data);
+         g_signal_stop_emission_by_name (dlg, "response");
+         return;
+      case GTK_RESPONSE_APPLY: /* Add/Update preset */
+         other_dialog_addpreset (user_data);
+         g_signal_stop_emission_by_name (dlg, "response");
+         return;
+   }
+   gtk_widget_destroy (GTK_WIDGET (dlg));
+}
+
 static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
 {
-     GtkWidget *a,*b,*c,*d,*e,*f;
-     GtkAccelGroup* ag;
-     GtkRequisition req;
-     static GtkWindowGroup *wg = NULL;
+     GtkWidget *b,*c,*d,*e,*f, * dialog;
      GtkTreeSelection *sel;
      GtkTreeViewColumn *col;
      GtkCellRenderer *renderer;
-    
-     ag = gtk_accel_group_new();
 
-     other_dialog.wnd = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
-     gtk_window_set_title(other_dialog.wnd,_("Custom format"));
-     if (wg == NULL) wg = gtk_window_group_new();
-     gtk_window_group_add_window(wg,other_dialog.wnd);
-     gtk_window_set_transient_for(other_dialog.wnd,GTK_WINDOW(rd));
+     dialog = gtk_dialog_new ();
+     gtk_window_set_title (GTK_WINDOW (dialog), _("Custom format"));
+     gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+     gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (rd));
+     gtk_window_set_skip_pager_hint (GTK_WINDOW (dialog), TRUE);
+     gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
 
      other_dialog.fs = FORMAT_SELECTOR(format_selector_new(TRUE));
-
      other_dialog.name_entry = GTK_ENTRY(gtk_entry_new());
 
      other_dialog.preset_view = gtk_tree_view_new();
@@ -500,12 +500,10 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
      sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(other_dialog.preset_view));
      gtk_tree_selection_set_mode(sel,GTK_SELECTION_SINGLE);
 
-     a = GTK_WIDGET(other_dialog.wnd);
-     gtk_container_set_border_width(GTK_CONTAINER(a),10);
-     g_signal_connect(G_OBJECT(a),"delete_event",
-			G_CALLBACK(other_dialog_delete),NULL);
-     b = gtk_vbox_new(FALSE,6);
-     gtk_container_add(GTK_CONTAINER(a),b);
+     gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+     b = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+     gtk_box_set_spacing (GTK_BOX (b), 5);
+
      c = gtk_hbox_new(FALSE,6);
      gtk_container_add(GTK_CONTAINER(b),c);
      d = gtk_vbox_new(FALSE,6);
@@ -520,12 +518,6 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
      gtk_label_set_line_wrap(GTK_LABEL(e),TRUE);
      gtk_box_pack_start(GTK_BOX(d),e,FALSE,FALSE,0);
 
-     /*
-     c = gtk_label_new(_("To add this format to the presets, enter a name "
-		       "below. Otherwise, leave it blank."));
-     gtk_label_set_line_wrap(GTK_LABEL(c),TRUE);     
-     gtk_container_add(GTK_CONTAINER(b),c);
-     */
      e = gtk_hbox_new(FALSE,4);
      gtk_box_pack_end(GTK_BOX(d),e,FALSE,FALSE,0);
      f = gtk_label_new(_("Name :"));
@@ -553,44 +545,21 @@ static void other_format_dialog(RecordFormatCombo *rfc, RecordDialog *rd)
 
      c = gtk_hseparator_new();
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     c = gtk_hbutton_box_new();
-     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     d = gtk_button_new_with_label(_("Set format"));
-     gtk_widget_add_accelerator (d, "clicked", ag, GDK_KP_Enter, 0, 
-				 (GtkAccelFlags) 0);
-     gtk_widget_add_accelerator (d, "clicked", ag, GDK_Return, 0, 
-				 (GtkAccelFlags) 0);
-     gtk_container_add(GTK_CONTAINER(c),d);
-     g_signal_connect(G_OBJECT(d),"clicked",
-			G_CALLBACK(other_dialog_ok),rd);
-     d = gtk_button_new_with_label(_("Add/Update preset"));
-     gtk_widget_set_sensitive(d,FALSE);
-     gtk_widget_size_request(d,&req);
-     gtk_widget_set_size_request(d,req.width,req.height);
-     gtk_container_add(GTK_CONTAINER(c),d);
-     g_signal_connect(G_OBJECT(d),"clicked",
-			G_CALLBACK(other_dialog_addpreset),rd);
-     other_dialog.set_button_button = GTK_BUTTON(d);
-     other_dialog.set_button_label = GTK_LABEL(gtk_bin_get_child(GTK_BIN(d)));
-     d = gtk_button_new_with_label(_("Close"));
-     gtk_widget_add_accelerator (d, "clicked", ag, GDK_Escape, 0, 
-				 (GtkAccelFlags) 0);
-     gtk_container_add(GTK_CONTAINER(c),d );
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy), a);
-     gtk_widget_show_all(a);
-     gtk_window_add_accel_group(GTK_WINDOW (a), ag);
 
-     g_signal_connect(G_OBJECT(other_dialog.wnd),"delete_event",
-			G_CALLBACK(other_dialog_delete),NULL);
+     d = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Set format"), GTK_RESPONSE_OK);
+     d = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Add preset"), GTK_RESPONSE_APPLY);
+     gtk_widget_set_sensitive (d, FALSE);
+     other_dialog.set_button_button = GTK_BUTTON (d);
+     d = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Close"), GTK_RESPONSE_CLOSE);
+
+     g_signal_connect (dialog, "response",
+                       G_CALLBACK (other_format_dlg_response), rd);
+     gtk_widget_show_all (dialog);
+
      g_signal_connect(sel,"changed",
                       G_CALLBACK(other_dialog_select_changed),NULL);
      g_signal_connect(G_OBJECT(other_dialog.name_entry),"changed",
-			G_CALLBACK(other_dialog_name_changed),rd);
-
-     g_signal_connect_object(rd, "destroy", G_CALLBACK(gtk_widget_destroy),
-			     other_dialog.wnd, G_CONNECT_SWAPPED);
+                      G_CALLBACK(other_dialog_name_changed),rd);
 }
 
 static void update_limit(RecordDialog *rd)
