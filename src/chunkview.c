@@ -161,29 +161,27 @@ static gint calc_x_noclamp(ChunkView *cv, off_t sample, off_t width)
 }
 
 
-static void chunk_view_update_image_main(ChunkView *cv, GdkDrawable *image,
-					 guint xs, guint xe)
+static void
+chunk_view_update_image_main (ChunkView *cv,
+                              cairo_t *cr , guint xs, guint xe)
 {
      guint i,j,y;
      gint w,h;
      GtkWidget *wid = GTK_WIDGET(cv);
+     GdkWindow *image = gtk_widget_get_window (wid);
      Document *d = cv->doc;
 
-     cairo_t *cr;
      GdkColor *color;
 
      w = wid->allocation.width;
      h = wid->allocation.height;
      if (cv->timescale) h-=font_height;
      if (xe < xs) return;
+
      /* Svart bakgrund */
-
-     cr = gdk_cairo_create (gtk_widget_get_window(wid));
-
      color = get_color (BACKGROUND);
      gdk_cairo_set_source_color (cr, color); // see also cairo_set_source_rgb()
-     //gdk_draw_rectangle( image, get_gc(BACKGROUND,wid), TRUE, xs, 0, 1+xe-xs,h);
-     cairo_rectangle (cr, xs, 0, 1+xe-xs, h);                 // x  y     w    h
+     cairo_rectangle (cr, xs, 0, 1+xe-xs, h);
      cairo_fill (cr);
 
      /* Om det inte finns någon sampling laddad, stanna här. */
@@ -208,8 +206,7 @@ static void chunk_view_update_image_main(ChunkView *cv, GdkDrawable *image,
 	       if (j >= xs) {
                color = get_color (SELECTION);
                gdk_cairo_set_source_color (cr, color);
-               //gdk_draw_rectangle( image, get_gc(SELECTION,wid),TRUE, i, 0, 1+j-i, h );
-               cairo_rectangle (cr,  i, 0, 1+j-i, h);                // x  y    w    h
+               cairo_rectangle (cr,  i, 0, 1+j-i, h);
                cairo_fill (cr);
 	       }
 	  }
@@ -218,13 +215,15 @@ static void chunk_view_update_image_main(ChunkView *cv, GdkDrawable *image,
      }
 
      /* Rita gråa streck */
+     color = get_color (BARS);
+     gdk_cairo_set_source_color (cr, color);
+     cairo_set_line_width (cr, 1.0);
+     cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
+
      j = h/d->chunk->format.channels;
-     for (i=0; i < (guint) d->chunk->format.channels; i++) {
-	  y = j/2 + i*j;	  
-        color = get_color (BARS);
-        gdk_cairo_set_source_color (cr, color);
-        // gdk_draw_line(image,get_gc(BARS,wid),   xs,y,xe,y); -> x1,y1,x2,y2
-        cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
+     for (i=0; i < (guint) d->chunk->format.channels; i++)
+     {
+        y = j/2 + i*j;
         cairo_move_to (cr, (double) xs, (double) y); // x1 y1
         cairo_line_to (cr, (double) xe, (double) y); // x2 y2
         cairo_stroke (cr);
@@ -234,8 +233,6 @@ static void chunk_view_update_image_main(ChunkView *cv, GdkDrawable *image,
      view_cache_draw_part(cv->cache, image, (xs==0)?0:xs-1, xe, h, 
 			  GTK_WIDGET(cv),
 			  cv->scale_factor);
-
-     cairo_destroy (cr);
 }
 
 struct draw_mark_data {
@@ -401,10 +398,13 @@ static gint chunk_view_expose(GtkWidget *widget, GdkEventExpose *event)
      struct draw_mark_data dd;
      gboolean expose_timescale=FALSE, expose_text=FALSE;
 
+     cairo_t * cr = gdk_cairo_create (gtk_widget_get_window (widget));
+
      /* printf("Expose: (%d,%d)+(%d,%d)\n",event->area.x,event->area.y,
 	event->area.width,event->area.height); */
-     chunk_view_update_image_main( cv, widget->window, event->area.x, 
-				   event->area.x + event->area.width - 1 );
+     chunk_view_update_image_main (cv, cr,
+                                   event->area.x, 
+                                   event->area.x + event->area.width - 1 );
 
      if (d == NULL) return FALSE;
 
@@ -446,6 +446,8 @@ static gint chunk_view_expose(GtkWidget *widget, GdkEventExpose *event)
      /* Draw the time scale */
      if (d->chunk && cv->timescale && expose_timescale) 
 	  draw_timescale( cv, event, expose_text );
+
+     cairo_destroy (cr);
      return FALSE;
 }
 
