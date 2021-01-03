@@ -560,7 +560,7 @@ static void config_dialog_init(ConfigDialog *cd)
 				 inifile_get_gboolean(INI_SETTING_BUFPOS,
 						      INI_SETTING_BUFPOS_DEFAULT));
 
-    w = gtk_button_new_with_label(_("_Settings"));
+    w = gtk_button_new_with_mnemonic (_("_Settings"));
     g_signal_connect(G_OBJECT(w),"clicked",
 		       G_CALLBACK(sound_settings_click),cd);
     gtk_widget_set_sensitive(w,sound_driver_has_preferences(NULL));
