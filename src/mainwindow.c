@@ -2913,7 +2913,7 @@ static void mainwindow_init(Mainwindow *obj)
      set_sensitive(obj->need_redo_items, FALSE);
 
      if (!geometry_stack_pop(&window_geometry_stack,NULL,GTK_WINDOW(obj)))
-	  gtk_window_set_default_size(GTK_WINDOW(obj),540,230);
+        gtk_window_set_default_size (GTK_WINDOW (obj), 640, 400);
 
      /* Setup drag'n'drop target */
      gte.target = "text/uri-list";
