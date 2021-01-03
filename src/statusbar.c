@@ -38,8 +38,7 @@ static int progress_count = 0;
 enum { PROGRESS_BEGIN_SIGNAL, PROGRESS_END_SIGNAL, LAST_SIGNAL };
 static guint status_bar_signals[LAST_SIGNAL] = { 0 };
 
-static void status_bar_expose(GtkWidget *widget, GdkEventExpose *event, 
-			    gpointer user_data)
+static gboolean status_bar_expose (GtkWidget * widget, GdkEventExpose *event, gpointer user_data)
 {
      StatusBar *bar = STATUSBAR(user_data);
      cairo_t *cr;
@@ -48,7 +47,9 @@ static void status_bar_expose(GtkWidget *widget, GdkEventExpose *event,
      if (bar->mode == 1) {
         color = get_color (PROGRESS);
         cr = gdk_cairo_create (gtk_widget_get_window(widget));
-        gdk_cairo_set_source_color (cr, color);
+        cairo_set_source_rgb (cr, color->red   / 65536.0,
+                                  color->green / 65536.0,
+                                  color->blue  / 65536.0);
         cairo_rectangle (cr,
                          widget->allocation.x,
                          event->area.y,
@@ -57,11 +58,12 @@ static void status_bar_expose(GtkWidget *widget, GdkEventExpose *event,
         cairo_fill (cr);
         cairo_destroy (cr);
      }
+     return FALSE;
 }
 
 static void status_bar_init(StatusBar *sb)
 {
-     GtkObject *gtkobj = GTK_OBJECT(sb);
+     GtkWidget *gtkobj = GTK_WIDGET (sb);
      GtkContainer *cont = GTK_CONTAINER(sb);
      GtkFixed *fix = GTK_FIXED(sb);
      GtkWidget *da;
@@ -69,7 +71,7 @@ static void status_bar_init(StatusBar *sb)
      da = gtk_label_new("");
      sb->da = da;
      g_signal_connect(G_OBJECT(da),"expose_event",
-			G_CALLBACK(status_bar_expose),gtkobj);
+                      G_CALLBACK (status_bar_expose), gtkobj);
      gtk_fixed_put(fix,da,0,0);
 
      sb->mode = 2;
