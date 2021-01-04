@@ -7,8 +7,7 @@ Run:
 - make install
 
 # Requirements:
-- gtk >= 2.24
-- glib >= 2.32
+- gtk >= 2.14
 - lame 3.93+
 
 # Known bugs in gWaveEdit:
