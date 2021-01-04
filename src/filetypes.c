@@ -1125,10 +1125,6 @@ static struct {
      GList *preset_list, *bitrate_list;
 } mp3_get_settings_data;
 
-static void set_flag(gboolean *flag) {
-     *flag = TRUE;
-}
-
 static void mp3_get_settings_type_changed(Combo *obj, gpointer user_data)
 {
      int i;
@@ -1144,6 +1140,16 @@ static void mp3_get_settings_type_changed(Combo *obj, gpointer user_data)
 	  combo_set_items(mp3_get_settings_data.subtype_combo,
 			  mp3_get_settings_data.bitrate_list, 5);
      
+}
+
+static void
+mp3_get_settings_response (GtkDialog * dlg, int response, gpointer user_data)
+{
+   if (response == GTK_RESPONSE_OK) {
+      mp3_get_settings_data.ok_flag = TRUE;
+   }
+   gtk_widget_destroy (GTK_WIDGET (dlg));
+   mp3_get_settings_data.destroyed_flag = TRUE;
 }
 
 static gpointer mp3_get_settings(void)
@@ -1167,7 +1173,7 @@ static gpointer mp3_get_settings(void)
      gchar *custom_arg = NULL;
 
      GList *l; 
-     GtkWidget *a,*b,*c,*d;
+     GtkWidget *b,*c,*d, * dialog;
 
      gchar *p;
      guint i,j;
@@ -1205,15 +1211,16 @@ static gpointer mp3_get_settings(void)
 
      /* Create the window */
 
-     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-     gtk_window_set_title(GTK_WINDOW(a),_("MP3 Preferences"));
-     gtk_window_set_modal(GTK_WINDOW(a),TRUE);
-     g_signal_connect_swapped(G_OBJECT(a),"destroy",
-			       G_CALLBACK(set_flag),
-			       &(mp3_get_settings_data.destroyed_flag));
-     b = gtk_vbox_new(FALSE,6);
-     gtk_container_add(GTK_CONTAINER(a),b);
-     gtk_container_set_border_width(GTK_CONTAINER(b),6);
+     //a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+     dialog = gtk_dialog_new ();
+     gtk_window_set_title (GTK_WINDOW (dialog), _("MP3 Preferences"));
+     gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+     gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+     gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+
+     b = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+     gtk_box_set_spacing (GTK_BOX (b), 6);
+
      c = gtk_hbox_new(FALSE,6);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_label_new(_("Encoding type: "));
@@ -1247,28 +1254,14 @@ static gpointer mp3_get_settings(void)
      c = gtk_check_button_new_with_label(_("Use this setting by default"));
      mp3_get_settings_data.set_default = GTK_TOGGLE_BUTTON(c);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     c = gtk_hbutton_box_new();
-     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
-     gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
-     d = gtk_button_new_with_label(_("OK"));
-     g_signal_connect_swapped (G_OBJECT(d),"clicked",
-			       G_CALLBACK(set_flag),
-			       &(mp3_get_settings_data.ok_flag));
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy), a);
-     gtk_container_add(GTK_CONTAINER(c),d);
-     d = gtk_button_new_with_label(_("Cancel"));
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy), a);
-     gtk_container_add(GTK_CONTAINER(c),d);
+
      c = gtk_hseparator_new();
      gtk_box_pack_end(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_show_all(a);
-     
-     gtk_object_ref(GTK_OBJECT(mp3_get_settings_data.type_combo));
-     gtk_object_ref(GTK_OBJECT(mp3_get_settings_data.subtype_combo));
-     gtk_object_ref(GTK_OBJECT(mp3_get_settings_data.arg_entry));
-     gtk_object_ref(GTK_OBJECT(mp3_get_settings_data.set_default));
+
+     gtk_dialog_add_button (GTK_DIALOG (dialog), _("_OK"), GTK_RESPONSE_OK);
+     gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
+     g_signal_connect (dialog, "response", G_CALLBACK (mp3_get_settings_response), NULL);
+     gtk_widget_show_all (dialog);
 
      mp3_get_settings_data.destroyed_flag = FALSE;
      mp3_get_settings_data.ok_flag = FALSE;
@@ -1279,6 +1272,7 @@ static gpointer mp3_get_settings(void)
      else
 	  gtk_entry_set_text(mp3_get_settings_data.arg_entry, custom_arg);
 
+     // wait for the dialog to close
      while (!mp3_get_settings_data.destroyed_flag)
 	  mainloop();
 
@@ -1312,14 +1306,8 @@ static gpointer mp3_get_settings(void)
 	  }	  
      } else p = NULL;
 
-     gtk_object_unref(GTK_OBJECT(mp3_get_settings_data.type_combo));
-     gtk_object_unref(GTK_OBJECT(mp3_get_settings_data.subtype_combo));
-     gtk_object_unref(GTK_OBJECT(mp3_get_settings_data.arg_entry));
-     gtk_object_unref(GTK_OBJECT(mp3_get_settings_data.set_default));
-     
-     g_list_free(mp3_get_settings_data.preset_list);
-     g_list_foreach(mp3_get_settings_data.bitrate_list,(GFunc)g_free,NULL);
-     g_list_free(mp3_get_settings_data.bitrate_list);
+     g_list_free (mp3_get_settings_data.preset_list);
+     g_list_free_full (mp3_get_settings_data.bitrate_list, g_free);
 
      return p;
 }
