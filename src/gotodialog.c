@@ -27,11 +27,25 @@
 #include "main.h"
 #include "gettext.h"
 
-G_DEFINE_TYPE (GotoDialog,
-               goto_dialog,
-               GTK_TYPE_DIALOG)
+#define GOTO_DIALOG_POS_AFTER_BEG_FILE 0
+#define GOTO_DIALOG_POS_AFTER_END_FILE 1
+#define GOTO_DIALOG_POS_AFTER_CURSOR 2
+#define GOTO_DIALOG_POS_AFTER_BEG_SEL 3
+#define GOTO_DIALOG_POS_AFTER_END_SEL 4
 
-static gboolean goto_dialog_apply(GotoDialog *gd)
+#define GOTO_DIALOG_UNIT_SECONDS 0
+#define GOTO_DIALOG_UNIT_SAMPLES 1
+
+typedef struct _GotoDialog_data
+{
+   Mainwindow *mw;
+   Floatbox *offset;
+   GtkToggleButton *relbuttons[5];
+   GtkToggleButton *unitbuttons[2];
+} GotoDialog_data;
+
+
+static gboolean goto_dialog_apply(GotoDialog_data *gd)
 {
      off_t p=0,q;
      float f;
@@ -86,6 +100,7 @@ static gboolean goto_dialog_apply(GotoDialog *gd)
 
 static void goto_dlg_response (GtkDialog * dlg, int response, gpointer user_data)
 {
+   GotoDialog_data * gd = (GotoDialog_data *) user_data;
    if (response == GTK_RESPONSE_OK) {
       if (goto_dialog_apply (user_data) == TRUE) {
          g_signal_stop_emission_by_name (dlg, "response");
@@ -97,22 +112,27 @@ static void goto_dlg_response (GtkDialog * dlg, int response, gpointer user_data
       return;
    }
    gtk_widget_destroy (GTK_WIDGET (dlg));
+   g_free (gd);
 }
 
-static void goto_dialog_init(GotoDialog *gd)
+GtkWidget * goto_dialog_new (Mainwindow *mw)
 {
-     GtkWidget *a,*b,*c, * frame;
+     GtkWidget *a,*b,*c, * frame, * dialog;
      guint32 i;
+     GotoDialog_data * gd = malloc (sizeof(GotoDialog_data));
+     memset (gd, 0, sizeof(GotoDialog_data));
+     gd->mw = mw;
 
-     gtk_window_set_title(GTK_WINDOW(gd),_("Position cursor"));
+     dialog = gtk_dialog_new ();
+     gtk_window_set_title (GTK_WINDOW (dialog),_("Position cursor"));
      if (gd->mw) {
-        gtk_window_set_modal (GTK_WINDOW (gd), TRUE);
-        gtk_window_set_transient_for (GTK_WINDOW (gd), GTK_WINDOW (gd->mw));
-        gtk_window_set_position (GTK_WINDOW (gd), GTK_WIN_POS_CENTER_ON_PARENT);
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (gd->mw));
+        gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ON_PARENT);
      }
-     gtk_container_set_border_width(GTK_CONTAINER(gd),5);
+     gtk_container_set_border_width (GTK_CONTAINER (dialog),5);
 
-     a = gtk_dialog_get_content_area (GTK_DIALOG (gd));
+     a = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
      frame = gtk_frame_new (NULL);
      gtk_box_pack_start (GTK_BOX (a), frame, TRUE, TRUE, 0);
 
@@ -173,23 +193,14 @@ static void goto_dialog_init(GotoDialog *gd)
      if (i>2) i=0;
      gtk_toggle_button_set_active(gd->unitbuttons[i],TRUE);
 
-     c = gtk_dialog_add_button (GTK_DIALOG (gd), _("OK"), GTK_RESPONSE_OK);
+     c = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_OK"), GTK_RESPONSE_OK);
      gtk_widget_grab_focus (c);
-     c = gtk_dialog_add_button (GTK_DIALOG (gd), _("Apply"), GTK_RESPONSE_APPLY);
-     c = gtk_dialog_add_button (GTK_DIALOG (gd), _("Close"), GTK_RESPONSE_CLOSE);
+     c = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Apply"), GTK_RESPONSE_APPLY);
+     c = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Close"), GTK_RESPONSE_CLOSE);
 
-     g_signal_connect (gd, "response", G_CALLBACK (goto_dlg_response), gd);
-     gtk_widget_show_all (GTK_WIDGET (gd));
+     g_signal_connect (dialog, "response", G_CALLBACK (goto_dlg_response), gd);
+     gtk_widget_show_all (GTK_WIDGET (dialog));
+
+     return (dialog);
 }
 
-static void goto_dialog_class_init(GotoDialogClass *klass)
-{
-}
-
-GtkWidget *goto_dialog_new(Mainwindow *mw)
-{     
-     GtkWidget *w;
-     w = g_object_new(GOTO_DIALOG_TYPE, NULL);
-     GOTO_DIALOG(w)->mw = mw;
-     return w;
-}
