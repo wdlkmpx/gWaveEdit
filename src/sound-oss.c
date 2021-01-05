@@ -290,19 +290,20 @@ static int oss_output_flush(gpointer ts, GTimeVal *tv, gpointer ud)
 #endif
    /* Calculate the number of bytes to write (into u) */
    u = ringbuf_available(oss_output_buffer);
-   if (u > (guint) info.fragsize)
+   if (u > (guint) info.fragsize) {
       u -= u % info.fragsize;
-      u = MIN(u, (guint) (info.fragments*info.fragsize));
-      if (u == 0) {
-         return 50;
-      }
-      /* Write it out! */
-      c = g_malloc(u);
-      ringbuf_dequeue(oss_output_buffer, c, u);
-      i = oss_errdlg_write(oss_fd, c, u);
-      g_free(c);
-      return 10;
    }
+   u = MIN(u, (guint) (info.fragments*info.fragsize));
+   if (u == 0) {
+      return 50;
+   }
+   /* Write it out! */
+   c = g_malloc(u);
+   ringbuf_dequeue(oss_output_buffer, c, u);
+   i = oss_errdlg_write(oss_fd, c, u);
+   g_free(c);
+   return 10;
+}
 
 static gboolean oss_output_want_data(void)
 {
