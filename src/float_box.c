@@ -26,7 +26,6 @@
 #include "um.h"
 #include "float_box.h"
 #include "main.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(Floatbox,floatbox,GTK_TYPE_ENTRY)
 

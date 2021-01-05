@@ -24,7 +24,6 @@
 #include "main.h"
 #include "formatselector.h"
 #include "inifile.h"
-#include "gettext.h"
 
 #define DEFAULT_CHANS 2
 #define DEFAULT_RATE 44100

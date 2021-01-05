@@ -19,21 +19,17 @@
  */
 
 
-#include <config.h>
-#include <gdk/gdkkeysyms.h>
-
+#include "main.h"
 #include <math.h>
 
 #include "sound.h"
 #include "inifile.h"
-#include "main.h"
 #include "configdialog.h"
 #include "um.h"
 #include "mainwindow.h"
 #include "tempfile.h"
 #include "player.h"
 #include "rateconv.h"
-#include "gettext.h"
 #include "filetypes.h"
 
 G_DEFINE_TYPE (ConfigDialog, config_dialog, GTK_TYPE_DIALOG)

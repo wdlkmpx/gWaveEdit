@@ -26,7 +26,6 @@
 #include "main.h"
 #include "gtkfiles.h"
 #include "inifile.h"
-#include "gettext.h"
 
 static GHashTable *settings;
 static gchar *ininame;

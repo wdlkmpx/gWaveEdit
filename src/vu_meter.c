@@ -19,11 +19,9 @@
  */
 
 
-#include <config.h>
+#include "main.h"
 
 #include <math.h>
-
-#include "main.h"
 #include "vu_meter.h"
 
 G_DEFINE_TYPE(VuMeter,vu_meter,GTK_TYPE_DRAWING_AREA)

@@ -29,7 +29,6 @@
 #include <locale.h>
 #include "um.h"
 #include "ladspacore.h"
-#include "gettext.h"
 
 static GHashTable *effect_list;
 

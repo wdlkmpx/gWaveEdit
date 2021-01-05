@@ -31,7 +31,6 @@
 #include "um.h"
 #include "int_box.h"
 #include "formatselector.h"
-#include "gettext.h"
 #include "mainloop.h"
 
 G_DEFINE_TYPE(RecordDialog,record_dialog,GTK_TYPE_WINDOW)

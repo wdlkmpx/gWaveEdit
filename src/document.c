@@ -25,7 +25,6 @@
 #include "document.h"
 #include "filetypes.h"
 #include "player.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(Document,document,GTK_TYPE_OBJECT)
 

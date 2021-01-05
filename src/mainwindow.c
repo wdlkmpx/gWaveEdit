@@ -44,7 +44,6 @@
 #include "effectdlg_sox.h"
 #include "help.h"
 #include "effectdlg_ladspa.h"
-#include "gettext.h"
 
 #include "res/button_paste.xpm"
 #include "res/button_pasteover.xpm"

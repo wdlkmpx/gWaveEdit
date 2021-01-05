@@ -37,12 +37,9 @@
 #include <sys/time.h>
 #include <sys/types.h>
 
-#include <gtk/gtk.h>
-
 #include "ringbuf.h"
 #include "um.h"
 #include "main.h"
-#include "gettext.h"
 #include "mainloop.h"
 
 #define OSS_PCMFILE_PLAYBACK "OSSdevice"

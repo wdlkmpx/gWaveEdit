@@ -24,13 +24,28 @@
 #ifndef MAIN_H_INCLUDED
 #define MAIN_H_INCLUDED
 
+#include <config.h>
 #include <stdio.h>
-#include <gtk/gtk.h>
-#include "gtkcompat.h"
 #include <sys/time.h>
 #include <sys/types.h>
 #include <time.h>
 #include <string.h>
+#include "gtkcompat.h"
+
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x) gettext(x)
+#define N_(x) (x)
+#else
+#define _(x) (x)
+#define N_(x) (x)
+#define setlocale(cat,locale)
+#define bindtextdomain(Domainname,Dirname)
+#define bind_textdomain_codeset(Domainname,Codeset)
+#define textdomain(Domainname)
+#endif
+
 
 /* Global stuff */
 #define PROGRAM_VERSION_STRING PACKAGE_NAME " " VERSION

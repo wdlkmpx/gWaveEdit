@@ -33,7 +33,6 @@
 #include "inifile.h"
 #include "effectbrowser.h"
 #include "rateconv.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(SamplerateDialog,samplerate_dialog,EFFECT_DIALOG_TYPE)
 

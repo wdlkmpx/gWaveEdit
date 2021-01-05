@@ -32,7 +32,6 @@
 
 #include "datasource.h"
 #include "tempfile.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(Datasource,datasource,GTK_TYPE_OBJECT)
 

@@ -19,7 +19,6 @@
  */
 
 #include <alsa/asoundlib.h>
-#include "gettext.h"
 
 /* #define ALSADEBUG */
 

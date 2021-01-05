@@ -20,15 +20,12 @@
  */
 
 
-#include <config.h>
-
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
 #include <math.h>
 #include <sys/stat.h>
-#include <gtk/gtk.h>
 #include "gtkfiles.h"
 #include "um.h"
 #include "chunk.h"
@@ -38,7 +35,6 @@
 #include "rawdialog.h"
 #include "tempfile.h"
 #include "rateconv.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(Chunk,chunk,GTK_TYPE_OBJECT)
 

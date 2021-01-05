@@ -22,13 +22,11 @@
 #include <config.h>
 
 #include <math.h>
-#include <gtk/gtk.h>
 #include "mainwindow.h"
 #include "effectdialog.h"
 #include "effectbrowser.h"
 #include "effectdlg_speed.h"
 #include "float_box.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(SpeedDialog,speed_dialog,EFFECT_DIALOG_TYPE)
 

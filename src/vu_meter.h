@@ -22,8 +22,6 @@
 #ifndef VU_METER_H_INCLUDED
 #define VU_METER_H_INCLUDED
 
-#include <gtk/gtk.h>
-
 #define VU_METER_TYPE          (vu_meter_get_type ())
 #define VU_METER(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), VU_METER_TYPE, VuMeter))
 #define IS_VU_METER(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), VU_METER_TYPE))

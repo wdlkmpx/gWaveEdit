@@ -19,8 +19,6 @@
  */
 
 
-#include <config.h>
-
 #include "combo.h"
 
 G_DEFINE_TYPE(Combo,combo,GTK_TYPE_COMBO_BOX_TEXT)

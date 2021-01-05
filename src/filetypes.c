@@ -35,7 +35,6 @@
 #include "filetypes.h"
 #include "tempfile.h"
 #include "combo.h"
-#include "gettext.h"
 
 #define MAX_REAL_SIZE inifile_get_guint32(INI_SETTING_REALMAX,INI_SETTING_REALMAX_DEFAULT)
 

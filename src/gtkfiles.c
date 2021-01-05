@@ -32,7 +32,6 @@
 #include "main.h"
 #include "mainloop.h"
 #include "inifile.h"
-#include "gettext.h"
 
 gboolean report_write_errors = TRUE;
 

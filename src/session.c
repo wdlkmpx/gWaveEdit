@@ -32,7 +32,6 @@
 #include "inifile.h"
 #include "um.h"
 #include "tempfile.h"
-#include "gettext.h"
 #include "document.h"
 #include "mainloop.h"
 

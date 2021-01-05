@@ -27,7 +27,6 @@
 #include <sys/audio.h>
 #include <sys/time.h>
 #include <sys/types.h>
-#include "gettext.h"
 
 /* Constant for output endian-ness */
 /* IS_BIGENDIAN = same as CPU, TRUE = Always big endian, 

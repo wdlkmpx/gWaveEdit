@@ -25,7 +25,6 @@
 #include "gotodialog.h"
 #include "inifile.h"
 #include "main.h"
-#include "gettext.h"
 
 #define GOTODLG_POS_AFTER_BEG_FILE 0
 #define GOTODLG_POS_AFTER_END_FILE 1

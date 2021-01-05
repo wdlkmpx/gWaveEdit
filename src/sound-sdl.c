@@ -22,10 +22,6 @@
 //     https://lazyfoo.net/tutorials/SDL/34_audio_recording/index.php
 //     https://stackoverflow.com/questions/42990071/recording-microphone-with-sdl2-gets-delayed-by-2-seconds
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <gtk/gtk.h>
-
 #ifdef HAVE_SDL2
 #include "SDL2/SDL.h"
 #else
@@ -34,7 +30,6 @@
 
 #include "sound.h" 
 #include "ringbuf.h"
-#include "gettext.h"
 
 // ==============================================================
 

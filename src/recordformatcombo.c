@@ -22,7 +22,6 @@
 #include <config.h>
 
 #include "recordformatcombo.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(RecordFormatCombo,record_format_combo,COMBO_TYPE)
 

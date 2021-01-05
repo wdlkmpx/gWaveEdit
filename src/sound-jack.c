@@ -25,7 +25,6 @@
 #include <jack/ringbuffer.h>
 
 #include "int_box.h"
-#include "gettext.h"
 
 /* All variables/functions prefixed with mhjack_ since the jack library
  * already uses the jack_ prefix */

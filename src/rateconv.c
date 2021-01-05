@@ -35,7 +35,6 @@
 #include "effectdlg_pipe.h"
 #include "ringbuf.h"
 #include "um.h"
-#include "gettext.h"
 
 struct driver_data {
      const gchar *name;

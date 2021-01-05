@@ -19,17 +19,14 @@
  */
 
 
-#include <config.h>
+#include "main.h"
 
-#include <glib.h>
 #include "inifile.h"
 #include "sound.h"
 #include "player.h"
-#include "main.h"
 #include "um.h"
 #include "rateest.h"
 #include "rateconv.h"
-#include "gettext.h"
 #include "mainloop.h"
 
 Dataformat player_fallback_format = { DATAFORMAT_PCM, 44100, 2, 2, 4, TRUE, 

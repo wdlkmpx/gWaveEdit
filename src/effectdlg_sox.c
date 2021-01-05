@@ -34,7 +34,6 @@
 #include "effectbrowser.h"
 #include "inifile.h"
 #include "um.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(SoxDialog,sox_dialog,EFFECT_DIALOG_TYPE)
 

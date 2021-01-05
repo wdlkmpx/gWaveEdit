@@ -39,7 +39,6 @@
 #include "inifile.h"
 #include "tempfile.h"
 #include "effectbrowser.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(PipeDialog,pipe_dialog,EFFECT_DIALOG_TYPE)
 

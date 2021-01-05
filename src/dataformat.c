@@ -30,7 +30,6 @@
 #include "dataformat.h"
 #include "inifile.h"
 #include "main.h"
-#include "gettext.h"
 
 Dataformat dataformat_sample_t,dataformat_single;
 gboolean ieee_le_compatible,ieee_be_compatible;

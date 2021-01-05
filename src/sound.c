@@ -18,14 +18,11 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
-
-#include <config.h>
+#include "main.h"
 
 #include "sound.h"
 #include "inifile.h"
-#include "main.h"
 #include "um.h"
-#include "gettext.h"
 #include "mainloop.h"
 
 gboolean output_byteswap_flag;

@@ -21,7 +21,6 @@
 
 #include <config.h>
 
-#include "gettext.h"
 
 #include "mainwindow.h"
 #include "effectdlg_mapchannels.h"

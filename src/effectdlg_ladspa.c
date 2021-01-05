@@ -29,7 +29,6 @@
 #include "float_box.h"
 #include "um.h"
 #include "combo.h"
-#include "gettext.h"
 
 static gchar *first_effect = NULL;
 

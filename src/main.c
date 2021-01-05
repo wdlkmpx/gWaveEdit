@@ -30,7 +30,6 @@
 #include <locale.h>
 #include <signal.h>
 #include <ctype.h>
-#include <gtk/gtk.h>
 #include "mainloop.h"
 #include "mainwindow.h"
 #include "datasource.h"
@@ -44,7 +43,6 @@
 #include "effectdlg_sox.h"
 #include "statusbar.h"
 #include "effectdlg_ladspa.h"
-#include "gettext.h"
 #include "session.h"
 
 #ifdef HAVE_SCHED_H

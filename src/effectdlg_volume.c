@@ -28,7 +28,6 @@
 #include "effectbrowser.h"
 #include "effectdlg_volume.h"
 #include "float_box.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(VolumeDialog,volume_dialog,EFFECT_DIALOG_TYPE)
 

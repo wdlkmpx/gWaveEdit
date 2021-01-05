@@ -20,15 +20,11 @@
 
 #include <stdio.h>
 #include <sys/time.h>
-
-#include <gtk/gtk.h>
-
 #include <portaudio.h>
 
 #include "ringbuf.h"
 #include "sound.h"
 #include "main.h"
-#include "gettext.h"
 
 static struct {
      gboolean delay_time_set;

@@ -19,14 +19,10 @@
  */
 
 
-#include <config.h>
-
 #include <stdlib.h>
-#include <gtk/gtk.h>
 #include "um.h"
 #include "int_box.h"
 #include "main.h"
-#include "gettext.h"
 
 G_DEFINE_TYPE(Intbox,intbox,GTK_TYPE_ENTRY)
 

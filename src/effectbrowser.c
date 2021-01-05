@@ -33,7 +33,6 @@
 #include "inifile.h"
 #include "documentlist.h"
 #include "um.h"
-#include "gettext.h"
 #include "effectdlg_mapchannels.h"
 #include "effectdlg_sandwich.h"
 

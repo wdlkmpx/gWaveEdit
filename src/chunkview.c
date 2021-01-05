@@ -19,10 +19,6 @@
  */
 
 
-#include <config.h>
-
-
-
 #include <math.h>
 #include "chunkview.h"
 #include "main.h"

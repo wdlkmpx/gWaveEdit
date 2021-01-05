@@ -24,7 +24,6 @@
 #include "effectdlg_samplesize.h"
 #include "main.h"
 #include "effectbrowser.h"
-#include "gettext.h"
 #include "um.h"
 
 G_DEFINE_TYPE(SamplesizeDialog,samplesize_dialog,EFFECT_DIALOG_TYPE)
