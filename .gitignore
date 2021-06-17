@@ -30,7 +30,6 @@ stamp-h1
 
 /po/en@boldquot.header
 /po/en@quot.header
-/po/Makefile.in.in
 /po/Makevars.template
 /po/POTFILES
 /po/Rules-quot
@@ -38,5 +37,4 @@ stamp-h1
 ar-lib
 ltmain.sh
 libtool
-po/Makefile.in.in
 stamp-it

@@ -1,26 +1,17 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([gWaveEdit],[1.4.25pre],[https://github.com/wdlkmpx/gwaveedit])
-
-AC_PREREQ([2.60])
-AC_CANONICAL_HOST
-AC_CANONICAL_TARGET
-
+AC_INIT([gWaveEdit],[1.4.25pre],[])
+AC_CONFIG_AUX_DIR([autoconf])
+AC_CONFIG_MACRO_DIR([autoconf-m4])
 AM_INIT_AUTOMAKE([1.10 -Wall foreign])
+
 AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_MACRO_DIR([m4])
+AM_GNU_GETTEXT([external])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 m4_ifdef([AM_MAINTAINER_MODE], [AM_MAINTAINER_MODE])
 
-dnl Check for libintl
-AM_GNU_GETTEXT([external])
-
-m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 LT_INIT
-
-# Init intltool
-IT_PROG_INTLTOOL
 
 # Set gettext package name
 GETTEXT_PACKAGE=gwaveedit
@@ -30,7 +21,6 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 # Add the languages which your application supports here.
 ALL_LINGUAS="ru sv fr es de zh_CN it pl"
 AC_SUBST(ALL_LINGUAS)
-AM_GLIB_GNU_GETTEXT
 
 # Various options
 
