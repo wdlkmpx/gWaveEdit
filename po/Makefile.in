@@ -1,0 +1,94 @@
+
+GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+@SET_MAKE@
+
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+datarootdir = @datarootdir@
+datadir = @datadir@
+localedir = @localedir@
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+
+GMSGFMT = @GMSGFMT@
+MSGFMT = @MSGFMT@
+#MSGFMT_OPTS = -c
+XGETTEXT = @XGETTEXT@
+MSGMERGE = msgmerge
+
+MOFILES = de.mo es.mo fr.mo it.mo pl.mo ru.mo sv.mo zh_CN.mo
+LINGUAS = de es fr it pl ru sv zh_CN
+POTFILES = ../src/chunk.c ../src/configdialog.c ../src/dataformat.c ../src/datasource.c ../src/document.c ../src/effectbrowser.c ../src/effectdlg_ladspa.c ../src/effectdlg_mapchannels.c ../src/effectdlg_pipe.c ../src/effectdlg_samplerate.c ../src/effectdlg_samplesize.c ../src/effectdlg_sandwich.c ../src/effectdlg_sox.c ../src/effectdlg_speed.c ../src/effectdlg_volume.c ../src/filetypes.c ../src/float_box.c ../src/formatselector.c ../src/gotodialog.c ../src/gtkfiles.c ../src/help.c ../src/inifile.c ../src/int_box.c ../src/ladspacore.c ../src/main.c ../src/main.h ../src/mainwindow.c ../src/player.c ../src/rateconv.c ../src/rawdialog.c ../src/recorddialog.c ../src/recordformatcombo.c ../src/session.c ../src/sound-alsalib.c ../src/sound.c ../src/sound-jack.c ../src/sound-oss.c ../src/sound-portaudio.c ../src/sound-pulse.c ../src/sound-sdl.c ../src/sound-sun.c ../src/statusbar.c ../src/um.c
+
+#.SUFFIXES: .po .gmo .mo
+#.po.mo:
+#	$(GMSGFMT) $(MSGFMT_OPTS) -o `echo $* | sed "s,.*/,,"`.mo $<
+
+all: all-@USE_NLS@
+all-yes: $(MOFILES)
+all-no:
+
+$(GETTEXT_PACKAGE).pot: $(POTFILES)
+	$(XGETTEXT) --default-domain=$(GETTEXT_PACKAGE) \
+	--add-comments --keyword=_ --keyword=N_ --from-code=UTF-8 \
+	-o $(GETTEXT_PACKAGE).pot $(POTFILES)
+
+install: install-data-@USE_NLS@
+install-data-no: all
+install-data-yes: all
+	catalogs="$(LINGUAS)"; \
+	for cat in $$catalogs; do \
+	  dir=$(DESTDIR)$(localedir)/$$cat/LC_MESSAGES; \
+	  mkdir -p $$dir; \
+	  $(INSTALL_DATA) $$cat.mo $$dir/$(GETTEXT_PACKAGE).mo; \
+	  echo "installing $$cat.mo as $$dir/$(GETTEXT_PACKAGE).mo"; \
+	done
+
+uninstall:
+	catalogs="$(LINGUAS)"; \
+	for cat in $$catalogs; do \
+	  echo "rm -f $(DESTDIR)$(localedir)/$$cat/LC_MESSAGES/$(GETTEXT_PACKAGE).mo"; \
+	  rm -f $(DESTDIR)$(localedir)/$$cat/LC_MESSAGES/$(GETTEXT_PACKAGE).mo; \
+	done
+
+mostlyclean:
+	rm -f *.pox *.old.po *.new.po *.mo *.gmo *.msg *.cat *.cat.m
+
+clean: mostlyclean
+
+distclean: clean
+	rm -f Makefile POTFILES
+
+update-po: Makefile
+	rm -f $(GETTEXT_PACKAGE).pot
+	$(MAKE) $(GETTEXT_PACKAGE).pot
+	catalogs="$(LINGUAS)"; \
+	for lang in $$catalogs; do \
+	  printf " %s " "$$lang"; \
+	  if $(MSGMERGE) $$lang.po $(GETTEXT_PACKAGE).pot -o $$lang.new.po; then \
+	    mv -f $$lang.new.po $$lang.po || exit 1; \
+	  else \
+	    echo "msgmerge for $$lang failed!"; \
+	    rm -f $$lang.new.po; \
+	  fi; \
+	done
+
+de.mo:
+	$(GMSGFMT) $(MSGFMT_OPTS) -o de.mo de.po
+es.mo:
+	$(GMSGFMT) $(MSGFMT_OPTS) -o es.mo es.po
+fr.mo:
+	$(GMSGFMT) $(MSGFMT_OPTS) -o fr.mo fr.po
+it.mo:
+	$(GMSGFMT) $(MSGFMT_OPTS) -o it.mo it.po
+pl.mo:
+	$(GMSGFMT) $(MSGFMT_OPTS) -o pl.mo pl.po
+ru.mo:
+	$(GMSGFMT) $(MSGFMT_OPTS) -o ru.mo ru.po
+sv.mo:
+	$(GMSGFMT) $(MSGFMT_OPTS) -o sv.mo sv.po
+zh_CN.mo:
+	$(GMSGFMT) $(MSGFMT_OPTS) -o zh_CN.mo zh_CN.po

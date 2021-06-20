@@ -11,7 +11,7 @@ AM_GNU_GETTEXT([external])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 m4_ifdef([AM_MAINTAINER_MODE], [AM_MAINTAINER_MODE])
 
-LT_INIT
+#L#T_INIT
 
 # Set gettext package name
 GETTEXT_PACKAGE=gwaveedit
@@ -428,7 +428,7 @@ fi
 
 
 dnl Write output
-AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in share/Makefile ])
+AC_CONFIG_FILES([Makefile src/Makefile po/Makefile share/Makefile ])
 AC_OUTPUT
 
 dnl Display configuration

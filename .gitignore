@@ -1,10 +1,12 @@
 *.po
 *.gmo
+*.mo
 *~
 *.o
 .deps
 Makefile
 Makefile.in
+!po/Makefile.in
 
 ABOUT-NLS
 aclocal.m4
