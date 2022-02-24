@@ -66,24 +66,6 @@ AC_ARG_WITH(default-mixerapp,
 DEFAULT_MIXERAPP=$withval)
 AC_DEFINE_UNQUOTED(DEFAULT_MIXERAPP,"${DEFAULT_MIXERAPP}",[Default mixer application])
 
-FIXED_DATE_STR="__DATE__ (actual compile date)"
-FIXED_TIME_STR="__TIME__ (actual compile time)"
-AC_ARG_WITH(build-date,
-[  --with-build-date=str   Fixed string to use instead of __DATE__],
-if test "x$withval" != "xno" ; then
-AC_DEFINE_UNQUOTED(FIXED_DATE,"${withval}",[Fixed build date])
-FIXED_DATE_STR=${withval}
-fi
-)
-
-AC_ARG_WITH(build-time,
-[  --with-build-time=str   Fixed string to use instead of __TIME__],
-if test "x$withval" != "xno" ; then
-AC_DEFINE_UNQUOTED(FIXED_TIME,"${withval}",[Fixed build date])
-FIXED_TIME_STR=${withval}
-fi
-)
-
 # Check for GTK
 
 AC_ARG_ENABLE(
@@ -496,7 +478,5 @@ echo
 echo "Build settings:"
 echo -n "  Compiler options:       "
 echo    $CFLAGS
-echo    "  Build date string:      ${FIXED_DATE_STR}"
-echo    "  Build time string:      ${FIXED_TIME_STR}"
 echo
 echo    "Type make (or gmake) to compile gWaveEdit!"

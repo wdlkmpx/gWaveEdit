@@ -63,18 +63,6 @@
 
 /* #define SHOW_DEBUG_MENU */
 
-#ifdef FIXED_DATE
-#define BUILD_DATE FIXED_DATE
-#else
-#define BUILD_DATE __DATE__
-#endif
-
-#ifdef FIXED_TIME
-#define BUILD_TIME FIXED_TIME
-#else
-#define BUILD_TIME __TIME__
-#endif
-
 G_DEFINE_TYPE(Mainwindow,mainwindow,GTK_TYPE_WINDOW)
 
 ListObject *mainwindow_objects = NULL;
@@ -1457,9 +1445,7 @@ static void help_about (GtkMenuItem * menuitem, gpointer user_data)
       g_free (logo_path);
    }
 
-   char * p = g_strdup_printf(_("GTK Sound file editor\nCurrent sound driver: %s\nCompiled %s %s"),
-                              sound_driver_name(),
-                              BUILD_DATE, BUILD_TIME);
+   char * p = g_strdup_printf(_("GTK Sound file editor\nCurrent sound driver: %s\n"), sound_driver_name());
 
    w = g_object_new (GTK_TYPE_ABOUT_DIALOG,
                      "version",      VERSION,
