@@ -15,12 +15,12 @@ gwaveedit_SOURCES = chunk.c int_box.c sound.c effectdlg_speed.c              \
 		     session.c effectdlg_mapchannels.c mainloop.c             \
 		     recordformatcombo.c effectdlg_sandwich.c
 
-AM_CPPFLAGS = @GTK_CFLAGS@ @SDL_CFLAGS@ @SNDFILE_CFLAGS@ @JACK_CFLAGS@ \
-	   @LIBSAMPLERATE_CFLAGS@ \
-           @PULSE_CFLAGS@ -DDATADIR='"$(datadir)"'
-LDADD = @GTK_LIBS@ @SDL_LIBS@ @PORTAUDIO_LIBS@ @SNDFILE_LIBS@ @ALSALIB_LIBS@ \
-        @JACK_LIBS@ @LIBSAMPLERATE_LIBS@ \
-        @PULSE_LIBS@
+AM_CPPFLAGS = $(GTK_CFLAGS) $(SDL_CFLAGS) $(SNDFILE_CFLAGS) $(JACK_CFLAGS) \
+	   $(LIBSAMPLERATE_CFLAGS) \
+           $(PULSE_CFLAGS) -DDATADIR='"$(datadir)"'
+LDADD = $(GTK_LIBS) $(SDL_LIBS) $(PORTAUDIO_LIBS) $(SNDFILE_LIBS) $(ALSALIB_LIBS) \
+        $(JACK_LIBS) $(LIBSAMPLERATE_LIBS) \
+        $(PULSE_LIBS)
 
 localedir = $(datadir)/locale
 AM_CPPFLAGS += -DLOCALEDIR=\"$(localedir)\"
