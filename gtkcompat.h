@@ -4,7 +4,7 @@
  * For more information, please refer to <https://unlicense.org>
  */
 
-/** 2020-12-29 **/
+/** 2022-02-22 **/
 
 /*
  * gtkcompat.h, GTK2+ compatibility layer
@@ -73,6 +73,16 @@ extern "C"
 // GLIB < 2.58
 #if ! GLIB_CHECK_VERSION (2, 58, 0)
 #define G_SOURCE_FUNC(f) ((GSourceFunc) (void (*)(void)) (f))
+#endif
+
+
+// GLIB < 2.40
+#if ! GLIB_CHECK_VERSION (2, 40, 0)
+#define g_key_file_save_to_file(kfile,filename,error) { \
+   char * data = g_key_file_to_data (kfile, NULL, error); \
+   g_file_set_contents (filename, data, -1, error); \
+   g_free (data); \
+}
 #endif
 
 
@@ -145,54 +155,49 @@ extern "C"
 
 
 
-
 /* ================================================== */
 /*                       GTK 3                        */
 /* ================================================== */
 
-
 // GTK >= 3.0 -- applies to GTK3, GTK4...
-#if GTK_CHECK_VERSION (3, 0, 0)
+#if GTK_MAJOR_VERSION >= 3
 #define GTKCOMPAT_DRAW_SIGNAL "draw"
 #define gtkcompat_widget_set_halign_left(w)   gtk_widget_set_halign(GTK_WIDGET(w), GTK_ALIGN_START)
 #define gtkcompat_widget_set_halign_center(w) gtk_widget_set_halign(GTK_WIDGET(w), GTK_ALIGN_CENTER)
 #define gtkcompat_widget_set_halign_right(w)  gtk_widget_set_halign(GTK_WIDGET(w), GTK_ALIGN_END)
-/* some compatible deprecated GTK2 functions... */
-#define gtk_hbox_new(homogenous,spacing) gtk_box_new(GTK_ORIENTATION_HORIZONTAL,spacing)
-#define gtk_vbox_new(homogenous,spacing) gtk_box_new(GTK_ORIENTATION_VERTICAL,spacing)
-#define gtk_hscale_new(adjustment) gtk_scale_new(GTK_ORIENTATION_HORIZONTAL,adjustment)
-#define gtk_vscale_new(adjustment) gtk_scale_new(GTK_ORIENTATION_VERTICAL,adjustment)
-#define gtk_hscale_new_with_range(min,max,step) gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL,min,max,step)
-#define gtk_vscale_new_with_range(min,max,step) gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL,min,max,step)
-#define gtk_hseparator_new() gtk_separator_new(GTK_ORIENTATION_HORIZONTAL)
-#define gtk_vseparator_new() gtk_separator_new(GTK_ORIENTATION_VERTICAL)
-#define gtk_hscrollbar_new(adj) gtk_scrollbar_new(GTK_ORIENTATION_HORIZONTAL,adj)
-#define gtk_vscrollbar_new(adj) gtk_scrollbar_new(GTK_ORIENTATION_VERTICAL,adj)
-#define gtk_hpaned_new() gtk_paned_new(GTK_ORIENTATION_HORIZONTAL)
-#define gtk_vpaned_new() gtk_paned_new(GTK_ORIENTATION_VERTICAL)
 #endif
 
-
+// GTK < 3.14
+#if (GTK_MAJOR_VERSION == 3 && !GTK_CHECK_VERSION(3, 14, 0))
+#error "GTK 3 < 3.14 should not be allowed"
+/*
 // GTK < 3.12
 #if ! GTK_CHECK_VERSION (3, 12, 0)
+#define gtk_application_set_accels_for_action(app,name,accels) \
+          gtk_application_add_accelerator(app,accels[0],name,NULL)
 #define gtk_widget_set_margin_start(widget,margin) gtk_widget_set_margin_left(widget,margin)
 #define gtk_widget_set_margin_end(widget,margin)   gtk_widget_set_margin_right(widget,margin)
 #endif
-
-
-// GTK < 3.4
-#if ! GTK_CHECK_VERSION (3, 4, 0)
-#define gtk_application_window_new(app) gtk_window_new(GTK_WINDOW_TOPLEVEL)
+*/
 #endif
-
 
 
 /* ================================================== */
 /*                       GTK 2                        */
 /* ================================================== */
 
-// define some GTK3+ functions
+// define some GTK3.14+ functions
 #if GTK_MAJOR_VERSION <= 2
+// GTK < 3.10
+// gdk_window_create_similar_image_surface() was removed in gtk4
+//                  only use gdk_window_create_similar_surface()
+// < 3.8
+#define gtk_widget_set_opacity(w,o) gtk_window_set_opacity(GTK_WINDOW(w),o)
+#define gtk_widget_get_opacity(w)  (gtk_window_get_opacity(GTK_WINDOW(w))
+// < 3.4
+#define gtk_application_window_new(app) gtk_window_new(GTK_WINDOW_TOPLEVEL)
+// 3.0
+
 #define GTKCOMPAT_DRAW_SIGNAL "expose_event"
 #define gtk_box_new(ori,spacing) \
   ((ori == GTK_ORIENTATION_HORIZONTAL) ? gtk_hbox_new(FALSE,spacing) \
@@ -218,8 +223,7 @@ extern "C"
 #define gtk_widget_get_allocated_height(widget) (GTK_WIDGET(widget)->allocation.height )
 #define gtk_widget_get_allocated_width(widget)  (GTK_WIDGET(widget)->allocation.width  )
 #define gtk_combo_box_text_remove_all(cmb) { \
-   GtkTreeModel * model = gtk_combo_box_get_model (GTK_COMBO_BOX (cmb)); \
-   gtk_list_store_clear (GTK_LIST_STORE (model)); \
+   gtk_list_store_clear (GTK_LIST_STORE (gtk_combo_box_get_model (GTK_COMBO_BOX (cmb)))); \
 }
 #define gtk_tree_model_iter_previous(model,iter) ({ \
    GtkTreePath * path = gtk_tree_model_get_path (model, iter); \
@@ -228,10 +232,18 @@ extern "C"
    gtk_tree_path_free (path); \
    valid; \
 })
+#define gtk_progress_bar_set_show_text(pb,show)
 #define gtk_widget_override_font(w,f) gtk_widget_modify_font(w,f)
 #define gtkcompat_widget_set_halign_left(w)   gtk_misc_set_alignment(GTK_MISC(w), 0.0, 0.5)
 #define gtkcompat_widget_set_halign_center(w) gtk_misc_set_alignment(GTK_MISC(w), 0.5, 0.5)
 #define gtkcompat_widget_set_halign_right(w)  gtk_misc_set_alignment(GTK_MISC(w), 1.0, 0.5)
+typedef enum /* GtkAlign */
+{
+  GTK_ALIGN_FILL,
+  GTK_ALIGN_START,
+  GTK_ALIGN_END,
+  GTK_ALIGN_CENTER
+} GtkAlign;
 /* GtkApplication */
 #define GtkApplication void
 #define g_application_quit(app) gtk_main_quit()
@@ -265,6 +277,8 @@ typedef struct _GtkComboBoxPrivate GtkComboBoxTextPrivate;
 //#define gdk_window_get_visual(w)  (gdk_drawable_get_visual(GDK_DRAWABLE(w)))
 #define gdk_window_get_screen(w)  (gdk_drawable_get_screen(GDK_DRAWABLE(w)))
 #define gdk_window_get_display(w) (gdk_drawable_get_display(GDK_DRAWABLE(w)))
+#define gtk_notebook_get_group_name gtk_notebook_get_group
+#define gtk_notebook_set_group_name gtk_notebook_set_group
 #endif
 
 
@@ -282,6 +296,15 @@ typedef struct _GtkComboBoxPrivate GtkComboBoxTextPrivate;
 #define gdk_visual_get_byte_order(visual) (GDK_VISUAL(visual)->byte_order)
 #define gdk_visual_get_colormap_size(visual) (GDK_VISUAL(visual)->colormap_size)
 #define gdk_visual_get_bits_per_rgb(visual) (GDK_VISUAL(visual)->bits_per_rgb)
+#define gtk_icon_view_get_item_orientation gtk_icon_view_get_orientation
+#define gtk_icon_view_set_item_orientation gtk_icon_view_set_orientation
+#define gdk_window_create_similar_surface(gdksurf,content,width,height) ({ \
+   cairo_t * wcr = gdk_cairo_create (gdksurf); \
+   cairo_surface_t * window_surface = cairo_get_target (wcr); \
+   cairo_surface_t * out_s = cairo_surface_create_similar (window_surface, content, width, height); \
+   cairo_destroy (wcr); \
+   out_s; \
+})
 #endif
 
 
@@ -346,15 +369,17 @@ typedef struct _GtkComboBoxPrivate GtkComboBoxTextPrivate;
 
 // GTK < 2.16
 #if ! GTK_CHECK_VERSION (2, 16, 0)
-#define gtk_status_icon_set_tooltip_text(icon,text) gtk_status_icon_set_tooltip(icon,text)
 #define gtk_menu_item_get_label(i) (gtk_label_get_label (GTK_LABEL (GTK_BIN (i)->child)))
 #define gtk_menu_item_set_label(i,label) gtk_label_set_label(GTK_LABEL(GTK_BIN(i)->child), (label) ? label : "")
 #define gtk_menu_item_get_use_underline(i) (gtk_label_get_use_underline (GTK_LABEL (GTK_BIN (i)->child)))
+#define gtk_status_icon_set_tooltip_text gtk_status_icon_set_tooltip
 #endif
 
 
 // GTK < 2.14
-#if ! GTK_CHECK_VERSION (2, 14, 0)
+#if GTK_MAJOR_VERSION == 2 && !GTK_CHECK_VERSION(2, 14, 0)
+#error "GTK 2 < 2.14 should not be allowed"
+/* this is untested
 #define gtk_dialog_get_action_area(dialog)    (GTK_DIALOG(dialog)->action_area)
 #define gtk_dialog_get_content_area(dialog)   (GTK_DIALOG(dialog)->vbox)
 #define gtk_widget_get_window(widget)         (GTK_WIDGET(widget)->window)
@@ -363,6 +388,13 @@ typedef struct _GtkComboBoxPrivate GtkComboBoxTextPrivate;
 #define gtk_menu_get_accel_path(menu)         (GTK_MENU(menu)->accel_path)
 #define gtk_message_dialog_get_image(m)       (GTK_MESSAGE_DIALOG(m)->image)
 #define gtk_entry_get_overwrite_mode(e)       (GTK_ENTRY(e)->overwrite_mode)
+// ---
+#define gtk_adjustment_set_page_increment(a,val) ((a)->page_increment = (val))
+#define gtk_adjustment_get_page_size(a)       ((a)->page_size)
+#define gtk_adjustment_get_lower(a)           ((a)->lower)
+#define gtk_adjustment_get_upper(a)           ((a)->upper) // GTK_ADJUSTMENT
+#define gtk_selection_data_get_length(data)   ((data)->length)
+*/
 #endif
 
 
@@ -378,15 +410,18 @@ typedef struct _GtkComboBoxPrivate GtkComboBoxTextPrivate;
 #	define GDK_KEY_Alt_R GDK_Alt_R
 #	define GDK_KEY_Alt_L GDK_Alt_L
 #	define GDK_KEY_Tab GDK_Tab
-#	define GDK_KEY_Up GDK_Up
 #	define GDK_KEY_space GDK_space
+#	define GDK_KEY_Up GDK_Up
 #	define GDK_KEY_Down GDK_Down
+#	define GDK_KEY_Right GDK_Right
+#	define GDK_KEY_Left GDK_Left
 #	define GDK_KEY_Return GDK_Return
 #	define GDK_KEY_exclam GDK_exclam
 #	define GDK_KEY_BackSpace GDK_BackSpace
 #	define GDK_KEY_Home GDK_Home
 #	define GDK_KEY_End GDK_End
 #	define GDK_KEY_Escape GDK_Escape
+#	define GDK_KEY_Delete GDK_Delete
 #	define GDK_KEY_a GDK_a
 #	define GDK_KEY_A GDK_A
 #	define GDK_KEY_b GDK_b
@@ -451,6 +486,40 @@ typedef struct _GtkComboBoxPrivate GtkComboBoxTextPrivate;
 #	define GDK_KEY_F10 GDK_F10
 #	define GDK_KEY_F11 GDK_F11
 #	define GDK_KEY_F12 GDK_F12
+#	define GDK_KEY_KP_Home GDK_KP_Home
+#	define GDK_KEY_KP_Page_Up GDK_KP_Page_Up
+#	define GDK_KEY_KP_End GDK_KP_End
+#	define GDK_KEY_KP_Page_Down GDK_KP_Page_Down
+#	define GDK_KEY_KP_Space GDK_KP_Space
+#	define GDK_KEY_KP_Enter GDK_KP_Enter
+#	define GDK_KEY_KP_Left GDK_KP_Left
+#	define GDK_KEY_KP_Right GDK_KP_Right
+#	define GDK_KEY_KP_Up GDK_KP_Up
+#	define GDK_KEY_KP_Down GDK_KP_Down
+#	define GDK_KEY_KP_Delete GDK_KP_Delete
+#endif
+
+
+// CAIRO < 1.10
+#if CAIRO_VERSION < CAIRO_VERSION_ENCODE(1, 10, 0)
+#define cairo_region_t         GdkRegion
+#define cairo_rectangle_int_t  GdkRectangle
+#define cairo_region_create    gdk_region_new
+#define cairo_region_copy      gdk_region_copy
+#define cairo_region_destroy   gdk_region_destroy
+#define cairo_region_create_rectangle gdk_region_rectangle
+#define cairo_region_get_extents gdk_region_get_clipbox
+#define cairo_region_is_empty  gdk_region_empty
+#define cairo_region_equal     gdk_region_empty
+#define cairo_region_contains_point gdk_region_point_in
+#define cairo_region_contains_rectangle gdk_region_rect_in
+#define cairo_region_translate gdk_region_rect_in
+#define cairo_region_union_rectangle gdk_region_union_with_rect
+#define cairo_region_intersect gdk_region_intersect
+#define cairo_region_union     gdk_region_union
+#define cairo_region_subtract  gdk_region_subtract
+#define cairo_region_xor       gdk_region_xor
+//#define cairo_region_num_rectangles / cairo_region_get_rectangle  gdk_region_get_rectangles
 #endif
 
 
