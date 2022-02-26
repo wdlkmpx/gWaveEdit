@@ -22,18 +22,14 @@
 //     https://lazyfoo.net/tutorials/SDL/34_audio_recording/index.php
 //     https://stackoverflow.com/questions/42990071/recording-microphone-with-sdl2-gets-delayed-by-2-seconds
 
-#ifdef HAVE_SDL2
-#include "SDL2/SDL.h"
-#else
-#include "SDL/SDL.h"
-#endif
+#include <SDL.h>
 
 #include "sound.h" 
 #include "ringbuf.h"
 
 // ==============================================================
 
-#if !defined(HAVE_SDL2)
+#if SDL_MAJOR_VERSION == 1
 #define SDL_AudioDeviceID            int
 #define SDL_CloseAudioDevice(id)     SDL_CloseAudio()
 #define SDL_GetAudioDeviceStatus(id) SDL_GetAudioStatus()
@@ -93,7 +89,7 @@ static gint sdl_output_select_format(Dataformat *format, gboolean silent,
     gchar *c;
     SDL_AudioSpec desired;
 
-#ifdef HAVE_SDL2
+#if SDL_MAJOR_VERSION == 2
     SDL_AudioSpec obtained;
     SDL_memset(&desired, 0, sizeof(desired)); /* or SDL_zero(desired) */
 #endif
@@ -115,7 +111,7 @@ static gint sdl_output_select_format(Dataformat *format, gboolean silent,
     desired.samples = 512;
     desired.callback = sdl_output_callback;
 
-#ifdef HAVE_SDL2
+#if SDL_MAJOR_VERSION == 2
     sdl_data.devId = SDL_OpenAudioDevice(NULL, 0, &desired, &obtained, 0);
     if (!sdl_data.devId) {
 #else
@@ -127,7 +123,7 @@ static gint sdl_output_select_format(Dataformat *format, gboolean silent,
         return -1;
     }
 
-#ifdef HAVE_SDL2
+#if SDL_MAJOR_VERSION == 2
     if (desired.format != obtained.format) {
         printf ("SDL2: Not really using the desired.format\n");
     }

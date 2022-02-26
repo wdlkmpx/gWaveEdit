@@ -211,7 +211,7 @@ static struct sound_driver drivers[] = {
 
 #if defined (HAVE_SDL)
 	{
-#ifdef HAVE_SDL2
+#if SDL_MAJOR_VERSION == 2
 		N_("SDL2 (output only)"), "sdl",
 #else
 		N_("SDL (output only)"), "sdl",
