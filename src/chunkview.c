@@ -18,10 +18,9 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
-
+#include "main.h"
 #include <math.h>
 #include "chunkview.h"
-#include "main.h"
 #include "inifile.h"
 #include "player.h"
 #include "mainloop.h"

@@ -20,9 +20,8 @@
  */
 
 
-#include <stdio.h>
+#include "main.h"
 #include <unistd.h>
-#include <string.h>
 #include <errno.h>
 #include <math.h>
 #include <sys/stat.h>
@@ -30,7 +29,6 @@
 #include "um.h"
 #include "chunk.h"
 #include "inifile.h"
-#include "main.h"
 #include "ringbuf.h"
 #include "rawdialog.h"
 #include "tempfile.h"

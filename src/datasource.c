@@ -18,8 +18,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
-
-#include <config.h>
+#include "main.h"
 
 #include <sys/stat.h>
 #include <unistd.h>
@@ -27,7 +26,6 @@
 #include "gtkfiles.h"
 #include "ringbuf.h"
 #include "um.h"
-#include "main.h"
 #include "inifile.h"
 
 #include "datasource.h"

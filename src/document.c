@@ -20,7 +20,6 @@
 
 #include <config.h>
 
-
 #include "um.h"
 #include "document.h"
 #include "filetypes.h"
