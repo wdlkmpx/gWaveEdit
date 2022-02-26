@@ -26,8 +26,6 @@ G_DEFINE_TYPE(Combo,combo,GTK_TYPE_COMBO_BOX_TEXT)
 enum { CHANGED_SIGNAL, LAST_SIGNAL };
 static guint combo_signals[LAST_SIGNAL] = { 0 };
 
-static gboolean updating_flag = FALSE;
-
 static void combo_size_request(GtkWidget *widget, GtkRequisition *req)
 {
      Combo *obj = COMBO(widget);
@@ -38,8 +36,6 @@ static void combo_size_request(GtkWidget *widget, GtkRequisition *req)
 
 static void combo_changed(GtkComboBox *combo)
 {
-     if (!updating_flag)
-	  g_signal_emit(G_OBJECT(combo),combo_signals[CHANGED_SIGNAL],0);
      if (GTK_COMBO_BOX_CLASS(combo_parent_class)->changed)
 	  GTK_COMBO_BOX_CLASS(combo_parent_class)->changed(combo);
 }
@@ -69,7 +65,6 @@ void combo_set_items(Combo *combo, GList *item_strings, int default_index)
      GList *l;
      gchar *c;
      int len;
-     updating_flag = TRUE;
      gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (combo));
      for (l=item_strings,len=0; l!=NULL; l=l->next,len++) {
 	  c = (gchar *)l->data;
@@ -79,8 +74,6 @@ void combo_set_items(Combo *combo, GList *item_strings, int default_index)
         default_index = 0;
      }
      gtk_combo_box_set_active(GTK_COMBO_BOX(combo),default_index);
-     updating_flag = FALSE;
-     g_signal_emit(G_OBJECT(combo),combo_signals[CHANGED_SIGNAL],0);
 }
 
 void combo_set_selection(Combo *combo, int item_index)
@@ -109,7 +102,7 @@ void combo_remove_item(Combo *combo, int item_index)
 
 GtkWidget *combo_new(void)
 {
-     return (GtkWidget *)g_object_new(COMBO_TYPE, NULL);
+     return (GtkWidget *) g_object_new(COMBO_TYPE, NULL);
 }
 
 void combo_set_max_request_width(Combo *c, int width)
