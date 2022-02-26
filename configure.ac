@@ -212,29 +212,27 @@ AC_SUBST(PORTAUDIO_LIBS)
 
 # Check for SDL
 
-HAVE_SDL=no
-SDL_TEST=yes
+HAVE_SDL='no'
+enable_sdl='check'
 
 AC_ARG_WITH([sdl], [  --without-sdl           Do not use SDL library],
+	[enable_sdl=$withval])
+
+if test "x$enable_sdl" != "xno"; then
+	PKG_CHECK_MODULES([SDL], [sdl >= 1.2.13], [HAVE_SDL=yes],
 	[
-	if test "x$withval" = "xno" ; then
-		SDL_TEST=no
-	fi
-	]
-)
-
-if test "x$SDL_TEST" = "xyes"; then
-	PKG_CHECK_MODULES([SDL], [sdl >= 1.2.13], [HAVE_SDL=yes], [HAVE_SDL=no])
-fi
-
-if test "x$HAVE_SDL" = "xno"; then
-	PKG_CHECK_MODULES([SDL], [sdl2 >= 2.0], [HAVE_SDL=yes],[HAVE_SDL=no])
+	PKG_CHECK_MODULES([SDL], [sdl2 >= 2.0], [HAVE_SDL=yes],
+		[
+		if test "x$enable_sdl" = "xyes"; then
+			AC_MSG_ERROR([SDL is requested but was not found])
+		fi
+		])
+	])
 fi
 
 if test "x$HAVE_SDL" = "xyes" ; then
-	AC_DEFINE(HAVE_SDL,1,[Enable SDL])
+	AC_DEFINE([HAVE_SDL],[1],[Enable SDL])
 fi
-
 
 dnl Check for AlsaLib
 
@@ -386,7 +384,7 @@ AC_TYPE_OFF_T
 AC_TYPE_PID_T
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS([gettimeofday sched_yield ceill setlocale fseeko ftello lrint lrintf dup2 memchr memmove pow putenv select sqrt strtoul]) 
+AC_CHECK_FUNCS([gettimeofday sched_yield ceill setlocale fseeko ftello lrint lrintf dup2 pow putenv select sqrt strtoul]) 
 AC_FUNC_FORK
 
 # Turn on all/most gcc warnings
