@@ -18,10 +18,6 @@ GETTEXT_PACKAGE=gwaveedit
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 
-# Add the languages which your application supports here.
-ALL_LINGUAS="ru sv fr es de zh_CN it pl"
-AC_SUBST(ALL_LINGUAS)
-
 # Various options
 
 AC_ARG_WITH(double-samples,
@@ -89,10 +85,6 @@ PKG_CHECK_MODULES(GTK, [$gtk_modules])
 
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
-
-PKG_CHECK_MODULES(
-	[GLIB], [glib-2.0 >= 2.18.0], found_glib=yes, AC_MSG_ERROR(Glib >= 2.18.0 is required)
-)
 
 # Disable gtk deprecations?
 
@@ -384,7 +376,7 @@ AC_TYPE_OFF_T
 AC_TYPE_PID_T
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS([gettimeofday sched_yield ceill setlocale fseeko ftello lrint lrintf dup2 pow putenv select sqrt strtoul]) 
+AC_CHECK_FUNCS([gettimeofday sched_yield ceill setlocale fseeko ftello lrint lrintf dup2 pow select sqrt strtoul]) 
 AC_FUNC_FORK
 
 # Turn on all/most gcc warnings
