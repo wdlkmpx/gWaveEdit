@@ -319,10 +319,9 @@ struct session_dialog_data {
      gint resume_index;
 };
 
-static void session_dialog_destroy(GtkObject *obj, gpointer user_data)
+static void session_dialog_destroy(GtkWidget *obj, gpointer user_data)
 {
-     struct session_dialog_data *ddata = 
-	  (struct session_dialog_data *)user_data;
+     struct session_dialog_data *ddata = (struct session_dialog_data *)user_data;
      ddata->destroy_flag = TRUE;
 }
 
@@ -340,22 +339,8 @@ static void session_dialog_select(GtkTreeSelection *sel,gpointer user_data)
 }
 
 
-static void session_dialog_exit(GtkWidget *widget, gpointer user_data)
+static void session_dialog_delete_click(struct session_dialog_data *ddata)
 {
-     quitflag = TRUE;
-}
-
-static void session_dialog_resume_click(GtkWidget *widget, gpointer user_data)
-{
-     struct session_dialog_data *ddata = 
-	  (struct session_dialog_data *)user_data;
-     ddata->resume_click_flag = TRUE;
-}
-
-static void session_dialog_delete_click(GtkWidget *widget, gpointer user_data)
-{
-     struct session_dialog_data *ddata = 
-	  (struct session_dialog_data *)user_data;
      int i;
      gboolean b, valid;
      GtkTreeModel *model;
@@ -380,10 +365,52 @@ static void session_dialog_delete_click(GtkWidget *widget, gpointer user_data)
      gtk_widget_set_sensitive(ddata->delete_button,FALSE);     
 }
 
+
+static gboolean on_sdialog_keypress (GtkWidget *w, GdkEventKey *event, gpointer udata)
+{
+    if (event->keyval == GDK_Escape) {
+        return TRUE; // prevent dialog from closing
+    }
+    return FALSE;
+}
+
+
+#define RESPONSE_RESUME 100
+#define RESPONSE_DELETE 102
+#define RESPONSE_NEW    GTK_RESPONSE_OK
+#define RESPONSE_EXIT   GTK_RESPONSE_CANCEL
+
+static void on_sdialog_response (GtkDialog *dialog, int response, gpointer udata)
+{
+    struct session_dialog_data *ddata;
+    ddata = (struct session_dialog_data *) udata;
+    switch (response)
+    {
+        case RESPONSE_RESUME:
+            ddata->resume_click_flag = TRUE;
+            break;
+        case RESPONSE_DELETE:
+            g_signal_stop_emission_by_name (dialog, "response");
+            session_dialog_delete_click (ddata);
+            return;
+        case RESPONSE_NEW:
+            break;
+        case RESPONSE_EXIT:
+            quitflag = TRUE;
+            break;
+        default:
+            g_signal_stop_emission_by_name (dialog, "response");
+            return;
+    }
+    gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+
 gboolean session_dialog(void)
 {
      struct session_dialog_data ddata;
-     GtkWidget *a,*b,*c,*d;
+     GtkWidget * vbox, *c, *d;
+     GtkWidget * swin, * sdialog;
      GList *m;
      int i;
      struct session *s;
@@ -426,26 +453,32 @@ gboolean session_dialog(void)
 	  return FALSE;
      }
 
-     a = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-     gtk_window_set_title(GTK_WINDOW(a),_("Sessions"));
-     gtk_window_set_modal(GTK_WINDOW(a),TRUE);
-     gtk_window_set_default_size(GTK_WINDOW(a),400,200);
-     gtk_container_set_border_width(GTK_CONTAINER(a),5);
-     g_signal_connect(G_OBJECT(a),"destroy",
-			G_CALLBACK(session_dialog_destroy),&ddata);
-     
-     b = gtk_vbox_new(FALSE,5);
-     gtk_container_add(GTK_CONTAINER(a),b);
+     swin = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+     sdialog = gtk_dialog_new ();
+     gtk_window_set_title (GTK_WINDOW (sdialog), _("Sessions"));
+     gtk_window_set_modal (GTK_WINDOW (sdialog), TRUE);
+     gtk_window_set_default_size (GTK_WINDOW (sdialog), 400, 200);
+     gtk_window_set_transient_for (GTK_WINDOW (sdialog), GTK_WINDOW (swin));
+
+     g_signal_connect (G_OBJECT(sdialog),"destroy",
+                       G_CALLBACK(session_dialog_destroy), &ddata);
+     g_signal_connect (G_OBJECT (sdialog), "response",
+                       G_CALLBACK (on_sdialog_response), &ddata);
+     g_signal_connect (G_OBJECT (sdialog), "key_press_event",
+                       G_CALLBACK (on_sdialog_keypress), &ddata);
+
+     vbox = gtk_dialog_get_content_area (GTK_DIALOG (sdialog));
+     gtk_box_set_spacing (GTK_BOX (vbox), 5);
      
      c = gtk_label_new(_("Earlier sessions were found. Choose one to resume or"
-			 " start a new session."));
+                       " start a new session."));
      gtk_label_set_line_wrap(GTK_LABEL(c),TRUE);
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);     
+     gtk_box_pack_start(GTK_BOX(vbox),c,FALSE,FALSE,0);
    
      c = gtk_scrolled_window_new(NULL,NULL);
      gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(c),GTK_POLICY_NEVER,
-				    GTK_POLICY_ALWAYS);
-     gtk_box_pack_start(GTK_BOX(b),c,TRUE,TRUE,0);
+                                    GTK_POLICY_ALWAYS);
+     gtk_box_pack_start(GTK_BOX(vbox),c,TRUE,TRUE,0);
 
      d = gtk_tree_view_new_with_model(GTK_TREE_MODEL(l));
      gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(d),FALSE);
@@ -455,50 +488,31 @@ gboolean session_dialog(void)
      sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(d));
      gtk_tree_selection_set_mode(sel,GTK_SELECTION_SINGLE);
      g_signal_connect(sel,"changed",
-			G_CALLBACK(session_dialog_select),&ddata);
+                      G_CALLBACK(session_dialog_select),&ddata);
      gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(c),d);
 
-     c = gtk_hbutton_box_new();
-     gtk_button_box_set_layout(GTK_BUTTON_BOX(c),GTK_BUTTONBOX_END);
-     gtk_box_pack_end(GTK_BOX(b),c,FALSE,TRUE,0);
-
-     d = gtk_button_new_with_label(_("Resume selected"));
+     d = gtk_dialog_add_button (GTK_DIALOG (sdialog), _("Resume selected"), RESPONSE_RESUME);
      ddata.resume_button = d;
      gtk_widget_set_sensitive(d,FALSE);
-     g_signal_connect(G_OBJECT(d),"clicked",
-			G_CALLBACK(session_dialog_resume_click),&ddata);
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy), a);
-     gtk_container_add(GTK_CONTAINER(c),d);
 
-     d = gtk_button_new_with_label(_("Delete selected"));
+     d = gtk_dialog_add_button (GTK_DIALOG (sdialog), _("Delete selected"), RESPONSE_DELETE);
      ddata.delete_button = d;
      gtk_widget_set_sensitive(d,FALSE);
-     g_signal_connect(G_OBJECT(d),"clicked",
-			G_CALLBACK(session_dialog_delete_click),&ddata);
-     gtk_container_add(GTK_CONTAINER(c),d);
 
-     d = gtk_button_new_with_label(_("Start new session"));
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy), a);
-     gtk_container_add(GTK_CONTAINER(c),d);
+     d = gtk_dialog_add_button (GTK_DIALOG (sdialog), _("Start new session"), RESPONSE_NEW);
+     d = gtk_dialog_add_button (GTK_DIALOG (sdialog), _("Exit"), RESPONSE_EXIT);
 
-     d = gtk_button_new_with_label(_("Exit"));
-     g_signal_connect(G_OBJECT(d),"clicked",
-			G_CALLBACK(session_dialog_exit),&ddata);
-     g_signal_connect_swapped(G_OBJECT(d),"clicked",
-			       G_CALLBACK(gtk_widget_destroy), a);
-     gtk_container_add(GTK_CONTAINER(c),d);
+     ddata.destroy_flag = FALSE;
+     ddata.resume_click_flag = FALSE;
 
-     c = gtk_hseparator_new();
-     gtk_box_pack_end(GTK_BOX(b),c,FALSE,TRUE,0);
+     gtk_widget_show_all(sdialog);
+     while (!ddata.destroy_flag) {
+         mainloop();
+     }
 
-     ddata.destroy_flag = ddata.resume_click_flag = FALSE;
-     gtk_widget_show_all(a);
-     while (!ddata.destroy_flag) mainloop();
-
-     if (ddata.resume_click_flag)
-	  session_resume(ddata.listmap[ddata.resume_index]);
+     if (ddata.resume_click_flag) {
+        session_resume(ddata.listmap[ddata.resume_index]);
+     }
 
      g_free(ddata.listmap);
 
