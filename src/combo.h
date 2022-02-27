@@ -55,4 +55,7 @@ char *combo_selected_string(Combo *combo);
 
 void combo_set_max_request_width(Combo *c, int w);
 
+//====
+void w_gtk_glist_to_combo (GtkComboBox *combo, GList *strings, int default_index);
+
 #endif

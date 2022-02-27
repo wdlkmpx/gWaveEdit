@@ -132,3 +132,26 @@ void combo_set_max_request_width(Combo *c, int width)
 {
      c->max_request_width = width;
 }
+
+// =============================================================
+
+void w_gtk_glist_to_combo (GtkComboBox *combo, GList *strings, int default_index)
+{
+    GList * list;
+    char * text;
+    int len = 0;
+    gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (combo));
+    if (!strings) {
+        return; // nothing to add
+    }
+    for (list = strings;  list;  list = list->next)
+    {
+        text = (char *) list->data;
+        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), text);
+        len++;
+    }
+    if (default_index >= len || default_index < 0) {
+        default_index = 0;
+    }
+    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), default_index);
+}

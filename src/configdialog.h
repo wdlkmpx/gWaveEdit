@@ -34,7 +34,7 @@
 typedef struct {
      GtkDialog dialog;
      Intbox *disk_threshold;
-     Combo *sound_driver;
+     GtkComboBoxText *sound_driver;
      GtkButton *sound_driver_prefs;
      Intbox *sound_buffer_size;
      GtkEntry *mixer_utility;

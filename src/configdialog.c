@@ -54,6 +54,7 @@ static void config_dialog_ok(GtkButton *button, gpointer user_data)
     GtkTreeModel *model;
     GtkTreeIter iter;
     gboolean valid;
+    int index;
     ConfigDialog *cd = CONFIG_DIALOG(user_data);
     if (intbox_check(cd->sound_buffer_size) || 
         intbox_check(cd->disk_threshold) ||
@@ -63,8 +64,8 @@ static void config_dialog_ok(GtkButton *button, gpointer user_data)
         intbox_check_limit(cd->vzoom_max,1,9999, _("maximum vertical zoom")) ||
 	format_selector_check(cd->fallback_format))
         return;
-    /* c = (gchar *)gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(cd->sound_driver)->entry)); */
-    c = sound_driver_id_from_index(combo_selected_index(cd->sound_driver));
+    index = gtk_combo_box_get_active (GTK_COMBO_BOX (cd->sound_driver));
+    c = sound_driver_id_from_index (index);
     g_assert(c != NULL);
 
     if (gtk_toggle_button_get_active(cd->driver_autodetect))
@@ -187,16 +188,16 @@ static void config_dialog_ok(GtkButton *button, gpointer user_data)
 
 static void sound_settings_click(GtkButton *button, gpointer user_data)
 {
-     ConfigDialog *cd = CONFIG_DIALOG(user_data);
-     sound_driver_show_preferences(
-	  sound_driver_id_from_index(combo_selected_index(cd->sound_driver)));
+    ConfigDialog *cd = CONFIG_DIALOG(user_data);
+    int index = gtk_combo_box_get_active (GTK_COMBO_BOX (cd->sound_driver));
+    sound_driver_show_preferences(sound_driver_id_from_index (index));
 }
 
-static void sound_driver_changed(Combo *combo, gpointer user_data)
+static void sound_driver_changed(GtkComboBox *combo, gpointer user_data)
 {
     ConfigDialog *cd = CONFIG_DIALOG(user_data);
     gchar *driver_name;
-    driver_name = combo_selected_string (combo);
+    driver_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
     if (driver_name) {
         gtk_widget_set_sensitive(GTK_WIDGET(cd->sound_driver_prefs),
             sound_driver_has_preferences (sound_driver_id_from_name (driver_name)));
@@ -432,13 +433,15 @@ static void tempdir_select_changed(GtkTreeSelection *sel,
      gtk_widget_set_sensitive(GTK_WIDGET(cd->tempdir_down),state);
 }
 
-static void driver_autodetect_toggled(GtkToggleButton *button, 
-				      gpointer user_data)
+static void driver_autodetect_toggled (GtkToggleButton *button, gpointer user_data)
 {
      ConfigDialog *cd = CONFIG_DIALOG(user_data);
      gboolean b;
      b = gtk_toggle_button_get_active(button);
-     if (b) combo_set_selection(cd->sound_driver,sound_driver_index());
+     if (b) {
+         gtk_combo_box_set_active (GTK_COMBO_BOX (cd->sound_driver),
+                                   sound_driver_index());
+     }
      gtk_widget_set_sensitive(GTK_WIDGET(cd->sound_driver), !b);
 }
 
@@ -477,12 +480,13 @@ static void config_dialog_init(ConfigDialog *cd)
                                        INI_SETTING_SOUNDBUFSIZE_DEFAULT));
     cd->sound_buffer_size = INTBOX(w);
 
-    w = combo_new();
-    cd->sound_driver = COMBO(w);
+    cd->sound_driver = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
     l = sound_driver_valid_names();
-    combo_set_items(cd->sound_driver,l,sound_driver_index());
-    g_signal_connect(G_OBJECT(cd->sound_driver),"selection_changed",
-		       G_CALLBACK(sound_driver_changed),cd);
+    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->sound_driver), l,
+                          sound_driver_index ());
+    g_signal_connect(G_OBJECT(cd->sound_driver),"changed",
+                     G_CALLBACK(sound_driver_changed),cd);
+    g_list_free (l);
 
     i = rateconv_driver_count(TRUE);
     for (l=NULL,j=0; j<i; j++)
