@@ -34,11 +34,16 @@ static void combo_size_request(GtkWidget *widget, GtkRequisition *req)
 	  req->width = obj->max_request_width;
 }
 
+
 static void combo_changed(GtkComboBox *combo)
 {
-     if (GTK_COMBO_BOX_CLASS(combo_parent_class)->changed)
-	  GTK_COMBO_BOX_CLASS(combo_parent_class)->changed(combo);
+    g_signal_emit (G_OBJECT(combo),combo_signals[CHANGED_SIGNAL],0);
+
+    if (GTK_COMBO_BOX_CLASS(combo_parent_class)->changed) {
+        GTK_COMBO_BOX_CLASS(combo_parent_class)->changed(combo);
+    }
 }
+
 
 static void combo_class_init(ComboClass *klass)
 {
@@ -47,11 +52,12 @@ static void combo_class_init(ComboClass *klass)
      klass->selection_changed = NULL;
      wc->size_request = combo_size_request;
      combo_signals[CHANGED_SIGNAL] = 
-	  g_signal_new("selection_changed", G_TYPE_FROM_CLASS(klass),
-	               G_SIGNAL_RUN_LAST,
-		       G_STRUCT_OFFSET(ComboClass,selection_changed),
-		       NULL, NULL,
-		       g_cclosure_marshal_VOID__VOID,G_TYPE_NONE,0);
+        g_signal_new ("selection_changed",
+                        G_TYPE_FROM_CLASS(klass),
+                        G_SIGNAL_RUN_LAST,
+                        G_STRUCT_OFFSET (ComboClass,selection_changed),
+                        NULL, NULL,
+                        g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
 }
 
 

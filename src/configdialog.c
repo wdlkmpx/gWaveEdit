@@ -194,13 +194,14 @@ static void sound_settings_click(GtkButton *button, gpointer user_data)
 
 static void sound_driver_changed(Combo *combo, gpointer user_data)
 {
-     ConfigDialog *cd = CONFIG_DIALOG(user_data);
-     gchar *c;
-     c = combo_selected_string(combo);
-     gtk_widget_set_sensitive(GTK_WIDGET(cd->sound_driver_prefs),
-			      sound_driver_has_preferences(
-				   sound_driver_id_from_name(c)));
-     g_free(c);
+    ConfigDialog *cd = CONFIG_DIALOG(user_data);
+    gchar *driver_name;
+    driver_name = combo_selected_string (combo);
+    if (driver_name) {
+        gtk_widget_set_sensitive(GTK_WIDGET(cd->sound_driver_prefs),
+            sound_driver_has_preferences (sound_driver_id_from_name (driver_name)));
+        g_free(driver_name);
+    }
 }
 
 static void color_select(GtkTreeSelection *sel, gpointer user_data)
