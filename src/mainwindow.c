@@ -1310,7 +1310,7 @@ static gchar *get_help_page_contents(int page)
      c = help_page_contents[page];
      l = 0;
      for (i=0; c[i]!=NULL && i<128; i++) {
-	  ts[i] = gettext(c[i]);
+	  ts[i] = _(c[i]);
 	  l += strlen(ts[i]);
      }
      r = g_malloc(l+1);

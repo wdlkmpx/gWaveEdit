@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
-#include <config.h>
+#include "main.h"
 
 #ifdef HAVE_LADSPA
 
@@ -26,7 +26,6 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <errno.h>
-#include <locale.h>
 #include "um.h"
 #include "ladspacore.h"
 
@@ -131,7 +130,6 @@ static void scan_directory(gchar *dir, gpointer dummy)
      struct dirent *de;
      int i;
      gchar *fn,*msg;
-     char *cur_lc_numeric;
 
      d = opendir(dir);
      if (d == NULL) {
@@ -143,10 +141,13 @@ static void scan_directory(gchar *dir, gpointer dummy)
 	  return;
      }
 
+#ifdef ENABLE_NLS
+     char *cur_lc_numeric;
      /* Some LADSPA plugins resets LC_NUMERIC setting,
       * so we need to save it. */
      cur_lc_numeric = setlocale(LC_NUMERIC, NULL);
-     
+#endif
+
      while (1) {
 	  de = readdir(d);
 	  if (de == NULL) break;
@@ -160,8 +161,10 @@ static void scan_directory(gchar *dir, gpointer dummy)
      }
      closedir(d);
 
+#ifdef ENABLE_NLS
      /* Restore LC_NUMERIC setting. */
      setlocale(LC_NUMERIC, cur_lc_numeric);
+#endif
 }
 
 static gboolean ladspa_cleanup_func(gpointer key, gpointer value, 
@@ -356,10 +359,12 @@ Chunk *ladspa_run_effect(Chunk *chunk, StatusBar *bar, LadspaEffect *eff,
      LADSPA_Descriptor_Function func;
      const LADSPA_Descriptor *desc;
      LADSPA_Handle hand;
-     char *cur_lc_numeric;
 
+#ifdef ENABLE_NLS
+     char *cur_lc_numeric;
      /* Save LC_NUMERIC setting. */
      cur_lc_numeric = setlocale(LC_NUMERIC, NULL);
+#endif
 
      /* Open plugin */
      p = dlopen(eff->filename,RTLD_LAZY);
@@ -417,8 +422,10 @@ Chunk *ladspa_run_effect(Chunk *chunk, StatusBar *bar, LadspaEffect *eff,
 	  for (j=0; j<eff->numports[i]; j++)
 	       g_free(eff->ports[i][j].buffer);
 
+#ifdef ENABLE_NLS
      /* Restore LC_NUMERIC setting. */
      setlocale(LC_NUMERIC, cur_lc_numeric);
+#endif
      return r;
 }
 

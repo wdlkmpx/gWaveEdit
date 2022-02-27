@@ -40,6 +40,7 @@
 #define _(x) gettext(x)
 #define N_(x) (x)
 #else
+#define gettext(x) (x)
 #define _(x) (x)
 #define N_(x) (x)
 #define setlocale(cat,locale)
