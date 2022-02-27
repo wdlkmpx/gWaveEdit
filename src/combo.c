@@ -108,7 +108,11 @@ void combo_remove_item(Combo *combo, int item_index)
 
 GtkWidget *combo_new(void)
 {
-     return (GtkWidget *) g_object_new(COMBO_TYPE, NULL);
+#if GTK_CHECK_VERSION(2, 24, 0)
+    return (GtkWidget *) g_object_new(COMBO_TYPE, NULL);
+#else
+    return gtk_combo_box_new_text ();
+#endif
 }
 
 void combo_set_max_request_width(Combo *c, int width)
