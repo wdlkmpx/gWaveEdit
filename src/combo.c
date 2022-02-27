@@ -63,7 +63,24 @@ static void combo_class_init(ComboClass *klass)
 
 static void combo_init(Combo *obj)
 {
-  obj->max_request_width = -1;
+    obj->max_request_width = -1;
+#if !GTK_CHECK_VERSION(2, 24, 0)
+    // - for GTK < 2.24 the combo is still a simple ComboBox
+    // - combo_new(): gtk_combo_box_new_text() doesn't work (needs g_object_new)
+    //   a lot of GObject errors and the selection_changed signal doesn't work
+    GtkWidget * combo_box = GTK_WIDGET (obj);
+    GtkCellRenderer * cell;
+    GtkListStore * store;
+
+    store = gtk_list_store_new (1, G_TYPE_STRING);
+    gtk_combo_box_set_model (GTK_COMBO_BOX (combo_box), GTK_TREE_MODEL (store));
+    g_object_unref (store);
+
+    cell = gtk_cell_renderer_text_new ();
+    gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), cell, TRUE);
+    gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), cell,
+                                    "text", 0, NULL);
+#endif
 }
 
 void combo_set_items(Combo *combo, GList *item_strings, int default_index)
@@ -108,11 +125,7 @@ void combo_remove_item(Combo *combo, int item_index)
 
 GtkWidget *combo_new(void)
 {
-#if GTK_CHECK_VERSION(2, 24, 0)
     return (GtkWidget *) g_object_new(COMBO_TYPE, NULL);
-#else
-    return gtk_combo_box_new_text ();
-#endif
 }
 
 void combo_set_max_request_width(Combo *c, int width)
