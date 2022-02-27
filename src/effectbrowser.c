@@ -755,7 +755,7 @@ static void effect_browser_init(EffectBrowser *eb)
      b11 = gtk_scrolled_window_new(NULL,NULL);
      gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(b11),
 				    GTK_POLICY_AUTOMATIC,GTK_POLICY_AUTOMATIC);
-     gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(b11),b11w);
+     gtk_container_add (GTK_CONTAINER (b11), b11w);
      gtk_widget_set_size_request(GTK_WIDGET(b11),150,150);
      eb->effect_list_container = GTK_CONTAINER(b11);
 
