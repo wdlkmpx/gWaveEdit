@@ -489,7 +489,7 @@ gboolean session_dialog(void)
      gtk_tree_selection_set_mode(sel,GTK_SELECTION_SINGLE);
      g_signal_connect(sel,"changed",
                       G_CALLBACK(session_dialog_select),&ddata);
-     gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(c),d);
+     gtk_container_add (GTK_CONTAINER (c), d);
 
      d = gtk_dialog_add_button (GTK_DIALOG (sdialog), _("Resume selected"), RESPONSE_RESUME);
      ddata.resume_button = d;
