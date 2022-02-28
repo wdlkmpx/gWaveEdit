@@ -36,8 +36,11 @@ typedef struct {
 
      GtkTable table;
 
-     Combo *samplesize_combo,*sign_combo,*endian_combo,*packing_combo;
-     Combo *channel_combo;
+     GtkComboBoxText *samplesize_combo;
+     GtkComboBoxText *sign_combo;
+     GtkComboBoxText *endian_combo;
+     GtkComboBoxText *packing_combo;
+     GtkComboBoxText *channel_combo;
      Intbox *rate_box;
 
 } FormatSelector;
