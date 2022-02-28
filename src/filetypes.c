@@ -1117,28 +1117,30 @@ static gboolean ogg_save(Chunk *chunk, gchar *filename, gpointer settings,
 }
 
 static struct {
-     Combo *type_combo, *subtype_combo;
+     GtkComboBoxText *type_combo;
+     GtkComboBoxText *subtype_combo;
      GtkEntry *arg_entry;
      GtkToggleButton *set_default;
      gboolean ok_flag, destroyed_flag;
-     GList *preset_list, *bitrate_list;
+     GList *preset_list;
+     GList *bitrate_list;
 } mp3_get_settings_data;
 
-static void mp3_get_settings_type_changed(Combo *obj, gpointer user_data)
+static void mp3_get_settings_type_changed(GtkComboBox *obj, gpointer user_data)
 {
      int i;
-     i = combo_selected_index(obj);
+     i = gtk_combo_box_get_active (obj);
      gtk_widget_set_sensitive(GTK_WIDGET(mp3_get_settings_data.subtype_combo),
 			      (i<3));
      gtk_widget_set_sensitive(GTK_WIDGET(mp3_get_settings_data.arg_entry),
 			      (i==3));
-     if (i == 0)
-	  combo_set_items(mp3_get_settings_data.subtype_combo, 
-			  mp3_get_settings_data.preset_list, 0);
-     else if (i < 3)
-	  combo_set_items(mp3_get_settings_data.subtype_combo,
-			  mp3_get_settings_data.bitrate_list, 5);
-     
+     if (i == 0) {
+        w_gtk_glist_to_combo (GTK_COMBO_BOX (mp3_get_settings_data.subtype_combo),
+                              mp3_get_settings_data.preset_list, 0);
+     } else if (i < 3) {
+        w_gtk_glist_to_combo (GTK_COMBO_BOX (mp3_get_settings_data.subtype_combo),
+                              mp3_get_settings_data.bitrate_list, 5);
+     }
 }
 
 static void
@@ -1225,22 +1227,24 @@ static gpointer mp3_get_settings(void)
      d = gtk_label_new(_("Encoding type: "));
      gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
      for (l=NULL, i=0; i<ARRAY_LENGTH(type_names); i++)
-	  l = g_list_append(l,type_names[i]);     
-     d = combo_new();
-     mp3_get_settings_data.type_combo = COMBO(d);
-     combo_set_items(mp3_get_settings_data.type_combo, l, 0);
-     g_signal_connect(G_OBJECT(d),"selection_changed",
-			G_CALLBACK(mp3_get_settings_type_changed),NULL);
+	  l = g_list_append(l,type_names[i]);
+
+     d = gtk_combo_box_text_new ();
+     mp3_get_settings_data.type_combo = GTK_COMBO_BOX_TEXT (d);
+     w_gtk_glist_to_combo (GTK_COMBO_BOX (d), l, 0);
+     g_signal_connect (G_OBJECT(d),"changed",
+                       G_CALLBACK(mp3_get_settings_type_changed), NULL);
      gtk_box_pack_start(GTK_BOX(c),d,TRUE,TRUE,0);     
-     g_list_free(l);
+
      c = gtk_hbox_new(FALSE,4);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
      d = gtk_label_new(_("Quality: "));
      gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
-     d = combo_new();
-     mp3_get_settings_data.subtype_combo = COMBO(d);
-     combo_set_items(mp3_get_settings_data.subtype_combo, 
-		     mp3_get_settings_data.preset_list, 0);
+
+     d = gtk_combo_box_text_new ();
+     mp3_get_settings_data.subtype_combo = GTK_COMBO_BOX_TEXT (d);
+     w_gtk_glist_to_combo (GTK_COMBO_BOX (d), mp3_get_settings_data.preset_list, 0);
+
      gtk_box_pack_start(GTK_BOX(c),d,TRUE,TRUE,0);
      c = gtk_hbox_new(FALSE, 4);
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
@@ -1265,19 +1269,19 @@ static gpointer mp3_get_settings(void)
      mp3_get_settings_data.destroyed_flag = FALSE;
      mp3_get_settings_data.ok_flag = FALSE;
 
-     combo_set_selection(mp3_get_settings_data.type_combo, type);
-     if (type < 3)
-	  combo_set_selection(mp3_get_settings_data.subtype_combo, subtype);
-     else
-	  gtk_entry_set_text(mp3_get_settings_data.arg_entry, custom_arg);
-
+     gtk_combo_box_set_active (GTK_COMBO_BOX (mp3_get_settings_data.type_combo), type);
+     if (type < 3) {
+        gtk_combo_box_set_active (GTK_COMBO_BOX (mp3_get_settings_data.subtype_combo), subtype);
+     } else {
+        gtk_entry_set_text(mp3_get_settings_data.arg_entry, custom_arg);
+     }
      // wait for the dialog to close
      while (!mp3_get_settings_data.destroyed_flag)
 	  mainloop();
 
      if (mp3_get_settings_data.ok_flag) {
-	  i = combo_selected_index(mp3_get_settings_data.type_combo);
-	  j = combo_selected_index(mp3_get_settings_data.subtype_combo);
+	  i = gtk_combo_box_get_active ( GTK_COMBO_BOX (mp3_get_settings_data.type_combo));
+	  j = gtk_combo_box_get_active ( GTK_COMBO_BOX (mp3_get_settings_data.subtype_combo));
 	  switch (i) {
 	  case 0: 
 	       p = g_strdup_printf("--preset %s",vbr_preset_strings[j]); 
