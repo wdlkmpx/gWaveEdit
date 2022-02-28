@@ -104,9 +104,10 @@ gboolean ladspa_dialog_apply(EffectDialog *ed)
      }
 
      for (j=2; j<4; j++)
-	  for (i=0; i < (guint) ld->effect->numports[j]; i++) {
-
-	       k = combo_selected_index(COMBO(ld->settings[j][i]));
+     {
+        for (i=0; i < (guint) ld->effect->numports[j]; i++)
+        {
+            k = gtk_combo_box_get_active (GTK_COMBO_BOX (ld->settings[j][i]));
 
 	       d = g_strdup_printf("ladspa_%s_default%s%d",ld->effect->id,
 				   (j==2)?"Input":"Output",i);
@@ -135,7 +136,8 @@ gboolean ladspa_dialog_apply(EffectDialog *ed)
 	       ld->effect->ports[j][i].map = k;
 	       inifile_set_guint32(d,k);
 	       g_free(d);
-	  }
+        }
+     }
 
      ld->effect->keep = gtk_toggle_button_get_active(ld->keep);
      c = g_strdup_printf("ladspa_%s_defaultKeep",ld->effect->id);
@@ -170,6 +172,7 @@ void ladspa_dialog_setup(EffectDialog *ed)
      LadspaDialog *ld = LADSPA_DIALOG(ed);
      LadspaEffect *eff;
      GtkWidget *a,*b,*c,*d,*e,*x;
+     GtkComboBoxText *combo;
      guint i,k,n,q;
      gint j;
      float f,u,l;
@@ -320,14 +323,15 @@ void ladspa_dialog_setup(EffectDialog *ed)
 	  c = gtk_vbox_new(FALSE,3);
 	  gtk_container_add(GTK_CONTAINER(b),c);
 	  gtk_container_set_border_width(GTK_CONTAINER(c),4);
-	  for (i=0; i < (guint) eff->numports[n+2]; i++) {
+	  for (i=0; i < (guint) eff->numports[n+2]; i++)
+      {
 	       d = gtk_hbox_new(FALSE,3);
 	       gtk_box_pack_start(GTK_BOX(c),d,FALSE,FALSE,0);
 	       e = gtk_label_new(eff->ports[n+2][i].name);
 	       gtk_box_pack_start(GTK_BOX(d),e,FALSE,FALSE,0);
-	       e = combo_new();
-	       ld->settings[n+2][i] = e;
-	       gtk_box_pack_end(GTK_BOX(d),e,FALSE,FALSE,0);
+	       combo = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
+	       ld->settings[n+2][i] = GTK_WIDGET (combo);
+	       gtk_box_pack_end(GTK_BOX(d),GTK_WIDGET(combo),FALSE,FALSE,0);
 	       ch = g_strdup_printf("ladspa_%s_default%s%d",eff->id,
 				    (n==0)?"Input":"Output",i);	       
 
@@ -339,7 +343,7 @@ void ladspa_dialog_setup(EffectDialog *ed)
 	       else if ((guint) j >= k) {
 		    j = q;
 	       }
-	       combo_set_items(COMBO(e),li,j);
+           w_gtk_glist_to_combo (GTK_COMBO_BOX (combo), li, j);
 	  }
      }
 
