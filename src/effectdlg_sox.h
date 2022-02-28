@@ -39,7 +39,8 @@ typedef struct {
      Floatbox *fb1,*fb2,*fb3,*fb4,*fb5;
      Floatbox **fba[4];
      GtkComboBoxText **ca;
-     Combo *c1,*c2;
+     GtkComboBoxText *c1;
+     GtkComboBoxText *c2;
      Intbox *ib1,*ib2,*ib3;
      GtkToggleButton *tb1;
 } SoxDialog;

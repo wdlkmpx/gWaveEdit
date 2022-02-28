@@ -220,8 +220,8 @@ static Chunk *sox_dialog_apply_proc_main(Chunk *chunk, StatusBar *bar,
      } else if (!strcmp(ed->effect_name,"pitch")) {
 	  inifile_set_gfloat("sox_pitch_amount",sd->fb1->val);
 	  inifile_set_gfloat("sox_pitch_width",sd->fb2->val);
-	  t1 = combo_selected_string(sd->c1);
-	  t2 = combo_selected_string(sd->c2);
+	  t1 = gtk_combo_box_text_get_active_text (sd->c1);
+	  t2 = gtk_combo_box_text_get_active_text (sd->c2);
 	  g_snprintf(c,sizeof(cmd_buf)-(c-cmd_buf),"pitch %f %f %s %s",
 		     sd->fb1->val,sd->fb2->val,t1,t2);
 	  g_free(t1);
@@ -333,11 +333,11 @@ static void setup_filter(EffectDialog *ed, gchar *bw_name, gboolean nm)
      gtk_widget_show_all(a);
 }
 
-static void sox_filter_type_changed(Combo *combo, gpointer user_data)
+static void sox_filter_type_changed (GtkComboBox *combo, gpointer user_data)
 {
      SoxDialog *sd = SOX_DIALOG(user_data);
      guint i;
-     i = combo_selected_index(combo);
+     i = gtk_combo_box_get_active (combo);
      sd->i1 = i;
      gtk_widget_set_sensitive(GTK_WIDGET(sd->ib1),(i==1 || i==2));
      gtk_widget_set_sensitive(GTK_WIDGET(sd->ib2),(i==0 || i==2));
@@ -434,7 +434,7 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
 {
      SoxDialog *sd = SOX_DIALOG(ed);
      GtkWidget *a,*b,*c,*w1;
-     GList *l=NULL;
+     GtkComboBoxText * combo;
      guint i;
      
      if (!strcmp(ed->effect_name,"echo")) {
@@ -480,13 +480,12 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
 	  attach_label(_("samples"),a,4,2);
 	  attach_label(_("Beta"),a,5,0);
 
-	  w1 = b = combo_new();
-	  l = g_list_append(l,_("Lowpass"));
-	  l = g_list_append(l,_("Highpass"));
-	  l = g_list_append(l,_("Bandpass"));
-	  combo_set_items(COMBO(b),l,2);
-	  g_list_free(l);	  
-	  gtk_table_attach(GTK_TABLE(a),b,1,3,0,1,0,0,0,7);
+      combo = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
+      gtk_combo_box_text_append_text (combo, _("Lowpass"));
+      gtk_combo_box_text_append_text (combo, _("Highpass"));
+      gtk_combo_box_text_append_text (combo, _("Bandpass"));
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 2);
+	  gtk_table_attach(GTK_TABLE(a),GTK_WIDGET(combo),1,3,0,1,0,0,0,7);
 	  	  
 	  b = intbox_new(inifile_get_guint32("sox_filter_low",100));
 	  sd->ib1 = INTBOX(b);
@@ -507,10 +506,12 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
 	  sd->fb1 = FLOATBOX(b);
 	  gtk_table_attach(GTK_TABLE(a),b,1,2,5,6,GTK_FILL,0,0,0);
 
-	  g_signal_connect(G_OBJECT(w1),"selection_changed",
-			     G_CALLBACK(sox_filter_type_changed),sd);
-	  combo_set_selection(COMBO(w1),sd->i1);
+      g_signal_connect(G_OBJECT(combo),"changed",
+                       G_CALLBACK(sox_filter_type_changed), sd);
+
+      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), sd->i1);
 	  gtk_widget_show_all(a);
+
      } else if (!strcmp(ed->effect_name,"compand")) {
 	  a = gtk_vbox_new(FALSE,8);
 	  gtk_container_add(GTK_CONTAINER(ed->input_area),a);
@@ -578,6 +579,7 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
 	       (GTK_TOGGLE_BUTTON(w1),
 		inifile_get_gboolean("sox_dcshift_limiter",FALSE));
 	  gtk_widget_show_all(a);
+
      } else if (!strcmp(ed->effect_name,"pitch")) {
 	  a = gtk_table_new(4,3,FALSE);
 	  gtk_container_add(GTK_CONTAINER(ed->input_area),a);
@@ -593,23 +595,21 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
 	  b = floatbox_new(inifile_get_gfloat("sox_pitch_width",20.0));
 	  gtk_table_attach(GTK_TABLE(a),b,1,2,1,2,GTK_FILL,0,0,0);
 	  sd->fb2 = FLOATBOX(b);
-	  b = combo_new();
-	  gtk_table_attach(GTK_TABLE(a),b,1,3,2,3,0,0,0,0);
-	  l = g_list_append(NULL,translate_strip(N_("Interpolation|Cubic")));
-	  l = g_list_append(l,translate_strip(N_("Interpolation|Linear")));
-	  combo_set_items(COMBO(b),l,0);
-	  g_list_free(l);
-	  sd->c1 = COMBO(b);
-	  b = combo_new();
-	  gtk_table_attach(GTK_TABLE(a),b,1,3,3,4,0,0,0,0);
-	  l = g_list_append(NULL,translate_strip(N_("Fade|Cos")));
-	  l = g_list_append(l,translate_strip(N_("Fade|Hamming")));
-	  l = g_list_append(l,translate_strip(N_("Fade|Linear")));
-	  l = g_list_append(l,translate_strip(N_("Fade|Trapezoid")));
-	  combo_set_items(COMBO(b),l,0);
-	  g_list_free(l);
-	  sd->c2 = COMBO(b);
-	  gtk_widget_show_all(a);
+
+      sd->c1 = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
+      gtk_table_attach (GTK_TABLE(a),GTK_WIDGET(sd->c1),1,3,2,3,0,0,0,0);
+      gtk_combo_box_text_append_text (sd->c1, translate_strip(N_("Interpolation|Cubic")));
+      gtk_combo_box_text_append_text (sd->c1, translate_strip(N_("Interpolation|Linear")));
+
+      sd->c2 = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
+      gtk_table_attach(GTK_TABLE(a),GTK_WIDGET(sd->c2),1,3,3,4,0,0,0,0);
+      gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Cos")));
+      gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Hamming")));
+      gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Linear")));
+      gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Trapezoid")));
+
+      gtk_widget_show_all(a);
+
      } else if (!strcmp(ed->effect_name,"stretch")) {
 	  a = gtk_table_new(2,3,FALSE);
 	  gtk_container_add(GTK_CONTAINER(ed->input_area),a);
