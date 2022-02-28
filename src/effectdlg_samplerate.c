@@ -80,8 +80,8 @@ static void samplerate_dialog_init(SamplerateDialog *v)
 {
      EffectDialog *ed = EFFECT_DIALOG(v);
      GtkWidget *a,*b,*c;
+     GtkComboBoxText * combo;
      GtkRequisition req;
-     GList *l = NULL;
      int i,j;
 
      a = gtk_vbox_new ( FALSE, 3 );
@@ -101,22 +101,21 @@ static void samplerate_dialog_init(SamplerateDialog *v)
      c = gtk_label_new(_("Method: "));
      gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
 
-     c = combo_new();
-     gtk_box_pack_start(GTK_BOX(b),c,FALSE,FALSE,0);
-     gtk_widget_size_request(c,&req);
-#ifdef COMBO_OLDSCHOOL
-     gtk_widget_set_size_request(c,req.width*3/2,req.height);
-#endif
+     combo = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
+     gtk_box_pack_start(GTK_BOX(b),GTK_WIDGET(combo),FALSE,FALSE,0);
+     gtk_widget_size_request(GTK_WIDGET(combo),&req);
      i = rateconv_driver_count(FALSE);
-     for (j=0; j<i; j++)
-	  l = g_list_append(l,(gpointer)rateconv_driver_name(FALSE,j));
+     for (j=0; j<i; j++) {
+        gtk_combo_box_text_append_text (combo, rateconv_driver_name(FALSE,j));
+     }
      v->method = inifile_get_guint32("srate_method",0);
-     if (v->method >= g_list_length(l)) v->method = 0;
-     combo_set_items(COMBO(c),l,v->method);
-     g_list_free(l);
+     if ((int)v->method >= i) {
+         v->method = 0;
+     }
+     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), v->method);
      
-     g_signal_connect(G_OBJECT(c),"selection_changed",
-			G_CALLBACK(set_method),v);
+     g_signal_connect(G_OBJECT(combo),"changed",
+                      G_CALLBACK(set_method),v);
 
      gtk_widget_show_all(a);
 }
