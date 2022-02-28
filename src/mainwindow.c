@@ -211,11 +211,11 @@ static void update_desc(Mainwindow *w)
 			      
 }
 
-static void typesel_changed(Combo *obj, GtkWidget *user_data)
+static void typesel_changed(GtkComboBox *obj, GtkWidget *user_data)
 {
      int i;
      gchar *c;
-     i = combo_selected_index(obj);
+     i = gtk_combo_box_get_active (obj);
      if (i == 0) {
 	  gtk_widget_set_sensitive(user_data,TRUE);
      } else {
@@ -246,7 +246,8 @@ static gchar *get_save_filename(gchar *old_filename, gchar *title_text,
      gchar *lsf,*lsd,*filename;
      gchar *c,*d,*e;
      GtkBox *b1,*b2;
-     GtkWidget *w,*usedef,*typesel;
+     GtkWidget *w,*usedef;
+     GtkComboBoxText *typesel;
      GList *l;
      gint i;
 
@@ -269,7 +270,7 @@ static gchar *get_save_filename(gchar *old_filename, gchar *title_text,
      /* Create the custom widget */
      usedef = gtk_check_button_new_with_label(_("Use default settings"));
      gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(usedef),TRUE);
-     typesel = combo_new();
+     typesel = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
      
      l = g_list_append(NULL,g_strdup(_("Auto-detect from extension")));
      for (i=0; ; i++) {
@@ -279,16 +280,16 @@ static gchar *get_save_filename(gchar *old_filename, gchar *title_text,
 	  e = g_strdup_printf("%s (%s)",c,d);
 	  l = g_list_append(l,e);
      }
-     combo_set_items(COMBO(typesel),l,0);
-     g_signal_connect(G_OBJECT(typesel),"selection-changed",
-			G_CALLBACK(typesel_changed),usedef);
+     w_gtk_glist_to_combo (GTK_COMBO_BOX (typesel), l, 0);
+     g_signal_connect(G_OBJECT(typesel),"changed",
+                      G_CALLBACK(typesel_changed),usedef);
      g_list_foreach(l,(GFunc)g_free,NULL);
      g_list_free(l);
 
      b1 = GTK_BOX(gtk_hbox_new(FALSE,0));
      w = gtk_label_new(_("File type: "));
      gtk_box_pack_start(b1,w,FALSE,FALSE,0);
-     gtk_box_pack_start(b1,typesel,TRUE,TRUE,0);
+     gtk_box_pack_start(b1,GTK_WIDGET (typesel),TRUE,TRUE,0);
      gtk_box_pack_start(b1,usedef,FALSE,FALSE,6);
      b2 = GTK_BOX(gtk_vbox_new(FALSE,8));
      gtk_box_pack_start(b2,GTK_WIDGET(b1),FALSE,FALSE,0);
@@ -315,7 +316,7 @@ static gchar *get_save_filename(gchar *old_filename, gchar *title_text,
      }
 
      *use_defaults = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(usedef));
-     *type_id = combo_selected_index(COMBO(typesel)) - 1;
+     *type_id = gtk_combo_box_get_active (GTK_COMBO_BOX(typesel)) - 1;
 
      g_free(lsd);
      gtk_object_unref(GTK_OBJECT(typesel));
