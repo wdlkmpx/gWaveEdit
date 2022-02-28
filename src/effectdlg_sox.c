@@ -600,6 +600,7 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
       gtk_table_attach (GTK_TABLE(a),GTK_WIDGET(sd->c1),1,3,2,3,0,0,0,0);
       gtk_combo_box_text_append_text (sd->c1, translate_strip(N_("Interpolation|Cubic")));
       gtk_combo_box_text_append_text (sd->c1, translate_strip(N_("Interpolation|Linear")));
+      gtk_combo_box_set_active (GTK_COMBO_BOX (sd->c1), 0);
 
       sd->c2 = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
       gtk_table_attach(GTK_TABLE(a),GTK_WIDGET(sd->c2),1,3,3,4,0,0,0,0);
@@ -607,6 +608,7 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
       gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Hamming")));
       gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Linear")));
       gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Trapezoid")));
+      gtk_combo_box_set_active (GTK_COMBO_BOX (sd->c2), 0);
 
       gtk_widget_show_all(a);
 
