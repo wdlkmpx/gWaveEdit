@@ -102,13 +102,10 @@ static void config_dialog_ok(GtkButton *button, gpointer user_data)
     inifile_set_gboolean("mainwinFront",
 			 gtk_toggle_button_get_active(cd->mainwin_front));
 
-    default_time_mode = combo_selected_index(cd->time_display);
+    default_time_mode = gtk_combo_box_get_active (GTK_COMBO_BOX (cd->time_display));
     inifile_set_guint32(INI_SETTING_TIME_DISPLAY,default_time_mode);
 
-    default_time_mode = combo_selected_index(cd->time_display);
-    inifile_set_guint32(INI_SETTING_TIME_DISPLAY,default_time_mode);
-
-    default_timescale_mode = combo_selected_index(cd->time_display_timescale);
+    default_timescale_mode = gtk_combo_box_get_active (GTK_COMBO_BOX (cd->time_display_timescale));
     inifile_set_guint32(INI_SETTING_TIME_DISPLAY_SCALE,default_timescale_mode);
 
     sound_lock_driver = gtk_toggle_button_get_active(cd->sound_lock);
@@ -163,9 +160,10 @@ static void config_dialog_ok(GtkButton *button, gpointer user_data)
     b = gtk_toggle_button_get_active(cd->varispeed_enable);
     inifile_set_gboolean("varispeed",b);
     mainwindow_set_speed_sensitive(b);
-    inifile_set_guint32("varispeedConv",
-			combo_selected_index(cd->varispeed_method));
-    inifile_set_guint32("speedConv",combo_selected_index(cd->speed_method));
+    inifile_set_guint32 ("varispeedConv",
+            gtk_combo_box_get_active (GTK_COMBO_BOX (cd->varispeed_method)));
+    inifile_set_guint32("speedConv",
+            gtk_combo_box_get_active (GTK_COMBO_BOX (cd->speed_method)));
 
     dither_editing = gtk_toggle_button_get_active(cd->dither_editing);
     inifile_set_guint32("ditherEditing",
@@ -174,11 +172,11 @@ static void config_dialog_ok(GtkButton *button, gpointer user_data)
     inifile_set_guint32("ditherPlayback",
 			dither_playback?DITHER_MINIMAL:DITHER_NONE);
 
-    if (sndfile_ogg_supported())
-	 inifile_set_guint32("sndfileOggMode",
-			     combo_selected_index(cd->oggmode));
-
-    sample_convert_mode = combo_selected_index(cd->convmode);
+    if (sndfile_ogg_supported()) {
+        inifile_set_guint32("sndfileOggMode",
+            gtk_combo_box_get_active (GTK_COMBO_BOX (cd->oggmode)));
+    }
+    sample_convert_mode = gtk_combo_box_get_active (GTK_COMBO_BOX (cd->convmode));
     inifile_set_guint32("sampleMode",sample_convert_mode);
 
     gtk_widget_destroy(GTK_WIDGET(cd));
@@ -492,25 +490,23 @@ static void config_dialog_init(ConfigDialog *cd)
     for (l=NULL,j=0; j<i; j++)
 	 l = g_list_append(l,(gpointer)rateconv_driver_name(TRUE,j));
 
-    w = combo_new();
-    cd->varispeed_method = COMBO(w);
+    cd->varispeed_method = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
     j = inifile_get_guint32("varispeedConv",i-1);
     if (j >= i) j = i-1;
-    combo_set_items(cd->varispeed_method, l, j);
-
+    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->varispeed_method), l, j);
     g_list_free(l);
+    l = NULL;
 
     i = rateconv_driver_count(FALSE);
     for (l=NULL,j=0; j<i; j++)
 	 l = g_list_append(l,(gpointer)rateconv_driver_name(FALSE,j));
 
-    w = combo_new();
-    cd->speed_method = COMBO(w);
+    cd->speed_method = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
     j = inifile_get_guint32("speedConv",0);
     if (j >= i) j = 0;
-    combo_set_items(cd->speed_method, l, j);
-
+    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->speed_method), l, j);
     g_list_free(l);
+    l = NULL;
 
     w = gtk_entry_new();
     cd->mixer_utility = GTK_ENTRY(w);
@@ -610,8 +606,7 @@ static void config_dialog_init(ConfigDialog *cd)
     cd->varispeed_fast = GTK_TOGGLE_BUTTON(w);
     gtk_toggle_button_set_active(cd->varispeed_fast,!varispeed_smooth_flag);
     
-    w = combo_new();
-    cd->time_display = COMBO(w);
+    cd->time_display = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
     l = NULL;
     l = g_list_append(l,_("(H')MM:SS.t"));
     l = g_list_append(l,_("(H')MM:SS.mmmm"));
@@ -621,14 +616,13 @@ static void config_dialog_init(ConfigDialog *cd)
     l = g_list_append(l,_("Time Code 29.97fps (NTSC)"));
     l = g_list_append(l,_("Time Code 30fps"));
     i = inifile_get_guint32(INI_SETTING_TIME_DISPLAY,0);
-    combo_set_items(cd->time_display,l,i);
+    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->time_display), l, i);
 
-    w = combo_new();
-    cd->time_display_timescale = COMBO(w);
+    cd->time_display_timescale = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
     i = inifile_get_guint32(INI_SETTING_TIME_DISPLAY_SCALE,i);
-    combo_set_items(cd->time_display_timescale,l,i);
-
+    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->time_display_timescale), l, i);
     g_list_free(l);
+    l = NULL;
 
     w = gtk_check_button_new_with_mnemonic(_("_Remember window "
                                              "sizes/positions"));
@@ -731,26 +725,25 @@ static void config_dialog_init(ConfigDialog *cd)
     g_signal_connect(G_OBJECT(w),"toggled",
 		       G_CALLBACK(driver_autodetect_toggled),cd);
 
-    w = combo_new();
+    cd->oggmode = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
     l = NULL;
     l = g_list_append(l,_("Direct access"));
     l = g_list_append(l,_("Decompress"));
     l = g_list_append(l,_("Bypass"));
-    combo_set_items(COMBO(w),l,inifile_get_guint32("sndfileOggMode",1));
+    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->oggmode),
+                          l, inifile_get_guint32("sndfileOggMode",1));
     g_list_free(l);
     if (!sndfile_ogg_supported()) {
-	 combo_set_selection(COMBO(w),2);
-	 gtk_widget_set_sensitive(w,FALSE);
+        gtk_combo_box_set_active (GTK_COMBO_BOX (cd->oggmode), 2);
+        gtk_widget_set_sensitive (GTK_WIDGET (cd->oggmode), FALSE);
     }
-    cd->oggmode = COMBO(w);
 
-    w = combo_new();
+    cd->convmode = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
     l = NULL;
     l = g_list_append(l,_("Biased"));
     l = g_list_append(l,_("Pure-Scaled"));
-    combo_set_items(COMBO(w),l,sample_convert_mode);
+    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->convmode), l, sample_convert_mode);
     g_list_free(l);
-    cd->convmode = COMBO(w);
 
     /* Layout the window */
 

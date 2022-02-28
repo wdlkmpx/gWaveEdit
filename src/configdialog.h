@@ -31,7 +31,8 @@
 #define IS_CONFIG_DIALOG(obj)       (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CONFIG_DIALOG_TYPE))
 #define CONFIG_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_CAST ((klass),  CONFIG_DIALOG_TYPE, ConfigDialogClass))
 
-typedef struct {
+typedef struct
+{
      GtkDialog dialog;
      Intbox *disk_threshold;
      GtkComboBoxText *sound_driver;
@@ -48,8 +49,12 @@ typedef struct {
      Intbox *recent_files;
      Intbox *vzoom_max;
      Intbox *view_quality;
-     Combo *time_display,*time_display_timescale,*varispeed_method,
-	  *speed_method;
+
+     GtkComboBoxText *time_display;
+     GtkComboBoxText *time_display_timescale;
+     GtkComboBoxText *varispeed_method;
+     GtkComboBoxText *speed_method;
+
      GtkToggleButton *remember_geometry;
      GtkListStore *tempdirs;
      GtkTreeSelection *tempsel;
@@ -58,9 +63,12 @@ typedef struct {
      GtkEntry *tempdir_add_entry;
      FormatSelector *fallback_format;
      GtkToggleButton *floating_tempfiles;
-     Combo *oggmode;
-     Combo *convmode;
+
+     GtkComboBoxText *oggmode;
+     GtkComboBoxText *convmode;
+
 } ConfigDialog;
+
 
 typedef struct {
      GtkDialogClass wc;
