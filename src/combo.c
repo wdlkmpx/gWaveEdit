@@ -155,3 +155,26 @@ void w_gtk_glist_to_combo (GtkComboBox *combo, GList *strings, int default_index
     }
     gtk_combo_box_set_active (GTK_COMBO_BOX (combo), default_index);
 }
+
+
+void w_gtk_strv_to_combo (GtkComboBox *combo, char **strv, int default_index)
+{
+    int i;
+    GtkListStore * store;
+    GtkTreeIter iter;
+    store = GTK_LIST_STORE (gtk_combo_box_get_model (combo));
+    gtk_list_store_clear (store);
+    //gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (combo));
+    if (!strv || !*strv) {
+        return; /* nothing to add */
+    }
+    for (i = 0; strv[i]; i++) {
+        gtk_list_store_append (store, &iter);
+        gtk_list_store_set (store, &iter, 0, strv[i], -1);
+        //gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), strv[i]);
+    }
+    if (default_index >= i || default_index < 0) {
+        default_index = 0;
+    }
+    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), default_index);
+}

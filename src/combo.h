@@ -57,5 +57,6 @@ void combo_set_max_request_width(Combo *c, int w);
 
 //====
 void w_gtk_glist_to_combo (GtkComboBox *combo, GList *strings, int default_index);
+void w_gtk_strv_to_combo (GtkComboBox *combo, char **strv, int default_index);
 
 #endif

@@ -407,17 +407,20 @@ static void setup_echos(EffectDialog *ed, gchar *gain_name, gint lines,
 	  setup_echo_column(sd,GTK_TABLE(b),3,lines);
      }
      if (show_mtype) {
+       char * mod_strv[] = {
+            translate_strip(N_("Modulation|Sinusoidal")),
+            translate_strip(N_("Modulation|Triangular")),
+            NULL,
+       };
 	  attach_label(_("Modulation  "),b,0,4);
 	  sd->ca = g_malloc(lines*sizeof(GtkComboBoxText *));
 	  for (i=0; i < (guint) lines; i++) {
 	       c = gtk_combo_box_text_new();
 	       gtk_widget_size_request(c,&req);
 	       sd->ca[i] = GTK_COMBO_BOX_TEXT(c);
-	       gtk_combo_box_text_append_text(sd->ca[i], translate_strip(N_("Modulation|Sinusoidal")));
-	       gtk_combo_box_text_append_text(sd->ca[i], translate_strip(N_("Modulation|Triangular")));
-	       gtk_combo_box_set_active(GTK_COMBO_BOX(sd->ca[i]), 0);
+	       w_gtk_strv_to_combo (GTK_COMBO_BOX (sd->ca[i]), mod_strv, 0);
 	       gtk_table_attach(GTK_TABLE(b),c,4,5,i+1,i+2,GTK_FILL,0,0,0);
-	  }
+	   }
      }
      b = gtk_label_new(_("(Lines with delay=0 will be ignored.)"));
      gtk_box_pack_start(GTK_BOX(a),b,FALSE,FALSE,0);
@@ -481,10 +484,13 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
 	  attach_label(_("Beta"),a,5,0);
 
       combo = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
-      gtk_combo_box_text_append_text (combo, _("Lowpass"));
-      gtk_combo_box_text_append_text (combo, _("Highpass"));
-      gtk_combo_box_text_append_text (combo, _("Bandpass"));
-      gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 2);
+      char * pass_strv[] = {
+          _("Lowpass"),
+          _("Highpass"),
+          _("Bandpass"),
+          NULL,
+      };
+      w_gtk_strv_to_combo (GTK_COMBO_BOX (combo), pass_strv, 2);
 	  gtk_table_attach(GTK_TABLE(a),GTK_WIDGET(combo),1,3,0,1,0,0,0,7);
 	  	  
 	  b = intbox_new(inifile_get_guint32("sox_filter_low",100));
@@ -598,17 +604,23 @@ static void sox_dialog_browser_setup(EffectDialog *ed)
 
       sd->c1 = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
       gtk_table_attach (GTK_TABLE(a),GTK_WIDGET(sd->c1),1,3,2,3,0,0,0,0);
-      gtk_combo_box_text_append_text (sd->c1, translate_strip(N_("Interpolation|Cubic")));
-      gtk_combo_box_text_append_text (sd->c1, translate_strip(N_("Interpolation|Linear")));
-      gtk_combo_box_set_active (GTK_COMBO_BOX (sd->c1), 0);
+      char * inter_strv[] = {
+          translate_strip(N_("Interpolation|Cubic")),
+          translate_strip(N_("Interpolation|Linear")),
+          NULL,
+      };
+      w_gtk_strv_to_combo (GTK_COMBO_BOX (sd->c1), inter_strv, 0);
 
       sd->c2 = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
       gtk_table_attach(GTK_TABLE(a),GTK_WIDGET(sd->c2),1,3,3,4,0,0,0,0);
-      gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Cos")));
-      gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Hamming")));
-      gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Linear")));
-      gtk_combo_box_text_append_text (sd->c2, translate_strip(N_("Fade|Trapezoid")));
-      gtk_combo_box_set_active (GTK_COMBO_BOX (sd->c2), 0);
+      char * fade_strv[] = {
+          translate_strip(N_("Fade|Cos")),
+          translate_strip(N_("Fade|Hamming")),
+          translate_strip(N_("Fade|Linear")),
+          translate_strip(N_("Fade|Trapezoid")),
+          NULL,
+      };
+      w_gtk_strv_to_combo (GTK_COMBO_BOX (sd->c2), fade_strv, 0);
 
       gtk_widget_show_all(a);
 

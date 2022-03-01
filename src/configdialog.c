@@ -607,22 +607,22 @@ static void config_dialog_init(ConfigDialog *cd)
     gtk_toggle_button_set_active(cd->varispeed_fast,!varispeed_smooth_flag);
     
     cd->time_display = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
-    l = NULL;
-    l = g_list_append(l,_("(H')MM:SS.t"));
-    l = g_list_append(l,_("(H')MM:SS.mmmm"));
-    l = g_list_append(l,translate_strip(N_("TimeDisplay|Samples")));
-    l = g_list_append(l,_("Time Code 24fps"));
-    l = g_list_append(l,_("Time Code 25fps (PAL)"));
-    l = g_list_append(l,_("Time Code 29.97fps (NTSC)"));
-    l = g_list_append(l,_("Time Code 30fps"));
+    char * time_display_strv[] = {
+        _("(H')MM:SS.t"),
+        _("(H')MM:SS.mmmm"),
+        translate_strip(N_("TimeDisplay|Samples")),
+        _("Time Code 24fps"),
+        _("Time Code 25fps (PAL)"),
+        _("Time Code 29.97fps (NTSC)"),
+        _("Time Code 30fps"),
+        NULL
+    };
     i = inifile_get_guint32(INI_SETTING_TIME_DISPLAY,0);
-    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->time_display), l, i);
+    w_gtk_strv_to_combo (GTK_COMBO_BOX (cd->time_display), time_display_strv, i);
 
     cd->time_display_timescale = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
     i = inifile_get_guint32(INI_SETTING_TIME_DISPLAY_SCALE,i);
-    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->time_display_timescale), l, i);
-    g_list_free(l);
-    l = NULL;
+    w_gtk_strv_to_combo (GTK_COMBO_BOX (cd->time_display_timescale), time_display_strv, i);
 
     w = gtk_check_button_new_with_mnemonic(_("_Remember window "
                                              "sizes/positions"));
@@ -726,24 +726,26 @@ static void config_dialog_init(ConfigDialog *cd)
 		       G_CALLBACK(driver_autodetect_toggled),cd);
 
     cd->oggmode = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
-    l = NULL;
-    l = g_list_append(l,_("Direct access"));
-    l = g_list_append(l,_("Decompress"));
-    l = g_list_append(l,_("Bypass"));
-    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->oggmode),
-                          l, inifile_get_guint32("sndfileOggMode",1));
-    g_list_free(l);
+    char * oggmode_strv[] = {
+        _("Direct access"),
+        _("Decompress"),
+        _("Bypass"),
+        NULL
+    };
+    w_gtk_strv_to_combo (GTK_COMBO_BOX (cd->oggmode),
+                         oggmode_strv, inifile_get_guint32("sndfileOggMode",1));
     if (!sndfile_ogg_supported()) {
         gtk_combo_box_set_active (GTK_COMBO_BOX (cd->oggmode), 2);
         gtk_widget_set_sensitive (GTK_WIDGET (cd->oggmode), FALSE);
     }
 
     cd->convmode = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
-    l = NULL;
-    l = g_list_append(l,_("Biased"));
-    l = g_list_append(l,_("Pure-Scaled"));
-    w_gtk_glist_to_combo (GTK_COMBO_BOX (cd->convmode), l, sample_convert_mode);
-    g_list_free(l);
+    char * convmode_strv[] = {
+        _("Biased"),
+        _("Pure-Scaled"),
+        NULL
+    };
+    w_gtk_strv_to_combo (GTK_COMBO_BOX (cd->convmode), convmode_strv, sample_convert_mode);
 
     /* Layout the window */
 

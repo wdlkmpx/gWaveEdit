@@ -59,37 +59,50 @@ static void format_selector_init(FormatSelector *fs)
      attach_label(_("Sample type: "),GTK_WIDGET(fs),1,0);
 
      fs->samplesize_combo = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
-     gtk_combo_box_text_append_text (fs->samplesize_combo, _("8 bit PCM"));
-     gtk_combo_box_text_append_text (fs->samplesize_combo, _("16 bit PCM"));
-     gtk_combo_box_text_append_text (fs->samplesize_combo, _("24 bit PCM"));
-     gtk_combo_box_text_append_text (fs->samplesize_combo, _("32 bit PCM"));
-     gtk_combo_box_text_append_text (fs->samplesize_combo, _("Floating-point, single"));
-     gtk_combo_box_text_append_text (fs->samplesize_combo, _("Floating-point, double"));
-     gtk_combo_box_set_active (GTK_COMBO_BOX (fs->samplesize_combo), 0);
+     char * samplesize_strv[] = {
+         _("8 bit PCM"),
+         _("16 bit PCM"),
+         _("24 bit PCM"),
+         _("32 bit PCM"),
+         _("Floating-point, single"),
+         _("Floating-point, double"),
+         NULL,
+     };
+     w_gtk_strv_to_combo (GTK_COMBO_BOX (fs->samplesize_combo), samplesize_strv, 0);
      g_signal_connect (G_OBJECT(fs->samplesize_combo),"changed",
                        G_CALLBACK(samplesize_changed), fs);
      gtk_table_attach(GTK_TABLE(a),GTK_WIDGET(fs->samplesize_combo),1,2,1,2,GTK_FILL,0,0,0);
      attach_label(_("Signedness: "),a,2,0);
 
      fs->sign_combo = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
-     gtk_combo_box_text_append_text (fs->sign_combo, _("Unsigned"));
-     gtk_combo_box_text_append_text (fs->sign_combo, _("Signed"));
-     gtk_combo_box_set_active (GTK_COMBO_BOX (fs->sign_combo), 0);
+     char * sign_strv[] = {
+         _("Unsigned"),
+         _("Signed"),
+         NULL,
+     };
+     w_gtk_strv_to_combo (GTK_COMBO_BOX (fs->sign_combo), sign_strv, 0);
      gtk_table_attach(GTK_TABLE(a),GTK_WIDGET(fs->sign_combo),1,2,2,3,GTK_FILL,0,0,0);
      attach_label(_("Endianness: "),a,3,0);
 
      fs->endian_combo = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
-     gtk_combo_box_text_append_text (fs->endian_combo, _("Little endian"));
-     gtk_combo_box_text_append_text (fs->endian_combo, _("Big endian"));
+     char * endian_strv[] = {
+         _("Little endian"),
+         _("Big endian"),
+         NULL,
+     };
+     w_gtk_strv_to_combo (GTK_COMBO_BOX (fs->endian_combo), endian_strv, 0);
      gtk_combo_box_set_active (GTK_COMBO_BOX (fs->endian_combo), 0);
      gtk_table_attach(GTK_TABLE(a),GTK_WIDGET(fs->endian_combo),1,2,3,4,GTK_FILL,0,0,0);
      attach_label(_("Alignment:"),a,4,0);
 
      fs->packing_combo = GTK_COMBO_BOX_TEXT (gtk_combo_box_text_new ());
-     gtk_combo_box_text_append_text (fs->packing_combo, _("Packed"));
-     gtk_combo_box_text_append_text (fs->packing_combo, _("Top bytes"));
-     gtk_combo_box_text_append_text (fs->packing_combo, _("Bottom bytes"));
-     gtk_combo_box_set_active (GTK_COMBO_BOX (fs->packing_combo), 0);
+     char * packing_strv[] = {
+         _("Packed"),
+         _("Top bytes"),
+         _("Bottom bytes"),
+         NULL,
+     };
+     w_gtk_strv_to_combo (GTK_COMBO_BOX (fs->packing_combo), packing_strv, 0);
      gtk_widget_set_sensitive (GTK_WIDGET (fs->packing_combo), FALSE);
      gtk_table_attach(GTK_TABLE(a),GTK_WIDGET(fs->packing_combo),1,2,4,5,GTK_FILL,0,0,0);
      
