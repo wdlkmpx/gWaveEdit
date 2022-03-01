@@ -44,15 +44,8 @@ typedef struct {
 
 GType combo_get_type(void);
 GtkWidget *combo_new(void);
-void combo_set_items(Combo *combo, GList *item_strings, int default_index);
-void combo_set_selection(Combo *combo, int item_index);
 /* The removed item must not be currently selected */
 void combo_remove_item(Combo *combo, int item_index);
-int combo_selected_index(Combo *combo);
-
-/* Result must be freed by caller */
-char *combo_selected_string(Combo *combo);
-
 void combo_set_max_request_width(Combo *c, int w);
 
 //====

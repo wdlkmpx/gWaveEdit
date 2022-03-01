@@ -110,7 +110,7 @@ static void rebuild_strings(RecordFormatCombo *rfc)
      if (rfc->show_other)
 	  l = g_list_append(l,g_strdup(_("Other format...")));
 
-     combo_set_items(COMBO(rfc),l,idx);
+     w_gtk_glist_to_combo (GTK_COMBO_BOX (rfc), l, idx);
      
      g_list_foreach(l,(GFunc)g_free,NULL);
      g_list_free(l);	  
@@ -147,7 +147,7 @@ static void record_format_combo_selection_changed(Combo *obj)
      
      if (nosignal_flag) return;
 
-     i = combo_selected_index(obj);
+     i = gtk_combo_box_get_active (GTK_COMBO_BOX (obj));
      if (i >= rfc->other_start) {
 	  g_signal_emit(G_OBJECT(obj),
 			  record_format_combo_signals
@@ -174,8 +174,7 @@ static void record_format_combo_class_init(RecordFormatComboClass *klass)
 {
      GtkObjectClass *oc = GTK_OBJECT_CLASS(klass);
      oc->destroy = record_format_combo_destroy;
-     COMBO_CLASS(klass)->selection_changed = 
-	  record_format_combo_selection_changed;
+     COMBO_CLASS(klass)->selection_changed = record_format_combo_selection_changed;
      klass->format_changed = NULL;
      record_format_combo_signals[FORMAT_CHANGED_SIGNAL] = 
 	  g_signal_new("format_changed", G_TYPE_FROM_CLASS(klass),

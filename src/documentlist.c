@@ -33,10 +33,10 @@ static void document_list_changed(Combo *combo)
 {
      Document *d=NULL;
      DocumentList *dl = DOCUMENT_LIST(combo);
+     int selindex = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
 
      if (updating) return;
-     d = DOCUMENT(list_object_get(document_objects,
-				  combo_selected_index(combo)));     
+     d = DOCUMENT (list_object_get(document_objects, selindex));
      if (d != dl->selected) {
 	  dl->selected = d;
 	  memcpy(&(dl->format),&(d->chunk->format),sizeof(Dataformat));
@@ -144,7 +144,8 @@ void document_list_setup(DocumentList *mwl, Document *chosen)
      sfd.lp = NULL;
      sfd.first = NULL;
      list_object_foreach(document_objects,document_list_setup_func,&sfd);
-     combo_set_items(COMBO(mwl),sfd.lp,0);
+
+     w_gtk_glist_to_combo (GTK_COMBO_BOX (mwl), sfd.lp, 0);
 
      if (chosen == NULL) 
 	  chosen = sfd.first;
@@ -152,7 +153,7 @@ void document_list_setup(DocumentList *mwl, Document *chosen)
      if (chosen) {
 	  i = g_list_index(sfd.lp,chosen->titlename);
 	  g_assert(i >= 0);
-	  combo_set_selection(COMBO(mwl),i);
+      gtk_combo_box_set_active (GTK_COMBO_BOX (mwl), i);
 	  memcpy(&(mwl->format),&(chosen->chunk->format),
 		 sizeof(Dataformat));
 	  mwl->selected = chosen;

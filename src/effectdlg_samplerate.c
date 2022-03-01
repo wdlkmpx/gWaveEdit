@@ -36,10 +36,10 @@
 
 G_DEFINE_TYPE(SamplerateDialog,samplerate_dialog,EFFECT_DIALOG_TYPE)
 
-static void set_method(Combo *cbo, gpointer user_data)
+static void set_method (GtkComboBox *combo, gpointer user_data)
 {
      SamplerateDialog *s = SAMPLERATE_DIALOG(user_data);
-     s->method = combo_selected_index(cbo);
+     s->method = gtk_combo_box_get_active (combo);
 }
 
 static Chunk *apply_proc(Chunk *chunk, StatusBar *bar, gpointer user_data)

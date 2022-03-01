@@ -83,42 +83,10 @@ static void combo_init(Combo *obj)
 #endif
 }
 
-void combo_set_items(Combo *combo, GList *item_strings, int default_index)
-{
-     GList *l;
-     gchar *c;
-     int len;
-     gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (combo));
-     for (l=item_strings,len=0; l!=NULL; l=l->next,len++) {
-	  c = (gchar *)l->data;
-	  gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(combo),c);
-     }
-     if (default_index >= len || default_index < 0) {
-        default_index = 0;
-     }
-     gtk_combo_box_set_active(GTK_COMBO_BOX(combo),default_index);
-}
-
-void combo_set_selection(Combo *combo, int item_index)
-{
-     gtk_combo_box_set_active(GTK_COMBO_BOX(combo),item_index);
-}
-
-int combo_selected_index(Combo *combo)
-{
-     return gtk_combo_box_get_active(GTK_COMBO_BOX(combo));
-}
-
-char *combo_selected_string(Combo *combo)
-{
-   char * str = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
-   return (str); /* must be freed */
-}
-
 void combo_remove_item(Combo *combo, int item_index)
 {
      int i;
-     i = combo_selected_index(combo);
+     i = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
      g_assert(i != item_index);
      gtk_combo_box_text_remove(GTK_COMBO_BOX_TEXT(combo),item_index);
 }
