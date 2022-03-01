@@ -141,11 +141,11 @@ static GtkWidget *create_error_window(gchar *command)
      t = c;
      gtk_container_add(GTK_CONTAINER(b),c);
      c = gtk_button_new_with_label(_("Close"));
-     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KP_Enter, 0, 
+     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KEY(KP_Enter), 0, 
 				 (GtkAccelFlags) 0);
-     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, 
+     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KEY(Return), 0, 
 				 (GtkAccelFlags) 0);
-     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 
+     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KEY(Escape), 0, 
 				 (GtkAccelFlags) 0);
 
      g_signal_connect_swapped(G_OBJECT(c),"clicked",

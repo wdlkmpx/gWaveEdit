@@ -895,9 +895,9 @@ void record_dialog_init(RecordDialog *obj)
      gtk_button_box_set_layout(GTK_BUTTON_BOX(b),GTK_BUTTONBOX_END);
      gtk_box_pack_start(GTK_BOX(a),b,FALSE,FALSE,0);
      c = gtk_button_new_with_label(_("Start recording"));
-     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KP_Enter, 0, 
+     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KEY(KP_Enter), 0, 
 				 (GtkAccelFlags) 0);
-     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Return, 0, 
+     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KEY(Return), 0, 
 				 (GtkAccelFlags) 0);
      gtk_widget_set_sensitive(c,FALSE);
      g_signal_connect(G_OBJECT(c),"clicked",
@@ -916,7 +916,7 @@ void record_dialog_init(RecordDialog *obj)
 			NULL);
      gtk_container_add(GTK_CONTAINER(b),c);
      c = gtk_button_new_with_label(_("Close"));
-     gtk_widget_add_accelerator (c, "clicked", ag, GDK_Escape, 0, 
+     gtk_widget_add_accelerator (c, "clicked", ag, GDK_KEY(Escape), 0, 
 				 (GtkAccelFlags) 0);
      g_signal_connect(G_OBJECT(c),"clicked",
 			G_CALLBACK(record_dialog_close),obj);

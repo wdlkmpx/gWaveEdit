@@ -368,7 +368,7 @@ static void session_dialog_delete_click(struct session_dialog_data *ddata)
 
 static gboolean on_sdialog_keypress (GtkWidget *w, GdkEventKey *event, gpointer udata)
 {
-    if (event->keyval == GDK_Escape) {
+    if (event->keyval == GDK_KEY(Escape)) {
         return TRUE; // prevent dialog from closing
     }
     return FALSE;
