@@ -294,7 +294,7 @@ void document_play(Document *d, off_t start, off_t end, gboolean loop,
      
      g_assert(d != NULL);
      /* This special if case was introduced to avoid a skipping sound
-      * caused by the cursor not matching the actual playing positon when
+      * caused by the cursor not matching the actual playing position when
       * pressing the "play" button and you're already playing. This
       * becomes a "wobbling" sound when holding down the ',' key due
       * to the keyboard auto-repeating. */

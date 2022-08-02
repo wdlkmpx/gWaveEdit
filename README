@@ -68,7 +68,7 @@ the 'sample view'.
 
 In the sample view there is a grey vertical bar called the 'cursor'. The cursor 
 follows the sound wave when you play the sound. You can position the cursor by 
-clicking with the right (2:nd) mouse button. If you do this while you're 
+clicking with the right (2nd) mouse button. If you do this while you're 
 playing a file, the playing will continue from the new cursor position. You can 
 also position the cursor more exact by using the 'Position Cursor...' command 
 on the Edit menu.
@@ -177,7 +177,7 @@ simple amplification of the sound.
 
    This converts the samplerate of the entire file to one you specify. There 
 are different methods for doing this, usually the one in the top has the best 
-quality but can take longer than the other methode.
+quality but can take longer than the other method.
 
  * Convert sample format...
 

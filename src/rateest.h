@@ -21,7 +21,7 @@
 
 /* Code for "guessing" the real sample rate and total buffer size
  * without using any special sound driver calls, by logging time
- * and size of succesful writes. */
+ * and size of successful writes. */
 
 #ifndef RATEEST_H_INCLUDED
 #define RATEEST_H_INCLUDED

@@ -53,7 +53,7 @@ GType list_object_get_type(void);
 
 
 /* Creates a new ListObject 
- * do_ref: Enable automatic referencing/derefencing - should only be used
+ * do_ref: Enable automatic referencing/dereferencing - should only be used
  *         if the list just contains GtkObjects  */
 ListObject *list_object_new(gboolean do_ref);
 

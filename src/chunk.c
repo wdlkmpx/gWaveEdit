@@ -729,7 +729,7 @@ Chunk *chunk_mix(Chunk *c1, Chunk *c2, int dither_mode, StatusBar *bar)
 	  m = c;
      }
 
-     /* Warn if clipping occured */
+     /* Warn if clipping occurred */
      if (clipcount > 0) {
 	  if (clipcount > 1000000000) clipcount = 1000000000;
 	  str = g_strdup_printf(_("The mixed result was clipped %d times."),
@@ -857,7 +857,7 @@ static Chunk *chunk_sandwich_main(Chunk *c1, Chunk *c2, int dither_mode, StatusB
      g_free(outbuf);
      if (!m) return NULL;
 
-     /* Warn if clipping occured */
+     /* Warn if clipping occurred */
      clipwarn(clipcount,FALSE);
 
      return m;

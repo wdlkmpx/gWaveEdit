@@ -34,7 +34,7 @@
    2. Idle
    3. Playing (or waiting for output)
    4. Recording
-   5. Quitted (ending state)
+   5. Quitting (ending state)
 */
 
 /* Global variable for selecting whether the sound driver should "lock" itself
@@ -140,7 +140,7 @@ void sound_init(void);
 gint sound_poll(void);
 
 /* Sound module cleanup.
- * Changes state to state 5 (Quitted)
+ * Changes state to state 5 (Quitting)
  */
 
 void sound_quit(void);

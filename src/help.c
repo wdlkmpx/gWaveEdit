@@ -31,7 +31,7 @@ static const char * D01_contents[] = {
      "\n",
      N_("The area where you 'see' the contents of the file you are editing, is called the 'sample view'. \n"),
      "\n",
-     N_("In the sample view there is a grey vertical bar called the 'cursor'. The cursor follows the sound wave when you play the sound. You can position the cursor by clicking with the right (2:nd) mouse button. If you do this while you're playing a file, the playing will continue from the new cursor position. You can also position the cursor more exact by using the 'Position Cursor...' command on the Edit menu.\n"),
+     N_("In the sample view there is a grey vertical bar called the 'cursor'. The cursor follows the sound wave when you play the sound. You can position the cursor by clicking with the right (2nd) mouse button. If you do this while you're playing a file, the playing will continue from the new cursor position. You can also position the cursor more exact by using the 'Position Cursor...' command on the Edit menu.\n"),
      "\n",
      N_("You can place marks in your file by holding down Ctrl and pressing a number from 0 to 9. This will place a mark (green vertical bar) with the same number at the current cursor position. You can later make the cursor go to that position again by just pressing the number. Setting and jumping to marks can be done while playing. To remove a mark, jump to the mark and set it again.\n"),
      NULL };
@@ -98,7 +98,7 @@ static const char * D05_contents[] = {
      "\n",
      N_(" * Convert samplerate...\n"),
      "\n",
-     N_("   This converts the samplerate of the entire file to one you specify. There are different methods for doing this, usually the one in the top has the best quality but can take longer than the other methode.\n"),
+     N_("   This converts the samplerate of the entire file to one you specify. There are different methods for doing this, usually the one in the top has the best quality but can take longer than the other method.\n"),
      "\n",
      N_(" * Convert sample format...\n"),
      "\n",

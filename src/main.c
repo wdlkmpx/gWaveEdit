@@ -719,7 +719,7 @@ static const gint smallsizes_30fps[] = { 30, 10, 5 };
  * 0 - Both major and minor points should have text from the get_time_head 
  *     function.
  * 1 - Major points should have text from the get_time_head function, and 
- *     minor points should have text from teh get_time_tail function.
+ *     minor points should have text from the get_time_tail function.
  */ 
 
 /* Midpoints are generated when there is a minor point scale that has

@@ -866,7 +866,7 @@ static void pulse_source_info_cb(pa_context *c, const pa_source_info *i,
  * Perform a quite messy workaround, ifdef:d with the
  * DEFUALT_SOURCE_BROKEN macro */
 
-/* Becuase PA didn't introduce PA_MAJOR/MINOR/MICRO macros until 0.9.15, 
+/* Because PA didn't introduce PA_MAJOR/MINOR/MICRO macros until 0.9.15, 
  * this will have to be done for the older versions as well... */
 #define DEFAULT_SOURCE_BROKEN
 
@@ -992,7 +992,7 @@ static void pulse_input_store(Ringbuf *buf)
      size_t b;
 
      if (pulse_data.overflow_report_count < pulse_data.overflow_count) {
-	  console_message("Overrun occured!");
+	  console_message("Overrun occurred!");
 	  pulse_data.overflow_report_count = pulse_data.overflow_count;
      }
 

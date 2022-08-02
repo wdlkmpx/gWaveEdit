@@ -73,7 +73,7 @@ void inifile_init(void);
 gchar *inifile_get(gchar *setting, gchar *defaultValue);
 
 
-/* Same as inifile_get excepts requires that the value is a guint32 value.
+/* Same as inifile_get except requires that the value is a guint32 value.
  * Returns: The value converted into a guint32 or defaultValue if setting 
  * doesn't exist or is not a valid number.
  */
